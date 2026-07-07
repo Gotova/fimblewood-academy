@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.3.6] - 2026-07-07
+
+### Fixed
+
+- Clicking "Cancel" on Bend Magic (and other multi-button prompts) could act like a different button was clicked instead. Foundry's `DialogV2` buttons default to `type="submit"`, which fires the dialog's result callback twice — once via the button's own click handler (correctly identifying the clicked button), and again via the native form "submit" event (which can resolve to the wrong button under a race). All dialog buttons now use `type="button"`, which only allows the correct click handler to fire.
+
 ## [0.3.5] - 2026-07-07
 
 ### Fixed

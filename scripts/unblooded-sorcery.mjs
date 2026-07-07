@@ -160,6 +160,8 @@ async function offerActiveSiphon(sorcererActor, spellLevel, casterName) {
     window: { title: "Mana Siphon" },
     content: `<p><strong>${sorcererActor.name}:</strong> ${casterName} just cast a level ${spellLevel} spell within 60 ft.
       Use Active Siphon to gain ${gain} Resonance? (${siphonItem.system.uses.value} use${siphonItem.system.uses.value === 1 ? "" : "s"} remaining)</p>`,
+    yes: { type: "button" },
+    no: { type: "button" },
     rejectClose: false
   });
   if (!confirmed) return;
@@ -176,6 +178,8 @@ async function offerPassiveSiphon(sorcererActor, spellItem, reason) {
     window: { title: "Passive Siphon" },
     content: `<p><strong>${sorcererActor.name}:</strong> you ${reason} from <em>${spellItem.name}</em>.
       Use your Reaction to gain 1 Resonance?</p>`,
+    yes: { type: "button" },
+    no: { type: "button" },
     rejectClose: false
   });
   if (!confirmed) return;
@@ -201,9 +205,9 @@ async function offerBendMagic(sorcererActor, spellItem, casterName) {
       Spend Resonance to bend it? (you have ${max})</p>
       <label>Resonance to spend (min 1): <input type="number" name="amount" value="1" min="1" max="${max}" style="width:4em"/></label>`,
     buttons: [
-      { action: "skew", label: "Skew the Roll", callback: (event, button) => ({ effect: "skew", amount: Number(button.form.elements.amount.value) }) },
-      { action: "crook", label: "Crook the Strike", callback: (event, button) => ({ effect: "crook", amount: Number(button.form.elements.amount.value) }) },
-      { action: "cancel", label: "Cancel", callback: () => null }
+      { action: "skew", label: "Skew the Roll", type: "button", callback: (event, button) => ({ effect: "skew", amount: Number(button.form.elements.amount.value) }) },
+      { action: "crook", label: "Crook the Strike", type: "button", callback: (event, button) => ({ effect: "crook", amount: Number(button.form.elements.amount.value) }) },
+      { action: "cancel", label: "Cancel", type: "button", callback: () => null }
     ],
     rejectClose: false
   });
@@ -238,6 +242,8 @@ async function offerRedirectMagic(sorcererActor, spellItem, casterName, spellLev
     window: { title: "Redirect Magic" },
     content: `<p><strong>${sorcererActor.name}:</strong> ${casterName} cast <em>${spellItem.name}</em> (level ${spellLevel}) within 60 ft.
       Spend ${spellLevel} Resonance to redirect it? Choosing new target(s)/origin is resolved manually with your GM.</p>`,
+    yes: { type: "button" },
+    no: { type: "button" },
     rejectClose: false
   });
   if (!confirmed) return;
@@ -306,8 +312,8 @@ async function promptSlotLevel(actor, min, max, label = "Spell slot level") {
     window: { title: "Drain Magic" },
     content: `<label>${label}: <input type="number" name="level" value="${min}" min="${min}" max="${max}" style="width:4em"/></label>`,
     buttons: [
-      { action: "ok", label: "Confirm", default: true, callback: (event, button) => Number(button.form.elements.level.value) },
-      { action: "cancel", label: "Cancel", callback: () => null }
+      { action: "ok", label: "Confirm", default: true, type: "button", callback: (event, button) => Number(button.form.elements.level.value) },
+      { action: "cancel", label: "Cancel", type: "button", callback: () => null }
     ],
     rejectClose: false
   });
@@ -325,8 +331,8 @@ async function promptSpellLevel(actor, baseLevel, maxLevel) {
     content: `<p>Cast at what level? (base ${baseLevel}, max ${maxLevel}, you have ${getResonanceValue(actor)} Resonance)</p>
       <label>Level: <input type="number" name="level" value="${baseLevel}" min="${baseLevel}" max="${maxLevel}" style="width:4em"/></label>`,
     buttons: [
-      { action: "ok", label: "Cast", default: true, callback: (event, button) => Number(button.form.elements.level.value) },
-      { action: "cancel", label: "Cancel", callback: () => null }
+      { action: "ok", label: "Cast", default: true, type: "button", callback: (event, button) => Number(button.form.elements.level.value) },
+      { action: "cancel", label: "Cancel", type: "button", callback: () => null }
     ],
     rejectClose: false
   });
