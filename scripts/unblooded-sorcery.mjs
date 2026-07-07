@@ -58,13 +58,17 @@ function tokensWithinFeet(originToken, feet) {
   if (!originToken || !canvas.ready) return [];
   return canvas.tokens.placeables.filter(t => {
     if (t === originToken || !t.actor) return false;
-    const { distance } = canvas.grid.measurePath([originToken.center, t.center]);
-    return distance <= feet;
+    try {
+      const { distance } = canvas.grid.measurePath([originToken.center, t.center]);
+      return distance <= feet;
+    } catch (err) {
+      return false;
+    }
   });
 }
 
 function tokenForActor(actor) {
-  return actor?.getActiveTokens?.(true, true)?.[0] ?? canvas.tokens?.placeables.find(t => t.actor === actor);
+  return canvas.tokens?.placeables.find(t => t.actor === actor) ?? actor?.getActiveTokens?.(true, false)?.[0];
 }
 
 /* -------------------------------------------- */
@@ -323,17 +327,21 @@ export function registerUnbloodedSorcery() {
 
   // Detect nearby spellcasting for Active Siphon / Bend Magic / Redirect Magic.
   Hooks.on("dnd5e.postUseActivity", async (activity) => {
-    const item = activity.item;
-    if (item?.type !== "spell" || item.system.level < 1) return;
-    const casterToken = tokenForActor(item.actor);
-    if (!casterToken) return;
+    try {
+      const item = activity.item;
+      if (item?.type !== "spell" || item.system.level < 1) return;
+      const casterToken = tokenForActor(item.actor);
+      if (!casterToken) return;
 
-    const nearby = tokensWithinFeet(casterToken, 60).filter(t => t.actor !== item.actor && hasUnbloodedSorcery(t.actor));
-    for (const t of nearby) {
-      if (item.actor === t.actor) continue;
-      await offerActiveSiphon(t.actor, item.system.level, item.actor.name);
-      await offerBendMagic(t.actor, item, item.actor.name);
-      await offerRedirectMagic(t.actor, item, item.actor.name, item.system.level);
+      const nearby = tokensWithinFeet(casterToken, 60).filter(t => t.actor !== item.actor && hasUnbloodedSorcery(t.actor));
+      for (const t of nearby) {
+        if (item.actor === t.actor) continue;
+        await offerActiveSiphon(t.actor, item.system.level, item.actor.name);
+        await offerBendMagic(t.actor, item, item.actor.name);
+        await offerRedirectMagic(t.actor, item, item.actor.name, item.system.level);
+      }
+    } catch (err) {
+      console.error("fimblewood-academy | Error in Unblooded Sorcery postUseActivity hook:", err);
     }
   });
 

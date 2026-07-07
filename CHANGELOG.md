@@ -4,6 +4,13 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-07-07
+
+### Fixed
+
+- Nearby-spellcasting detection (Active Siphon, Bend Magic, Redirect Magic) never triggered because the token lookup used `getActiveTokens(true, true)`, which returns `TokenDocument`s instead of canvas placeables — their `.center` isn't compatible with `canvas.grid.measurePath`, silently crashing the hook. Verified live: fixed and confirmed detection now works at range.
+- Hardened distance checks against a canvas grid error observed on live tokens so one bad token can't silently kill the whole nearby-spellcasting scan.
+
 ## [0.3.0] - 2026-07-07
 
 ### Added
