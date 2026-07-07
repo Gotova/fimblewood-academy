@@ -1,6 +1,7 @@
 const MODULE_ID = "fimblewood-academy";
 const FLAG_RESONANCE = "resonance";
 const SIPHONED_FLAG = "siphonedSpells";
+const INNATE_SORCERY_MARKER = "Unblooded Magic: Innate Sorcery Active";
 
 /* -------------------------------------------- */
 /*  Helpers                                      */
@@ -387,6 +388,20 @@ export function registerUnbloodedSorcery() {
     }
   });
 
+  // dnd5e's core Innate Sorcery doesn't create a tracked effect on its own; add our own marker so
+  // Mana Surge / Resonant Sundering (Unblooded Magic) know when it's active.
+  Hooks.on("dnd5e.postUseActivity", async (activity) => {
+    const item = activity.item;
+    if (item?.name !== "Innate Sorcery" || !getFeature(item.actor, "isUnbloodedMagic")) return;
+    await item.actor.createEmbeddedDocuments("ActiveEffect", [{
+      name: INNATE_SORCERY_MARKER,
+      img: item.img,
+      duration: { seconds: 60 },
+      origin: item.uuid,
+      flags: { [MODULE_ID]: { innateSorceryMarker: true } }
+    }]);
+  });
+
   // Cancel default activity flow for spell casts by Unblooded Sorcery actors; spend Resonance instead.
   Hooks.on("dnd5e.preUseActivity", (activity, usageConfig, dialogConfig, messageConfig) => {
     if (usageConfig.fimblewoodResonanceHandled) return true; // avoid recursing into our own re-invocation
@@ -446,7 +461,7 @@ export function registerUnbloodedSorcery() {
       if (currentTemp < prof) await actor.update({ "system.attributes.hp.temp": prof });
     }
 
-    const innateActive = actor.effects.some(e => e.name === "Innate Sorcery" && !e.disabled);
+    const innateActive = actor.effects.some(e => e.name === INNATE_SORCERY_MARKER && !e.disabled);
     if (innateActive) {
       const unbloodedMagic = getFeature(actor, "isUnbloodedMagic");
       if (unbloodedMagic) {
@@ -466,10 +481,10 @@ export function registerUnbloodedSorcery() {
 
   // Resonant Sundering also needs to toggle the instant an Innate Sorcery effect is added/removed mid-turn.
   const syncOnEffectChange = (effect) => {
-    if (effect.name !== "Innate Sorcery" || !effect.parent) return;
+    if (effect.name !== INNATE_SORCERY_MARKER || !effect.parent) return;
     const actor = effect.parent;
     if (!hasUnbloodedSorcery(actor) || !getFeature(actor, "isUnbloodedMagic")) return;
-    syncResonantSundering(actor, actor.effects.some(e => e.name === "Innate Sorcery" && !e.disabled));
+    syncResonantSundering(actor, actor.effects.some(e => e.name === INNATE_SORCERY_MARKER && !e.disabled));
   };
   Hooks.on("createActiveEffect", syncOnEffectChange);
   Hooks.on("deleteActiveEffect", syncOnEffectChange);

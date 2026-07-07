@@ -4,6 +4,13 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.3.4] - 2026-07-07
+
+### Fixed
+
+- Mana Surge and Resonant Sundering (Unblooded Magic, level 18) never triggered because dnd5e's core Innate Sorcery doesn't create a tracked Active Effect on its own — there was nothing for the code to detect. The module now creates its own 1-minute marker effect when Innate Sorcery is activated, confirmed against the live item's actual "1 minute" duration text, and both features key off that instead.
+- Verified live: Drain Magic correctly ends a matching ongoing spell effect and restores the target's slot; Mana Resistance's Midi QoL flags apply correctly on a freshly-granted Resonant Reserve.
+
 ## [0.3.3] - 2026-07-07
 
 ### Added
