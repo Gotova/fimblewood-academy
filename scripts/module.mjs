@@ -1,4 +1,6 @@
-import { registerUnbloodedSorcery, hasUnbloodedSorcery, getResonanceValue, getResonanceMax, addResonance } from "./unblooded-sorcery.mjs";
+import {
+  registerUnbloodedSorcery, hasUnbloodedSorcery, getResonanceValue, getResonanceMax, addResonance, cleanupStaleResonance
+} from "./unblooded-sorcery.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 
@@ -19,4 +21,5 @@ Hooks.once("ready", () => {
       "Fimblewood Academy is built for the dnd5e system and may not function correctly with the currently active system."
     );
   }
+  cleanupStaleResonance();
 });

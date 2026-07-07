@@ -27,18 +27,17 @@ export function getResonanceMax(actor) {
   return 2 * (actor?.system?.attributes?.prof ?? 0);
 }
 
-async function setResonance(actor, value) {
+async function setResonance(actor, value, { allowOverflow=false }={}) {
   const max = getResonanceMax(actor);
-  const surging = actor.getFlag(MODULE_ID, "manaSurgeActive");
-  const clamped = surging ? Math.max(0, value) : Math.clamp(value, 0, max);
+  const clamped = allowOverflow ? Math.max(0, value) : Math.clamp(value, 0, max);
   await actor.setFlag(MODULE_ID, `${FLAG_RESONANCE}.value`, clamped);
   return clamped;
 }
 
-export async function addResonance(actor, amount, { flavor }={}) {
+export async function addResonance(actor, amount, { flavor, allowOverflow=false }={}) {
   if (!hasUnbloodedSorcery(actor) || !Number.isFinite(amount)) return null;
   const before = getResonanceValue(actor);
-  const after = await setResonance(actor, before + amount);
+  const after = await setResonance(actor, before + amount, { allowOverflow });
   if (flavor && after !== before) {
     ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor }),
@@ -95,7 +94,8 @@ function injectResonanceBar(app, html) {
     <div class="label roboto-condensed-upper"><span>Resonance</span></div>
     <div class="meter progress fimblewood-resonance" role="meter"
          aria-valuemin="0" aria-valuenow="${value}" aria-valuemax="${max}"
-         style="--bar-percentage: ${pct}%">
+         style="--bar-percentage: ${pct}%"
+         data-tooltip="Left-click: +1 Resonance. Right-click: -1 Resonance.">
       <div class="label">
         <span class="value">${value}</span>
         <span class="separator">/</span>
@@ -104,9 +104,13 @@ function injectResonanceBar(app, html) {
     </div>`;
   hdGroup.insertAdjacentElement("afterend", group);
 
-  group.querySelector(".fimblewood-resonance").addEventListener("click", async (event) => {
-    const delta = event.shiftKey ? -1 : 1;
-    await addResonance(actor, delta);
+  const bar = group.querySelector(".fimblewood-resonance");
+  bar.addEventListener("click", async () => {
+    await addResonance(actor, 1);
+  });
+  bar.addEventListener("contextmenu", async (event) => {
+    event.preventDefault();
+    await addResonance(actor, -1);
   });
 }
 
@@ -369,6 +373,22 @@ async function handleResonanceCast(activity) {
 /*  Hooks registration                           */
 /* -------------------------------------------- */
 
+/**
+ * One-time cleanup for actors left with Resonance above their maximum by the overflow bug in
+ * versions prior to 0.3.5 (a stuck "manaSurgeActive" flag bypassed the Resonance cap entirely).
+ */
+export async function cleanupStaleResonance() {
+  if (!game.user.isGM) return;
+  for (const actor of game.actors) {
+    if (!hasUnbloodedSorcery(actor)) continue;
+    const innateActive = actor.effects.some(e => e.name === INNATE_SORCERY_MARKER && !e.disabled);
+    if (innateActive) continue;
+    const max = getResonanceMax(actor);
+    if (getResonanceValue(actor) > max) await setResonance(actor, max);
+    if (actor.getFlag(MODULE_ID, "manaSurgeActive")) await actor.unsetFlag(MODULE_ID, "manaSurgeActive");
+  }
+}
+
 export function registerUnbloodedSorcery() {
   Hooks.on("renderCharacterActorSheet", (app, html) => injectResonanceBar(app, html));
 
@@ -468,7 +488,7 @@ export function registerUnbloodedSorcery() {
         const prof = actor.system.attributes.prof ?? 0;
         const gain = Math.max(1, Math.floor(prof / 2));
         await actor.setFlag(MODULE_ID, "manaSurgeActive", true);
-        await addResonance(actor, gain, { flavor: `${actor.name} gains Resonance from Mana Surge` });
+        await addResonance(actor, gain, { flavor: `${actor.name} gains Resonance from Mana Surge`, allowOverflow: true });
       }
     } else if (actor.getFlag(MODULE_ID, "manaSurgeActive")) {
       await actor.unsetFlag(MODULE_ID, "manaSurgeActive");

@@ -4,6 +4,17 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.3.5] - 2026-07-07
+
+### Fixed
+
+- Resonance could exceed its maximum from ordinary gains (clicking the bar, Active Siphon) if the internal "Mana Surge is active" flag ever got stuck on — that flag bypassed the Resonance cap for *every* gain, not just Mana Surge itself. The cap bypass is now scoped exclusively to the one Mana Surge gain that's supposed to exceed it; every other source of Resonance is always clamped to the maximum.
+- Actors left with Resonance above their maximum by this bug are corrected automatically the next time the world loads.
+
+### Added
+
+- Right-click the Resonance bar to remove 1 Resonance (left-click still adds 1).
+
 ## [0.3.4] - 2026-07-07
 
 ### Fixed
