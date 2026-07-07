@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.3.7] - 2026-07-07
+
+### Fixed
+
+- Actually fixed the "Cancel acts like Crook the Strike" bug (0.3.6's `type="button"` change addressed a real but different double-submit risk — it wasn't the cause of this specific symptom). The real cause: Foundry's `DialogV2._onSubmit` computes `result = (await callback()) ?? button.action`, so a callback that explicitly returns `null` (as Bend Magic's Cancel button did) gets silently replaced with the button's own action string `"cancel"` — a truthy value. That string passed the code's `if (!choice) return` guard, and since it has no `.effect` property, the message defaulted to "Crook the Strike". Cancel callbacks across the module now return `false` (falsy, but not nullish, so it survives `??`) instead of `null`. Verified live with an isolated dialog test before shipping.
+
 ## [0.3.6] - 2026-07-07
 
 ### Fixed

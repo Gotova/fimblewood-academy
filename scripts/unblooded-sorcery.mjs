@@ -207,7 +207,7 @@ async function offerBendMagic(sorcererActor, spellItem, casterName) {
     buttons: [
       { action: "skew", label: "Skew the Roll", type: "button", callback: (event, button) => ({ effect: "skew", amount: Number(button.form.elements.amount.value) }) },
       { action: "crook", label: "Crook the Strike", type: "button", callback: (event, button) => ({ effect: "crook", amount: Number(button.form.elements.amount.value) }) },
-      { action: "cancel", label: "Cancel", type: "button", callback: () => null }
+      { action: "cancel", label: "Cancel", type: "button", callback: () => false }
     ],
     rejectClose: false
   });
@@ -313,7 +313,7 @@ async function promptSlotLevel(actor, min, max, label = "Spell slot level") {
     content: `<label>${label}: <input type="number" name="level" value="${min}" min="${min}" max="${max}" style="width:4em"/></label>`,
     buttons: [
       { action: "ok", label: "Confirm", default: true, type: "button", callback: (event, button) => Number(button.form.elements.level.value) },
-      { action: "cancel", label: "Cancel", type: "button", callback: () => null }
+      { action: "cancel", label: "Cancel", type: "button", callback: () => false }
     ],
     rejectClose: false
   });
@@ -332,7 +332,7 @@ async function promptSpellLevel(actor, baseLevel, maxLevel) {
       <label>Level: <input type="number" name="level" value="${baseLevel}" min="${baseLevel}" max="${maxLevel}" style="width:4em"/></label>`,
     buttons: [
       { action: "ok", label: "Cast", default: true, type: "button", callback: (event, button) => Number(button.form.elements.level.value) },
-      { action: "cancel", label: "Cancel", type: "button", callback: () => null }
+      { action: "cancel", label: "Cancel", type: "button", callback: () => false }
     ],
     rejectClose: false
   });
