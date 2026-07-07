@@ -2,7 +2,7 @@
   "_id": "xhpbcDCvBNOdNMJa",
   "name": "Orderly Disarray",
   "type": "feat",
-  "img": "icons/magic/perception/eye-ringed-glow-angry-small.webp",
+  "img": "icons/magic/perception/eye-ringed-glow-angry-small-teal.webp",
   "system": {
     "description": {
       "value": "<p>Starting at 10th level, the brewing chaos of the wild magic that flows through your veins makes you immune to the charmed condition and allows you to see through any illusions within 300 feet of you.</p>",
@@ -21,7 +21,7 @@
     {
       "_id": "NmMGvrYTF5dRD3cV",
       "name": "Orderly Disarray",
-      "img": "icons/magic/perception/eye-ringed-glow-angry-small.webp",
+      "img": "icons/magic/perception/eye-ringed-glow-angry-small-teal.webp",
       "changes": [
         {
           "key": "system.traits.ci.value",

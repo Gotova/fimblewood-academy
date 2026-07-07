@@ -2,7 +2,7 @@
   "_id": "o3VMFozAOxbibgo1",
   "name": "Chaotic Wild Shape",
   "type": "feat",
-  "img": "icons/creatures/abilities/wolf-paw-glow-teal.webp",
+  "img": "icons/creatures/abilities/wolf-howl-moon-purple.webp",
   "system": {
     "description": {
       "value": "<p>Starting at 2nd level, you learn how to increase the internal chaos in your body, allowing you to transform into strange creatures. You can use your Wild Shape feature to transform into any <strong>monstrosity</strong>, following the same limitations as for beasts. When you transform into a monstrosity, the GM can have you roll on the Wild Magic Surge table.</p><p>You can transform into a monstrosity with a challenge rating as high as 2 at 10th level and as high as 3 at 14th level.</p>",
