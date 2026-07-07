@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.3.0
+- **Current version:** 0.3.4
 
 ## Installation
 
@@ -36,6 +36,33 @@ A druid circle that channels chaotic Feywild energy. Closely adapted from the "C
 - **Influencing the Unpredictable** (14th level) — bank a Wild Magic Surge roll to use later.
 
 All four leveled features are granted automatically via the subclass's advancement. A **Wild Magic Surge** roll table (d100, compendium: *Fimblewood Academy Roll Tables*) is included and referenced by these features — right-click it in the compendium and choose "Roll" (or drag it onto the hotbar) whenever a feature calls for a surge.
+
+---
+
+**Sorcerer — Unblooded Sorcery** (compendium: *Fimblewood Academy Subclasses*)
+
+A Sorcerous Origin built around **Resonance**, a resource that replaces Spell Slots entirely. Closely adapted from "Unblooded Sorcery" (2026). One rule from the source PDF was left underspecified: the text references a "Mana Siphon table" for how much Resonance you gain from siphoning another creature's spell, but that table isn't actually printed anywhere in the document. Per a campaign ruling, **Resonance gained from siphoning equals the siphoned spell's level.**
+
+Requires [Midi QoL](https://foundryvtt.com/packages/midi-qol) for full automation (already active in this world) — a few pieces degrade gracefully without it, noted below.
+
+**Resonance display:** a purple bar on the character sheet, directly below Hit Dice, for any actor with this subclass. Maximum is twice your Proficiency Bonus; it resets to 0 on a Long Rest.
+
+#### What's automated
+
+- **Spellcasting via Resonance** — Spell Slots are forced to 0 automatically. Casting a 1st-level-or-higher spell intercepts the normal cast flow, lets you pick an upcast level (up to your max, computed from the real Sorcerer Slot table — not from your zeroed slots), deducts the right amount of Resonance (including the Charged Focus discount, see below), and blocks the cast if you can't afford it.
+- **Active Siphon** — the module watches for any creature casting a spell within 60 ft and prompts you to spend a use to gain Resonance equal to the spell's level. Uses (= Proficiency Bonus) and their reset on a Short/Long Rest are tracked automatically.
+- **Passive Siphon** — detects when you take damage from a spell or fail a save against one (via Midi QoL) and offers you the Reaction, once per spell-casting.
+- **Resonant Reserve thresholds** — all six thresholds (2/4/6/8/10/12) automatically enable/disable as your Resonance crosses them:
+  - *Mana Veil* (+2 AC) and *Surging Strike* (bonus damage on hit, equal to Proficiency Bonus) are fully automatic. **Surging Strike's "once per turn" limit isn't enforced** — track that yourself.
+  - *Charged Focus* (−1 Resonance cost per cast) is applied automatically in the casting flow.
+  - *Echo Ward* (temp HP at the start of your turn) is applied automatically in combat.
+  - *Mana Resistance* (Advantage on saves vs. spells) applies via Midi QoL flags, covering all spell schools — non-spell magical effects aren't covered.
+  - *Mana Free* (free Metamagic once per turn) is **not automated** — apply it and track the once-per-turn limit yourself.
+- **Bend Magic** — detects nearby spellcasting and offers the choice (Skew the Roll / Crook the Strike) with Resonance validated against what you have. Actually adjusting the roll/targets is manual — the chat card tells you exactly what to apply.
+- **Drain Magic / Improved Drain Magic** — target a creature (use Foundry's normal targeting); if they have a matching ongoing spell effect, it's removed and a slot of your choice is restored automatically. Otherwise you're offered the Resonance-cost alternative. The once-per-rest use and the Bonus Action upgrade (Improved) are both tracked.
+- **Absorb Magic / Occult Shroud** — Counterspell and Nondetection are granted as always-prepared spells automatically. Absorb Magic's bonus Sorcery Points (on a target's failed save against your Counterspell) are rolled and applied automatically via Midi QoL. Occult Shroud's first free Nondetection cast each day is tracked and waives the Resonance cost automatically.
+- **Redirect Magic** — detects nearby spellcasting, validates the Resonance cost and that the spell isn't Range: Self, and prompts you. Actually choosing new targets/origin is resolved manually with your GM — Foundry has no safe generic way to re-target an already-cast spell.
+- **Unblooded Magic (level 18)** — the module creates its own tracking effect when you activate Innate Sorcery (core dnd5e's version doesn't leave a trackable effect on its own). While it's active: Mana Surge grants bonus Resonance (able to exceed your normal max) at the start of each of your turns, automatically clamped back down when Innate Sorcery ends; Resonant Sundering applies Disadvantage to Constitution saves against your spells/features via a Midi QoL flag, toggled live as Innate Sorcery starts and ends.
 
 Further classes, subclasses, and other content will be added incrementally as compendium packs under `packs/`.
 
