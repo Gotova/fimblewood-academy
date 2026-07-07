@@ -4,6 +4,19 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.3.3] - 2026-07-07
+
+### Added
+
+- Actual Drain Magic / Improved Drain Magic automation (was previously documented but never implemented): targets a willing creature, ends a matching ongoing spell effect and restores a slot, or spends Resonance for the same effect if no ongoing spell qualifies.
+- Mana Resistance (Resonant Reserve, 10 Resonance) now actually grants Advantage on saves against spells via Midi QoL per-school flags, instead of being description-only.
+- Resonant Sundering (Unblooded Magic, level 18) now actually applies Disadvantage to Constitution saves against the sorcerer's own spells/features while Innate Sorcery is active, toggled live as Innate Sorcery starts/ends (via Midi QoL).
+
+### Fixed
+
+- Absorb Magic's bonus Sorcery Points now correctly target the "Font of Magic" feature's uses (the actual mechanism dnd5e uses for Sorcery Points) instead of a nonexistent `system.resources` path.
+- Passive Siphon's damage-target detection now reads the correct Midi QoL workflow field (`damageList[].actorUuid`) instead of a nonexistent token reference, so it was never actually firing on damage before this fix.
+
 ## [0.3.2] - 2026-07-07
 
 ### Fixed

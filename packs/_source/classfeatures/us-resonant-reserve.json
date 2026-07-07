@@ -89,10 +89,19 @@
       "_id": "v4niJ0MMmKFtDoiS",
       "name": "Resonant Reserve: Mana Resistance",
       "img": "icons/magic/unholy/orb-glowing-yellow-purple.webp",
-      "changes": [],
+      "changes": [
+        { "key": "flags.midi-qol.advantage.save.school.abj", "mode": 5, "value": "1", "priority": 20 },
+        { "key": "flags.midi-qol.advantage.save.school.con", "mode": 5, "value": "1", "priority": 20 },
+        { "key": "flags.midi-qol.advantage.save.school.div", "mode": 5, "value": "1", "priority": 20 },
+        { "key": "flags.midi-qol.advantage.save.school.enc", "mode": 5, "value": "1", "priority": 20 },
+        { "key": "flags.midi-qol.advantage.save.school.evo", "mode": 5, "value": "1", "priority": 20 },
+        { "key": "flags.midi-qol.advantage.save.school.ill", "mode": 5, "value": "1", "priority": 20 },
+        { "key": "flags.midi-qol.advantage.save.school.nec", "mode": 5, "value": "1", "priority": 20 },
+        { "key": "flags.midi-qol.advantage.save.school.trs", "mode": 5, "value": "1", "priority": 20 }
+      ],
       "disabled": true,
       "duration": {},
-      "description": "You have Advantage on Saving Throws against spells and other magical effects. Automated only when the Midi QoL module is active.",
+      "description": "You have Advantage on Saving Throws against spells and other magical effects. Automated for saves against spells (any school) when the Midi QoL module is active; non-spell magical effects aren't covered.",
       "transfer": true,
       "origin": "Compendium.fimblewood-academy.classfeatures.Item.oMivtRBv73nyGFxO",
       "flags": {

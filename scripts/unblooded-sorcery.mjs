@@ -129,6 +129,20 @@ async function updateResonantReserveEffects(actor) {
 }
 
 /* -------------------------------------------- */
+/*  Unblooded Magic: Resonant Sundering           */
+/* -------------------------------------------- */
+
+const RESONANT_SUNDERING_FLAG = "flags.midi-qol.grants.disadvantage.save.con";
+
+async function syncResonantSundering(actor, shouldBeActive) {
+  if (!getFeature(actor, "isUnbloodedMagic")) return;
+  const current = foundry.utils.getProperty(actor, RESONANT_SUNDERING_FLAG);
+  if (!!current === shouldBeActive) return;
+  if (shouldBeActive) await actor.setFlag("midi-qol", "grants.disadvantage.save.con", true);
+  else await actor.unsetFlag("midi-qol", "grants.disadvantage.save.con");
+}
+
+/* -------------------------------------------- */
 /*  Active Siphon / Passive Siphon               */
 /* -------------------------------------------- */
 
@@ -232,6 +246,70 @@ async function offerRedirectMagic(sorcererActor, spellItem, casterName, spellLev
 }
 
 /* -------------------------------------------- */
+/*  Drain Magic / Improved Drain Magic           */
+/* -------------------------------------------- */
+
+async function handleDrainMagic(sorcererActor, improved) {
+  const targetToken = Array.from(game.user.targets)[0];
+  if (!targetToken?.actor) {
+    ui.notifications.warn("Target a willing creature first, then use Drain Magic again.");
+    return;
+  }
+  const target = targetToken.actor;
+  const maxDrainLevel = improved ? 3 : 2;
+
+  const spellEffects = target.effects.filter(e => {
+    const origin = e.origin ? fromUuidSync(e.origin) : null;
+    return origin?.type === "spell" && origin.system.level >= 1 && origin.system.level <= maxDrainLevel;
+  });
+
+  if (spellEffects.length) {
+    const effect = spellEffects[0];
+    const origin = fromUuidSync(effect.origin);
+    await effect.delete();
+    const restoreLevel = await promptSlotLevel(target, 1, maxDrainLevel);
+    if (restoreLevel) {
+      await target.update({ [`system.spells.spell${restoreLevel}.value`]: (target.system.spells[`spell${restoreLevel}`]?.value ?? 0) + 1 });
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: sorcererActor }),
+        content: `<p><strong>${sorcererActor.name}</strong> uses Drain Magic to end <em>${origin?.name ?? "an ongoing spell"}</em> on ${target.name},
+          who recovers a level ${restoreLevel} spell slot.</p>`
+      });
+    }
+    return;
+  }
+
+  const maxResonance = improved ? 3 : 2;
+  const available = Math.min(maxResonance, getResonanceValue(sorcererActor));
+  if (available < 1) {
+    ui.notifications.warn(`${target.name} has no ongoing spell to drain, and ${sorcererActor.name} has no Resonance to spend instead.`);
+    return;
+  }
+  const amount = await promptSlotLevel(sorcererActor, 1, available, "Resonance to spend");
+  if (!amount) return;
+  if (!(await spendResonance(sorcererActor, amount))) return;
+  await target.update({ [`system.spells.spell${amount}.value`]: (target.system.spells[`spell${amount}`]?.value ?? 0) + 1 });
+  ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor: sorcererActor }),
+    content: `<p><strong>${sorcererActor.name}</strong> spends ${amount} Resonance (Drain Magic) so ${target.name} recovers a level ${amount} spell slot.</p>`
+  });
+}
+
+async function promptSlotLevel(actor, min, max, label = "Spell slot level") {
+  if (min >= max) return max;
+  const result = await foundry.applications.api.DialogV2.wait({
+    window: { title: "Drain Magic" },
+    content: `<label>${label}: <input type="number" name="level" value="${min}" min="${min}" max="${max}" style="width:4em"/></label>`,
+    buttons: [
+      { action: "ok", label: "Confirm", default: true, callback: (event, button) => Number(button.form.elements.level.value) },
+      { action: "cancel", label: "Cancel", callback: () => null }
+    ],
+    rejectClose: false
+  });
+  return Number.isFinite(result) ? Math.clamp(result, min, max) : null;
+}
+
+/* -------------------------------------------- */
 /*  Casting via Resonance (no spell slots)       */
 /* -------------------------------------------- */
 
@@ -326,6 +404,14 @@ export function registerUnbloodedSorcery() {
     return false;
   });
 
+  // Perform the actual Drain Magic effect after the feature's own use/charge is resolved.
+  Hooks.on("dnd5e.postUseActivity", (activity) => {
+    const item = activity.item;
+    if (!item?.flags?.[MODULE_ID]?.isDrainMagic) return;
+    const improved = !!getFeature(item.actor, "isImprovedDrainMagic");
+    handleDrainMagic(item.actor, improved);
+  });
+
   // Detect nearby spellcasting for Active Siphon / Bend Magic / Redirect Magic.
   Hooks.on("dnd5e.postUseActivity", async (activity) => {
     try {
@@ -374,7 +460,19 @@ export function registerUnbloodedSorcery() {
       const max = getResonanceMax(actor);
       if (getResonanceValue(actor) > max) await setResonance(actor, max);
     }
+
+    await syncResonantSundering(actor, innateActive);
   });
+
+  // Resonant Sundering also needs to toggle the instant an Innate Sorcery effect is added/removed mid-turn.
+  const syncOnEffectChange = (effect) => {
+    if (effect.name !== "Innate Sorcery" || !effect.parent) return;
+    const actor = effect.parent;
+    if (!hasUnbloodedSorcery(actor) || !getFeature(actor, "isUnbloodedMagic")) return;
+    syncResonantSundering(actor, actor.effects.some(e => e.name === "Innate Sorcery" && !e.disabled));
+  };
+  Hooks.on("createActiveEffect", syncOnEffectChange);
+  Hooks.on("deleteActiveEffect", syncOnEffectChange);
 
   // Midi QoL integration (optional): Passive Siphon, Mana Resistance, Resonant Sundering, Absorb Magic bonus.
   if (game.modules.get("midi-qol")?.active) {
@@ -383,11 +481,11 @@ export function registerUnbloodedSorcery() {
       if (!item || item.type !== "spell" || item.system.level < 1) return;
 
       const failedSaveTokens = workflow.failedSaves ?? new Set();
-      const damageTargets = workflow.damageList?.map(d => d.tokenUuid ? fromUuidSync(d.tokenUuid) : d.token).filter(Boolean) ?? [];
+      const damagedActors = (workflow.damageList ?? []).map(d => d.actorUuid ? fromUuidSync(d.actorUuid) : null).filter(Boolean);
 
       const affectedActors = new Set([
         ...Array.from(failedSaveTokens).map(t => t.actor),
-        ...damageTargets.map(t => t?.actor)
+        ...damagedActors
       ].filter(a => a && hasUnbloodedSorcery(a) && a !== item.actor));
 
       for (const actor of affectedActors) {
@@ -398,18 +496,17 @@ export function registerUnbloodedSorcery() {
 
       // Absorb Magic: bonus sorcery points when a target fails the save against the sorcerer's Counterspell.
       if (item.name === "Counterspell" && hasUnbloodedSorcery(item.actor) && failedSaveTokens.size) {
-        const roll = await new Roll("1d4").evaluate();
-        const points = item.actor.system.resources?.["sorcery-points"] ?? item.actor.system.spells?.sorcery ?? null;
-        const path = item.actor.system.resources?.["sorcery-points"] !== undefined
-          ? "system.resources.sorcery-points.value" : null;
-        if (path) {
-          await item.actor.update({ [path]: (foundry.utils.getProperty(item.actor, path) ?? 0) + roll.total });
+        const fontOfMagic = item.actor.items.find(i => i.name === "Font of Magic");
+        if (fontOfMagic) {
+          const roll = await new Roll("1d4").evaluate();
+          const spent = fontOfMagic.system.uses?.spent ?? 0;
+          await fontOfMagic.update({ "system.uses.spent": Math.max(0, spent - roll.total) });
+          ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor: item.actor }),
+            content: `<p><strong>${item.actor.name}</strong> regains ${roll.total} Sorcery Points (Absorb Magic).</p>`,
+            rolls: [roll]
+          });
         }
-        ChatMessage.create({
-          speaker: ChatMessage.getSpeaker({ actor: item.actor }),
-          content: `<p><strong>${item.actor.name}</strong> regains ${roll.total} Sorcery Points (Absorb Magic).</p>`,
-          rolls: [roll]
-        });
       }
     });
   }
