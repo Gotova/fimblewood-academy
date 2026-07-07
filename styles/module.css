@@ -1,1 +1,15 @@
 /* Fimblewood Academy — module styles */
+
+.dnd5e2 .fimblewood-resonance-group {
+  cursor: pointer;
+}
+
+.dnd5e2 .meter.fimblewood-resonance.progress::before {
+  background: linear-gradient(to right, #3b0a5c, #a24fe0);
+  border-right: var(--border-width, 3px) solid #6a0dad;
+}
+
+.dnd5e2 .meter.fimblewood-resonance .label .value,
+.dnd5e2 .meter.fimblewood-resonance .label .max {
+  text-shadow: 0 0 4px #c084fc;
+}

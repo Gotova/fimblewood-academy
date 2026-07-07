@@ -1,0 +1,130 @@
+{
+  "_id": "oMivtRBv73nyGFxO",
+  "name": "Resonant Reserve",
+  "type": "feat",
+  "img": "icons/magic/unholy/orb-glowing-yellow-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>While Resonance fills your reserve, the absorbed essence empowers you. You gain the following benefits based on the amount of Resonance you currently hold. These benefits are passive and cumulative &mdash; every threshold you meet applies. Spending Resonance immediately removes the relevant benefits if you drop below a threshold.</p><table><thead><tr><th>Resonance</th><th>Resonant Aspect</th><th>Effect</th></tr></thead><tbody><tr><td>2</td><td>Surging Strike</td><td>Once on each of your turns, when you hit a creature with an Attack Roll (Weapon or Spell), you deal additional damage equal to your Proficiency Bonus.</td></tr><tr><td>4</td><td>Mana Veil</td><td>You gain a +2 bonus to your Armor Class.</td></tr><tr><td>6</td><td>Charged Focus</td><td>Whenever you cast a spell of 1st level or higher, the Resonance cost of that spell is reduced by 1 (minimum 1).</td></tr><tr><td>8</td><td>Echo Ward</td><td>At the start of each of your turns, you gain Temporary Hit Points equal to your Proficiency Bonus.</td></tr><tr><td>10</td><td>Mana Resistance</td><td>You have Advantage on Saving Throws against spells and other magical effects.</td></tr><tr><td>12</td><td>Mana Free</td><td>Once on each of your turns, when you cast a spell of 1st level or higher, you can apply one Metamagic option to that spell without spending Sorcery Points. This Metamagic option doesn't count against the normal limit of one Metamagic option per spell, allowing you to combine it with a second Metamagic option you apply to the same spell (paying that option's Sorcery Point cost as normal).</td></tr></tbody></table><p><em>Automated: the Fimblewood Academy module automatically enables/disables each Resonant Aspect below as your Resonance crosses its threshold. Mana Veil's AC bonus, Surging Strike's damage bonus, and Echo Ward's temporary hit points are applied automatically. Charged Focus's discount is applied automatically when you spend Resonance to cast. Mana Resistance (requires Midi QoL) and Mana Free's Sorcery Point refund are best-effort automated &mdash; see the module README for exact behavior. Surging Strike and Mana Free's \"once per turn\" limits are not strictly enforced by the passive bonus &mdash; track that manually.</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 1, Unblooded Sorcery",
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Unblooded Sorcery\" (2026)."
+    }
+  },
+  "effects": [
+    {
+      "_id": "iALoTjQPWOyf2Xn9",
+      "name": "Resonant Reserve: Surging Strike",
+      "img": "icons/magic/unholy/orb-glowing-yellow-purple.webp",
+      "changes": [
+        { "key": "system.bonuses.mwak.damage", "mode": 2, "value": "@prof", "priority": 20 },
+        { "key": "system.bonuses.rwak.damage", "mode": 2, "value": "@prof", "priority": 20 },
+        { "key": "system.bonuses.msak.damage", "mode": 2, "value": "@prof", "priority": 20 },
+        { "key": "system.bonuses.rsak.damage", "mode": 2, "value": "@prof", "priority": 20 }
+      ],
+      "disabled": true,
+      "duration": {},
+      "description": "Once on each of your turns, when you hit with an Attack Roll, you deal additional damage equal to your Proficiency Bonus. (Applies to all hits; track the once-per-turn limit yourself.)",
+      "transfer": true,
+      "origin": "Compendium.fimblewood-academy.classfeatures.Item.oMivtRBv73nyGFxO",
+      "flags": {
+        "fimblewood-academy": { "resonanceThreshold": 2 }
+      },
+      "_key": "!items.effects!oMivtRBv73nyGFxO.iALoTjQPWOyf2Xn9"
+    },
+    {
+      "_id": "A62h9HtiamaKvOZ9",
+      "name": "Resonant Reserve: Mana Veil",
+      "img": "icons/magic/unholy/orb-glowing-yellow-purple.webp",
+      "changes": [
+        { "key": "system.attributes.ac.bonus", "mode": 2, "value": "2", "priority": 20 }
+      ],
+      "disabled": true,
+      "duration": {},
+      "description": "You gain a +2 bonus to your Armor Class.",
+      "transfer": true,
+      "origin": "Compendium.fimblewood-academy.classfeatures.Item.oMivtRBv73nyGFxO",
+      "flags": {
+        "fimblewood-academy": { "resonanceThreshold": 4 }
+      },
+      "_key": "!items.effects!oMivtRBv73nyGFxO.A62h9HtiamaKvOZ9"
+    },
+    {
+      "_id": "bHqT2kWIxeemwSTk",
+      "name": "Resonant Reserve: Charged Focus",
+      "img": "icons/magic/unholy/orb-glowing-yellow-purple.webp",
+      "changes": [],
+      "disabled": true,
+      "duration": {},
+      "description": "Whenever you cast a spell of 1st level or higher, its Resonance cost is reduced by 1 (minimum 1). Applied automatically when spending Resonance to cast.",
+      "transfer": true,
+      "origin": "Compendium.fimblewood-academy.classfeatures.Item.oMivtRBv73nyGFxO",
+      "flags": {
+        "fimblewood-academy": { "resonanceThreshold": 6 }
+      },
+      "_key": "!items.effects!oMivtRBv73nyGFxO.bHqT2kWIxeemwSTk"
+    },
+    {
+      "_id": "7AkzJVvxcEXJTLXX",
+      "name": "Resonant Reserve: Echo Ward",
+      "img": "icons/magic/unholy/orb-glowing-yellow-purple.webp",
+      "changes": [],
+      "disabled": true,
+      "duration": {},
+      "description": "At the start of each of your turns, you gain Temporary Hit Points equal to your Proficiency Bonus. Applied automatically at the start of your turn in combat.",
+      "transfer": true,
+      "origin": "Compendium.fimblewood-academy.classfeatures.Item.oMivtRBv73nyGFxO",
+      "flags": {
+        "fimblewood-academy": { "resonanceThreshold": 8 }
+      },
+      "_key": "!items.effects!oMivtRBv73nyGFxO.7AkzJVvxcEXJTLXX"
+    },
+    {
+      "_id": "v4niJ0MMmKFtDoiS",
+      "name": "Resonant Reserve: Mana Resistance",
+      "img": "icons/magic/unholy/orb-glowing-yellow-purple.webp",
+      "changes": [],
+      "disabled": true,
+      "duration": {},
+      "description": "You have Advantage on Saving Throws against spells and other magical effects. Automated only when the Midi QoL module is active.",
+      "transfer": true,
+      "origin": "Compendium.fimblewood-academy.classfeatures.Item.oMivtRBv73nyGFxO",
+      "flags": {
+        "fimblewood-academy": { "resonanceThreshold": 10 }
+      },
+      "_key": "!items.effects!oMivtRBv73nyGFxO.v4niJ0MMmKFtDoiS"
+    },
+    {
+      "_id": "bWJDjGhJCjnjhVBT",
+      "name": "Resonant Reserve: Mana Free",
+      "img": "icons/magic/unholy/orb-glowing-yellow-purple.webp",
+      "changes": [],
+      "disabled": true,
+      "duration": {},
+      "description": "Once on each of your turns, when you cast a spell of 1st level or higher with a Metamagic option applied, its Sorcery Point cost is refunded. Applied automatically, once per turn.",
+      "transfer": true,
+      "origin": "Compendium.fimblewood-academy.classfeatures.Item.oMivtRBv73nyGFxO",
+      "flags": {
+        "fimblewood-academy": { "resonanceThreshold": 12 }
+      },
+      "_key": "!items.effects!oMivtRBv73nyGFxO.bWJDjGhJCjnjhVBT"
+    }
+  ],
+  "folder": null,
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isResonantReserve": true
+    }
+  },
+  "_key": "!items!oMivtRBv73nyGFxO"
+}

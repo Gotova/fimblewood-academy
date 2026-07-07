@@ -1,0 +1,32 @@
+{
+  "_id": "8EGX8ykIWniqtDUE",
+  "name": "Spellcasting Modifications",
+  "type": "feat",
+  "img": "icons/magic/control/debuff-energy-snare-purple-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p>You follow the Sorcerer Spellcasting rules (see chapter 3 of the Player's Handbook) with the following modifications. These modifications apply at all Sorcerer levels.</p><p><strong>No Spell Slots.</strong> You do not gain Spell Slots from your Sorcerer levels.</p><p><strong>Casting Spells via Resonance.</strong> To cast a spell of 1st level or higher, you spend Resonance equal to the spell's level. Casting a 3rd-level spell costs 3 Resonance. You can spend extra Resonance to cast a spell at a higher level (upcasting), up to the maximum spell level your Sorcerer level allows.</p><p><strong>Maximum Spell Level.</strong> Despite not having Spell Slots, the highest spell level you can cast is determined by the Sorcerer Slot table. A 9th-level Sorcerer can cast spells of up to 5th level, for example.</p><p><em>Automated: the Fimblewood Academy module tracks your Resonance as a purple bar below Hit Dice, blocks casting a spell you can't afford, deducts Resonance automatically on cast (applying the Charged Focus discount from Resonant Reserve when active), and lets you choose an upcast level up to your maximum instead of the normal spell-slot picker. Your spell slots are set to 0 automatically.</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 1, Unblooded Sorcery",
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Unblooded Sorcery\" (2026)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isSpellcastingModifications": true
+    }
+  },
+  "_key": "!items!8EGX8ykIWniqtDUE"
+}

@@ -1,0 +1,41 @@
+{
+  "_id": "ozhkH4MsovOWXvoP",
+  "name": "Redirect Magic",
+  "type": "feat",
+  "img": "icons/magic/movement/portal-vortex-orange.webp",
+  "system": {
+    "description": {
+      "value": "<p>Whenever a creature you can see within 60 feet of yourself casts a spell of 1st level or higher, you can take a Reaction and expend Resonance equal to the spell's level to redirect it. If you cannot pay the full cost, this feature fails and no Resonance is spent.</p><p>Redirect the spell as follows, based on its targeting:</p><ul><li><strong>Targeted Spell.</strong> If the spell targets one or more creatures, choose any number of those targets and replace each with a new target you can see. Each new target must be within the spell's normal range, measured from your position, and must satisfy the spell's normal targeting requirements.</li><li><strong>Area Spell.</strong> If the spell has an Area of Effect, choose a new point of origin for the Area. The new origin must be within the spell's normal range, measured from your position.</li><li><strong>Self-Range Spell.</strong> A spell with a Range of Self cannot be redirected.</li></ul><p>The spell otherwise resolves normally at its new target(s) or Area, treating the original caster as its source for all rules purposes (Save DC, Spell Attack Bonus, damage, duration, and so on).</p><p><em>Automated: the Fimblewood Academy module detects nearby spellcasting and offers a Redirect Magic prompt validating the Resonance cost (equal to the spell's level) and whether the spell can be redirected (blocked for Range: Self spells). Choosing new targets/origin and resolving the spell against them is done manually by the GM, since Foundry has no generic way to safely re-target an already-cast spell.</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 14, Unblooded Sorcery",
+    "activation": {
+      "type": "reaction",
+      "cost": 1,
+      "condition": "When a creature you can see within 60 feet of yourself casts a Spell of 1st level or higher"
+    },
+    "range": {
+      "value": 60,
+      "units": "ft"
+    },
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Unblooded Sorcery\" (2026)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isRedirectMagic": true
+    }
+  },
+  "_key": "!items!ozhkH4MsovOWXvoP"
+}

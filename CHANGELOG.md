@@ -4,6 +4,15 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-07-07
+
+### Added
+
+- **Sorcerer — Unblooded Sorcery** subclass, closely adapted from "Unblooded Sorcery" (2026): replaces Spell Slots with a custom **Resonance** resource. Includes Spellcasting Modifications, Mana Siphon, Resonant Reserve, Bend Magic, Drain Magic, Absorb Magic, Occult Shroud, Redirect Magic, Improved Drain Magic, and Unblooded Magic.
+- A purple Resonance bar on the character sheet, below Hit Dice, for any actor with this subclass.
+- Automation: Resonance gain (Active/Passive Siphon), spending Resonance to cast spells, Resonant Reserve threshold effects, and more — see README for the full automation breakdown.
+- The PDF's "Mana Siphon table" was missing from the source document; Resonance gained from siphoning equals the siphoned spell's level (campaign ruling).
+
 ## [0.2.1] - 2026-07-07
 
 ### Fixed

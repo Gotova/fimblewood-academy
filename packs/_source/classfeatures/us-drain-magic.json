@@ -1,0 +1,56 @@
+{
+  "_id": "A2whEp2Lkyu19wL2",
+  "name": "Drain Magic",
+  "type": "feat",
+  "img": "icons/magic/unholy/strike-body-life-soul-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>You can drain power from ongoing spells to recharge your allies' magic. As a Magic Action, you can touch a willing creature and end one ongoing spell of 1st or 2nd level affecting it; the creature immediately recovers one expended Spell Slot of 2nd level or lower (the target's choice).</p><p>If the target has no ongoing 1st- or 2nd-level spell affecting it, you can instead use this Magic Action and expend up to 2 Resonance of your own to allow the target to recover one expended Spell Slot. The Slot recovered is of a level equal to the amount of Resonance you expended (a maximum of 2nd level).</p><p>Once you use this feature, you can't use it again until you finish a Short or Long Rest.</p><p><em>Automated: the Fimblewood Academy module lets you pick a willing target and, if they have an ongoing 1st- or 2nd-level spell effect, ends it and restores a spell slot of the target's choice automatically. Otherwise it lets you spend up to 2 Resonance to restore a slot of the corresponding level. Tracks the once-per-rest use automatically.</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 3, Unblooded Sorcery",
+    "activation": {
+      "type": "action",
+      "cost": 1
+    },
+    "range": {
+      "value": 5,
+      "units": "ft"
+    },
+    "target": {
+      "affects": {
+        "count": "1",
+        "type": "creature"
+      }
+    },
+    "uses": {
+      "max": "1",
+      "recovery": [
+        {
+          "period": "sr",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
+    },
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Unblooded Sorcery\" (2026)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isDrainMagic": true
+    }
+  },
+  "_key": "!items!A2whEp2Lkyu19wL2"
+}

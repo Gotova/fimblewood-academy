@@ -1,0 +1,32 @@
+{
+  "_id": "GDOXYJyogTLhUI7k",
+  "name": "Occult Shroud",
+  "type": "feat",
+  "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>You always have the <em>Nondetection</em> spell prepared, and it doesn't count against the number of spells you can have prepared. Once per long rest, you can cast it for free.</p><p><em>Automated: the Fimblewood Academy module grants you Nondetection as an always-prepared spell and tracks your once-per-long-rest free casting &mdash; the first time you cast it each day, no Resonance is spent.</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 6, Unblooded Sorcery",
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Unblooded Sorcery\" (2026)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isOccultShroud": true
+    }
+  },
+  "_key": "!items!GDOXYJyogTLhUI7k"
+}

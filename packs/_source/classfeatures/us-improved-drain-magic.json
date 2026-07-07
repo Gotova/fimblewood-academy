@@ -1,0 +1,32 @@
+{
+  "_id": "ITFDd7JSyIwjYpTW",
+  "name": "Improved Drain Magic",
+  "type": "feat",
+  "img": "icons/magic/unholy/strike-body-life-soul-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>You can now use Drain Magic as a Bonus Action. In addition, when you use Drain Magic, you can end one ongoing spell of 1st, 2nd, or 3rd level affecting the target, and the target recovers one expended Spell Slot of 3rd level or lower (the target's choice). When you use the alternative version of Drain Magic that costs Resonance, you can expend up to 3 Resonance instead of 2 to allow the target to recover a Spell Slot of the corresponding level.</p><p><em>Automated: the Fimblewood Academy module updates Drain Magic's activation to a Bonus Action and raises its spell-level ceiling and maximum Resonance cost as described above.</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 14, Unblooded Sorcery",
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Unblooded Sorcery\" (2026)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isImprovedDrainMagic": true
+    }
+  },
+  "_key": "!items!ITFDd7JSyIwjYpTW"
+}

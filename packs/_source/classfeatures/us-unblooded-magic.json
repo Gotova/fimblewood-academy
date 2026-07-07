@@ -1,0 +1,32 @@
+{
+  "_id": "5ktFWsIGB0S7ZZfD",
+  "name": "Unblooded Magic",
+  "type": "feat",
+  "img": "icons/magic/unholy/beam-impact-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>You have ascended past the limit of what stolen magic should allow. Where other Sorcerers tap their inherited well, you draw from a parasitic reservoir no caster can defend against. While your Innate Sorcery feature is active, you gain the following benefits:</p><ul><li><strong>Mana Surge.</strong> You gain Resonance equal to half your Proficiency Bonus (rounded down, minimum 1) at the start of each of your turns. This Resonance can exceed your normal Resonance Maximum. When Innate Sorcery ends, any Resonance you hold above your normal Maximum is immediately lost.</li><li><strong>Resonant Sundering.</strong> Whenever a creature must make a Constitution Saving Throw caused by any spell or feature of yours, it makes that Saving Throw with Disadvantage.</li></ul><p><em>Automated: while your Innate Sorcery is active, the Fimblewood Academy module grants bonus Resonance (above your maximum) at the start of each of your turns, and clamps any excess back down to your normal maximum the moment Innate Sorcery ends. Resonant Sundering's Disadvantage on Constitution saves against your spells/features is applied automatically for casts the module can detect (requires Midi QoL).</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 18, Unblooded Sorcery",
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Unblooded Sorcery\" (2026)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isUnbloodedMagic": true
+    }
+  },
+  "_key": "!items!5ktFWsIGB0S7ZZfD"
+}

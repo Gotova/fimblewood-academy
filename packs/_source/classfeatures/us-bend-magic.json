@@ -1,0 +1,41 @@
+{
+  "_id": "vtQpLlrC6ke8l8XE",
+  "name": "Bend Magic",
+  "type": "feat",
+  "img": "icons/magic/control/energy-stream-link-spiral-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>Whenever a creature you can see within 60 feet of yourself casts a spell, you can take a Reaction and expend any amount of Resonance (minimum 1) to bend the spell's weave. Choose one of the following effects, then resolve it using the amount of Resonance you spent.</p><ul><li><strong>Skew the Roll.</strong> A number of creatures affected by the spell equal to the Resonance you expended have Advantage or Disadvantage (your choice for each) on the first Saving Throw they make against the spell.</li><li><strong>Crook the Strike.</strong> A number of damage dice equal to the Resonance you expended in the spell's damage roll take their maximum or minimum result (your choice for each die).</li></ul><p>The Resonance you expend cannot exceed the number of valid targets (for Skew the Roll) or damage dice (for Crook the Strike) in the spell. Any excess Resonance is wasted.</p><p><em>Automated: the Fimblewood Academy module detects nearby spellcasting and offers you a Bend Magic prompt (choice of effect, amount of Resonance, and Advantage/Disadvantage or max/min per die), validated against your current Resonance. Crook the Strike adjusts the actual damage roll; Skew the Roll applies Advantage/Disadvantage to the affected targets' next save against that spell (requires Midi QoL for automatic save application).</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 3, Unblooded Sorcery",
+    "activation": {
+      "type": "reaction",
+      "cost": 1,
+      "condition": "When a creature you can see within 60 feet of yourself casts a Spell"
+    },
+    "range": {
+      "value": 60,
+      "units": "ft"
+    },
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Unblooded Sorcery\" (2026)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isBendMagic": true
+    }
+  },
+  "_key": "!items!vtQpLlrC6ke8l8XE"
+}

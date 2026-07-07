@@ -1,0 +1,42 @@
+{
+  "_id": "LabpHJk8nAnq44iN",
+  "name": "Mana Siphon",
+  "type": "feat",
+  "img": "icons/magic/unholy/orb-glowing-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>You can siphon arcane essence from spells and store it as Resonance.</p><p><strong>Active Siphon.</strong> When a creature you can see within 60 feet of yourself casts a spell of 1st level or higher, you can siphon Resonance from the casting. This requires no action or reaction; it occurs as the spell is cast. The amount of Resonance you gain is equal to the spell's level.</p><p>You can use this Active Siphon a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Short or Long Rest.</p><p><strong>Passive Siphon.</strong> Whenever you take damage from a spell, or whenever you fail a Saving Throw against a spell, you can use your Reaction to gain 1 Resonance. You can gain Resonance in this way from a given spell only once, regardless of how many effects it produces against you. This Passive Siphon has no daily limit.</p><p><strong>Resonance Maximum.</strong> Your maximum Resonance equals twice your Proficiency Bonus.</p><p><strong>Resonance Duration.</strong> Resonance you hold remains until you finish a Long Rest, at which point any unspent Resonance is lost. You begin each day with 0 Resonance. Cantrips do not generate Resonance.</p><p><em>Automated: the Fimblewood Academy module watches for nearby spellcasting and prompts you to Active Siphon (tracking your uses and their reset on rest) or Passive Siphon (on taking spell damage or failing a spell save, once per casting &mdash; requires the Midi QoL module to detect the originating spell). Your Resonance maximum, duration, and daily reset are applied automatically.</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 1, Unblooded Sorcery",
+    "uses": {
+      "max": "@prof",
+      "recovery": [
+        {
+          "period": "sr",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
+    },
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Unblooded Sorcery\" (2026)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isManaSiphon": true
+    }
+  },
+  "_key": "!items!LabpHJk8nAnq44iN"
+}

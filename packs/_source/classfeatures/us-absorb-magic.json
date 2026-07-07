@@ -1,0 +1,32 @@
+{
+  "_id": "hnSleRPAeWV6RUX7",
+  "name": "Absorb Magic",
+  "type": "feat",
+  "img": "icons/magic/defensive/barrier-shield-dome-blue-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>You always have the <em>Counterspell</em> spell prepared, and it doesn't count against the number of spells you can have prepared.</p><p>Additionally, whenever a creature fails the Saving Throw against a <em>Counterspell</em> you cast, you regain 1d4 Sorcery Points.</p><p><em>Automated: the Fimblewood Academy module grants you Counterspell as an always-prepared spell. When a target fails its save against your Counterspell, the module automatically rolls 1d4 and adds the result to your Sorcery Points (requires Midi QoL to detect the failed save automatically).</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 6, Unblooded Sorcery",
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Unblooded Sorcery\" (2026)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isAbsorbMagic": true
+    }
+  },
+  "_key": "!items!hnSleRPAeWV6RUX7"
+}

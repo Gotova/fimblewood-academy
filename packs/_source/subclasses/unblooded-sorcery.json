@@ -1,0 +1,148 @@
+{
+  "_id": "AWLkxIMk0BSIznO5",
+  "name": "Unblooded Sorcery",
+  "type": "subclass",
+  "img": "icons/magic/unholy/beam-ringed-impact-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>You were born into magic and yet inherited none of it. Whether the gift skipped you, was burned out of you, or simply refused to take, your bloodline's power passed you by &mdash; until you discovered that what was denied could be taken. Where other Sorcerers channel the magic that runs within them, you channel what you have stolen from the magic of others.</p><p><em>This subclass replaces the normal Sorcerer spellcasting resource (Spell Slots) with a custom resource called <strong>Resonance</strong>, tracked automatically by the Fimblewood Academy module as a purple bar on the character sheet, below Hit Dice.</em></p>",
+      "chat": ""
+    },
+    "identifier": "unblooded-sorcery",
+    "classIdentifier": "sorcerer",
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Unblooded Sorcery\" (2026)."
+    },
+    "advancement": [
+      {
+        "_id": "BqDPyTiJmDpnBI4I",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.fimblewood-academy.classfeatures.Item.8EGX8ykIWniqtDUE",
+            "Compendium.fimblewood-academy.classfeatures.Item.LabpHJk8nAnq44iN",
+            "Compendium.fimblewood-academy.classfeatures.Item.oMivtRBv73nyGFxO"
+          ],
+          "optional": false
+        },
+        "value": {},
+        "level": 1,
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "JFM8x9Mlb5lzb839",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.fimblewood-academy.classfeatures.Item.vtQpLlrC6ke8l8XE",
+            "Compendium.fimblewood-academy.classfeatures.Item.A2whEp2Lkyu19wL2"
+          ],
+          "optional": false
+        },
+        "value": {},
+        "level": 3,
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "7wTXHxiamFcQL9YS",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.fimblewood-academy.classfeatures.Item.hnSleRPAeWV6RUX7",
+            "Compendium.fimblewood-academy.classfeatures.Item.GDOXYJyogTLhUI7k",
+            "Compendium.dnd5e.spells.Item.Ek45cBpVXvJdv1Qy",
+            "Compendium.dnd5e.spells.Item.aU62xVUBYkAQWIHv"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": [],
+            "method": "spell",
+            "prepared": 2,
+            "uses": {
+              "max": "",
+              "per": "",
+              "requireSlot": false
+            }
+          }
+        },
+        "value": {},
+        "level": 6,
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "TtazLH5roPx56tQh",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.fimblewood-academy.classfeatures.Item.ozhkH4MsovOWXvoP",
+            "Compendium.fimblewood-academy.classfeatures.Item.ITFDd7JSyIwjYpTW"
+          ],
+          "optional": false
+        },
+        "value": {},
+        "level": 14,
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "rFWf7vvRLDwN2Qv7",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.fimblewood-academy.classfeatures.Item.5ktFWsIGB0S7ZZfD"
+          ],
+          "optional": false
+        },
+        "value": {},
+        "level": 18,
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      }
+    ]
+  },
+  "effects": [
+    {
+      "_id": "iy7c2Z1FhVQhVh1p",
+      "name": "Unblooded Sorcery: No Spell Slots",
+      "img": "icons/magic/unholy/beam-ringed-impact-purple.webp",
+      "changes": [
+        { "key": "system.spells.spell1.max", "mode": 5, "value": "0", "priority": 20 },
+        { "key": "system.spells.spell2.max", "mode": 5, "value": "0", "priority": 20 },
+        { "key": "system.spells.spell3.max", "mode": 5, "value": "0", "priority": 20 },
+        { "key": "system.spells.spell4.max", "mode": 5, "value": "0", "priority": 20 },
+        { "key": "system.spells.spell5.max", "mode": 5, "value": "0", "priority": 20 },
+        { "key": "system.spells.spell6.max", "mode": 5, "value": "0", "priority": 20 },
+        { "key": "system.spells.spell7.max", "mode": 5, "value": "0", "priority": 20 },
+        { "key": "system.spells.spell8.max", "mode": 5, "value": "0", "priority": 20 },
+        { "key": "system.spells.spell9.max", "mode": 5, "value": "0", "priority": 20 }
+      ],
+      "disabled": false,
+      "duration": {},
+      "description": "You do not gain Spell Slots from your Sorcerer levels. You cast spells by spending Resonance instead.",
+      "transfer": true,
+      "origin": "Compendium.fimblewood-academy.subclasses.Item.AWLkxIMk0BSIznO5",
+      "flags": {},
+      "_key": "!items.effects!AWLkxIMk0BSIznO5.iy7c2Z1FhVQhVh1p"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "sourcePdf": "Unblooded Sorcery",
+      "isUnbloodedSorcery": true
+    }
+  },
+  "_key": "!items!AWLkxIMk0BSIznO5"
+}

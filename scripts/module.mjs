@@ -1,10 +1,15 @@
+import { registerUnbloodedSorcery, hasUnbloodedSorcery, getResonanceValue, getResonanceMax, addResonance } from "./unblooded-sorcery.mjs";
+
 const MODULE_ID = "fimblewood-academy";
 
 Hooks.once("init", () => {
   console.log(`${MODULE_ID} | Initializing Fimblewood Academy`);
 
+  registerUnbloodedSorcery();
+
   game.modules.get(MODULE_ID).api = {
-    id: MODULE_ID
+    id: MODULE_ID,
+    unbloodedSorcery: { hasUnbloodedSorcery, getResonanceValue, getResonanceMax, addResonance }
   };
 });
 
