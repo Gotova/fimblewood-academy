@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify tag matches module.json version
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          MODULE_VERSION=$(node -p "require('./module.json').version")
+          if [ "$TAG_VERSION" != "$MODULE_VERSION" ]; then
+            echo "Tag version ($TAG_VERSION) does not match module.json version ($MODULE_VERSION)"
+            exit 1
+          fi
+
+      - name: Build compendium packs
+        run: npm run build:packs
+
+      - name: Package module
+        run: |
+          mkdir -p dist
+          zip -r dist/module.zip \
+            module.json \
+            scripts \
+            styles \
+            lang \
+            templates \
+            packs \
+            assets \
+            -x "packs/_source/*"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }}
+          files: |
+            module.json
+            dist/module.zip
+          generate_release_notes: true
