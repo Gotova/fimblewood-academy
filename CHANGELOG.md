@@ -4,6 +4,13 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-07-07
+
+### Fixed
+
+- Bend Magic / Redirect Magic / Cast via Resonance dialogs could pass a non-numeric amount through to Resonance spending, which — because the old spend check used `<` against `NaN` (always false) — silently wiped an actor's Resonance to 0 instead of failing safely. `addResonance`/`spendResonance` now reject non-finite amounts outright, and the dialogs clamp/validate their inputs before spending. Found and fixed during live testing.
+- Removed dead no-op code in Redirect Magic's range check.
+
 ## [0.3.1] - 2026-07-07
 
 ### Fixed

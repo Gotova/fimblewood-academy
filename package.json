@@ -1,6 +1,6 @@
 {
   "name": "fimblewood-academy",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "type": "module",
   "description": "Homebrew Foundry VTT module for the Fimblewood Academy dnd5e campaign.",

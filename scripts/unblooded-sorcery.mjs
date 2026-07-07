@@ -35,7 +35,7 @@ async function setResonance(actor, value) {
 }
 
 export async function addResonance(actor, amount, { flavor }={}) {
-  if (!hasUnbloodedSorcery(actor)) return null;
+  if (!hasUnbloodedSorcery(actor) || !Number.isFinite(amount)) return null;
   const before = getResonanceValue(actor);
   const after = await setResonance(actor, before + amount);
   if (flavor && after !== before) {
@@ -48,6 +48,7 @@ export async function addResonance(actor, amount, { flavor }={}) {
 }
 
 async function spendResonance(actor, amount) {
+  if (!Number.isFinite(amount) || amount <= 0) return false;
   const before = getResonanceValue(actor);
   if (before < amount) return false;
   await setResonance(actor, before - amount);
@@ -189,8 +190,11 @@ async function offerBendMagic(sorcererActor, spellItem, casterName) {
   });
   if (!choice) return;
 
-  const amount = Math.clamp(choice.amount, 1, max);
-  if (!(await spendResonance(sorcererActor, amount))) return;
+  const amount = Math.clamp(Number.isFinite(choice.amount) ? choice.amount : 1, 1, max);
+  if (!(await spendResonance(sorcererActor, amount))) {
+    ui.notifications.warn(`${sorcererActor.name} couldn't spend Resonance for Bend Magic (insufficient Resonance or invalid amount).`);
+    return;
+  }
 
   ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: sorcererActor }),
@@ -206,9 +210,6 @@ async function offerBendMagic(sorcererActor, spellItem, casterName) {
 async function offerRedirectMagic(sorcererActor, spellItem, casterName, spellLevel) {
   const feature = getFeature(sorcererActor, "isRedirectMagic");
   if (!feature) return;
-  if (spellItem.system.target?.template?.type || spellItem.system.range?.units === "self" || spellItem.system.range?.value === undefined && spellItem.system.range?.units === "self") {
-    // fallthrough, still allow prompt; range=self check happens below more precisely
-  }
   if (spellItem.system.range?.units === "self") return; // cannot redirect
 
   const value = getResonanceValue(sorcererActor);
@@ -246,7 +247,7 @@ async function promptSpellLevel(actor, baseLevel, maxLevel) {
     ],
     rejectClose: false
   });
-  return result;
+  return Number.isFinite(result) ? Math.clamp(result, baseLevel, maxLevel) : (result === null ? null : baseLevel);
 }
 
 async function handleResonanceCast(activity) {
