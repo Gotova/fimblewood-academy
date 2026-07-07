@@ -1,0 +1,94 @@
+{
+  "_id": "rneDjp7HbhUH1cs3",
+  "name": "Circle of Wild Magic",
+  "type": "subclass",
+  "img": "icons/magic/nature/tree-glow-teal-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>The Circle of Wild Magic is comprised of witches and sages that draw power from the chaotic natural energy of the Feywild instead of the natural energy of the Material Plane. Users of such magic are necessary to the balance of natural energy in the world by slowly releasing their natural chaos into their surroundings. This chaotic energy is necessary for life to blossom.</p><p>Practitioners of this art are often cast away not for their intentions or their alignment, but due to the unpredictability of their powers and its destructiveness.</p><h3>Circle Spells</h3><p>When you join this circle at 2nd level, you are imbued with wild fey magic. This unusual magic flowing inside you grants you access to some spells when you reach certain levels in this class, as shown on the Circle of Wild Magic Spells table below. Once you gain access to one of these spells, you always have it prepared, and it doesn't count against the number of spells you can prepare each day. If you gain access to a spell that doesn't appear on the Druid spell list, the spell is nonetheless a druid spell for you.</p><table><thead><tr><th>Druid Level</th><th>Spells</th></tr></thead><tbody><tr><td>2nd</td><td>Chaos Bolt, Color Spray</td></tr><tr><td>3rd</td><td>Enlarge/Reduce, Prayer of Healing</td></tr><tr><td>5th</td><td>Counterspell, Slow</td></tr><tr><td>7th</td><td>Confusion, Vitriolic Sphere</td></tr><tr><td>9th</td><td>Greater Restoration, Seeming</td></tr></tbody></table><p><em>Note: this always-prepared spell list is described here for reference. Foundry's automatic spell-granting advancement is not wired up on this subclass yet &mdash; add the spells above to the Circle Spells feature or a spell-granting advancement manually if you want them auto-prepared.</em></p>",
+      "chat": ""
+    },
+    "identifier": "wild-magic",
+    "classIdentifier": "druid",
+    "source": {
+      "custom": "Fimblewood Academy homebrew, closely adapted from \"Circle of Wild Magic\" by u/Jigui26 (GM Binder, 2022). Unofficial Fan Content permitted under the Fan Content Policy; not approved or endorsed by Wizards of the Coast."
+    },
+    "advancement": [
+      {
+        "_id": "IADn6S4w7aqDawt9",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.fimblewood-academy.classfeatures.Item.o3VMFozAOxbibgo1",
+            "Compendium.fimblewood-academy.classfeatures.Item.H1wrOgOgG0YFDYXv"
+          ],
+          "optional": false
+        },
+        "value": {},
+        "level": 2,
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "IpHsQ8bebVix2HUI",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.fimblewood-academy.classfeatures.Item.OBZrti0qiHzlk6mj"
+          ],
+          "optional": false
+        },
+        "value": {},
+        "level": 6,
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "Wm8y6aDJYr0HNTK8",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.fimblewood-academy.classfeatures.Item.xhpbcDCvBNOdNMJa"
+          ],
+          "optional": false
+        },
+        "value": {},
+        "level": 10,
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "1VHZFFhIKEixqu67",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.fimblewood-academy.classfeatures.Item.PtcLlmTXFmpnWpJ5"
+          ],
+          "optional": false
+        },
+        "value": {},
+        "level": 14,
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "sourcePdf": "Druid: Circle of Wild Magic (GM Binder)",
+      "sourceCreator": "u/Jigui26",
+      "sourceDate": "2022-12-22"
+    }
+  },
+  "_key": "!items!rneDjp7HbhUH1cs3"
+}

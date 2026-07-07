@@ -4,3 +4,8 @@ dist/
 .DS_Store
 Thumbs.db
 module.zip
+
+# Compiled compendium packs are build output — only packs/_source is tracked.
+packs/*
+!packs/_source
+!packs/_source/**

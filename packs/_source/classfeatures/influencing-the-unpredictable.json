@@ -1,0 +1,28 @@
+{
+  "_id": "PtcLlmTXFmpnWpJ5",
+  "name": "Influencing the Unpredictable",
+  "type": "feat",
+  "img": "icons/magic/time/hourglass-yellow-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>Starting at 14th level, your connection to the Feywild grows stronger and allows you to influence the chaotic energy flowing through you. When you finish a long rest, roll on the Wild Magic Surge table &mdash; this is your <strong>influenced roll</strong>. You can replace the result of any roll on the Wild Magic Surge table with your influenced roll.</p><p>You regain a spent influenced roll when you cast a 5th-level or higher spell. If you already have an influenced roll available, you can roll another one instead and choose which effect to keep.</p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Druid 14, Circle of Wild Magic",
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Circle of Wild Magic\" by u/Jigui26 (GM Binder, 2022)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!PtcLlmTXFmpnWpJ5"
+}

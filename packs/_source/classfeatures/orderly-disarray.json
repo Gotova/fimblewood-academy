@@ -1,0 +1,49 @@
+{
+  "_id": "xhpbcDCvBNOdNMJa",
+  "name": "Orderly Disarray",
+  "type": "feat",
+  "img": "icons/magic/perception/eye-ringed-glow-angry-small.webp",
+  "system": {
+    "description": {
+      "value": "<p>Starting at 10th level, the brewing chaos of the wild magic that flows through your veins makes you immune to the charmed condition and allows you to see through any illusions within 300 feet of you.</p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Druid 10, Circle of Wild Magic",
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Circle of Wild Magic\" by u/Jigui26 (GM Binder, 2022)."
+    }
+  },
+  "effects": [
+    {
+      "_id": "NmMGvrYTF5dRD3cV",
+      "name": "Orderly Disarray",
+      "img": "icons/magic/perception/eye-ringed-glow-angry-small.webp",
+      "changes": [
+        {
+          "key": "system.traits.ci.value",
+          "mode": 2,
+          "value": "charmed",
+          "priority": 20
+        }
+      ],
+      "disabled": false,
+      "duration": {},
+      "description": "Immune to the charmed condition.",
+      "transfer": true,
+      "origin": "Compendium.fimblewood-academy.classfeatures.Item.xhpbcDCvBNOdNMJa",
+      "flags": {},
+      "_key": "!items.effects!xhpbcDCvBNOdNMJa.NmMGvrYTF5dRD3cV"
+    }
+  ],
+  "folder": null,
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!xhpbcDCvBNOdNMJa"
+}

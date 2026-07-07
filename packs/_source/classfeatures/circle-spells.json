@@ -1,0 +1,28 @@
+{
+  "_id": "H1wrOgOgG0YFDYXv",
+  "name": "Circle Spells",
+  "type": "feat",
+  "img": "icons/magic/symbols/runes-star-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>When you join this circle at 2nd level, you are imbued with wild fey magic. This unusual magic flowing inside you grants you access to some spells when you reach certain levels in this class, as shown on the table below. Once you gain access to one of these spells, you always have it prepared, and it doesn't count against the number of spells you can prepare each day. If you gain access to a spell that doesn't appear on the druid spell list, the spell is nonetheless a druid spell for you.</p><table><thead><tr><th>Druid Level</th><th>Spells</th></tr></thead><tbody><tr><td>2nd</td><td>Chaos Bolt, Color Spray</td></tr><tr><td>3rd</td><td>Enlarge/Reduce, Prayer of Healing</td></tr><tr><td>5th</td><td>Counterspell, Slow</td></tr><tr><td>7th</td><td>Confusion, Vitriolic Sphere</td></tr><tr><td>9th</td><td>Greater Restoration, Seeming</td></tr></tbody></table><p><em>Immediately after casting a spell from this list, the GM can have you roll on the Wild Magic Surge table.</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Druid 2, Circle of Wild Magic",
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Circle of Wild Magic\" by u/Jigui26 (GM Binder, 2022)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!H1wrOgOgG0YFDYXv"
+}

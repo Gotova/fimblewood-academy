@@ -2,7 +2,7 @@
   "id": "fimblewood-academy",
   "title": "Fimblewood Academy",
   "description": "Homebrew classes, subclasses, and content for the Fimblewood Academy campaign, built for the dnd5e system.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "compatibility": {
     "minimum": "13",
     "verified": "13.351",
@@ -39,11 +39,55 @@
       "path": "lang/en.json"
     }
   ],
-  "packs": [],
-  "packFolders": [],
+  "packs": [
+    {
+      "name": "subclasses",
+      "label": "Fimblewood Academy Subclasses",
+      "path": "packs/subclasses",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "classfeatures",
+      "label": "Fimblewood Academy Class Features",
+      "path": "packs/classfeatures",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "rolltables",
+      "label": "Fimblewood Academy Roll Tables",
+      "path": "packs/rolltables",
+      "type": "RollTable",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Fimblewood Academy",
+      "sorting": "a",
+      "color": "#3f7d5c",
+      "packs": [
+        "subclasses",
+        "classfeatures",
+        "rolltables"
+      ]
+    }
+  ],
   "url": "https://github.com/Gotova/fimblewood-academy",
   "manifest": "https://github.com/Gotova/fimblewood-academy/releases/latest/download/module.json",
-  "download": "https://github.com/Gotova/fimblewood-academy/releases/download/v0.1.0/module.zip",
+  "download": "https://github.com/Gotova/fimblewood-academy/releases/download/v0.2.0/module.zip",
   "readme": "https://github.com/Gotova/fimblewood-academy/blob/main/README.md",
   "bugs": "https://github.com/Gotova/fimblewood-academy/issues",
   "changelog": "https://github.com/Gotova/fimblewood-academy/blob/main/CHANGELOG.md"

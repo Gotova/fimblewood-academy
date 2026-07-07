@@ -1,0 +1,47 @@
+{
+  "_id": "OBZrti0qiHzlk6mj",
+  "name": "Chaos Weaver",
+  "type": "feat",
+  "img": "icons/magic/control/energy-stream-link-large-teal.webp",
+  "system": {
+    "description": {
+      "value": "<p>Starting at 6th level, you learn how to convert the logical order of nature to pure chaos. When a creature you can see within 30 feet of you is damaged or healed, you can use your reaction to cause the opposite effect at a lesser degree. If a creature is damaged, it is instead healed for half the damage roll, and if a creature is healed, it takes force damage instead equal to half the healing roll.</p><p>You can use this feature a number of times equal to half your proficiency bonus (rounded up) per long rest. When you use this feature, the GM can have you roll on the Wild Magic Surge table.</p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Druid 6, Circle of Wild Magic",
+    "activation": {
+      "type": "reaction",
+      "cost": 1,
+      "condition": "When a creature you can see within 30 feet of you is damaged or healed"
+    },
+    "range": {
+      "value": 30,
+      "units": "ft"
+    },
+    "uses": {
+      "max": "ceil(@prof / 2)",
+      "recovery": [
+        {
+          "period": "lr",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
+    },
+    "source": {
+      "custom": "Fimblewood Academy homebrew, adapted from \"Circle of Wild Magic\" by u/Jigui26 (GM Binder, 2022)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!OBZrti0qiHzlk6mj"
+}
