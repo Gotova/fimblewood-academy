@@ -1,23 +1,32 @@
 /* Fimblewood Academy — module styles */
 
-/* Scene control category icon: a house silhouette with a star cut out of the
-   centre (a school-crest look). No single Font Awesome glyph combines those,
-   so this is a small custom SVG applied as a mask — it inherits color via
-   `currentColor`, so it still follows the core UI's hover/active states like
-   every Font Awesome icon in the same toolbar. */
+/* Scene control category icon: Font Awesome's own house glyph (crisp at any
+   size, unlike a hand-drawn shape) with a small star badge overlaid on top —
+   a school-crest look. No single Font Awesome glyph combines house + star,
+   so the star is a tiny custom SVG applied via CSS mask on ::after. */
 .fimblewood-controls-icon {
+  position: relative;
   display: inline-block;
-  width: 1em;
-  height: 1em;
-  background-color: currentColor;
-  -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMTIgMiBMMjEgMTAgSDE4IFYyMSBINiBWMTAgSDMgWiBNMTIgMTAuOCBMMTMgMTMuNjMgTDE2IDEzLjcgTDEzLjYyIDE1LjUzIEwxNC40NyAxOC40IEwxMiAxNi43IEw5LjUzIDE4LjQgTDEwLjM4IDE1LjUzIEw4IDEzLjcgTDExIDEzLjYzIFoiLz48L3N2Zz4=");
-  mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMTIgMiBMMjEgMTAgSDE4IFYyMSBINiBWMTAgSDMgWiBNMTIgMTAuOCBMMTMgMTMuNjMgTDE2IDEzLjcgTDEzLjYyIDE1LjUzIEwxNC40NyAxOC40IEwxMiAxNi43IEw5LjUzIDE4LjQgTDEwLjM4IDE1LjUzIEw4IDEzLjcgTDExIDEzLjYzIFoiLz48L3N2Zz4=");
+}
+
+.fimblewood-controls-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  width: 0.42em;
+  height: 0.42em;
+  transform: translate(-50%, -50%);
+  background-color: #c8962a;
+  -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDEwLjggTDEzIDEzLjYzIEwxNiAxMy43IEwxMy42MiAxNS41MyBMMTQuNDcgMTguNCBMMTIgMTYuNyBMOS41MyAxOC40IEwxMC4zOCAxNS41MyBMOCAxMy43IEwxMSAxMy42MyBaIi8+PC9zdmc+");
+  mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDEwLjggTDEzIDEzLjYzIEwxNiAxMy43IEwxMy42MiAxNS41MyBMMTQuNDcgMTguNCBMMTIgMTYuNyBMOS41MyAxOC40IEwxMC4zOCAxNS41MyBMOCAxMy43IEwxMSAxMy42MyBaIi8+PC9zdmc+");
   -webkit-mask-size: contain;
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
+  pointer-events: none;
 }
 
 .dnd5e2 .fimblewood-resonance-group {

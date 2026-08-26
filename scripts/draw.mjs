@@ -1137,11 +1137,25 @@ export function registerDrawPad() {
     controls[CONTROL_GROUP] = {
       name:       CONTROL_GROUP,
       title:      "FIMBLEWOOD.ControlGroupTitle",
-      icon:       "fimblewood-controls-icon",
+      icon:       "fas fa-house fimblewood-controls-icon",
       order:      Object.keys(controls).length,
       visible:    true,
-      activeTool: "drawpad",
+      // Foundry requires activeTool to name a real tool, and immediately fires
+      // that tool's onChange the moment this category itself is selected — not
+      // just when one of its buttons is clicked. Both real tools here are
+      // one-shot actions (open the draw pad / open the gallery), so neither can
+      // be the default: pointing activeTool at either would pop its window open
+      // as soon as the category is clicked. This invisible, no-op placeholder
+      // tool satisfies the requirement without opening anything.
+      activeTool: "select",
       tools: {
+        select: {
+          name:     "select",
+          title:    "FIMBLEWOOD.ControlGroupTitle",
+          icon:     "fas fa-house",
+          visible:  false,
+          onChange: () => {},
+        },
         drawpad: {
           name:     "drawpad",
           title:    "FIMBLEWOOD.Draw.ButtonTitle",

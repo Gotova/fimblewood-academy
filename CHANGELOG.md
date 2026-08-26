@@ -4,6 +4,13 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.4.2] - 2026-08-26
+
+### Fixed
+
+- Clicking the **Fimblewood Controls** category itself (not one of its two buttons) was opening the Magic Circle Draw Pad automatically. Foundry requires a scene-control category's `activeTool` to name a real tool, and fires that tool's `onChange` the instant the category becomes active — not just when its button is clicked. Both real tools here (draw pad, gallery) are one-shot actions, so pointing `activeTool` at either popped its window open on category select. Fixed with an invisible, no-op placeholder tool as the default `activeTool`; the draw pad and gallery now only open when their own buttons are clicked.
+- The custom category icon (a hand-drawn house-with-star-cutout SVG) looked malformed at the toolbar's actual 20px size. Replaced with Font Awesome's own `fa-house` glyph — crisp at any size — with a small gold star badge overlaid on top via a CSS `::after` mask, instead of trying to hand-draw the whole shape.
+
 ## [0.4.1] - 2026-08-26
 
 ### Changed
