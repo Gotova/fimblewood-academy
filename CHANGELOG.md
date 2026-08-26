@@ -4,6 +4,25 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-08-26
+
+### Fixed
+
+- The 0.4.0 port of the Magic Circle Draw Pad was built from a stale copy: the `scripts/foundrydraw.js` committed to FoundryDraw's own git repository (1158 lines, raster canvas engine) turned out to be out of sync with `foundrydraw.zip` in that same repo — the file that actually gets installed, and what this campaign was really running (2862 lines, SVG-based). This release replaces the port wholesale with a faithful port of the real, currently-shipping script, restoring everything that was missing:
+  - **Live-draw broadcast** — GM-only "Go Live" toggle streams the drawing to all players in real time (~200ms throttle while drawing, immediate on stroke end); a live viewer window opens automatically on player clients and closes when broadcasting stops.
+  - **Select tool** — click, Shift-click, or marquee-drag to select one or more shapes; drag to move, drag the handle to rotate; Ctrl snaps to 45°, Alt snaps to the grid; Delete/Backspace or the ✕ button removes the selection.
+  - **Text tool** — click to place vector text, sized from the brush-size slider.
+  - **Ink counter & spell-level badge** — tracks total stroke length and estimates the spell level a circle can hold (Cantrip through 9th, or beyond).
+  - **Gallery folders** — organize saved circles into named, collapsible, drag-to-reorder folders.
+  - **Per-user gallery storage** — the gallery is now a flag on your user document (follows you to any machine you log into as that user) instead of a world setting.
+  - **SVG drawing engine** — infinite resolution at any zoom, exports as true `.svg`; replaces the old raster canvas (flood-fill, a raster-only operation, is gone as a result — matching upstream).
+  - Paper-grain background texture, eraser cursor ring, "send to chat," Ctrl/Alt/Shift modifier keys for shape and select-tool precision.
+  - The scene-control registration and the `activeTool` auto-open fix from 0.4.2 were re-applied on top of the real engine.
+
+### Changed
+
+- Gallery data from the 0.4.0–0.4.2 releases (a world setting) is not carried over to the new per-user flag storage — those releases shipped too recently for this to likely matter, but re-save anything you created under them.
+
 ## [0.4.2] - 2026-08-26
 
 ### Fixed

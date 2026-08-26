@@ -26,14 +26,16 @@ This URL always resolves to the latest release, so it never needs to change betw
 
 ### Magic Circle Draw Pad
 
-A drawing canvas for painting magic circles, available to every player and the GM via a dedicated **Fimblewood Controls** category in the scene control bar (left sidebar) — a house-and-star crest icon, separate from Token Controls.
+An SVG-based drawing canvas for painting magic circles, available to every player and the GM via a dedicated **Fimblewood Controls** category in the scene control bar (left sidebar) — a house-and-star crest icon, separate from Token Controls.
 
-- **Tools:** brush, eraser, line, circle, rectangle, flood-fill — each with adjustable color, brush size, opacity, and a stroke-smoothing stabilizer.
+- **Tools:** select (move/rotate), brush, eraser, line, circle, rectangle, text — each with adjustable color, brush size, opacity, and a stroke-smoothing stabilizer. Drawing is vector-based (infinite resolution at any zoom), not raster.
+- **Select tool:** click a shape to select it (Shift-click to add/remove, drag a marquee to multi-select), drag to move, drag the handle above it to rotate, click the red ✕ or press Delete to remove. Hold Ctrl while moving/rotating to snap to 45°; hold Alt to snap to the grid.
 - **Symmetry:** none, or 2/4/6/8/12-fold rotational symmetry around a fixed centre point — ideal for magic circles. Start with a dark background, 6- or 8-fold symmetry, and draw outward from the centre.
-- **Canvas:** a 2000×2000 virtual drawing surface with independent pan (right-drag) and zoom (scroll wheel); the symmetry centre never drifts regardless of window size or viewport.
+- **Canvas:** a 2000×2000 virtual drawing surface with independent pan (right-drag) and zoom (scroll wheel); the symmetry centre never drifts regardless of window size or viewport. A procedural paper-grain texture is baked into the parchment background.
+- **Ink counter & spell-level badge:** a running total of "ink used" (stroke length) is shown in the status bar; a badge in the canvas corner estimates what spell level the circle can hold, from Cantrip up to 9th (and beyond).
 - **Undo/redo:** `Ctrl+Z` / `Ctrl+Y` (or `Ctrl+Shift+Z`), up to 20 steps.
-- **Export:** save as PNG, copy to clipboard, or save to a **Gallery** (a world-scoped setting) for later reuse — gallery entries can be renamed, reloaded into the draw pad, or deleted.
-- **GM tools:** push the current drawing, or any gallery entry, out to all connected players as an image popout (requires the module's socket, already enabled).
+- **Export:** save as SVG, copy to clipboard, send to chat, or save to a **Gallery** — gallery entries can be organized into folders (drag-and-drop to reorder or move between folders), renamed, reloaded into the draw pad, or deleted. The gallery is stored per-user (a flag on your user document), so it follows you to any machine you log into.
+- **GM tools:** push the current drawing, or any gallery entry, out to all connected players as a one-off image popout; or toggle **Go Live** to broadcast the drawing to all players in real time as you draw (updates every stroke, ~200ms throttled) — a live viewer window opens automatically on player clients and closes when you stop broadcasting.
 
 This module and [FoundryDraw](https://github.com/Gotova/FoundryDraw) should not be run together — disable FoundryDraw once you've switched to this built-in version, otherwise you'll get duplicate buttons and two separate galleries.
 

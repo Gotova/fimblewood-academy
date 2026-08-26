@@ -6,12 +6,13 @@
       "ButtonTitle": "Magiekreis zeichnen",
       "WindowTitle": "Fimblewood Academy - Magiekreis",
       "Tools": {
+        "Select": "Auswahl — klicken zum Auswaehlen; ziehen zum Verschieben; blauen Kreis ueber dem Rahmen ziehen zum Drehen; Escape zum Aufheben",
         "Brush": "Pinsel",
         "Eraser": "Radiergummi",
         "Line": "Linie",
         "Circle": "Kreis",
         "Rectangle": "Rechteck",
-        "Fill": "Fuellen"
+        "Text": "Text (klicken zum Platzieren; Groesse = Pinselgroesse × 8)"
       },
       "Actions": {
         "Undo": "Rueckgaengig (Ctrl+Z)",
@@ -22,12 +23,22 @@
         "CopiedClipboard": "Bild in Zwischenablage kopiert!",
         "CopyFallback": "Bild im neuen Tab geoeffnet - Rechtsklick -> Bild kopieren",
         "CopyFailed": "Konnte kein neues Fenster oeffnen. Bitte 'Als PNG speichern' verwenden.",
-        "Save": "Als PNG speichern",
+        "Save": "Als SVG speichern",
         "SaveGallery": "In Galerie speichern",
+        "SendToChat": "In den Chat senden",
         "ShowPlayers": "Allen Spielern zeigen",
+        "LiveDraw": "Live-Modus — Zeichnung in Echtzeit an alle Spieler senden",
         "CenterView": "Ansicht zuruecksetzen (Mitte + 100%)"
       },
+      "Status": {
+        "InkTooltip": "Verbrauchte Tinte — Summe der Strichlaengen aller gezeichneten Elemente (1 Tinte = 1000 Welteinheiten Linie). Der Zaubergrad-Anzeiger in der Ecke der Leinwand basiert auf diesem Wert.",
+        "SpellLevelTooltip": "Zaubergrad, den dieser Kreis fassen kann, basierend auf der verbrauchten Tinte",
+        "Cantrip": "Zaubertrick",
+        "SpellLevel": "Zauber {level}. Grades",
+        "BeyondNinth": "Jenseits des 9. Grades"
+      },
       "GalleryTitle": "Magiekreis-Galerie",
+      "LiveViewerTitle": "Live-Zeichnung",
       "Gallery": {
         "NameTitle": "In Galerie speichern",
         "RenameTitle": "Kreis umbenennen",
@@ -38,7 +49,18 @@
         "Show": "Spielern zeigen",
         "Delete": "Loeschen",
         "Saved": "In Galerie gespeichert!",
-        "Unnamed": "Unbenannter Kreis"
+        "Unnamed": "Unbenannter Kreis",
+        "DragToReorder": "Zum Neuanordnen ziehen",
+        "NewFolder": "Neuer Ordner",
+        "FolderNameTitle": "Neuer Ordner",
+        "FolderRename": "Ordner umbenennen",
+        "FolderRenameTitle": "Ordner umbenennen",
+        "FolderDelete": "Ordner loeschen (Eintraege werden in 'Ohne Ordner' verschoben)",
+        "FolderEmpty": "Zeichnungen hier ablegen",
+        "Uncategorized": "Ohne Ordner",
+        "Move": "In Ordner verschieben",
+        "MoveTitle": "In Ordner verschieben",
+        "MoveLabel": "Ordner auswaehlen:"
       },
       "Settings": {
         "BrushSize": "Pinsel",

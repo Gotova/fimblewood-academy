@@ -1,11 +1,10 @@
-/* Fimblewood Academy — Magic Circle Draw Pad (ported from FoundryDraw) */
+/* Fimblewood Academy - Magic Circle Painter */
 
 /* ───── Application Window ───── */
 
 /*
   Foundry sets `body.game .app.window-app .window-content > * { flex: 1 }` globally,
-  which distributes space equally between toolbar, canvas and status bar — ignoring
-  our fixed height: 600px on the canvas wrap.
+  which distributes space equally between toolbar, canvas and status bar.
   Override it with flex: none so each child uses its own defined size.
 */
 body.game .fimblewood-draw-app.window-app .window-content > * {
@@ -69,6 +68,20 @@ body.game .fimblewood-draw-app.window-app .window-content {
   color: #f0d080;
   border-color: #c8962a;
   box-shadow: 0 0 6px #c8962a80;
+}
+
+/* Live-draw button — red pulsing glow when active */
+#fw-draw-live-draw.fw-draw-live-active {
+  background: #3a0808;
+  color: #ff6060;
+  border-color: #cc2020;
+  box-shadow: 0 0 8px #cc202080;
+  animation: fw-draw-live-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes fw-draw-live-pulse {
+  0%, 100% { box-shadow: 0 0 6px #cc202060; }
+  50%       { box-shadow: 0 0 14px #cc2020cc; }
 }
 
 .fw-draw-tool-btn[data-tooltip]:hover::after {
@@ -155,7 +168,6 @@ body.game .fimblewood-draw-app.window-app .window-content {
   cursor: pointer;
   transition: border-color 0.15s;
   flex-shrink: 0;
-  /* Makes the browser use a dark-themed native dropdown on Windows/Chrome */
   color-scheme: dark;
 }
 
@@ -165,7 +177,6 @@ body.game .fimblewood-draw-app.window-app .window-content {
   outline: none;
 }
 
-/* Firefox + some Chromium builds honour these */
 .fw-draw-select option {
   background: #2c2010;
   color: #e8d5a3;
@@ -174,8 +185,7 @@ body.game .fimblewood-draw-app.window-app .window-content {
 /* ───── Canvas Area ───── */
 
 /*
-  Override the flex:none rule (applied to all .window-content children) for
-  the canvas wrap specifically, so it expands to fill the remaining window space.
+  Allow the canvas wrap to expand and fill the remaining window space.
 */
 body.game .fimblewood-draw-app.window-app .window-content > .fimblewood-draw-canvas-wrap {
   flex: 1 1 auto !important;
@@ -184,42 +194,89 @@ body.game .fimblewood-draw-app.window-app .window-content > .fimblewood-draw-can
 
 .fimblewood-draw-canvas-wrap {
   width: 100%;
-  /* height is now flex-driven — do NOT set a fixed px value */
   position: relative;
   overflow: hidden;
-  /* Parchment bg shows through transparent world-canvas areas (e.g. erased spots) */
+  /* Parchment bg shows while the SVG is loading */
   background: #e8d5a3;
   cursor: crosshair;
 }
 
 /*
-  The canvas elements are sized purely by JS (canvas.width / canvas.height attributes).
-  Do NOT set width/height here – CSS size != buffer size causes distortion.
-  Absolute positioning keeps both canvases stacked on top of each other.
+  The SVG element is sized purely by JS (width / height attributes).
+  Absolute positioning lets it fill the wrap exactly.
 */
-#fimblewood-draw-canvas {
+#fimblewood-draw-svg {
   position: absolute;
   top: 0;
   left: 0;
   display: block;
-  cursor: crosshair;
   touch-action: none;
+  cursor: crosshair;
 }
 
-#fimblewood-draw-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
+/* Cursor overrides per tool / mode */
+.fimblewood-draw-canvas-wrap.tool-eraser           #fimblewood-draw-svg { cursor: none; }
+.fimblewood-draw-canvas-wrap.tool-text             #fimblewood-draw-svg { cursor: text; }
+.fimblewood-draw-canvas-wrap.fw-draw-insert-circle-mode #fimblewood-draw-svg { cursor: crosshair; }
+.fimblewood-draw-canvas-wrap.tool-select           #fimblewood-draw-svg { cursor: default; }
+.fimblewood-draw-canvas-wrap.tool-select.fw-draw-sel-moving   #fimblewood-draw-svg { cursor: move; }
+.fimblewood-draw-canvas-wrap.tool-select.fw-draw-sel-rotating #fimblewood-draw-svg { cursor: crosshair; }
+
+/* ── Text tool floating input ── */
+.fw-draw-text-input-wrap {
+  position:   absolute;
+  transform:  translate(-50%, -50%);
+  z-index:    100;
   pointer-events: none;
 }
 
-/* Cursor overrides per tool */
-.fimblewood-draw-canvas-wrap.tool-eraser #fimblewood-draw-canvas { cursor: cell; }
-.fimblewood-draw-canvas-wrap.tool-fill   #fimblewood-draw-canvas { cursor: copy; }
+.fw-draw-text-input {
+  pointer-events: all;
+  background:   rgba(20, 12, 5, 0.75);
+  border:       1px solid #c8962a;
+  border-radius: 3px;
+  color:        #e8d5a3;
+  font-family:  "Palatino Linotype", Palatino, "Book Antiqua", serif;
+  padding:      2px 6px;
+  outline:      none;
+  min-width:    120px;
+  max-width:    400px;
+  width:        auto;
+  box-shadow:   0 0 8px rgba(200, 150, 42, 0.5);
+}
+
+.fw-draw-text-input::placeholder {
+  color: #6a5030;
+  font-style: italic;
+  font-size: 12px;
+}
 
 /* Panning cursor (applied via JS while right-button is held) */
-.fimblewood-draw-canvas-wrap.fw-draw-panning  #fimblewood-draw-canvas { cursor: grab; }
+.fimblewood-draw-canvas-wrap.fw-draw-panning          #fimblewood-draw-svg { cursor: grab; }
+
+/* ───── Spell level badge (top-right of canvas) ───── */
+#fw-draw-spell-level {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 10px;
+  background: rgba(30, 24, 16, 0.85);
+  border: 1px solid #8a6d2f;
+  border-radius: 6px;
+  color: #e0b860;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  pointer-events: none;
+  z-index: 25;
+  cursor: help;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+#fw-draw-spell-level.fw-draw-level-max {
+  color: #ff7060;
+  border-color: #a04030;
+}
 
 /* ───── Symmetry centre marker ───── */
 /* top/left are set dynamically by JS (_updateCenterMarker) to follow pan/zoom */
@@ -258,8 +315,7 @@ body.game .fimblewood-draw-app.window-app .window-content > .fimblewood-draw-can
   transform: translateX(-50%);
 }
 
-/* Small dot in the very centre via box-shadow on ::before */
-/* We use a separate box on the marker itself */
+/* Small dot in the very centre */
 #fw-draw-center-marker span {
   position: absolute;
   top: 50%;
@@ -285,9 +341,10 @@ body.game .fimblewood-draw-app.window-app .window-content > .fimblewood-draw-can
   gap: 12px;
 }
 
-.fimblewood-draw-status .fw-draw-coords     { font-family: monospace; flex: 1; }
-.fimblewood-draw-status #fw-draw-zoom-info    { font-family: monospace; min-width: 40px; text-align: right; }
+.fimblewood-draw-status .fw-draw-coords    { font-family: monospace; flex: 1; }
+.fimblewood-draw-status #fw-draw-zoom-info  { font-family: monospace; min-width: 40px; text-align: right; }
 .fimblewood-draw-status #fw-draw-history-info { color: #7a6040; white-space: nowrap; }
+.fimblewood-draw-status #fw-draw-ink-info   { font-family: monospace; color: #5a8fb8; white-space: nowrap; cursor: help; }
 
 /* ───── Gallery Application ───── */
 
@@ -337,13 +394,47 @@ body.game .fimblewood-draw-app.window-app .window-content > .fimblewood-draw-can
 }
 
 .fw-draw-gallery-name {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   padding: 5px 7px;
   color: #e8d5a3;
   font-size: 11px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.fw-draw-gallery-name span {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  flex: 1;
+}
+
+/* Drag handle icon */
+.fw-draw-drag-handle {
+  color: #5a4020;
+  font-size: 10px;
+  cursor: grab;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity 0.15s, color 0.15s;
+  user-select: none;
+}
+
+.fw-draw-gallery-item:hover .fw-draw-drag-handle {
+  opacity: 1;
+  color: #b8a070;
+}
+
+/* Drag-and-drop states */
+.fw-draw-gallery-item.fw-draw-dragging {
+  opacity: 0.35;
+  cursor: grabbing;
+}
+
+.fw-draw-gallery-item.fw-draw-drag-over {
+  border-color: #c8962a;
+  box-shadow: 0 0 0 2px #c8962a80;
 }
 
 .fw-draw-gallery-actions {
@@ -373,4 +464,206 @@ body.game .fimblewood-draw-app.window-app .window-content > .fimblewood-draw-can
 
 .fw-draw-gallery-delete:hover {
   color: #e05050 !important;
+}
+
+/* ── Gallery root + folder layout ── */
+.fw-draw-gallery-root {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fw-draw-gallery-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 2px 8px;
+  border-bottom: 1px solid #5a4020;
+}
+
+.fw-draw-new-folder {
+  background: transparent;
+  border: 1px solid #5a4020;
+  color: #b8a070;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.fw-draw-new-folder:hover {
+  color: #e8d5a3;
+  border-color: #c8962a;
+}
+
+/* Folder section */
+.fw-draw-folder {
+  border: 1px solid #5a4020;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.fw-draw-folder-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  background: #1a150e;
+  cursor: pointer;
+  user-select: none;
+  color: #c8962a;
+  font-size: 12px;
+  transition: background 0.15s;
+}
+
+.fw-draw-folder-header:hover {
+  background: #221a10;
+}
+
+.fw-draw-folder-label {
+  flex: 1;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fw-draw-folder-chevron {
+  color: #b8a070;
+  font-size: 10px;
+  flex-shrink: 0;
+  width: 10px;
+  text-align: center;
+}
+
+.fw-draw-folder-icon {
+  color: #c8962a;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.fw-draw-folder-btns {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.fw-draw-folder-btn {
+  background: transparent;
+  border: none;
+  color: #b8a070;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 11px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.fw-draw-folder-btn:hover {
+  color: #e8d5a3;
+}
+
+.fw-draw-folder-delete:hover {
+  color: #e05050 !important;
+}
+
+.fw-draw-folder-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px;
+  background: #231c13;
+  min-height: 48px; /* keeps it a valid drop target when empty */
+}
+
+.fw-draw-folder.fw-draw-collapsed .fw-draw-folder-items {
+  display: none;
+}
+
+.fw-draw-folder-empty {
+  width: 100%;
+  color: #5a4020;
+  font-style: italic;
+  font-size: 11px;
+  text-align: center;
+  margin: 4px 0;
+  pointer-events: none;
+}
+
+/* Uncategorized section (muted styling) */
+.fw-draw-uncategorized-header {
+  color: #b8a070;
+}
+
+.fw-draw-uncategorized-header .fw-draw-folder-icon {
+  color: #b8a070;
+}
+
+/* Folder drag handle */
+.fw-draw-folder-header .fw-draw-drag-handle {
+  font-size: 10px;
+  cursor: grab;
+  flex-shrink: 0;
+  opacity: 0.4;
+  transition: opacity 0.15s;
+}
+
+.fw-draw-folder-header:hover .fw-draw-drag-handle {
+  opacity: 1;
+}
+
+/* Drag states for folders */
+.fw-draw-folder.fw-draw-dragging {
+  opacity: 0.35;
+}
+
+.fw-draw-folder-header.fw-draw-drag-over {
+  background: #2a1f0a;
+  box-shadow: inset 0 0 0 2px #c8962a80;
+}
+
+/* ── Live viewer window ── */
+.fimblewood-draw-live-viewer .window-content {
+  padding: 0;
+  overflow: hidden;
+  background: #1a150e;
+  display: flex;
+  flex-direction: column;
+}
+
+.fw-draw-live-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.fw-draw-live-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: #1a0808;
+  color: #ff6060;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #cc2020;
+  animation: fw-draw-live-pulse 1.4s ease-in-out infinite;
+}
+
+.fw-draw-live-badge i {
+  font-size: 12px;
+}
+
+#fw-draw-live-svg {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
 }

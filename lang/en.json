@@ -6,12 +6,13 @@
       "ButtonTitle": "Draw Magic Circle",
       "WindowTitle": "Fimblewood Academy - Magic Circle",
       "Tools": {
+        "Select": "Select — click to select a shape; drag to move; drag the blue circle above the box to rotate; Escape to deselect",
         "Brush": "Brush",
         "Eraser": "Eraser",
         "Line": "Line",
         "Circle": "Circle",
         "Rectangle": "Rectangle",
-        "Fill": "Fill"
+        "Text": "Text (click to place; size follows brush-size slider × 8)"
       },
       "Actions": {
         "Undo": "Undo (Ctrl+Z)",
@@ -22,12 +23,22 @@
         "CopiedClipboard": "Image copied to clipboard!",
         "CopyFallback": "Image opened in new tab - right-click to Copy Image",
         "CopyFailed": "Could not open new window. Please use Save as PNG instead.",
-        "Save": "Save as PNG",
+        "Save": "Save as SVG",
         "SaveGallery": "Save to Gallery",
+        "SendToChat": "Send to chat",
         "ShowPlayers": "Show to all players",
+        "LiveDraw": "Go Live — broadcast drawing to all players in real time",
         "CenterView": "Reset view (center + 100%)"
       },
+      "Status": {
+        "InkTooltip": "Total ink used — sum of stroke lengths for every drawn element (1 ink = 1000 world-units of line). The spell level badge in the canvas corner is derived from this number.",
+        "SpellLevelTooltip": "Spell level this circle can hold, based on ink used",
+        "Cantrip": "Cantrip",
+        "SpellLevel": "Level {level} Spell",
+        "BeyondNinth": "Beyond 9th Level"
+      },
       "GalleryTitle": "Magic Circle Gallery",
+      "LiveViewerTitle": "Live Drawing",
       "Gallery": {
         "NameTitle": "Save to Gallery",
         "RenameTitle": "Rename Circle",
@@ -38,7 +49,18 @@
         "Show": "Show to Players",
         "Delete": "Delete",
         "Saved": "Saved to gallery!",
-        "Unnamed": "Untitled Circle"
+        "Unnamed": "Untitled Circle",
+        "DragToReorder": "Drag to reorder",
+        "NewFolder": "New Folder",
+        "FolderNameTitle": "New Folder",
+        "FolderRename": "Rename folder",
+        "FolderRenameTitle": "Rename Folder",
+        "FolderDelete": "Delete folder (entries move to Uncategorized)",
+        "FolderEmpty": "Drop drawings here",
+        "Uncategorized": "Uncategorized",
+        "Move": "Move to folder",
+        "MoveTitle": "Move to Folder",
+        "MoveLabel": "Choose a folder:"
       },
       "Settings": {
         "BrushSize": "Brush",
