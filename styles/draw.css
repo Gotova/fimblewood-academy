@@ -1,0 +1,376 @@
+/* Fimblewood Academy — Magic Circle Draw Pad (ported from FoundryDraw) */
+
+/* ───── Application Window ───── */
+
+/*
+  Foundry sets `body.game .app.window-app .window-content > * { flex: 1 }` globally,
+  which distributes space equally between toolbar, canvas and status bar — ignoring
+  our fixed height: 600px on the canvas wrap.
+  Override it with flex: none so each child uses its own defined size.
+*/
+body.game .fimblewood-draw-app.window-app .window-content > * {
+  flex: none !important;
+}
+
+body.game .fimblewood-draw-app.window-app .window-content {
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  background: #2c2416;
+}
+
+/* ───── Toolbar ───── */
+.fimblewood-draw-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  background: #1e1810;
+  border-bottom: 1px solid #5c4a1e;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.fimblewood-draw-toolbar .separator {
+  width: 1px;
+  height: 28px;
+  background: #5c4a1e;
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+/* Tool Buttons */
+.fw-draw-tool-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #5c4a1e;
+  border-radius: 4px;
+  background: #2c2010;
+  color: #b8965a;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.15s;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.fw-draw-tool-btn:hover {
+  background: #3d2e14;
+  color: #d4a96a;
+  border-color: #8b6914;
+}
+
+.fw-draw-tool-btn.active {
+  background: #6b4a10;
+  color: #f0d080;
+  border-color: #c8962a;
+  box-shadow: 0 0 6px #c8962a80;
+}
+
+.fw-draw-tool-btn[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e1810;
+  color: #e8d5a3;
+  padding: 3px 7px;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+  pointer-events: none;
+  border: 1px solid #8b6914;
+  z-index: 9999;
+}
+
+/* Color Picker */
+.fw-draw-color-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  border: 2px solid #5c4a1e;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color 0.15s;
+}
+
+.fw-draw-color-btn:hover { border-color: #c8962a; }
+
+.fw-draw-color-btn input[type="color"] {
+  position: absolute;
+  inset: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+}
+
+/* Sliders */
+.fw-draw-slider-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.fw-draw-slider-group label {
+  color: #b8965a;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.fw-draw-slider-group input[type="range"] {
+  width: 70px;
+  height: 4px;
+  accent-color: #c8962a;
+  cursor: pointer;
+}
+
+.fw-draw-slider-group .fw-draw-val {
+  color: #d4a96a;
+  font-size: 11px;
+  min-width: 28px;
+  text-align: right;
+}
+
+/* Selects */
+.fw-draw-select {
+  height: 28px;
+  background: #2c2010;
+  color: #e8d5a3;
+  border: 1px solid #5c4a1e;
+  border-radius: 4px;
+  padding: 0 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  flex-shrink: 0;
+  /* Makes the browser use a dark-themed native dropdown on Windows/Chrome */
+  color-scheme: dark;
+}
+
+.fw-draw-select:hover,
+.fw-draw-select:focus {
+  border-color: #c8962a;
+  outline: none;
+}
+
+/* Firefox + some Chromium builds honour these */
+.fw-draw-select option {
+  background: #2c2010;
+  color: #e8d5a3;
+}
+
+/* ───── Canvas Area ───── */
+
+/*
+  Override the flex:none rule (applied to all .window-content children) for
+  the canvas wrap specifically, so it expands to fill the remaining window space.
+*/
+body.game .fimblewood-draw-app.window-app .window-content > .fimblewood-draw-canvas-wrap {
+  flex: 1 1 auto !important;
+  min-height: 300px;
+}
+
+.fimblewood-draw-canvas-wrap {
+  width: 100%;
+  /* height is now flex-driven — do NOT set a fixed px value */
+  position: relative;
+  overflow: hidden;
+  /* Parchment bg shows through transparent world-canvas areas (e.g. erased spots) */
+  background: #e8d5a3;
+  cursor: crosshair;
+}
+
+/*
+  The canvas elements are sized purely by JS (canvas.width / canvas.height attributes).
+  Do NOT set width/height here – CSS size != buffer size causes distortion.
+  Absolute positioning keeps both canvases stacked on top of each other.
+*/
+#fimblewood-draw-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+#fimblewood-draw-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  pointer-events: none;
+}
+
+/* Cursor overrides per tool */
+.fimblewood-draw-canvas-wrap.tool-eraser #fimblewood-draw-canvas { cursor: cell; }
+.fimblewood-draw-canvas-wrap.tool-fill   #fimblewood-draw-canvas { cursor: copy; }
+
+/* Panning cursor (applied via JS while right-button is held) */
+.fimblewood-draw-canvas-wrap.fw-draw-panning  #fimblewood-draw-canvas { cursor: grab; }
+
+/* ───── Symmetry centre marker ───── */
+/* top/left are set dynamically by JS (_updateCenterMarker) to follow pan/zoom */
+#fw-draw-center-marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Horizontal arm */
+#fw-draw-center-marker::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  width: 20px;
+  height: 1px;
+  background: rgba(3, 8, 33, 0.45);
+  transform: translateY(-50%);
+}
+
+/* Vertical arm */
+#fw-draw-center-marker::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  width: 1px;
+  height: 20px;
+  background: rgba(3, 8, 33, 0.45);
+  transform: translateX(-50%);
+}
+
+/* Small dot in the very centre via box-shadow on ::before */
+/* We use a separate box on the marker itself */
+#fw-draw-center-marker span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(3, 8, 33, 0.55);
+  transform: translate(-50%, -50%);
+}
+
+/* ───── Status bar ───── */
+.fimblewood-draw-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 8px;
+  background: #1e1810;
+  border-top: 1px solid #5c4a1e;
+  font-size: 11px;
+  color: #b8965a;
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.fimblewood-draw-status .fw-draw-coords     { font-family: monospace; flex: 1; }
+.fimblewood-draw-status #fw-draw-zoom-info    { font-family: monospace; min-width: 40px; text-align: right; }
+.fimblewood-draw-status #fw-draw-history-info { color: #7a6040; white-space: nowrap; }
+
+/* ───── Gallery Application ───── */
+
+.fimblewood-draw-gallery .window-content {
+  padding: 8px;
+  overflow-y: auto;
+  background: #2c2416;
+}
+
+.fw-draw-gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 4px;
+  align-content: flex-start;
+}
+
+.fw-draw-gallery-empty {
+  width: 100%;
+  text-align: center;
+  padding: 40px 16px;
+  color: #b8a070;
+  font-style: italic;
+  margin: 0;
+}
+
+.fw-draw-gallery-item {
+  width: 160px;
+  background: #1a150e;
+  border: 1px solid #5a4020;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.fw-draw-gallery-item:hover {
+  border-color: #c8962a;
+}
+
+.fw-draw-gallery-thumb {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid #5a4020;
+}
+
+.fw-draw-gallery-name {
+  padding: 5px 7px;
+  color: #e8d5a3;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.fw-draw-gallery-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 4px;
+  border-top: 1px solid #5a4020;
+  gap: 2px;
+}
+
+.fw-draw-gallery-btn {
+  background: transparent;
+  border: none;
+  color: #b8a070;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 1;
+  transition: color 0.15s, background 0.15s;
+}
+
+.fw-draw-gallery-btn:hover {
+  color: #e8d5a3;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.fw-draw-gallery-delete:hover {
+  color: #e05050 !important;
+}

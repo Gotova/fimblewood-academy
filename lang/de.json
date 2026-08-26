@@ -1,0 +1,58 @@
+{
+  "FIMBLEWOOD": {
+    "ModuleTitle": "Fimblewood Academy",
+    "Draw": {
+      "ControlTitle": "Magiekreis-Werkzeuge",
+      "ButtonTitle": "Magiekreis zeichnen",
+      "WindowTitle": "Fimblewood Academy - Magiekreis",
+      "Tools": {
+        "Brush": "Pinsel",
+        "Eraser": "Radiergummi",
+        "Line": "Linie",
+        "Circle": "Kreis",
+        "Rectangle": "Rechteck",
+        "Fill": "Fuellen"
+      },
+      "Actions": {
+        "Undo": "Rueckgaengig (Ctrl+Z)",
+        "Redo": "Wiederholen (Ctrl+Y)",
+        "InsertCircle": "Zentrierten Kreis einfuegen",
+        "Clear": "Alles loeschen",
+        "CopyClipboard": "In Zwischenablage kopieren",
+        "CopiedClipboard": "Bild in Zwischenablage kopiert!",
+        "CopyFallback": "Bild im neuen Tab geoeffnet - Rechtsklick -> Bild kopieren",
+        "CopyFailed": "Konnte kein neues Fenster oeffnen. Bitte 'Als PNG speichern' verwenden.",
+        "Save": "Als PNG speichern",
+        "SaveGallery": "In Galerie speichern",
+        "ShowPlayers": "Allen Spielern zeigen",
+        "CenterView": "Ansicht zuruecksetzen (Mitte + 100%)"
+      },
+      "GalleryTitle": "Magiekreis-Galerie",
+      "Gallery": {
+        "NameTitle": "In Galerie speichern",
+        "RenameTitle": "Kreis umbenennen",
+        "Confirm": "Speichern",
+        "Empty": "Noch keine gespeicherten Kreise. Zeichne etwas und klicke das Disketten-Symbol!",
+        "Edit": "In Zeichenpad laden",
+        "Rename": "Umbenennen",
+        "Show": "Spielern zeigen",
+        "Delete": "Loeschen",
+        "Saved": "In Galerie gespeichert!",
+        "Unnamed": "Unbenannter Kreis"
+      },
+      "Settings": {
+        "BrushSize": "Pinsel",
+        "Smoothness": "Glaettung",
+        "Color": "Farbe",
+        "Symmetry": "Symmetrie",
+        "SymmetryNone": "Keine",
+        "Symmetry2": "2-fach",
+        "Symmetry4": "4-fach",
+        "Symmetry6": "6-fach",
+        "Symmetry8": "8-fach",
+        "Symmetry12": "12-fach",
+        "SymmetryCenter": "Symmetrie-Mittelpunkt"
+      }
+    }
+  }
+}

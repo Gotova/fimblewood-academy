@@ -1,3 +1,58 @@
 {
-  "FIMBLEWOOD.ModuleTitle": "Fimblewood Academy"
+  "FIMBLEWOOD": {
+    "ModuleTitle": "Fimblewood Academy",
+    "Draw": {
+      "ControlTitle": "Magic Circle Tools",
+      "ButtonTitle": "Draw Magic Circle",
+      "WindowTitle": "Fimblewood Academy - Magic Circle",
+      "Tools": {
+        "Brush": "Brush",
+        "Eraser": "Eraser",
+        "Line": "Line",
+        "Circle": "Circle",
+        "Rectangle": "Rectangle",
+        "Fill": "Fill"
+      },
+      "Actions": {
+        "Undo": "Undo (Ctrl+Z)",
+        "Redo": "Redo (Ctrl+Y)",
+        "InsertCircle": "Insert centred circle",
+        "Clear": "Clear All",
+        "CopyClipboard": "Copy to Clipboard",
+        "CopiedClipboard": "Image copied to clipboard!",
+        "CopyFallback": "Image opened in new tab - right-click to Copy Image",
+        "CopyFailed": "Could not open new window. Please use Save as PNG instead.",
+        "Save": "Save as PNG",
+        "SaveGallery": "Save to Gallery",
+        "ShowPlayers": "Show to all players",
+        "CenterView": "Reset view (center + 100%)"
+      },
+      "GalleryTitle": "Magic Circle Gallery",
+      "Gallery": {
+        "NameTitle": "Save to Gallery",
+        "RenameTitle": "Rename Circle",
+        "Confirm": "Save",
+        "Empty": "No saved circles yet. Draw something and click the floppy-disk icon!",
+        "Edit": "Load into Draw Pad",
+        "Rename": "Rename",
+        "Show": "Show to Players",
+        "Delete": "Delete",
+        "Saved": "Saved to gallery!",
+        "Unnamed": "Untitled Circle"
+      },
+      "Settings": {
+        "BrushSize": "Brush",
+        "Smoothness": "Smooth",
+        "Color": "Color",
+        "Symmetry": "Symmetry",
+        "SymmetryNone": "None",
+        "Symmetry2": "2-fold",
+        "Symmetry4": "4-fold",
+        "Symmetry6": "6-fold",
+        "Symmetry8": "8-fold",
+        "Symmetry12": "12-fold",
+        "SymmetryCenter": "Symmetry center point"
+      }
+    }
+  }
 }

@@ -4,6 +4,24 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-08-26
+
+### Added
+
+- **Magic Circle Draw Pad**, merged in from the standalone [FoundryDraw](https://github.com/Gotova/FoundryDraw) module: a drawing canvas for painting magic circles, with brush/eraser/line/circle/rectangle/flood-fill tools, rotational symmetry (2/4/6/8/12-fold), pan/zoom, up to 20-step undo/redo, PNG/clipboard export, and a saved-circle gallery. GMs can push a drawing out to all players.
+- A new **Magic Circle Tools** category in the scene control bar (left sidebar), separate from Token Controls, holding the draw pad and gallery buttons.
+- German translations for the draw pad (`lang/de.json`), also carried over from FoundryDraw.
+
+### Changed
+
+- FoundryDraw's two buttons no longer appear inside Token Controls — the module now registers its own top-level control group instead of adding tools to an existing one.
+
+### Known issues
+
+- The draw pad and gallery windows are still built on Foundry's Application V1 / Dialog V1 APIs (unchanged from FoundryDraw). These are deprecated as of v13 and still function through v14, but will need porting to ApplicationV2/DialogV2 before a future Foundry version removes them.
+- The gallery is a new world setting under this module's namespace; circles saved in FoundryDraw's gallery do not carry over automatically. Re-save anything you want to keep after switching over.
+- If FoundryDraw is left active alongside this module, both will register competing scene controls and separate galleries. Disable FoundryDraw once you've confirmed this module's draw pad works for you.
+
 ## [0.3.7] - 2026-07-07
 
 ### Fixed

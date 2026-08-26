@@ -22,6 +22,20 @@ This URL always resolves to the latest release, so it never needs to change betw
 - A `dnd5e`-aware compendium pack pipeline (`packs/_source` → compiled packs)
 - A GitHub Actions release workflow that builds and publishes the module on every version tag
 - Version bump tooling to keep `module.json`, `package.json`, and the manifest download link in sync
+- **Magic Circle Draw Pad** (`scripts/draw.mjs`, `styles/draw.css`) — merged in from the standalone [FoundryDraw](https://github.com/Gotova/FoundryDraw) module
+
+### Magic Circle Draw Pad
+
+A drawing canvas for painting magic circles, available to every player and the GM via a dedicated **Magic Circle Tools** category in the scene control bar (left sidebar) — a magic-wand icon, separate from Token Controls.
+
+- **Tools:** brush, eraser, line, circle, rectangle, flood-fill — each with adjustable color, brush size, opacity, and a stroke-smoothing stabilizer.
+- **Symmetry:** none, or 2/4/6/8/12-fold rotational symmetry around a fixed centre point — ideal for magic circles. Start with a dark background, 6- or 8-fold symmetry, and draw outward from the centre.
+- **Canvas:** a 2000×2000 virtual drawing surface with independent pan (right-drag) and zoom (scroll wheel); the symmetry centre never drifts regardless of window size or viewport.
+- **Undo/redo:** `Ctrl+Z` / `Ctrl+Y` (or `Ctrl+Shift+Z`), up to 20 steps.
+- **Export:** save as PNG, copy to clipboard, or save to a **Gallery** (a world-scoped setting) for later reuse — gallery entries can be renamed, reloaded into the draw pad, or deleted.
+- **GM tools:** push the current drawing, or any gallery entry, out to all connected players as an image popout (requires the module's socket, already enabled).
+
+This module and [FoundryDraw](https://github.com/Gotova/FoundryDraw) should not be run together — disable FoundryDraw once you've switched to this built-in version, otherwise you'll get duplicate buttons and two separate galleries.
 
 ### Content
 
