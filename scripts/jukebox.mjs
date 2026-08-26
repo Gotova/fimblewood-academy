@@ -181,8 +181,29 @@ async function forceJukeboxTokenOwnership(tokenDoc) {
   if (!game.user.isGM) return;
   const flags = tokenDoc.flags?.[MODULE_ID];
   if (!flags?.recordPickup && !flags?.recordPlayer) return;
-  if (tokenDoc.ownership?.default === CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER) return;
-  await tokenDoc.update({ "ownership.default": CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER });
+  // TokenDocument has no ownership field of its own — control permission is
+  // inherited entirely from the Actor it represents (linked or unlinked), so
+  // the grant has to land on the actor, not the token.
+  const actor = tokenDoc.actor;
+  if (!actor) return;
+  if (actor.ownership?.default === CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER) return;
+  await actor.update({ "ownership.default": CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER });
+}
+
+/**
+ * One-time catch-up for tokens that got a recordPickup/recordPlayer flag before
+ * a fix to forceJukeboxTokenOwnership (or before this feature existed at all) —
+ * re-applies the ownership grant across every scene without requiring the GM to
+ * re-toggle each token's config by hand.
+ */
+async function reapplyJukeboxTokenOwnership() {
+  if (!game.user.isGM) return;
+  for (const scene of game.scenes) {
+    for (const tokenDoc of scene.tokens) {
+      const flags = tokenDoc.flags?.[MODULE_ID];
+      if (flags?.recordPickup || flags?.recordPlayer) await forceJukeboxTokenOwnership(tokenDoc);
+    }
+  }
 }
 
 async function onControlToken(token, controlled) {
@@ -551,6 +572,7 @@ export function registerJukebox() {
 
   Hooks.once("ready", async () => {
     await ensureJukeboxPlaylist();
+    await reapplyJukeboxTokenOwnership();
     game.socket.on(`module.${MODULE_ID}`, (data) => {
       if (data.type === "trackCollected") showCollectionBanner(data.name);
     });

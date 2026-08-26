@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-08-26
+
+### Fixed
+
+- The Jukebox's "make this token clickable by every player" logic (`forceJukeboxTokenOwnership`) was a silent no-op — it tried to set `ownership.default` directly on the `TokenDocument`, but `TokenDocument` has no `ownership` field of its own; control permission is inherited entirely from the token's Actor. Fixed to grant ownership on the token's actor instead. A one-time catch-up pass on world load re-applies this to any token that already had a `recordPickup`/`recordPlayer` flag set before this fix, so existing setups self-heal without needing the GM to re-toggle each token's config by hand.
+
 ## [0.6.0] - 2026-08-26
 
 ### Added
