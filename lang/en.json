@@ -75,6 +75,45 @@
         "Symmetry12": "12-fold",
         "SymmetryCenter": "Symmetry center point"
       }
+    },
+    "Jukebox": {
+      "WindowTitle": "Hideout Jukebox",
+      "TrackList": {
+        "Empty": "No tracks collected yet.",
+        "Play": "Play",
+        "Stop": "Stop"
+      },
+      "GM": {
+        "Rename": "Rename Track",
+        "RenameTitle": "Rename Track",
+        "Delete": "Delete Track",
+        "DeleteConfirmTitle": "Delete Track",
+        "DeleteConfirmBody": "Remove \"{name}\" from the shared track registry? Players who already collected it keep it in their history, but it will no longer appear in the Jukebox.",
+        "Confirm": "Save"
+      },
+      "NewTrackDialog": {
+        "Title": "New Jukebox Track",
+        "NameLabel": "Track Name",
+        "AudioLabel": "Audio File",
+        "ArtLabel": "Cover Art (optional)",
+        "Confirm": "Add Track",
+        "Cancel": "Cancel"
+      },
+      "SourceConfig": {
+        "TrackLabel": "Jukebox Track",
+        "TrackNone": "— None —",
+        "TrackNew": "+ Create new track…",
+        "ItemGrantsTrack": "Grants a Jukebox track",
+        "TokenIsPickup": "Map pickup — grants track",
+        "TokenIsPlayer": "This is the Jukebox prop"
+      },
+      "Notify": {
+        "Broadcast": "Record \"{name}\" collected!"
+      },
+      "Settings": {
+        "RewardSoundName": "Jukebox Reward Sound",
+        "RewardSoundHint": "A short sound effect played for everyone whenever the party collects a new Jukebox track."
+      }
     }
   }
 }

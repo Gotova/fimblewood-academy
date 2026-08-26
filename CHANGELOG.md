@@ -4,6 +4,22 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-08-26
+
+### Added
+
+- **Hideout Jukebox** — a party-shared music collection built on Foundry's native Ambient Sound and Playlist documents:
+  - Tag an Ambient Sound, an Item, or a map-placed token with a "Jukebox Track" (a small GM-only picker injected into each one's own configuration sheet; naming a brand-new track happens inline the first time you tag one, via a small dialog — no separate track-manager screen).
+  - Players collect a track by walking within an Ambient Sound's own audible radius, receiving a tagged item (which stays in their inventory as a keepsake — never consumed), or clicking a tagged map pickup token (which then disappears for everyone). Collection is party-wide: whoever triggers it, the whole table gets it.
+  - Every collection announces itself to the whole table with a short reward sound (a GM-configurable world setting) and a "Record "<name>" collected!" banner.
+  - A record-player prop token, placed by the GM anywhere in the world, opens the Jukebox window on click — listing every track the party has collected, with Play/Stop per track. Playback uses a module-managed Playlist with player-level ownership, so it plays in sync for every connected client (including ones who join mid-song) via Foundry's native Playlist sync — no custom broadcast code needed for that part.
+  - GM-only rename/delete controls live in the same Jukebox window; there's no separate management screen and no sidebar shortcut — the record-player prop is the only way in, by design.
+
+### Known issues
+
+- The exact hook name and DOM anchor for injecting the track picker into dnd5e's Item sheet (`renderItemSheet5e`, per dnd5e's documented naming convention) haven't been verified against a live install — this repo has no Foundry/dnd5e runtime to test against. Verify live and adjust the anchor/hook name if needed; the Ambient Sound and Token Config injections use the same pattern and are lower-risk since those are stable core Foundry classes.
+- The new-track dialog's audio/art file fields use Foundry v13's `<file-picker>` custom form element — unverified live for the same reason. If it doesn't render as expected, it's a contained fix inside `promptNewTrack()` in `scripts/jukebox.mjs`.
+
 ## [0.5.0] - 2026-08-26
 
 ### Fixed

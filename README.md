@@ -23,6 +23,7 @@ This URL always resolves to the latest release, so it never needs to change betw
 - A GitHub Actions release workflow that builds and publishes the module on every version tag
 - Version bump tooling to keep `module.json`, `package.json`, and the manifest download link in sync
 - **Magic Circle Draw Pad** (`scripts/draw.mjs`, `styles/draw.css`) — merged in from the standalone [FoundryDraw](https://github.com/Gotova/FoundryDraw) module
+- **Hideout Jukebox** (`scripts/jukebox.mjs`, `styles/jukebox.css`) — a collectible-music system built around Foundry's native Ambient Sound and Playlist documents
 
 ### Magic Circle Draw Pad
 
@@ -38,6 +39,24 @@ An SVG-based drawing canvas for painting magic circles, available to every playe
 - **GM tools:** push the current drawing, or any gallery entry, out to all connected players as a one-off image popout; or toggle **Go Live** to broadcast the drawing to all players in real time as you draw (updates every stroke, ~200ms throttled) — a live viewer window opens automatically on player clients and closes when you stop broadcasting.
 
 This module and [FoundryDraw](https://github.com/Gotova/FoundryDraw) should not be run together — disable FoundryDraw once you've switched to this built-in version, otherwise you'll get duplicate buttons and two separate galleries.
+
+### Hideout Jukebox
+
+A party can **collect** music tracks the GM has set up as Ambient Sound themes, then play any collected track together — in sync, for everyone at the table — on a physical record-player prop placed somewhere in the world (e.g. a hideout).
+
+**Setting it up (GM):**
+
+- **Tag an existing Ambient Sound** with a track: open its configuration, pick (or create) a track in the new "Jukebox Track" field at the bottom. The first time you tag a *new* track, a small dialog asks for a name and the audio file (cover art optional) — no separate setup screen needed.
+- **Grant a track via an item**: open any item's sheet, tick "Grants a Jukebox track," and pick/create a track the same way. Dropping that item onto a player's character immediately unlocks the track for the whole party — the item stays in their inventory as a keepsake, it's never consumed.
+- **Place a collectible on the map**: drop any token, open its Token Configuration, and choose "Map pickup — grants track" (with a track picker) or "This is the Jukebox prop" (for the interactive record player itself). Either way, the token's ownership is automatically opened up so any player can click it — you never need to configure permissions by hand.
+
+**Playing it (players):**
+
+- Walking a character within earshot of a tagged Ambient Sound, receiving a tagged item, or clicking a map pickup token all unlock that track for the **whole party** (not just whoever triggered it) — collection is shared. Every collection announces itself to the whole table with a short reward sound and a "Record *\<name>* collected!" banner (the reward sound itself is a world setting the GM sets once, under Foundry's Configure Settings).
+- Clicking the record-player prop token opens the Jukebox window, listing every track the party has collected so far. Hit Play on any of them — it plays looped, for every connected player, using Foundry's own synced Playlist system (no lag or "your client is playing something different" issues, and it's still correct for anyone who reconnects mid-song).
+- The GM can rename or delete tracks from the same window; deleting a track just removes it from the Jukebox going forward — nobody who already collected it loses anything.
+
+There's no sidebar shortcut to the Jukebox by design — the only way in is the physical prop, to keep it grounded in the fiction.
 
 ### Content
 

@@ -75,6 +75,45 @@
         "Symmetry12": "12-fach",
         "SymmetryCenter": "Symmetrie-Mittelpunkt"
       }
+    },
+    "Jukebox": {
+      "WindowTitle": "Unterschlupf-Musikbox",
+      "TrackList": {
+        "Empty": "Noch keine Titel gesammelt.",
+        "Play": "Abspielen",
+        "Stop": "Stopp"
+      },
+      "GM": {
+        "Rename": "Titel umbenennen",
+        "RenameTitle": "Titel umbenennen",
+        "Delete": "Titel loeschen",
+        "DeleteConfirmTitle": "Titel loeschen",
+        "DeleteConfirmBody": "\"{name}\" aus der gemeinsamen Titel-Liste entfernen? Spieler, die ihn bereits gesammelt haben, behalten ihn in ihrer Sammlung, aber er erscheint nicht mehr in der Musikbox.",
+        "Confirm": "Speichern"
+      },
+      "NewTrackDialog": {
+        "Title": "Neuer Musikbox-Titel",
+        "NameLabel": "Titelname",
+        "AudioLabel": "Audiodatei",
+        "ArtLabel": "Cover (optional)",
+        "Confirm": "Titel hinzufuegen",
+        "Cancel": "Abbrechen"
+      },
+      "SourceConfig": {
+        "TrackLabel": "Musikbox-Titel",
+        "TrackNone": "— Keiner —",
+        "TrackNew": "+ Neuen Titel erstellen…",
+        "ItemGrantsTrack": "Schaltet einen Musikbox-Titel frei",
+        "TokenIsPickup": "Fundstueck auf der Karte — schaltet Titel frei",
+        "TokenIsPlayer": "Dies ist die Musikbox"
+      },
+      "Notify": {
+        "Broadcast": "Schallplatte \"{name}\" gesammelt!"
+      },
+      "Settings": {
+        "RewardSoundName": "Musikbox-Belohnungston",
+        "RewardSoundHint": "Ein kurzer Soundeffekt, der fuer alle abgespielt wird, sobald die Gruppe einen neuen Musikbox-Titel sammelt."
+      }
     }
   }
 }

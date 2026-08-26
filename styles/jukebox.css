@@ -1,0 +1,104 @@
+/* Fimblewood Academy — Hideout Jukebox */
+
+.fimblewood-jukebox-app .window-content {
+  padding: 8px;
+  overflow-y: auto;
+  background: #2c2416;
+}
+
+.fw-jukebox-track-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fw-jukebox-empty {
+  text-align: center;
+  padding: 40px 16px;
+  color: #b8a070;
+  font-style: italic;
+  margin: 0;
+}
+
+.fw-jukebox-track-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  background: #1a150e;
+  border: 1px solid #5a4020;
+  border-radius: 4px;
+}
+
+.fw-jukebox-track-art {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2c2010;
+  color: #c8962a;
+  font-size: 18px;
+}
+
+img.fw-jukebox-track-art {
+  font-size: 0;
+}
+
+.fw-jukebox-track-name {
+  flex: 1;
+  color: #e8d5a3;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fw-jukebox-icon-btn {
+  background: transparent;
+  border: 1px solid #5c4a1e;
+  color: #b8965a;
+  cursor: pointer;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.fw-jukebox-icon-btn:hover {
+  background: #3d2e14;
+  color: #d4a96a;
+  border-color: #8b6914;
+}
+
+.fw-jukebox-gm-actions {
+  display: flex;
+  gap: 2px;
+}
+
+/* ── GM config-sheet track picker (Ambient Sound / Item / Token config) ── */
+.fimblewood-jukebox-source-field {
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid var(--color-border-light-tertiary, #782e22);
+  border-radius: 4px;
+}
+
+.fimblewood-jukebox-source-field legend {
+  font-weight: 600;
+  padding: 0 4px;
+}
+
+.fimblewood-jukebox-source-field label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.fw-jukebox-track-picker {
+  width: 100%;
+}
