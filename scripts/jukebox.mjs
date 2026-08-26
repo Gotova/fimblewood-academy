@@ -436,14 +436,12 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
     tag: "div",
     window: { title: "FIMBLEWOOD.Jukebox.WindowTitle", icon: "fas fa-record-vinyl" },
     position: { width: 480, height: 560 },
-    classes: ["fimblewood-jukebox-app"],
-    actions: {
-      play: "_onPlay",
-      stop: "_onStop",
-      rename: "_onRename",
-      delete: "_onDelete"
-    }
+    classes: ["fimblewood-jukebox-app"]
   };
+
+  // action name -> instance method. Dispatched manually (see _replaceHTML) rather
+  // than via DEFAULT_OPTIONS.actions/data-action, which did not reliably fire.
+  static #ACTIONS = { play: "_onPlay", stop: "_onStop", rename: "_onRename", delete: "_onDelete" };
 
   async _renderHTML() {
     const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.${k}`);
@@ -482,6 +480,19 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
 
   async _replaceHTML(result, content) {
     content.innerHTML = result;
+    // Content is destroyed/recreated on every render (innerHTML replacement), but
+    // `content` itself is the same stable node Foundry hands back each time, so a
+    // delegated listener attached to it once (guarded by the dataset flag) keeps
+    // catching clicks on freshly-rendered buttons via normal event bubbling.
+    if (!content.dataset.fwJukeboxWired) {
+      content.dataset.fwJukeboxWired = "1";
+      content.addEventListener("click", (event) => {
+        const target = event.target.closest("[data-action]");
+        if (!target) return;
+        const handlerName = JukeboxApp.#ACTIONS[target.dataset.action];
+        if (handlerName) this[handlerName](event, target);
+      });
+    }
     return content;
   }
 

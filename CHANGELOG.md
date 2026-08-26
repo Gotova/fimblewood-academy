@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.6.2] - 2026-08-26
+
+### Fixed
+
+- Play/Stop/Rename/Delete in the Jukebox window did nothing — verified live that clicking Play never even reached `playSound()` (the target `PlaylistSound`'s `playing` field stayed `false`). The buttons relied on `ApplicationV2`'s built-in `data-action`/`DEFAULT_OPTIONS.actions` dispatch, which didn't reliably fire. Replaced with a manually-wired delegated click listener attached directly to the window's content element, removing the dependency on that mechanism entirely.
+
 ## [0.6.1] - 2026-08-26
 
 ### Fixed
