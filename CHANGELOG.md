@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-08-26
+
+### Changed
+
+- The scene control category is now titled **"Fimblewood Controls"** (was "Magic Circle Tools"), and uses a custom icon — a house silhouette with a star cut out of the centre, evoking a school crest — instead of a generic Font Awesome wand icon. Implemented as a small inline SVG applied via CSS mask (`styles/module.css`), so it still follows the sidebar's hover/active coloring like every other control icon.
+
 ## [0.4.0] - 2026-08-26
 
 ### Added

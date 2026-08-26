@@ -1136,8 +1136,8 @@ export function registerDrawPad() {
   Hooks.on("getSceneControlButtons", (controls) => {
     controls[CONTROL_GROUP] = {
       name:       CONTROL_GROUP,
-      title:      "FIMBLEWOOD.Draw.ControlTitle",
-      icon:       "fas fa-wand-magic-sparkles",
+      title:      "FIMBLEWOOD.ControlGroupTitle",
+      icon:       "fimblewood-controls-icon",
       order:      Object.keys(controls).length,
       visible:    true,
       activeTool: "drawpad",

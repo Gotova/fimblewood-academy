@@ -1,8 +1,8 @@
 {
   "FIMBLEWOOD": {
     "ModuleTitle": "Fimblewood Academy",
+    "ControlGroupTitle": "Fimblewood Controls",
     "Draw": {
-      "ControlTitle": "Magic Circle Tools",
       "ButtonTitle": "Draw Magic Circle",
       "WindowTitle": "Fimblewood Academy - Magic Circle",
       "Tools": {

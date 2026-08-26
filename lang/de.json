@@ -1,8 +1,8 @@
 {
   "FIMBLEWOOD": {
     "ModuleTitle": "Fimblewood Academy",
+    "ControlGroupTitle": "Fimblewood-Steuerung",
     "Draw": {
-      "ControlTitle": "Magiekreis-Werkzeuge",
       "ButtonTitle": "Magiekreis zeichnen",
       "WindowTitle": "Fimblewood Academy - Magiekreis",
       "Tools": {

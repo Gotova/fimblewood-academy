@@ -26,7 +26,7 @@ This URL always resolves to the latest release, so it never needs to change betw
 
 ### Magic Circle Draw Pad
 
-A drawing canvas for painting magic circles, available to every player and the GM via a dedicated **Magic Circle Tools** category in the scene control bar (left sidebar) — a magic-wand icon, separate from Token Controls.
+A drawing canvas for painting magic circles, available to every player and the GM via a dedicated **Fimblewood Controls** category in the scene control bar (left sidebar) — a house-and-star crest icon, separate from Token Controls.
 
 - **Tools:** brush, eraser, line, circle, rectangle, flood-fill — each with adjustable color, brush size, opacity, and a stroke-smoothing stabilizer.
 - **Symmetry:** none, or 2/4/6/8/12-fold rotational symmetry around a fixed centre point — ideal for magic circles. Start with a dark background, 6- or 8-fold symmetry, and draw outward from the centre.
