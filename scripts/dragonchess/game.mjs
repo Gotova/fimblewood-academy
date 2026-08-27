@@ -25,6 +25,7 @@ import {
   PIECE_VALUES, algebraic
 } from "./rules.mjs";
 import { chooseMove, difficultyPreset } from "./engine.mjs";
+import { t as i18n, tf as fmt } from "./strings.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 const CHANNEL = `module.${MODULE_ID}`;
@@ -32,8 +33,6 @@ const CHANNEL = `module.${MODULE_ID}`;
 export const GAME_SETTING = "dragonchessGame";
 export const DIFFICULTY_SETTING = "dragonchessDifficulty";
 export const ROLL_DELAY_SETTING = "dragonchessRollDelay";
-export const KINGS_MAY_TOUCH_SETTING = "dragonchessKingsMayTouch";
-
 /** Fixed (non-configurable) duration of the arrow-forms-then-piece-slides
  * animation that plays before a Schlagzug's roll delay (or immediately, for
  * a quiet move) — see processMove(). Every client times its own local
@@ -45,9 +44,6 @@ export const ARROW_ANIMATION_MS = 300;
 export const PIECE_DISPLAY = { k: "König", q: "Drache", r: "Bastion", b: "Magus", n: "Greif", p: "Knappe" };
 export const PIECE_GLYPH = { k: "♚", q: "♛", r: "♜", b: "♝", n: "♞", p: "♟" };
 export const COLOR_LABEL = { w: "Blau", b: "Rot" };
-
-const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Dragonchess.${k}`);
-const fmt = (k, data) => game.i18n.format(`FIMBLEWOOD.Dragonchess.${k}`, data);
 
 function pieceLabel(type, color) {
   return `${PIECE_DISPLAY[type]} (${COLOR_LABEL[color]})`;
@@ -66,10 +62,6 @@ export function getGameRecord() {
 async function setGameRecord(record) {
   if (!game.user.isGM) return;
   await game.settings.set(MODULE_ID, GAME_SETTING, record);
-}
-
-function ruleOptions() {
-  return { kingsMayTouch: game.settings.get(MODULE_ID, KINGS_MAY_TOUCH_SETTING) };
 }
 
 export function roleForCurrentUser(record) {
@@ -507,7 +499,7 @@ function scheduleBotMove(gameId) {
     const record = getGameRecord();
     if (!record || record.id !== gameId || record.phase !== "playing" || !isBotTurn(record)) return;
     const preset = difficultyPreset(record.difficulty);
-    const move = chooseMove(record.state, { ...preset, kingsMayTouch: ruleOptions().kingsMayTouch });
+    const move = chooseMove(record.state, preset);
     if (!move) return;
     await processMove(record, move);
   }, thinkMs);
@@ -523,7 +515,9 @@ function scheduleBotMove(gameId) {
  */
 async function processMove(record, move) {
   const defenderSq = move.capture ? (move.enPassant ? move.epCapturedSq : move.to) : null;
-  const isKingTarget = move.capture && move.capturedType === "k";
+  const isKingTarget = move.capture && move.capturedType === "k"; // defender is King: game-ending
+  const isKingAttacker = move.capture && move.piece.type === "k" && !isKingTarget; // attacker is King: no roll, game continues
+  const autoSucceeds = isKingTarget || isKingAttacker;
   const entrenched = move.capture && record.state.entrenched === defenderSq;
   const attackerLabel = move.capture ? pieceLabel(move.piece.type, move.piece.color) : null;
   const defenderLabel = move.capture ? pieceLabel(move.capturedType, opponent(move.piece.color)) : null;
@@ -532,9 +526,9 @@ async function processMove(record, move) {
     moveId: foundry.utils.randomID(),
     from: move.from, to: move.to,
     pieceType: move.piece.type, pieceColor: move.piece.color,
-    capture: !!move.capture, isKingTarget, entrenched,
+    capture: !!move.capture, isKingTarget, isKingAttacker, entrenched,
     attackerLabel, defenderLabel,
-    needed: move.capture && !isKingTarget ? 10 + PIECE_VALUES[move.capturedType] : null
+    needed: move.capture && !autoSucceeds ? 10 + PIECE_VALUES[move.capturedType] : null
   };
   await setGameRecord(record);
   await sleep(MOVE_ANIMATION_MS);
@@ -550,7 +544,7 @@ async function processMove(record, move) {
   await sleep(totalDelay / 2);
 
   let success = true, rollTotal = null;
-  if (!isKingTarget) {
+  if (!autoSucceeds) {
     const atkVal = PIECE_VALUES[move.piece.type];
     const defVal = PIECE_VALUES[move.capturedType];
     const dc = 10 + defVal;
@@ -567,24 +561,25 @@ async function processMove(record, move) {
     });
     rollTotal = roll.total;
   } else {
-    ChatMessage.create({ content: fmt("Log.KingAttack", { attacker: attackerLabel, defender: defenderLabel }) });
+    ChatMessage.create({ content: fmt(isKingTarget ? "Log.KingAttack" : "Log.KingAttackerNoRoll", { attacker: attackerLabel, defender: defenderLabel }) });
   }
 
   await sleep(totalDelay / 2);
   const next = makeMove(record.state, move, { success });
   record.announce = null;
-  await finalizeMove(record, move, next, { success, rollTotal, isKingTarget, attackerLabel, defenderLabel });
+  await finalizeMove(record, move, next, { success, rollTotal, isKingTarget, isKingAttacker, attackerLabel, defenderLabel });
 }
 
 async function finalizeMove(record, move, nextState, meta) {
-  const opts = ruleOptions();
   record.state = nextState;
 
   let logText;
   if (move.capture) {
     logText = meta.isKingTarget
       ? fmt("Log.KingCapturedLine", { attacker: meta.attackerLabel })
-      : fmt(meta.success ? "Log.CaptureSuccessLine" : "Log.CaptureFailLine", {
+      : meta.isKingAttacker
+        ? fmt("Log.KingCapturesLine", { attacker: meta.attackerLabel, defender: meta.defenderLabel })
+        : fmt(meta.success ? "Log.CaptureSuccessLine" : "Log.CaptureFailLine", {
         attacker: meta.attackerLabel, defender: meta.defenderLabel, roll: meta.rollTotal
       });
     if (move.promotion && meta.success) logText += ` ${fmt("Log.PromotionLine", { square: algebraic(move.to) })}`;
@@ -601,7 +596,7 @@ async function finalizeMove(record, move, nextState, meta) {
     record.result = { type: "kingCaptured", winnerColor: move.piece.color };
     record.phase = "ended";
   } else {
-    const status = gameStatus(nextState, opts);
+    const status = gameStatus(nextState);
     if (status !== "playing") {
       record.result = { type: status, winnerColor: status === "checkmate" ? opponent(nextState.turn) : null };
       record.phase = "ended";
@@ -641,7 +636,7 @@ async function handleMoveRequest(data) {
   if (!record || record.id !== data.gameId || record.phase !== "playing") return;
   const seatColor = seatColorForUser(record, data.userId);
   if (!seatColor || record.state.turn !== seatColor) return;
-  const legal = generateMoves(record.state, ruleOptions());
+  const legal = generateMoves(record.state);
   const move = legal.find((m) => m.from === data.from && m.to === data.to);
   if (!move) return;
   await processMove(record, move);
@@ -663,7 +658,7 @@ export async function gmSubmitMove(from, to) {
   const record = getGameRecord();
   if (!record || record.phase !== "playing" || record.npcIsBot || record.opponentUserId) return;
   if (record.state.turn !== record.npcColor) return;
-  const legal = generateMoves(record.state, ruleOptions());
+  const legal = generateMoves(record.state);
   const move = legal.find((m) => m.from === from && m.to === to);
   if (!move) return;
   await processMove(record, move);
@@ -696,21 +691,20 @@ export function registerDragonchess() {
     scope: "world", config: false, type: Object, default: null,
     onChange: (record) => onGameRecordChanged(record)
   });
+  // Hard-coded German rather than lang-file keys: Foundry's own Settings
+  // Config sheet localizes name/hint/choices directly, following the
+  // world's active language — which would reintroduce the English/German
+  // mix these are meant to avoid (see strings.mjs).
   game.settings.register(MODULE_ID, DIFFICULTY_SETTING, {
     scope: "world", config: true, type: String, default: "student",
-    choices: { knappe: "FIMBLEWOOD.Dragonchess.Difficulty.Knappe", student: "FIMBLEWOOD.Dragonchess.Difficulty.Student", magister: "FIMBLEWOOD.Dragonchess.Difficulty.Magister", drache: "FIMBLEWOOD.Dragonchess.Difficulty.Drache" },
-    name: "FIMBLEWOOD.Dragonchess.Settings.DifficultyName",
-    hint: "FIMBLEWOOD.Dragonchess.Settings.DifficultyHint"
+    choices: { knappe: "Knappe (sehr schwach)", student: "Student (schwach)", magister: "Magister (stark)", drache: "Drache (sehr stark)" },
+    name: "Dragonchess-Bot-Schwierigkeit",
+    hint: "Vorgegebene Schwierigkeit, wenn der Spielleiter eine neue Dragonchess-Partie startet."
   });
   game.settings.register(MODULE_ID, ROLL_DELAY_SETTING, {
     scope: "world", config: true, type: Number, default: 3, range: { min: 0, max: 6, step: 0.5 },
-    name: "FIMBLEWOOD.Dragonchess.Settings.RollDelayName",
-    hint: "FIMBLEWOOD.Dragonchess.Settings.RollDelayHint"
-  });
-  game.settings.register(MODULE_ID, KINGS_MAY_TOUCH_SETTING, {
-    scope: "world", config: true, type: Boolean, default: false,
-    name: "FIMBLEWOOD.Dragonchess.Settings.KingsMayTouchName",
-    hint: "FIMBLEWOOD.Dragonchess.Settings.KingsMayTouchHint"
+    name: "Dragonchess-Wurf-Verzoegerung",
+    hint: "Sekunden Spannung zwischen der Ankuendigung eines Schlagzugs und seinem Ergebnis — Zeit fuer den Tisch zu reagieren. 0 fuer keine Verzoegerung."
   });
 
   Hooks.once("ready", () => {
@@ -809,7 +803,7 @@ export function selftest() {
     const move = chooseMove(state, { depth: 1, blunderChance: 0.2 });
     const legal = generateMoves(state, {});
     if (!legal.some((m) => m.from === move.from && m.to === move.to)) { illegal = true; break; }
-    const success = !move.capture || move.capturedType === "k" || Math.random() < hitChance(PIECE_VALUES[move.piece.type], PIECE_VALUES[move.capturedType], state.entrenched === (move.enPassant ? move.epCapturedSq : move.to));
+    const success = !move.capture || move.capturedType === "k" || move.piece.type === "k" || Math.random() < hitChance(PIECE_VALUES[move.piece.type], PIECE_VALUES[move.capturedType], state.entrenched === (move.enPassant ? move.epCapturedSq : move.to));
     state = makeMove(state, move, { success });
     plies++;
     if (move.capturedType === "k") break;

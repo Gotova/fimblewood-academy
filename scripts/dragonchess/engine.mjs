@@ -91,7 +91,8 @@ function negamaxPosition(state, depth, alpha, beta, options) {
 function negamaxMove(state, move, depth, alpha, beta, options) {
   if (move.capturedType === "k") return MATE_SCORE; // attacks on the King always succeed and end the game
 
-  if (!move.capture) {
+  if (!move.capture || move.piece.type === "k") {
+    // Quiet move, or the King attacking — King attacks always succeed, no roll.
     const next = makeMove(state, move, { success: true });
     return -negamaxPosition(next, depth - 1, -beta, -alpha, options);
   }
@@ -119,13 +120,13 @@ function shuffled(array, rng) {
 /**
  * Pick a move for the side to move in `state`.
  *
- * options: { depth, blunderChance, kingsMayTouch, rng }. `rng` defaults to
- * Math.random and may be overridden for deterministic tests. Returns null
- * if there is no legal move (the caller should not be asking in that case —
- * check gameStatus() first).
+ * options: { depth, blunderChance, rng }. `rng` defaults to Math.random and
+ * may be overridden for deterministic tests. Returns null if there is no
+ * legal move (the caller should not be asking in that case — check
+ * gameStatus() first).
  */
 export function chooseMove(state, options = {}) {
-  const opts = { depth: 2, blunderChance: 0, kingsMayTouch: false, rng: Math.random, ...options };
+  const opts = { depth: 2, blunderChance: 0, rng: Math.random, ...options };
   const moves = generateMoves(state, opts);
   if (!moves.length) return null;
 

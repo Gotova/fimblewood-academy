@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.11.0
+- **Current version:** 0.12.0
 
 ## Installation
 
@@ -82,7 +82,11 @@ Either way, accepting triggers Schere/Stein/Papier for who picks a colour first 
 
 **The bot** isn't a chess engine with dice bolted on: its search treats every capture as a chance node, weighing the success and failure branches by the real Dragonchess odds, so it correctly avoids bad-odds trades and values attacking an undefended piece over an entrenched one.
 
-**Every move plays out as a short, legible beat** so the table can actually follow what's happening: an arrow forms from the source square to the destination, the piece physically slides there, and — only if there's an enemy piece on that square — a short pause and then the die rolls in chat (animated by Dice So Nice if installed) before the outcome resolves. The board is labelled a–h / 1–8 like a normal chessboard. The roll delay, the bot's difficulty, and whether two Kings may stand adjacent (off by default, since the König threatens no squares under these rules) are all world settings.
+**Every move plays out as a short, legible beat** so the table can actually follow what's happening: an arrow forms from the source square to the destination, the piece physically slides there, and — only if there's an enemy piece on that square — a short pause and then the die rolls in chat (animated by Dice So Nice if installed) before the outcome resolves. The board is labelled a–h / 1–8 like a normal chessboard. The roll delay and the bot's default difficulty are world settings.
+
+**The König attacks and is attacked exactly like a normal chess king** — one step in any direction, including capturing — with one deviation from plain chess: any capture where either side is the König, attacker or defender, always succeeds, no roll. The two Kings still can't stand adjacent, exactly as in normal chess.
+
+Dragonchess's text is deliberately German throughout, regardless of the world's configured Foundry language — the source rulebook, the club fiction, and the world piece names (Drache, Bastion, Magus, Greif, Knappe, König) are German, so following an English world language for everything else around them would just produce a mixed-language mess.
 
 ### Content
 

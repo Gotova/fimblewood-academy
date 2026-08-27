@@ -14,15 +14,15 @@
  *    entrenched. A successful capture removes the defender and entrenches
  *    the attacker on the captured square. Only one square on the whole board
  *    is ever entrenched at a time, and moving that piece away ends it.
- *  - The King never generates a capturing move (it cannot attack at all),
- *    and is therefore also never eligible to be entrenched. Attacks against
- *    the King are resolved by the caller as automatic successes.
+ *  - The King attacks and is attacked exactly like a normal chess king
+ *    (one step in any direction, including onto an enemy-occupied square).
+ *    Any capture where either side is the King — attacker or defender —
+ *    always succeeds; the caller (game.mjs) is responsible for skipping the
+ *    roll in that case. A King that captures becomes entrenched like any
+ *    other piece, since a capture that always succeeds is still a capture.
  *  - Pawn promotion always produces a Drache (Dame, value 9) and the new
  *    piece is never entrenched, even when the promotion happened via a
  *    successful capture.
- *  - Whether two Kings may stand adjacent is a table-rule toggle
- *    (`kingsMayTouch`, default false) because the King threatens no squares
- *    at all under these rules.
  */
 
 export const PIECE_VALUES = { p: 1, n: 3, b: 3, r: 5, q: 9, k: 0 };
@@ -109,11 +109,23 @@ export function findKing(board, color) {
 }
 
 /* -------------------------------------------- */
-/*  Attack detection (King excluded as attacker) */
+/*  Attack detection                             */
 /* -------------------------------------------- */
 
-/** True if `square` is geometrically threatened by any `byColor` piece other than a King. */
+const KING_OFFSETS = [
+  [1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]
+];
+
+/** True if `square` is geometrically threatened by any `byColor` piece. */
 export function isSquareAttacked(board, square, byColor) {
+  for (const [df, dr] of KING_OFFSETS) {
+    const file = fileOf(square) + df;
+    const rank = rankOf(square) + dr;
+    if (file < 0 || file > 7 || rank < 0 || rank > 7) continue;
+    const p = board[sq(file, rank)];
+    if (p && p.color === byColor && p.type === "k") return true;
+  }
+
   // Pawns: a byColor pawn attacks diagonally toward its forward direction.
   const pawnDirs = byColor === "w" ? ["SW", "SE"] : ["NW", "NE"];
   for (const dir of pawnDirs) {
@@ -157,10 +169,6 @@ export function isSquareAttacked(board, square, byColor) {
   }
 
   return false;
-}
-
-function chebyshevDistance(a, b) {
-  return Math.max(Math.abs(fileOf(a) - fileOf(b)), Math.abs(rankOf(a) - rankOf(b)));
 }
 
 /* -------------------------------------------- */
@@ -225,8 +233,9 @@ function kingStepMoves(state, from, out) {
   for (const dir of QUEEN_DIRS) {
     const to = step(from, dir);
     if (to == null) continue;
-    // The King can never capture, undefended or not — only empty squares are valid.
-    if (!state.board[to]) out.push({ from, to, piece: { ...piece }, capture: false });
+    const occupant = state.board[to];
+    if (!occupant) out.push({ from, to, piece: { ...piece }, capture: false });
+    else if (occupant.color !== piece.color) out.push({ from, to, piece: { ...piece }, capture: true, capturedType: occupant.type });
   }
 }
 
@@ -358,16 +367,14 @@ export function makeMove(state, move, { success = true } = {}) {
 /*  Legal move generation                        */
 /* -------------------------------------------- */
 
-function isLegal(state, move, options) {
+function isLegal(state, move) {
   // Legality is judged on the success branch: if the capture works, is my king safe?
+  // Since isSquareAttacked() now includes King attacks, this alone also
+  // covers the standard "the two Kings can never stand adjacent" rule — no
+  // separate check needed, exactly as in normal chess.
   const after = makeMove(state, move, { success: true });
   const kingSq = findKing(after.board, state.turn);
   if (kingSq != null && isSquareAttacked(after.board, kingSq, opponent(state.turn))) return false;
-
-  if (move.piece.type === "k" && !options.kingsMayTouch) {
-    const enemyKingSq = findKing(after.board, opponent(state.turn));
-    if (enemyKingSq != null && chebyshevDistance(move.to, enemyKingSq) <= 1) return false;
-  }
 
   if (move.castle) {
     const enemy = opponent(state.turn);
@@ -379,16 +386,11 @@ function isLegal(state, move, options) {
   return true;
 }
 
-/**
- * All legal moves for the side to move (or, if `from` is given, from that
- * square only). `options.kingsMayTouch` defaults to false (classic
- * adjacency ban) per the table-rule toggle.
- */
+/** All legal moves for the side to move (or, if `options.from` is given, from that square only). */
 export function generateMoves(state, options = {}) {
-  const opts = { kingsMayTouch: false, ...options };
   const pseudo = generatePseudoMoves(state);
-  const legal = pseudo.filter((m) => isLegal(state, m, opts));
-  return opts.from != null ? legal.filter((m) => m.from === opts.from) : legal;
+  const legal = pseudo.filter((m) => isLegal(state, m));
+  return options.from != null ? legal.filter((m) => m.from === options.from) : legal;
 }
 
 export function isInCheck(state) {

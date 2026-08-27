@@ -4,6 +4,15 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.12.0] - 2026-08-27
+
+### Changed
+
+
+- **The König now attacks and is attacked exactly like a normal chess king** (one step in any direction, including onto an enemy-occupied square), instead of never being able to attack at all. Any capture where either side is the König — attacker or defender — always succeeds automatically, no roll. This also fixes a real bug: a capture *targeting* the enemy König was already always resolved as an automatic success in play, but the pre-move hit-chance badge shown on the board was still computing a misleading dice-based percentage for it.
+- Removed the **Dragonchess: Kings May Touch** world setting — the two Kings not being allowed to stand adjacent is now a natural consequence of the König threatening squares like a normal king (exactly how vanilla chess enforces the same rule), so the special-cased toggle is no longer needed.
+- **All Dragonchess text is now hard-coded German**, independent of the Foundry world's configured language, instead of following it via the normal `lang/en.json` / `lang/de.json` translation files. Piece names and colours (Drache, Bastion, Magus, Greif, Knappe, König, Blau, Rot) were always German-only constants, so an English-language world previously saw a jarring English/German mash-up in every dialog, banner and chat message; a new `scripts/dragonchess/strings.mjs` is now the single source for all of it.
+
 ## [0.11.0] - 2026-08-27
 
 ### Added

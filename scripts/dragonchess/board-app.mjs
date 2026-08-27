@@ -32,13 +32,11 @@ import { generateMoves, PIECE_VALUES, hitChance, fileOf, rankOf } from "./rules.
 import {
   getGameRecord, submitMove, submitResign, gmSubmitMove, gmEndGame,
   mySideForCurrentUser, PIECE_DISPLAY, PIECE_GLYPH, COLOR_LABEL,
-  KINGS_MAY_TOUCH_SETTING, MOVE_ANIMATION_MS, ARROW_ANIMATION_MS
+  MOVE_ANIMATION_MS, ARROW_ANIMATION_MS
 } from "./game.mjs";
+import { t as i18n, tf as fmt } from "./strings.mjs";
 
-const MODULE_ID = "fimblewood-academy";
 const SQUARE_SIZE = 50; // px — board is a fixed 8×8 grid of these
-const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Dragonchess.${k}`);
-const fmt = (k, data) => game.i18n.format(`FIMBLEWOOD.Dragonchess.${k}`, data);
 
 function esc(value) {
   return String(value ?? "").replace(/[&<>"']/g, (c) => ({
@@ -55,7 +53,9 @@ export class DragonchessBoardApp extends foundry.applications.api.ApplicationV2 
   static DEFAULT_OPTIONS = {
     id: "fimblewood-dragonchess",
     tag: "div",
-    window: { title: "FIMBLEWOOD.Dragonchess.Board.WindowTitle", icon: "fas fa-chess-queen" },
+    // Hard-coded German, not a lang-file key: Foundry localizes window titles
+    // itself, following the world's active language (see strings.mjs).
+    window: { title: "Dragonchess", icon: "fas fa-chess-queen" },
     position: { width: 660, height: 660 },
     classes: ["fimblewood-dragonchess-app"]
   };
@@ -91,11 +91,10 @@ export class DragonchessBoardApp extends foundry.applications.api.ApplicationV2 
       return `<div class="fw-dc-empty">${i18n(record.phase === "declined" ? "Board.Declined" : "Board.Waiting")}</div>`;
     }
 
-    const kingsMayTouch = game.settings.get(MODULE_ID, KINGS_MAY_TOUCH_SETTING);
     const interactive = this.canInteract(record);
     let legalDestinations = new Map(); // square -> move
     if (interactive && this.selectedSquare != null) {
-      for (const move of generateMoves(record.state, { kingsMayTouch, from: this.selectedSquare })) {
+      for (const move of generateMoves(record.state, { from: this.selectedSquare })) {
         legalDestinations.set(move.to, move);
       }
     }
@@ -196,8 +195,10 @@ export class DragonchessBoardApp extends foundry.applications.api.ApplicationV2 
       const a = record.announce;
       const text = a.isKingTarget
         ? fmt("Board.KingAttackBanner", { attacker: esc(a.attackerLabel), defender: esc(a.defenderLabel) })
-        : fmt("Board.AttackBanner", { attacker: esc(a.attackerLabel), defender: esc(a.defenderLabel), needed: a.needed })
-          + (a.entrenched ? ` ${i18n("Board.EntrenchedNote")}` : "");
+        : a.isKingAttacker
+          ? fmt("Board.KingAttackerBanner", { attacker: esc(a.attackerLabel), defender: esc(a.defenderLabel) })
+          : fmt("Board.AttackBanner", { attacker: esc(a.attackerLabel), defender: esc(a.defenderLabel), needed: a.needed })
+            + (a.entrenched ? ` ${i18n("Board.EntrenchedNote")}` : "");
       return `<div class="fw-dc-banner is-attack">${text}</div>`;
     }
     if (record.phase === "ended") {
@@ -337,9 +338,7 @@ export class DragonchessBoardApp extends foundry.applications.api.ApplicationV2 
     if (!record || !this.canInteract(record)) return;
 
     if (this.selectedSquare != null) {
-      const moves = generateMoves(record.state, {
-        kingsMayTouch: game.settings.get(MODULE_ID, KINGS_MAY_TOUCH_SETTING), from: this.selectedSquare
-      });
+      const moves = generateMoves(record.state, { from: this.selectedSquare });
       const move = moves.find((m) => m.to === square);
       if (move) {
         this.selectedSquare = null;
@@ -385,5 +384,7 @@ export class DragonchessBoardApp extends foundry.applications.api.ApplicationV2 
 
 /** Hit chance for a given legal move object, matching the odds shown in chat when it resolves. */
 function hitChanceFor(move, entrenched) {
+  // Either King involved (attacker or defender) always succeeds — no roll.
+  if (move.piece.type === "k" || move.capturedType === "k") return 1;
   return hitChance(PIECE_VALUES[move.piece.type], PIECE_VALUES[move.capturedType], entrenched);
 }
