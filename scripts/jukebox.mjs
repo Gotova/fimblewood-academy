@@ -199,6 +199,21 @@ export async function stopTrack(trackId) {
 /*  Ambient Sound proximity → auto-collect       */
 /* -------------------------------------------- */
 
+/**
+ * Distance in grid units between a token and an ambient sound. Measured from the
+ * token *document's* position rather than the placeable's, so a check that runs
+ * from the updateToken hook sees where the token just landed and not where its
+ * animation currently is.
+ */
+function distanceToSound(tokenDoc, sound) {
+  const gridSize = canvas.grid.size;
+  const center = {
+    x: tokenDoc.x + (tokenDoc.width * gridSize) / 2,
+    y: tokenDoc.y + (tokenDoc.height * gridSize) / 2
+  };
+  return canvas.grid.measurePath([center, { x: sound.x, y: sound.y }]).distance;
+}
+
 async function checkAmbientSoundProximity() {
   if (game.user.isGM || !canvas.ready || !isCollectionEnabled()) return;
   const ownedTokens = canvas.tokens.placeables.filter(t => t.actor?.isOwner);
@@ -208,14 +223,62 @@ async function checkAmbientSoundProximity() {
     if (!trackId) continue;
     const inRange = ownedTokens.some(t => {
       try {
-        const { distance } = canvas.grid.measurePath([t.center, { x: sound.x, y: sound.y }]);
-        return distance <= sound.radius;
+        return distanceToSound(t.document, sound) <= sound.radius;
       } catch (err) {
+        // Swallowing this silently would leave proximity collection permanently
+        // dead with no clue as to why, so it gets logged every time.
+        console.error(`${MODULE_ID} | Jukebox proximity measurement failed:`, err);
         return false;
       }
     });
     if (inRange && await addCollectedTrack(trackId)) announceTrackCollected(trackId);
   }
+}
+
+/**
+ * Reports, for the client it runs on, every reason proximity collection could be
+ * failing: the master switch, whether this client owns a token on the canvas, and
+ * for each tagged ambient sound its radius against the measured distance. Exposed
+ * on the module API because the collection paths are deliberately silent — there
+ * is otherwise nothing to look at when a record doesn't drop.
+ */
+export function diagnoseJukebox() {
+  const registry = getRegistry();
+  const report = {
+    user: game.user.name,
+    isGM: game.user.isGM,
+    collectingEnabled: isCollectionEnabled(),
+    note: game.user.isGM ? "GM clients never auto-collect — run this as a player." : "",
+    registeredTracks: Object.keys(registry).length,
+    myCollectedTracks: getCollectedTracks().map(id => registry[id]?.name ?? `${id} (not in registry)`),
+    ownedTokensOnCanvas: canvas.ready
+      ? canvas.tokens.placeables.filter(t => t.actor?.isOwner).map(t => t.name)
+      : "canvas not ready",
+    taggedSounds: []
+  };
+
+  if (canvas.ready) {
+    const ownedTokens = canvas.tokens.placeables.filter(t => t.actor?.isOwner);
+    for (const sound of canvas.scene.sounds) {
+      const trackId = sound.getFlag(MODULE_ID, "trackId");
+      if (!trackId) continue;
+      report.taggedSounds.push({
+        track: registry[trackId]?.name ?? `${trackId} (NOT IN REGISTRY)`,
+        radius: sound.radius,
+        alreadyCollected: getCollectedTracks().includes(trackId),
+        distances: ownedTokens.map(t => {
+          try {
+            return `${t.name}: ${distanceToSound(t.document, sound).toFixed(1)}`;
+          } catch (err) {
+            return `${t.name}: MEASUREMENT FAILED (${err.message})`;
+          }
+        })
+      });
+    }
+  }
+
+  console.log(`${MODULE_ID} | Jukebox diagnostics`, report);
+  return report;
 }
 
 /* -------------------------------------------- */
@@ -886,6 +949,10 @@ export function registerJukebox() {
   // registerDrawPad — which runs first at init, so the category already exists
   // by the time this listener fires.
   Hooks.on("getSceneControlButtons", (controls) => {
+    // Left out of the tool list entirely for players rather than added with
+    // visible:false — an invisible entry is still a real tool as far as core's
+    // control activation is concerned, and there is nothing here players need.
+    if (!game.user.isGM) return;
     const group = controls[CONTROL_GROUP];
     if (!group) return;
     group.tools.jukebox = {
@@ -893,7 +960,7 @@ export function registerJukebox() {
       title: "FIMBLEWOOD.Jukebox.Manager.ButtonTitle",
       icon: "fas fa-compact-disc",
       button: true,
-      visible: game.user.isGM,
+      visible: true,
       order: 2,
       onChange: () => openJukeboxManager()
     };

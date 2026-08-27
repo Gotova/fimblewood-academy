@@ -2,7 +2,7 @@ import {
   registerUnbloodedSorcery, hasUnbloodedSorcery, getResonanceValue, getResonanceMax, addResonance, cleanupStaleResonance
 } from "./unblooded-sorcery.mjs";
 import { registerDrawPad, openDrawApp, openGallery } from "./draw.mjs";
-import { registerJukebox, openJukeboxWindow, openJukeboxManager, playTrack, stopTrack } from "./jukebox.mjs";
+import { registerJukebox, openJukeboxWindow, openJukeboxManager, diagnoseJukebox, playTrack, stopTrack } from "./jukebox.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 
@@ -17,7 +17,7 @@ Hooks.once("init", () => {
     id: MODULE_ID,
     unbloodedSorcery: { hasUnbloodedSorcery, getResonanceValue, getResonanceMax, addResonance },
     draw: { openDrawApp, openGallery },
-    jukebox: { openJukeboxWindow, openJukeboxManager, playTrack, stopTrack }
+    jukebox: { openJukeboxWindow, openJukeboxManager, diagnoseJukebox, playTrack, stopTrack }
   };
 });
 

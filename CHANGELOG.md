@@ -4,6 +4,18 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.7.1] - 2026-08-27
+
+### Fixed
+
+- Proximity collection measured distance from the token *placeable* rather than its document, so a check running off the `updateToken` hook could read the position the token was animating from instead of the one it just landed on. Now measured from the document.
+- The proximity check swallowed any measurement error and returned "not in range", which meant a single failure left proximity collection permanently dead with nothing in the console. Errors are now logged.
+- The GM's Music Tracks tool was added to the scene controls for every user with `visible: false` on player clients. It is now not registered at all for players, since an invisible entry is still a real tool as far as core's control activation is concerned.
+
+### Added
+
+- `game.modules.get("fimblewood-academy").api.jukebox.diagnoseJukebox()` — reports why proximity collection isn't firing on the client it's run from: the collecting master switch, whether that client owns a token on the canvas, and each tagged ambient sound's radius against the measured distance. The collection paths are deliberately silent, so there was previously nothing to inspect when a record didn't drop.
+
 ## [0.7.0] - 2026-08-27
 
 ### Added
