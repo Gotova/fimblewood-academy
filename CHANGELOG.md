@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.12.1] - 2026-08-27
+
+### Fixed
+
+- A selected Dragonchess piece disappeared from the board until you moved it or deselected it. `.fw-dc-square.is-selected`'s `z-index: 1` was lifting that square's opaque background above the piece-overlay layer (which had no explicit `z-index`), painting over the piece standing on it. The piece layer now has an explicit `z-index` above every square state, so this class of bug can't recur.
+
 ## [0.12.0] - 2026-08-27
 
 ### Changed

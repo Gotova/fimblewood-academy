@@ -79,7 +79,7 @@
 .fw-dc-square.is-light { background: #e8d5a3; }
 .fw-dc-square.is-dark { background: #5a4020; }
 
-.fw-dc-square.is-selected { outline: 3px solid #c8962a; outline-offset: -3px; z-index: 1; }
+.fw-dc-square.is-selected { outline: 3px solid #c8962a; outline-offset: -3px; }
 .fw-dc-square.is-entrenched::after {
   content: "";
   position: absolute;
@@ -114,6 +114,11 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
+  /* Explicit so pieces always paint above square backgrounds/highlights
+     regardless of DOM order — a square modifier (e.g. is-selected) once
+     carried its own z-index and, being positioned+opaque, painted over the
+     piece standing on it despite coming first in the DOM. */
+  z-index: 5;
 }
 
 .fw-dc-piece-token {
