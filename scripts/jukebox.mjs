@@ -183,10 +183,58 @@ function findPlaylistSound(trackId) {
   return sound ? { playlist, sound } : null;
 }
 
+/* -------------------------------------------- */
+/*  Scene-scoped audibility                      */
+/* -------------------------------------------- */
+
+/** True if this scene has the record-player prop standing on it. */
+function isJukeboxScene(scene) {
+  return !!scene?.tokens.some(t => t.getFlag(MODULE_ID, "recordPlayer"));
+}
+
+function anySceneHasJukebox() {
+  return game.scenes.some(s => isJukeboxScene(s));
+}
+
+/**
+ * Keeps the jukebox audible only on the scene its prop stands on, per client:
+ * playback stays shared and in sync (the Playlist is untouched), but each client
+ * silences it locally while looking at a different scene. Walk out of the hideout
+ * and the music stops for you; walk back and you rejoin the song already in
+ * progress, while everyone still in the hideout keeps hearing it throughout.
+ */
+function applyJukeboxSceneAudio() {
+  const playlist = findJukeboxPlaylist();
+  if (!playlist) return;
+  // Before the prop is placed anywhere there is no hideout to be scoped to, so
+  // muting every scene would just make the jukebox silent everywhere.
+  const audible = !anySceneHasJukebox() || isJukeboxScene(canvas.scene);
+  for (const playlistSound of playlist.sounds) {
+    if (!playlistSound.getFlag(MODULE_ID, "trackId")) continue;
+    const sound = playlistSound.sound;
+    if (!sound?.playing) continue;
+    const target = audible ? (playlistSound.effectiveVolume ?? playlistSound.volume ?? 1) : 0;
+    if (sound.volume === target) continue;
+    if (typeof sound.fade === "function") sound.fade(target, { duration: 400 });
+    else sound.volume = target;
+  }
+}
+
+/**
+ * A sound that has only just been told to play may not have its audio buffer yet,
+ * and there is nothing to set a volume on until it does — so the mute is applied
+ * again shortly after, once playback has actually started.
+ */
+function applyJukeboxSceneAudioSoon() {
+  applyJukeboxSceneAudio();
+  setTimeout(applyJukeboxSceneAudio, 300);
+}
+
 export async function playTrack(trackId) {
   const found = findPlaylistSound(trackId);
   if (!found) return;
   await found.playlist.playSound(found.sound);
+  applyJukeboxSceneAudioSoon();
 }
 
 export async function stopTrack(trackId) {
@@ -250,6 +298,8 @@ export function diagnoseJukebox() {
     collectingEnabled: isCollectionEnabled(),
     note: game.user.isGM ? "GM clients never auto-collect — run this as a player." : "",
     registeredTracks: Object.keys(registry).length,
+    jukeboxScenes: game.scenes.filter(s => isJukeboxScene(s)).map(s => s.name),
+    viewingJukeboxScene: canvas.ready ? isJukeboxScene(canvas.scene) : "canvas not ready",
     myCollectedTracks: getCollectedTracks().map(id => registry[id]?.name ?? `${id} (not in registry)`),
     ownedTokensOnCanvas: canvas.ready
       ? canvas.tokens.placeables.filter(t => t.actor?.isOwner).map(t => t.name)
@@ -936,9 +986,20 @@ export function registerJukebox() {
     });
   });
 
-  Hooks.on("canvasReady", () => checkAmbientSoundProximity());
+  Hooks.on("canvasReady", () => {
+    checkAmbientSoundProximity();
+    // The client just changed scene — re-decide whether the jukebox is audible here.
+    applyJukeboxSceneAudioSoon();
+  });
+  // Core re-syncs a sound's volume whenever it updates (play, stop, volume
+  // change), which would undo the local mute, so it is re-applied afterwards.
+  Hooks.on("updatePlaylistSound", () => applyJukeboxSceneAudioSoon());
   Hooks.on("updateToken", (tokenDoc, changes) => {
-    if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}`)) forceJukeboxTokenOwnership(tokenDoc);
+    if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}`)) {
+      forceJukeboxTokenOwnership(tokenDoc);
+      // The prop may have just been placed on, or cleared from, this scene.
+      applyJukeboxSceneAudio();
+    }
     if ("x" in changes || "y" in changes || "elevation" in changes) checkAmbientSoundProximity();
   });
   Hooks.on("createToken", (tokenDoc) => forceJukeboxTokenOwnership(tokenDoc));

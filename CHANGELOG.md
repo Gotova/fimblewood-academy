@@ -4,6 +4,14 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-08-27
+
+### Added
+
+- Jukebox music is now **scoped to the hideout scene** — the scene the record-player prop stands on. Each client silences the jukebox locally while viewing any other scene and fades it back in on return, so a player who wanders off stops hearing it without stopping it for everyone else, and rejoins the song already in progress when they come back. Playback itself is untouched: the shared Playlist keeps running in sync for whoever is still in the hideout.
+  - If the prop hasn't been placed on any scene yet there is no hideout to scope to, so the jukebox stays audible everywhere rather than going silent world-wide.
+- `diagnoseJukebox()` now also reports which scenes hold the prop and whether the client is currently viewing one.
+
 ## [0.7.1] - 2026-08-27
 
 ### Fixed
