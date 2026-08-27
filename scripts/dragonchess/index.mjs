@@ -9,10 +9,8 @@
 import { CONTROL_GROUP } from "../draw.mjs";
 import {
   registerDragonchess as registerDragonchessCore,
-  launchDragonchess, openBoardForCurrentUser, getGameRecord, selftest
+  launchDragonchess, launchPvpChallenge, openBoardForCurrentUser, getGameRecord, selftest
 } from "./game.mjs";
-
-const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Dragonchess.${k}`);
 
 export { openBoardForCurrentUser, getGameRecord, selftest };
 
@@ -36,15 +34,27 @@ export function registerDragonchess() {
         onChange: () => launchDragonchess()
       };
     } else {
-      // Always present for players/spectators; clicking it when no game is
-      // running just explains that (see game.mjs openBoardForCurrentUser).
+      // Control your own token, target the opponent's, then challenge them
+      // directly — no GM click required (a GM must simply be logged in
+      // somewhere, since only the GM can write the shared game state).
+      group.tools.dragonchessChallenge = {
+        name: "dragonchessChallenge",
+        title: "FIMBLEWOOD.Dragonchess.ChallengeButtonTitle",
+        icon: "fas fa-chess-knight",
+        button: true,
+        visible: true,
+        order: 3,
+        onChange: () => launchPvpChallenge()
+      };
+      // Always present; clicking it when no game is running just explains
+      // that (see game.mjs openBoardForCurrentUser).
       group.tools.dragonchessWatch = {
         name: "dragonchessWatch",
         title: "FIMBLEWOOD.Dragonchess.WatchButtonTitle",
         icon: "fas fa-eye",
         button: true,
         visible: true,
-        order: 3,
+        order: 4,
         onChange: () => openBoardForCurrentUser()
       };
     }

@@ -147,6 +147,7 @@
     },
     "Dragonchess": {
       "ButtonTitle": "Dragonchess",
+      "ChallengeButtonTitle": "Challenge to Dragonchess",
       "WatchButtonTitle": "Watch Dragonchess",
       "Difficulty": {
         "Knappe": "Knappe (very weak)",
@@ -166,11 +167,19 @@
         "AlreadyRunningTitle": "Dragonchess Already Running",
         "AlreadyRunningBody": "A Dragonchess match is already in progress or awaiting a response. Starting a new one will replace it. Continue?",
         "NeedTwoTargets": "Target exactly two tokens first: one PC and one NPC.",
-        "NeedOnePcOneNpc": "One targeted token must have a player owner (the PC) and the other must not (the NPC)."
+        "NeedOnePcOneNpc": "One targeted token must have a player owner (the PC) and the other must not (the NPC).",
+        "ChallengeTitle": "Challenge to Dragonchess",
+        "ChallengeConfirmBody": "Challenge <strong>{opponent}</strong> to a game of Dragonchess?",
+        "NeedGmOnline": "A GM must be logged in to referee a Dragonchess match.",
+        "NeedOneTarget": "Target exactly one other player's token first, then control your own.",
+        "NeedOtherPlayerToken": "The targeted token must belong to a different player.",
+        "NeedOwnToken": "Control your own character's token first.",
+        "ChallengeSent": "Challenge sent! Waiting for a response…",
+        "ChallengeBusy": "A Dragonchess match is already running — try again once it's over."
       },
       "Invite": {
         "Title": "Dragonchess Challenge",
-        "Body": "<strong>{gm}</strong> challenges you to a game of Dragonchess: <strong>{pc}</strong> against <strong>{npc}</strong>. Do you accept?",
+        "Body": "<strong>{challenger}</strong> challenges you to a game of Dragonchess: <strong>{pc}</strong> against <strong>{npc}</strong>. Do you accept?",
         "Accept": "Accept",
         "Decline": "Decline"
       },

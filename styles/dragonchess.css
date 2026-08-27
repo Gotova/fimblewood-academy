@@ -19,13 +19,48 @@
   height: 100%;
 }
 
+.fw-dc-board-area {
+  display: grid;
+  grid-template-columns: 20px 400px;
+  grid-template-rows: 400px 18px;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.fw-dc-ranks, .fw-dc-files {
+  display: flex;
+  color: #b8a070;
+  font-size: 11px;
+  user-select: none;
+}
+.fw-dc-ranks {
+  grid-column: 1;
+  grid-row: 1;
+  flex-direction: column;
+}
+.fw-dc-files {
+  grid-column: 2;
+  grid-row: 2;
+}
+.fw-dc-files-spacer {
+  grid-column: 1;
+  grid-row: 2;
+}
+.fw-dc-coord {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .fw-dc-board {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
+  grid-column: 2;
+  grid-row: 1;
   width: 400px;
   height: 400px;
-  flex-shrink: 0;
   border: 2px solid #5a4020;
   border-radius: 4px;
   overflow: hidden;
@@ -75,11 +110,53 @@
   50% { box-shadow: inset 0 0 0 3px rgba(200, 150, 42, 0.15); }
 }
 
-.fw-dc-piece {
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.6));
+.fw-dc-piece-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
-.fw-dc-piece.is-blau { color: #3a6fd8; -webkit-text-stroke: 1px #14213d; }
-.fw-dc-piece.is-rot { color: #c23b3b; -webkit-text-stroke: 1px #3d1414; }
+
+.fw-dc-piece-token {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.6));
+  pointer-events: none;
+  user-select: none;
+}
+.fw-dc-piece-token.is-blau { color: #3a6fd8; -webkit-text-stroke: 1px #14213d; }
+.fw-dc-piece-token.is-rot { color: #c23b3b; -webkit-text-stroke: 1px #3d1414; }
+
+.fw-dc-piece-flying {
+  z-index: 10;
+}
+
+.fw-dc-arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  background: #c8962a;
+  border-radius: 3px;
+  transform-origin: left center;
+  pointer-events: none;
+  z-index: 8;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+}
+.fw-dc-arrow::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 10px solid #c8962a;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
 
 .fw-dc-hit-badge {
   position: absolute;

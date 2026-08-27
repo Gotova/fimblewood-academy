@@ -4,6 +4,14 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.11.0] - 2026-08-27
+
+### Added
+
+- **Dragonchess player-vs-player challenges** — any player can control their own token, target another player's token, and click a new **Challenge to Dragonchess** scene-control button to send the invitation themselves, with no GM click required (a GM just needs to be logged in, since only the GM's client can write the shared match state). Rock-paper-scissors, colour choice, moves and resignation all work the same as the GM-launched flow, just with a real second player instead of the bot/GM in the "NPC" seat.
+- **Move animation** — every move (not just captures) now plays out as a short beat instead of snapping instantly: an arrow forms from the source square to the destination, then the piece physically slides there; a Schlagzug's roll-delay/roll/resolve sequence plays out after that. Much easier to follow, especially for a fast-moving bot.
+- **Board coordinates** — files (a–h) and ranks (1–8) are now labelled around the board, like a normal chessboard.
+
 ## [0.10.0] - 2026-08-27
 
 ### Added

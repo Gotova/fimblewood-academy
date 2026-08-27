@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.10.0
+- **Current version:** 0.11.0
 
 ## Installation
 
@@ -74,11 +74,15 @@ For players there's no sidebar shortcut to the Jukebox by design — the only wa
 
 The Fimblewood Academy Dragonchess Club's house variant: full chess rules, except a capture is never automatic. Moving onto an occupied enemy square is a **Schlagzug** — the attacker rolls `1d20 + attacker value` against `DC 10 + defender value`; on a success the defender is removed and the attacker holds the square, **entrenched** (the next attack on that square rolls with Disadvantage); on a failure the *attacker* dies and the defender becomes entrenched instead. The König can't attack at all, and any attack against it always succeeds — so checkmate can still be "rolled away," which is the whole point.
 
-**Starting a match (GM):** target one PC token and one NPC token, then click **Dragonchess** in the Fimblewood Controls scene-control category. A dialog lets you pick who plays the NPC — the built-in bot (four difficulties: Knappe, Student, Magister, Drache) or yourself — before sending the PC's player an invitation. Accepting triggers Schere/Stein/Papier for who picks a colour first (Blau moves first), and the match begins. Every other connected player automatically gets a read-only board the moment play starts — no separate step needed — and a **Watch Dragonchess** button lets anyone reopen it (or a latecomer open it for the first time).
+**Starting a match against the GM's NPC:** target one PC token and one NPC token, then click **Dragonchess** in the Fimblewood Controls scene-control category (GM only). A dialog lets you pick who plays the NPC — the built-in bot (four difficulties: Knappe, Student, Magister, Drache) or yourself — before sending the PC's player an invitation.
+
+**Starting a match against another player:** any player can control their own token, target another player's token, and click **Challenge to Dragonchess** — no GM click required (a GM just has to be logged in somewhere, since only the GM's client can write the shared match state).
+
+Either way, accepting triggers Schere/Stein/Papier for who picks a colour first (Blau moves first), and the match begins. Every other connected player automatically gets a read-only board the moment play starts — no separate step needed — and a **Watch Dragonchess** button lets anyone reopen it (or a latecomer open it for the first time).
 
 **The bot** isn't a chess engine with dice bolted on: its search treats every capture as a chance node, weighing the success and failure branches by the real Dragonchess odds, so it correctly avoids bad-odds trades and values attacking an undefended piece over an entrenched one.
 
-**Captures play out with a beat of drama** — the board announces the attack and the odds, pauses, rolls the die in chat (animated by Dice So Nice if installed), pauses again, then resolves. The delay, the bot's difficulty, and whether two Kings may stand adjacent (off by default, since the König threatens no squares under these rules) are all world settings.
+**Every move plays out as a short, legible beat** so the table can actually follow what's happening: an arrow forms from the source square to the destination, the piece physically slides there, and — only if there's an enemy piece on that square — a short pause and then the die rolls in chat (animated by Dice So Nice if installed) before the outcome resolves. The board is labelled a–h / 1–8 like a normal chessboard. The roll delay, the bot's difficulty, and whether two Kings may stand adjacent (off by default, since the König threatens no squares under these rules) are all world settings.
 
 ### Content
 

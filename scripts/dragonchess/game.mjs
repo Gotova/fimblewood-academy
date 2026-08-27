@@ -34,6 +34,14 @@ export const DIFFICULTY_SETTING = "dragonchessDifficulty";
 export const ROLL_DELAY_SETTING = "dragonchessRollDelay";
 export const KINGS_MAY_TOUCH_SETTING = "dragonchessKingsMayTouch";
 
+/** Fixed (non-configurable) duration of the arrow-forms-then-piece-slides
+ * animation that plays before a Schlagzug's roll delay (or immediately, for
+ * a quiet move) — see processMove(). Every client times its own local
+ * animation to this same constant so they all settle in step. */
+export const MOVE_ANIMATION_MS = 700;
+/** How much of MOVE_ANIMATION_MS is the arrow forming; the remainder is the piece's slide. */
+export const ARROW_ANIMATION_MS = 300;
+
 export const PIECE_DISPLAY = { k: "König", q: "Drache", r: "Bastion", b: "Magus", n: "Greif", p: "Knappe" };
 export const PIECE_GLYPH = { k: "♚", q: "♛", r: "♜", b: "♝", n: "♞", p: "♟" };
 export const COLOR_LABEL = { w: "Blau", b: "Rot" };
@@ -67,8 +75,29 @@ function ruleOptions() {
 export function roleForCurrentUser(record) {
   if (!record) return null;
   if (game.user.isGM) return "gm";
-  if (game.user.id === record.pcUserId) return "player";
+  if (game.user.id === record.pcUserId || (record.opponentUserId && game.user.id === record.opponentUserId)) return "player";
   return "spectator";
+}
+
+/**
+ * Which colour `userId` controls in `record`, or null if they don't control
+ * either side. `record.opponentUserId` is set only for a player-vs-player
+ * match (see launchPvpChallenge) — it names whichever real user plays the
+ * "npc" seat, which otherwise belongs to the bot or the GM playing by hand.
+ */
+export function seatColorForUser(record, userId) {
+  if (!record) return null;
+  if (userId === record.pcUserId) return record.pcColor;
+  if (record.opponentUserId && userId === record.opponentUserId) return record.npcColor;
+  return null;
+}
+
+/** Like seatColorForUser, but also covers the GM manually playing the NPC's side by hand. */
+export function mySideForCurrentUser(record) {
+  const seat = seatColorForUser(record, game.user.id);
+  if (seat) return seat;
+  if (game.user.isGM && record && !record.npcIsBot && !record.opponentUserId) return record.npcColor;
+  return null;
 }
 
 /* -------------------------------------------- */
@@ -132,6 +161,15 @@ function resolvePending(key, value) {
 function emit(type, payload) {
   game.socket.emit(CHANNEL, { type, ...payload });
 }
+
+/** Ask a specific user (by socket round-trip) for an RPS throw or a colour choice. */
+function requestPlayerChoice(kind, gameId, userId) {
+  emit(kind === "rps" ? "dcRpsRequest" : "dcColorRequest", { gameId, userId });
+  return waitFor(`${kind}:${gameId}:${userId}`);
+}
+
+function randomRpsChoice() { return ["schere", "stein", "papier"][Math.floor(Math.random() * 3)]; }
+function randomColorChoice() { return Math.random() < 0.5 ? "w" : "b"; }
 
 /* -------------------------------------------- */
 /*  Launching a game (GM)                        */
@@ -228,12 +266,111 @@ export async function launchDragonchess() {
   await setGameRecord(record);
 
   emit("dcInvite", {
-    gameId: record.id, userId: pcUser.id, gmName: game.user.name,
+    gameId: record.id, userId: pcUser.id, challengerName: game.user.name,
     pcActorName: record.pcActorName, npcActorName: record.npcActorName
   });
   ChatMessage.create({
     content: fmt("Notify.InvitationSent", { player: pcUser.name, pc: record.pcActorName, npc: record.npcActorName })
   });
+}
+
+/* -------------------------------------------- */
+/*  Launching a player-vs-player challenge       */
+/* -------------------------------------------- */
+
+/**
+ * Entry point for the player-facing "Challenge to Dragonchess" tool. The
+ * challenger controls their own token and targets the opponent's; the
+ * request is broadcast and only the GM's client acts on it (only the GM can
+ * write the world-scope game-state setting), so a GM must be logged in.
+ */
+export async function launchPvpChallenge() {
+  if (game.user.isGM) return;
+
+  if (!game.users.some((u) => u.isGM && u.active)) {
+    ui.notifications.warn(i18n("Launch.NeedGmOnline"));
+    return;
+  }
+
+  const targets = Array.from(game.user.targets ?? []);
+  if (targets.length !== 1) {
+    ui.notifications.warn(i18n("Launch.NeedOneTarget"));
+    return;
+  }
+  const opponentToken = targets[0];
+  const opponentUser = primaryOwnerOf(opponentToken.actor);
+  if (!opponentUser || opponentUser.id === game.user.id) {
+    ui.notifications.warn(i18n("Launch.NeedOtherPlayerToken"));
+    return;
+  }
+
+  const myToken = canvas.tokens?.controlled.find((t) => primaryOwnerOf(t.actor)?.id === game.user.id)
+    ?? game.user.character?.getActiveTokens()[0];
+  if (!myToken) {
+    ui.notifications.warn(i18n("Launch.NeedOwnToken"));
+    return;
+  }
+
+  const confirmed = await foundry.applications.api.DialogV2.confirm({
+    window: { title: i18n("Launch.ChallengeTitle") },
+    content: `<p>${fmt("Launch.ChallengeConfirmBody", { opponent: opponentToken.actor?.name ?? opponentToken.name })}</p>`,
+    rejectClose: false
+  });
+  if (!confirmed) return;
+
+  emit("dcChallengeRequest", {
+    challengerUserId: game.user.id,
+    challengerActorName: myToken.actor?.name ?? myToken.name,
+    challengerTokenUuid: myToken.document.uuid,
+    opponentUserId: opponentUser.id,
+    opponentActorName: opponentToken.actor?.name ?? opponentToken.name,
+    opponentTokenUuid: opponentToken.document.uuid
+  });
+  ui.notifications.info(i18n("Launch.ChallengeSent"));
+}
+
+async function handleChallengeRequest(data) {
+  const existing = getGameRecord();
+  if (existing && !["ended", "declined"].includes(existing.phase)) {
+    emit("dcChallengeBusy", { userId: data.challengerUserId });
+    return;
+  }
+
+  // Kept consistent with the GM-launched flow's invariant: pcUserId is
+  // always the invited party (the one who accepts/declines and whose
+  // decline message reads naturally), regardless of who initiated.
+  const record = {
+    id: foundry.utils.randomID(),
+    createdAt: Date.now(),
+    pcUserId: data.opponentUserId,
+    pcActorName: data.opponentActorName,
+    pcTokenUuid: data.opponentTokenUuid,
+    npcActorName: data.challengerActorName,
+    npcTokenUuid: data.challengerTokenUuid,
+    npcIsBot: false,
+    opponentUserId: data.challengerUserId,
+    difficulty: null,
+    phase: "invited",
+    pcColor: null,
+    npcColor: null,
+    state: null,
+    announce: null,
+    log: [],
+    result: null
+  };
+  await setGameRecord(record);
+
+  emit("dcInvite", {
+    gameId: record.id, userId: record.pcUserId, challengerName: game.users.get(data.challengerUserId)?.name ?? record.npcActorName,
+    pcActorName: record.pcActorName, npcActorName: record.npcActorName
+  });
+  ChatMessage.create({
+    content: fmt("Notify.InvitationSent", { player: game.users.get(record.pcUserId)?.name ?? "?", pc: record.pcActorName, npc: record.npcActorName })
+  });
+}
+
+function handleChallengeBusy(data) {
+  ui.notifications.warn(i18n("Launch.ChallengeBusy"));
 }
 
 /* -------------------------------------------- */
@@ -243,7 +380,7 @@ export async function launchDragonchess() {
 async function handleInviteReceived(data) {
   const accepted = await foundry.applications.api.DialogV2.confirm({
     window: { title: i18n("Invite.Title") },
-    content: `<p>${fmt("Invite.Body", { gm: data.gmName, pc: data.pcActorName, npc: data.npcActorName })}</p>`,
+    content: `<p>${fmt("Invite.Body", { challenger: data.challengerName, pc: data.pcActorName, npc: data.npcActorName })}</p>`,
     yes: { label: i18n("Invite.Accept") },
     no: { label: i18n("Invite.Decline") },
     rejectClose: false
@@ -305,12 +442,13 @@ async function promptGmColorChoice() {
 async function runRockPaperScissorsAndStart(record) {
   let pcChoice = null, npcChoice = null, winner = null;
   while (!winner) {
-    emit("dcRpsRequest", { gameId: record.id, userId: record.pcUserId });
-    const pcPromise = waitFor(`rps:${record.id}`);
-    npcChoice = record.npcIsBot
-      ? ["schere", "stein", "papier"][Math.floor(Math.random() * 3)]
-      : await promptGmRpsChoice(record.npcActorName);
-    pcChoice = await pcPromise;
+    const pcPromise = requestPlayerChoice("rps", record.id, record.pcUserId);
+    const npcPromise = record.npcIsBot
+      ? Promise.resolve(randomRpsChoice())
+      : record.opponentUserId
+        ? requestPlayerChoice("rps", record.id, record.opponentUserId)
+        : promptGmRpsChoice(record.npcActorName);
+    [pcChoice, npcChoice] = await Promise.all([pcPromise, npcPromise]);
     if (pcChoice === npcChoice) continue; // tie, roll again
     winner = RPS_BEATS[pcChoice] === npcChoice ? "pc" : "npc";
   }
@@ -326,10 +464,13 @@ async function runRockPaperScissorsAndStart(record) {
 
   let winnerColor;
   if (winner === "pc") {
-    emit("dcColorRequest", { gameId: record.id, userId: record.pcUserId });
-    winnerColor = await waitFor(`color:${record.id}`);
+    winnerColor = await requestPlayerChoice("color", record.id, record.pcUserId);
+  } else if (record.npcIsBot) {
+    winnerColor = randomColorChoice();
+  } else if (record.opponentUserId) {
+    winnerColor = await requestPlayerChoice("color", record.id, record.opponentUserId);
   } else {
-    winnerColor = record.npcIsBot ? (Math.random() < 0.5 ? "w" : "b") : await promptGmColorChoice();
+    winnerColor = await promptGmColorChoice();
   }
   const loserColor = winnerColor === "w" ? "b" : "w";
   record.pcColor = winner === "pc" ? winnerColor : loserColor;
@@ -349,8 +490,8 @@ async function runRockPaperScissorsAndStart(record) {
   if (isBotTurn(record)) scheduleBotMove(record.id);
 }
 
-async function handleRpsChoice(data) { resolvePending(`rps:${data.gameId}`, data.choice); }
-async function handleColorChoice(data) { resolvePending(`color:${data.gameId}`, data.color); }
+async function handleRpsChoice(data) { resolvePending(`rps:${data.gameId}:${data.userId}`, data.choice); }
+async function handleColorChoice(data) { resolvePending(`color:${data.gameId}:${data.userId}`, data.color); }
 
 /* -------------------------------------------- */
 /*  Move resolution                              */
@@ -373,28 +514,37 @@ function scheduleBotMove(gameId) {
 }
 
 /**
- * Apply a validated legal move to `record`, running the full capture beat
- * (announce → delay → roll → delay → resolve) when it's a Schlagzug.
+ * Apply a validated legal move to `record`. Every move — quiet or not —
+ * gets a beat first: the board shows an arrow forming from the source
+ * square to the destination and the piece physically sliding there
+ * (MOVE_ANIMATION_MS, played independently by each client off the
+ * `announce` field). A Schlagzug then continues into the existing
+ * announce → roll-delay → roll → roll-delay → resolve beat on top of that.
  */
 async function processMove(record, move) {
+  const defenderSq = move.capture ? (move.enPassant ? move.epCapturedSq : move.to) : null;
+  const isKingTarget = move.capture && move.capturedType === "k";
+  const entrenched = move.capture && record.state.entrenched === defenderSq;
+  const attackerLabel = move.capture ? pieceLabel(move.piece.type, move.piece.color) : null;
+  const defenderLabel = move.capture ? pieceLabel(move.capturedType, opponent(move.piece.color)) : null;
+
+  record.announce = {
+    moveId: foundry.utils.randomID(),
+    from: move.from, to: move.to,
+    pieceType: move.piece.type, pieceColor: move.piece.color,
+    capture: !!move.capture, isKingTarget, entrenched,
+    attackerLabel, defenderLabel,
+    needed: move.capture && !isKingTarget ? 10 + PIECE_VALUES[move.capturedType] : null
+  };
+  await setGameRecord(record);
+  await sleep(MOVE_ANIMATION_MS);
+
   if (!move.capture) {
     const next = makeMove(record.state, move, { success: true });
+    record.announce = null;
     await finalizeMove(record, move, next, {});
     return;
   }
-
-  const defenderSq = move.enPassant ? move.epCapturedSq : move.to;
-  const attackerLabel = pieceLabel(move.piece.type, move.piece.color);
-  const defenderLabel = pieceLabel(move.capturedType, opponent(move.piece.color));
-  const isKingTarget = move.capturedType === "k";
-  const entrenched = record.state.entrenched === defenderSq;
-
-  record.announce = {
-    attackerSq: move.from, defenderSq,
-    attackerLabel, defenderLabel, entrenched, isKingTarget,
-    needed: isKingTarget ? null : 10 + PIECE_VALUES[move.capturedType]
-  };
-  await setGameRecord(record);
 
   const totalDelay = Math.max(0, game.settings.get(MODULE_ID, ROLL_DELAY_SETTING)) * 1000;
   await sleep(totalDelay / 2);
@@ -489,7 +639,8 @@ function postGameEndMessage(record) {
 async function handleMoveRequest(data) {
   const record = getGameRecord();
   if (!record || record.id !== data.gameId || record.phase !== "playing") return;
-  if (data.userId !== record.pcUserId || record.state.turn !== record.pcColor) return;
+  const seatColor = seatColorForUser(record, data.userId);
+  if (!seatColor || record.state.turn !== seatColor) return;
   const legal = generateMoves(record.state, ruleOptions());
   const move = legal.find((m) => m.from === data.from && m.to === data.to);
   if (!move) return;
@@ -499,8 +650,9 @@ async function handleMoveRequest(data) {
 async function handleResignRequest(data) {
   const record = getGameRecord();
   if (!record || record.id !== data.gameId || record.phase !== "playing") return;
-  if (data.userId !== record.pcUserId) return;
-  record.result = { type: "resign", winnerColor: opponent(record.pcColor) };
+  const seatColor = seatColorForUser(record, data.userId);
+  if (!seatColor) return;
+  record.result = { type: "resign", winnerColor: opponent(seatColor) };
   record.phase = "ended";
   await setGameRecord(record);
   postGameEndMessage(record);
@@ -509,7 +661,7 @@ async function handleResignRequest(data) {
 /** Called directly (no socket hop) by the GM's own board when playing the NPC by hand, or resigning on its behalf. */
 export async function gmSubmitMove(from, to) {
   const record = getGameRecord();
-  if (!record || record.phase !== "playing" || record.npcIsBot) return;
+  if (!record || record.phase !== "playing" || record.npcIsBot || record.opponentUserId) return;
   if (record.state.turn !== record.npcColor) return;
   const legal = generateMoves(record.state, ruleOptions());
   const move = legal.find((m) => m.from === from && m.to === to);
@@ -564,6 +716,8 @@ export function registerDragonchess() {
   Hooks.once("ready", () => {
     game.socket.on(CHANNEL, (data) => {
       switch (data.type) {
+        case "dcChallengeRequest": if (game.user.isGM) handleChallengeRequest(data); break;
+        case "dcChallengeBusy": if (game.user.id === data.userId) handleChallengeBusy(data); break;
         case "dcInvite": if (game.user.id === data.userId) handleInviteReceived(data); break;
         case "dcInviteResponse": if (game.user.isGM) handleInviteResponse(data); break;
         case "dcRpsRequest": if (game.user.id === data.userId) resolvePromptRps(data); break;

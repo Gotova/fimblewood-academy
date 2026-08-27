@@ -147,6 +147,7 @@
     },
     "Dragonchess": {
       "ButtonTitle": "Dragonchess",
+      "ChallengeButtonTitle": "Zu Dragonchess herausfordern",
       "WatchButtonTitle": "Dragonchess zuschauen",
       "Difficulty": {
         "Knappe": "Knappe (sehr schwach)",
@@ -166,11 +167,19 @@
         "AlreadyRunningTitle": "Dragonchess laeuft bereits",
         "AlreadyRunningBody": "Es laeuft bereits eine Dragonchess-Partie oder wartet auf eine Antwort. Eine neue Partie ersetzt sie. Fortfahren?",
         "NeedTwoTargets": "Ziele zuerst genau zwei Tokens: einen Spieler-Charakter und einen NSC.",
-        "NeedOnePcOneNpc": "Eines der Ziel-Tokens braucht einen Spieler als Besitzer (der SC), das andere nicht (der NSC)."
+        "NeedOnePcOneNpc": "Eines der Ziel-Tokens braucht einen Spieler als Besitzer (der SC), das andere nicht (der NSC).",
+        "ChallengeTitle": "Zu Dragonchess herausfordern",
+        "ChallengeConfirmBody": "<strong>{opponent}</strong> zu einer Partie Dragonchess herausfordern?",
+        "NeedGmOnline": "Ein Spielleiter muss angemeldet sein, um eine Dragonchess-Partie zu leiten.",
+        "NeedOneTarget": "Ziele zuerst auf genau ein Token eines anderen Spielers und kontrolliere dann dein eigenes.",
+        "NeedOtherPlayerToken": "Das Ziel-Token muss einem anderen Spieler gehoeren.",
+        "NeedOwnToken": "Kontrolliere zuerst das Token deines eigenen Charakters.",
+        "ChallengeSent": "Herausforderung gesendet! Warte auf eine Antwort …",
+        "ChallengeBusy": "Es laeuft bereits eine Dragonchess-Partie — versuch es erneut, wenn sie vorbei ist."
       },
       "Invite": {
         "Title": "Dragonchess-Herausforderung",
-        "Body": "<strong>{gm}</strong> fordert dich zu einer Partie Dragonchess heraus: <strong>{pc}</strong> gegen <strong>{npc}</strong>. Nimmst du an?",
+        "Body": "<strong>{challenger}</strong> fordert dich zu einer Partie Dragonchess heraus: <strong>{pc}</strong> gegen <strong>{npc}</strong>. Nimmst du an?",
         "Accept": "Annehmen",
         "Decline": "Ablehnen"
       },
