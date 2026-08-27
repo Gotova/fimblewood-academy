@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.9.0
+- **Current version:** 0.10.0
 
 ## Installation
 
@@ -24,6 +24,7 @@ This URL always resolves to the latest release, so it never needs to change betw
 - Version bump tooling to keep `module.json`, `package.json`, and the manifest download link in sync
 - **Magic Circle Draw Pad** (`scripts/draw.mjs`, `styles/draw.css`) — merged in from the standalone [FoundryDraw](https://github.com/Gotova/FoundryDraw) module
 - **Hideout Jukebox** (`scripts/jukebox.mjs`, `styles/jukebox.css`) — a collectible-music system built around Foundry's native Ambient Sound and Playlist documents
+- **Dragonchess** (`scripts/dragonchess/`, `styles/dragonchess.css`) — the Dragonchess Club's chess variant, playable in Foundry with a rules engine, an optional bot opponent, and dice-driven captures streamed live to the whole table
 
 ### Magic Circle Draw Pad
 
@@ -68,6 +69,16 @@ Open **Music Tracks** from the Fimblewood Controls category in the scene control
 - **Play / Stop** — audition any record, collected or not.
 
 For players there's no sidebar shortcut to the Jukebox by design — the only way in is the physical prop, to keep it grounded in the fiction. The Music Tracks window is the GM's side of it, and is never shown to players.
+
+### Dragonchess
+
+The Fimblewood Academy Dragonchess Club's house variant: full chess rules, except a capture is never automatic. Moving onto an occupied enemy square is a **Schlagzug** — the attacker rolls `1d20 + attacker value` against `DC 10 + defender value`; on a success the defender is removed and the attacker holds the square, **entrenched** (the next attack on that square rolls with Disadvantage); on a failure the *attacker* dies and the defender becomes entrenched instead. The König can't attack at all, and any attack against it always succeeds — so checkmate can still be "rolled away," which is the whole point.
+
+**Starting a match (GM):** target one PC token and one NPC token, then click **Dragonchess** in the Fimblewood Controls scene-control category. A dialog lets you pick who plays the NPC — the built-in bot (four difficulties: Knappe, Student, Magister, Drache) or yourself — before sending the PC's player an invitation. Accepting triggers Schere/Stein/Papier for who picks a colour first (Blau moves first), and the match begins. Every other connected player automatically gets a read-only board the moment play starts — no separate step needed — and a **Watch Dragonchess** button lets anyone reopen it (or a latecomer open it for the first time).
+
+**The bot** isn't a chess engine with dice bolted on: its search treats every capture as a chance node, weighing the success and failure branches by the real Dragonchess odds, so it correctly avoids bad-odds trades and values attacking an undefended piece over an entrenched one.
+
+**Captures play out with a beat of drama** — the board announces the attack and the odds, pauses, rolls the die in chat (animated by Dice So Nice if installed), pauses again, then resolves. The delay, the bot's difficulty, and whether two Kings may stand adjacent (off by default, since the König threatens no squares under these rules) are all world settings.
 
 ### Content
 

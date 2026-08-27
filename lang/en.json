@@ -144,6 +144,110 @@
         "RewardSoundName": "Jukebox Reward Sound",
         "RewardSoundHint": "A short sound effect played for everyone whenever the party collects a new Jukebox track."
       }
+    },
+    "Dragonchess": {
+      "ButtonTitle": "Dragonchess",
+      "WatchButtonTitle": "Watch Dragonchess",
+      "Difficulty": {
+        "Knappe": "Knappe (very weak)",
+        "Student": "Student (weak)",
+        "Magister": "Magister (strong)",
+        "Drache": "Drache (very strong)"
+      },
+      "Launch": {
+        "Title": "Challenge to Dragonchess",
+        "Intro": "Target one PC token and one NPC token before pressing this button. The PC's player will receive an invitation.",
+        "NpcControl": "NPC played by",
+        "NpcBot": "the Dragonchess bot",
+        "NpcGm": "me (the GM)",
+        "Difficulty": "Bot difficulty",
+        "Invite": "Send Invitation",
+        "Cancel": "Cancel",
+        "AlreadyRunningTitle": "Dragonchess Already Running",
+        "AlreadyRunningBody": "A Dragonchess match is already in progress or awaiting a response. Starting a new one will replace it. Continue?",
+        "NeedTwoTargets": "Target exactly two tokens first: one PC and one NPC.",
+        "NeedOnePcOneNpc": "One targeted token must have a player owner (the PC) and the other must not (the NPC)."
+      },
+      "Invite": {
+        "Title": "Dragonchess Challenge",
+        "Body": "<strong>{gm}</strong> challenges you to a game of Dragonchess: <strong>{pc}</strong> against <strong>{npc}</strong>. Do you accept?",
+        "Accept": "Accept",
+        "Decline": "Decline"
+      },
+      "Rps": {
+        "Schere": "Scissors",
+        "Stein": "Rock",
+        "Papier": "Paper",
+        "GmTitle": "Rock, Paper, Scissors",
+        "GmBody": "Choose {npc}'s throw.",
+        "PlayerTitle": "Rock, Paper, Scissors",
+        "PlayerBody": "Choose your throw to see who picks their colour first."
+      },
+      "Color": {
+        "Blau": "Blau",
+        "Rot": "Rot",
+        "GmTitle": "Choose a Colour",
+        "GmBody": "You won the throw. Choose the NPC's colour.",
+        "PlayerTitle": "Choose a Colour",
+        "PlayerBody": "You won the throw! Choose your colour — Blau moves first."
+      },
+      "Notify": {
+        "InvitationSent": "{player} has been invited to a Dragonchess match: {pc} against {npc}.",
+        "Declined": "{player} declined the Dragonchess challenge against {npc}.",
+        "RpsResult": "{player} threw {pcChoice}, {npcChoice} was thrown for the NPC — {winner} wins the throw.",
+        "GameStart": "Dragonchess begins: {pc} plays {pcColor}, {npc} plays {npcColor}. Blau moves first.",
+        "NoActiveGame": "There is no Dragonchess game running right now.",
+        "EndTitle": "Dragonchess — Game Over",
+        "EndStalemate": "The game ends in a stalemate — a draw.",
+        "EndResign": "{winner} wins by resignation.",
+        "EndKingCaptured": "{winner} wins — the enemy König has fallen!",
+        "EndCheckmate": "{winner} wins by checkmate."
+      },
+      "Log": {
+        "GameStart": "The match begins — {pcColor} against {npcColor}. Blau moves first.",
+        "AttackFlavor": "{attacker} attacks {defender} — needs {dc}+",
+        "Hit": "Success!",
+        "Miss": "Failure!",
+        "KingAttack": "{attacker} strikes down {defender} — an attack on the König always lands.",
+        "KingCapturedLine": "{attacker} captures the enemy König!",
+        "CaptureSuccessLine": "{attacker} defeats {defender} ({roll}) and takes the square, entrenched.",
+        "CaptureFailLine": "{attacker} falls to {defender} ({roll}) — {defender} holds the square, entrenched.",
+        "CastleLine": "{color} castles {side}.",
+        "SideKing": "kingside",
+        "SideQueen": "queenside",
+        "PromotionLine": "A Knappe reaches {square} and becomes a Drache!",
+        "MoveLine": "{piece} moves {from}-{to}."
+      },
+      "Board": {
+        "WindowTitle": "Dragonchess",
+        "NoGame": "There is no Dragonchess game to show.",
+        "Waiting": "Waiting for the invitation to be answered…",
+        "Declined": "The invitation to this Dragonchess match was declined.",
+        "AttackBanner": "{attacker} attacks {defender} — needs {needed}+…",
+        "KingAttackBanner": "{attacker} strikes at the König — {defender} has no defense against this…",
+        "EntrenchedNote": "(entrenched — rolling with disadvantage)",
+        "EndStalemate": "Stalemate — the game is a draw.",
+        "EndResign": "{winner} wins by resignation.",
+        "EndKingCaptured": "{winner} wins — the enemy König has fallen!",
+        "EndCheckmate": "{winner} wins by checkmate.",
+        "TurnBanner": "{color} to move ({name})",
+        "NoPieces": "no pieces left",
+        "Resign": "Resign",
+        "EndGame": "End Game",
+        "ResignConfirmTitle": "Resign the Game?",
+        "ResignConfirmBody": "Are you sure you want to resign this Dragonchess match?",
+        "EndGameTitle": "End Game",
+        "EndGameBody": "Declare a winner and end the match immediately.",
+        "EndGameWinner": "{name} wins"
+      },
+      "Settings": {
+        "DifficultyName": "Dragonchess Bot Difficulty",
+        "DifficultyHint": "Default difficulty offered when the GM launches a new Dragonchess match.",
+        "RollDelayName": "Dragonchess Roll Delay",
+        "RollDelayHint": "Seconds of suspense between a Schlagzug being announced and its outcome — time for the table to react. Set to 0 for no delay.",
+        "KingsMayTouchName": "Dragonchess: Kings May Touch",
+        "KingsMayTouchHint": "The König cannot attack, so strictly it threatens no squares. Off (default) still bans the two Kings from standing adjacent, as in normal chess. On allows it."
+      }
     }
   }
 }

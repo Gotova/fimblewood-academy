@@ -4,6 +4,19 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-08-27
+
+### Added
+
+- **Dragonchess** — the Dragonchess Club's chess variant, playable end-to-end in Foundry:
+  - A **Dragonchess** button in the Fimblewood Controls scene-control category (GM only): target one PC token and one NPC token, choose whether the NPC is played by the built-in bot or the GM, pick a difficulty, and send the PC's player an invitation.
+  - Full chess rules with the club's three dice deviations automated: captures are a `1d20 + attacker value` vs `DC 10 + defender value` Schlagzug (natural 20 always hits, natural 1 always misses), a failed capture kills the attacker instead of the defender, and the surviving piece is entrenched (the next attack on it rolls with Disadvantage). The König cannot attack and any attack on it always succeeds, so checkmate can still be lost on a bad roll — matching the source rulebook. Castling, en passant (rolled as a normal Bauer-vs-Bauer Schlagzug), and promotion (always to a Drache, never entrenched) are all implemented.
+  - Captures resolve with a configurable delay (`Dragonchess Roll Delay` world setting, default 3s): the attack and its odds are announced on the board, then the roll posts to chat (animated by Dice So Nice if installed), then the outcome resolves — giving the table a beat to react.
+  - An optional bot opponent with four difficulties (Knappe/Student/Magister/Drache), built as a dedicated Dragonchess engine rather than a chess engine with dice bolted on: it treats every capture as a chance node weighted by the real hit odds, so it correctly discounts bad-odds trades and values attacking undefended pieces over entrenched ones.
+  - Every other connected player automatically gets a read-only, live-updating board the moment a match starts, plus a **Watch Dragonchess** button to (re)open it — including for latecomers.
+  - `game.modules.get("fimblewood-academy").api.dragonchess.selftest()` — runs a perft check on the move generator, verifies the hit-chance table against the rulebook, and plays a scripted bot-vs-bot game to a terminal state.
+  - World settings: default bot difficulty, roll delay, and whether two Kings may stand adjacent (off by default — the König threatens no squares under these rules, so this is purely a table-rule toggle).
+
 ## [0.9.0] - 2026-08-27
 
 ### Added

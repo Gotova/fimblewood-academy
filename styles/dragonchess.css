@@ -1,0 +1,157 @@
+/* Fimblewood Academy — Dragonchess */
+
+.fimblewood-dragonchess-app .window-content {
+  padding: 8px;
+  background: #2c2416;
+  overflow: hidden;
+}
+
+.fw-dc-empty {
+  text-align: center;
+  padding: 40px 16px;
+  color: #b8a070;
+  font-style: italic;
+}
+
+.fw-dc-layout {
+  display: flex;
+  gap: 10px;
+  height: 100%;
+}
+
+.fw-dc-board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: 400px;
+  height: 400px;
+  flex-shrink: 0;
+  border: 2px solid #5a4020;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.fw-dc-square {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  line-height: 1;
+  user-select: none;
+}
+
+.fw-dc-square.is-light { background: #e8d5a3; }
+.fw-dc-square.is-dark { background: #5a4020; }
+
+.fw-dc-square.is-selected { outline: 3px solid #c8962a; outline-offset: -3px; z-index: 1; }
+.fw-dc-square.is-entrenched::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 2px dashed #7a2020;
+  border-radius: 3px;
+  pointer-events: none;
+}
+.fw-dc-square.is-announcing {
+  animation: fw-dc-pulse 1s ease-in-out infinite;
+}
+.fw-dc-square.is-legal-move {
+  cursor: pointer;
+}
+.fw-dc-square.is-legal-move::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(200, 150, 42, 0.35);
+  pointer-events: none;
+}
+.fw-dc-square.is-legal-capture::before {
+  background: rgba(122, 32, 32, 0.35);
+}
+
+@keyframes fw-dc-pulse {
+  0%, 100% { box-shadow: inset 0 0 0 3px rgba(200, 150, 42, 0.9); }
+  50% { box-shadow: inset 0 0 0 3px rgba(200, 150, 42, 0.15); }
+}
+
+.fw-dc-piece {
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.6));
+}
+.fw-dc-piece.is-blau { color: #3a6fd8; -webkit-text-stroke: 1px #14213d; }
+.fw-dc-piece.is-rot { color: #c23b3b; -webkit-text-stroke: 1px #3d1414; }
+
+.fw-dc-hit-badge {
+  position: absolute;
+  bottom: 1px;
+  right: 2px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #f5e6c0;
+  background: rgba(26, 21, 14, 0.85);
+  border-radius: 3px;
+  padding: 0 3px;
+  pointer-events: none;
+}
+
+.fw-dc-side {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #e8d5a3;
+  overflow-y: auto;
+}
+
+.fw-dc-banner {
+  padding: 6px 8px;
+  background: #1a150e;
+  border: 1px solid #5a4020;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.fw-dc-banner.is-attack { border-color: #c8962a; color: #f5e6c0; }
+.fw-dc-banner.is-my-turn { border-color: #4a8f4a; }
+.fw-dc-banner.is-end { border-color: #c23b3b; font-weight: bold; }
+
+.fw-dc-roster {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.fw-dc-roster-row strong.is-blau { color: #6f9fe8; }
+.fw-dc-roster-row strong.is-rot { color: #e87a7a; }
+
+.fw-dc-log {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px 6px 6px 22px;
+  background: #1a150e;
+  border: 1px solid #5a4020;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.fw-dc-log li { margin-bottom: 3px; }
+
+.fw-dc-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.fw-dc-btn {
+  flex: 1;
+  padding: 6px;
+  background: #1a150e;
+  border: 1px solid #5a4020;
+  border-radius: 4px;
+  color: #e8d5a3;
+  cursor: pointer;
+}
+.fw-dc-btn:hover {
+  border-color: #c8962a;
+  color: #f5e6c0;
+}
