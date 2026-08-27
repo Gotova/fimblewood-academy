@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.3.4
+- **Current version:** 0.7.0
 
 ## Installation
 
@@ -56,7 +56,17 @@ A party can **collect** music tracks the GM has set up as Ambient Sound themes, 
 - Clicking the record-player prop token opens the Jukebox window, listing every track the party has collected so far. Hit Play on any of them — it plays looped, for every connected player, using Foundry's own synced Playlist system (no lag or "your client is playing something different" issues, and it's still correct for anyone who reconnects mid-song).
 - The GM can rename or delete tracks from the same window; deleting a track just removes it from the Jukebox going forward — nobody who already collected it loses anything.
 
-There's no sidebar shortcut to the Jukebox by design — the only way in is the physical prop, to keep it grounded in the fiction.
+**Managing it (GM):**
+
+Open **Music Tracks** from the Fimblewood Controls category in the scene controls (the same category as the Draw Pad). This GM-only window lists *every* record you've registered — collected or not — and is where you prepare and reset the whole system between test runs:
+
+- **Collecting enabled / disabled** — the switch at the top. While it's off, players can't collect anything at all: ambient sounds, map pickups and item grants all stop handing out records, and a clicked pickup token stays put on the map instead of being consumed. Turn it on when the party is ready. (It's also available as a normal world setting.)
+- **Collected / Uncollected** — the status pill on each row toggles that record's state for the whole party, so you can hand out a record directly or take one back after testing.
+- **Collect All / Reset All** — the same across every record at once.
+- **Add / edit / delete** — create records here without going through a sound, item or token first, and change a record's name, audio file or cover art at any time.
+- **Play / Stop** — audition any record, collected or not.
+
+For players there's no sidebar shortcut to the Jukebox by design — the only way in is the physical prop, to keep it grounded in the fiction. The Music Tracks window is the GM's side of it, and is never shown to players.
 
 ### Content
 

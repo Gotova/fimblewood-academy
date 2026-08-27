@@ -11,7 +11,7 @@
  */
 
 const MODULE_ID = "fimblewood-academy";
-const CONTROL_GROUP = "fimblewood-magic";
+export const CONTROL_GROUP = "fimblewood-magic";
 
 // ─── World coordinate space ───────────────────────────────────────────────────
 // All drawing coordinates are in a 2000×2000 world.  The display is a

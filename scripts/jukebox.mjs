@@ -6,10 +6,20 @@
  * in sync for the whole table via a module-managed Foundry Playlist.
  */
 
+import { CONTROL_GROUP } from "./draw.mjs";
+
 const MODULE_ID = "fimblewood-academy";
 const REGISTRY_SETTING = "jukeboxRegistry";
 const REWARD_SOUND_SETTING = "jukeboxRewardSound";
+const COLLECTION_ENABLED_SETTING = "jukeboxCollectionEnabled";
 const JUKEBOX_PLAYLIST_NAME = "Fimblewood Hideout Jukebox";
+
+/** Escapes a value for interpolation into the hand-built HTML strings below. */
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[c]);
+}
 
 /* -------------------------------------------- */
 /*  Track registry (GM-authored, world-shared)   */
@@ -42,11 +52,21 @@ async function removeTrackFromRegistry(trackId) {
 /*  Per-user collected-tracks flag               */
 /* -------------------------------------------- */
 
+/**
+ * Master switch for in-world collecting. While off, none of the player-facing
+ * sources (ambient-sound proximity, map pickups, item grants) hand out records —
+ * only the GM's manual toggles in the manager can change collection state.
+ */
+function isCollectionEnabled() {
+  return game.settings.get(MODULE_ID, COLLECTION_ENABLED_SETTING) !== false;
+}
+
 function getCollectedTracks() {
   return foundry.utils.deepClone(game.user.getFlag(MODULE_ID, "collectedTracks") ?? []);
 }
 
 async function addCollectedTrack(trackId) {
+  if (!isCollectionEnabled()) return false;
   const list = getCollectedTracks();
   if (list.includes(trackId)) return false;
   list.push(trackId);
@@ -60,6 +80,31 @@ function getPartyCollectedTrackIds() {
     for (const id of (u.getFlag(MODULE_ID, "collectedTracks") ?? [])) ids.add(id);
   }
   return ids;
+}
+
+/**
+ * GM override of the party's collection state for one track: granting writes the
+ * track onto every non-GM user (the same audience an item grant reaches), while
+ * revoking clears it from every user — GMs included — so the track really does
+ * vanish from `getPartyCollectedTrackIds`.
+ */
+async function setTrackCollectedForParty(trackId, collected) {
+  if (!game.user.isGM) return;
+  const targets = collected ? game.users.filter(u => !u.isGM) : game.users.contents;
+  for (const u of targets) {
+    const list = foundry.utils.deepClone(u.getFlag(MODULE_ID, "collectedTracks") ?? []);
+    const has = list.includes(trackId);
+    if (collected === has) continue;
+    const next = collected ? [...list, trackId] : list.filter(id => id !== trackId);
+    await u.setFlag(MODULE_ID, "collectedTracks", next);
+  }
+}
+
+async function setAllTracksCollectedForParty(collected) {
+  if (!game.user.isGM) return;
+  for (const trackId of Object.keys(getRegistry())) {
+    await setTrackCollectedForParty(trackId, collected);
+  }
 }
 
 /* -------------------------------------------- */
@@ -155,7 +200,7 @@ export async function stopTrack(trackId) {
 /* -------------------------------------------- */
 
 async function checkAmbientSoundProximity() {
-  if (game.user.isGM || !canvas.ready) return;
+  if (game.user.isGM || !canvas.ready || !isCollectionEnabled()) return;
   const ownedTokens = canvas.tokens.placeables.filter(t => t.actor?.isOwner);
   if (!ownedTokens.length) return;
   for (const sound of canvas.scene.sounds) {
@@ -211,6 +256,9 @@ async function onControlToken(token, controlled) {
   const pickupTrackId = token.document.getFlag(MODULE_ID, "recordPickup");
   if (pickupTrackId) {
     token.release();
+    // Collecting is switched off: leave the pickup sitting on the map untouched
+    // so it is still there once the GM opens collecting back up.
+    if (!isCollectionEnabled()) return;
     if (await addCollectedTrack(pickupTrackId)) announceTrackCollected(pickupTrackId);
     try {
       await token.document.delete();
@@ -226,28 +274,36 @@ async function onControlToken(token, controlled) {
 }
 
 /* -------------------------------------------- */
-/*  "Name this new track" dialog                 */
+/*  Track details dialog (create + edit)         */
 /* -------------------------------------------- */
 
-async function promptNewTrack() {
+/**
+ * Prompts for a track's name, audio file and cover art. Used both for creating a
+ * brand new track (no `track`) and for editing an existing one, so the fields the
+ * GM sees when adding a record are exactly the ones they can change later.
+ */
+async function promptTrackDetails(track = null) {
   const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.${k}`);
+  const editing = !!track;
   const result = await foundry.applications.api.DialogV2.wait({
-    window: { title: i18n("NewTrackDialog.Title") },
+    window: { title: i18n(editing ? "EditTrackDialog.Title" : "NewTrackDialog.Title") },
     content: `
       <div style="display:flex;flex-direction:column;gap:8px;">
         <label>${i18n("NewTrackDialog.NameLabel")}
-          <input type="text" name="name" required>
+          <input type="text" name="name" value="${esc(track?.name ?? "")}" required>
         </label>
         <label>${i18n("NewTrackDialog.AudioLabel")}
-          <file-picker name="path" type="audio" required></file-picker>
+          <file-picker name="path" type="audio" value="${esc(track?.path ?? "")}" required></file-picker>
         </label>
         <label>${i18n("NewTrackDialog.ArtLabel")}
-          <file-picker name="img" type="image"></file-picker>
+          <file-picker name="img" type="image" value="${esc(track?.img ?? "")}"></file-picker>
         </label>
       </div>`,
     buttons: [
       {
-        action: "ok", label: i18n("NewTrackDialog.Confirm"), default: true, type: "button",
+        action: "ok",
+        label: i18n(editing ? "EditTrackDialog.Confirm" : "NewTrackDialog.Confirm"),
+        default: true, type: "button",
         callback: (event, button) => {
           const form = button.form;
           const name = form.elements.name.value?.trim();
@@ -272,7 +328,7 @@ async function promptNewTrack() {
 async function resolveOrCreateTrackId(selectedValue) {
   if (!game.user.isGM) return null;
   if (selectedValue !== "__new__") return selectedValue || null;
-  const data = await promptNewTrack();
+  const data = await promptTrackDetails();
   if (!data) return null;
   const trackId = foundry.utils.randomID();
   await ensureTrackRegistered(trackId, data);
@@ -411,7 +467,7 @@ function injectTokenTrackPicker(app, html) {
 /* -------------------------------------------- */
 
 async function onCreateItem(item) {
-  if (!game.user.isGM) return;
+  if (!game.user.isGM || !isCollectionEnabled()) return;
   const trackId = item.getFlag(MODULE_ID, "recordTrackId");
   if (!trackId || !item.actor?.hasPlayerOwner) return;
   let anyNew = false;
@@ -498,12 +554,24 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
 
   _onRender(context, options) {
     super._onRender?.(context, options);
-    this._soundUpdateHandler ??= () => this.render();
+    // _onRender fires on every render, but each of these handlers calls render()
+    // in turn — registering them more than once would stack duplicate listeners.
+    if (this._hooksWired) return;
+    this._hooksWired = true;
+    this._soundUpdateHandler = () => this.render();
     Hooks.on("updatePlaylistSound", this._soundUpdateHandler);
+    // Collection state lives on user flags, so a GM granting or revoking a record
+    // from the manager has to redraw this list on every client that has it open.
+    this._userUpdateHandler = (user, changes) => {
+      if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.collectedTracks`)) this.render();
+    };
+    Hooks.on("updateUser", this._userUpdateHandler);
   }
 
   async close(options) {
     if (this._soundUpdateHandler) Hooks.off("updatePlaylistSound", this._soundUpdateHandler);
+    if (this._userUpdateHandler) Hooks.off("updateUser", this._userUpdateHandler);
+    this._hooksWired = false;
     return super.close(options);
   }
 
@@ -567,12 +635,228 @@ export function openJukeboxWindow() {
 }
 
 /* -------------------------------------------- */
+/*  GM track manager window                      */
+/* -------------------------------------------- */
+
+/**
+ * GM-only console over the whole track registry: every registered record is
+ * listed whether or not the party found it, with its collection state as a
+ * one-click toggle so a test run can be reset before the real session.
+ */
+class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
+  static DEFAULT_OPTIONS = {
+    id: "fimblewood-jukebox-manager",
+    tag: "div",
+    window: { title: "FIMBLEWOOD.Jukebox.Manager.WindowTitle", icon: "fas fa-compact-disc" },
+    position: { width: 620, height: 620 },
+    classes: ["fimblewood-jukebox-app", "fimblewood-jukebox-manager-app"]
+  };
+
+  // Same manual dispatch as JukeboxApp — see its #ACTIONS note.
+  static #ACTIONS = {
+    add: "_onAdd", collectAll: "_onCollectAll", resetAll: "_onResetAll",
+    toggleCollecting: "_onToggleCollecting",
+    toggleCollected: "_onToggleCollected", play: "_onPlay", stop: "_onStop",
+    edit: "_onEdit", delete: "_onDelete"
+  };
+
+  async _renderHTML() {
+    const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.${k}`);
+    const registry = getRegistry();
+    const collectedIds = getPartyCollectedTrackIds();
+    const playlist = findJukeboxPlaylist();
+
+    const entries = Object.entries(registry)
+      .sort(([, a], [, b]) => (a.name ?? "").localeCompare(b.name ?? ""));
+    const collectedCount = entries.filter(([id]) => collectedIds.has(id)).length;
+
+    const rows = entries.length
+      ? entries.map(([id, track]) => {
+        const isCollected = collectedIds.has(id);
+        const isPlaying = !!playlist?.sounds.find(s => s.getFlag(MODULE_ID, "trackId") === id)?.playing;
+        const art = track.img
+          ? `<img class="fw-jukebox-track-art" src="${esc(track.img)}" alt="">`
+          : `<i class="fw-jukebox-track-art fas fa-record-vinyl"></i>`;
+        return `
+          <div class="fw-jukebox-track-row fw-jukebox-manager-row" data-track-id="${id}">
+            ${art}
+            <div class="fw-jukebox-manager-info">
+              <span class="fw-jukebox-track-name">${esc(track.name ?? id)}</span>
+              <span class="fw-jukebox-track-path">${esc(track.path || i18n("Manager.NoAudio"))}</span>
+            </div>
+            <button type="button" class="fw-jukebox-status-pill ${isCollected ? "is-collected" : "is-uncollected"}"
+                    data-action="toggleCollected" data-track-id="${id}"
+                    title="${i18n(isCollected ? "Manager.MarkUncollected" : "Manager.MarkCollected")}">
+              <i class="fas fa-${isCollected ? "check" : "lock"}"></i>
+              ${i18n(isCollected ? "Manager.Collected" : "Manager.Uncollected")}
+            </button>
+            <div class="fw-jukebox-gm-actions">
+              <button type="button" class="fw-jukebox-icon-btn" data-action="${isPlaying ? "stop" : "play"}" data-track-id="${id}"
+                      title="${i18n(isPlaying ? "TrackList.Stop" : "TrackList.Play")}"><i class="fas fa-${isPlaying ? "stop" : "play"}"></i></button>
+              <button type="button" class="fw-jukebox-icon-btn" data-action="edit" data-track-id="${id}"
+                      title="${i18n("Manager.Edit")}"><i class="fas fa-pen-to-square"></i></button>
+              <button type="button" class="fw-jukebox-icon-btn" data-action="delete" data-track-id="${id}"
+                      title="${i18n("GM.Delete")}"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+      }).join("")
+      : `<p class="fw-jukebox-empty">${i18n("Manager.Empty")}</p>`;
+
+    const collecting = isCollectionEnabled();
+    return `
+      <div class="fw-jukebox-manager-collecting ${collecting ? "is-on" : "is-off"}">
+        <button type="button" class="fw-jukebox-toggle-btn" data-action="toggleCollecting"
+                title="${i18n(collecting ? "Manager.CollectingDisableHint" : "Manager.CollectingEnableHint")}">
+          <i class="fas fa-toggle-${collecting ? "on" : "off"}"></i>
+          ${i18n(collecting ? "Manager.CollectingOn" : "Manager.CollectingOff")}
+        </button>
+        <span class="fw-jukebox-manager-hint">${i18n(collecting ? "Manager.CollectingOnHint" : "Manager.CollectingOffHint")}</span>
+      </div>
+      <div class="fw-jukebox-manager-toolbar">
+        <button type="button" class="fw-jukebox-text-btn" data-action="add"><i class="fas fa-plus"></i> ${i18n("Manager.AddTrack")}</button>
+        <button type="button" class="fw-jukebox-text-btn" data-action="collectAll"><i class="fas fa-check-double"></i> ${i18n("Manager.CollectAll")}</button>
+        <button type="button" class="fw-jukebox-text-btn" data-action="resetAll"><i class="fas fa-rotate-left"></i> ${i18n("Manager.ResetAll")}</button>
+        <span class="fw-jukebox-manager-count">${game.i18n.format("FIMBLEWOOD.Jukebox.Manager.CountSummary", { collected: collectedCount, total: entries.length })}</span>
+      </div>
+      <div class="fw-jukebox-track-list">${rows}</div>`;
+  }
+
+  async _replaceHTML(result, content) {
+    content.innerHTML = result;
+    if (!content.dataset.fwJukeboxWired) {
+      content.dataset.fwJukeboxWired = "1";
+      content.addEventListener("click", (event) => {
+        const target = event.target.closest("[data-action]");
+        if (!target) return;
+        const handlerName = JukeboxManagerApp.#ACTIONS[target.dataset.action];
+        if (handlerName) this[handlerName](event, target);
+      });
+    }
+    return content;
+  }
+
+  _onRender(context, options) {
+    super._onRender?.(context, options);
+    if (this._hooksWired) return;
+    this._hooksWired = true;
+    this._refresh = () => this.render();
+    Hooks.on("updatePlaylistSound", this._refresh);
+    Hooks.on("updateUser", this._refresh);
+  }
+
+  async close(options) {
+    if (this._refresh) {
+      Hooks.off("updatePlaylistSound", this._refresh);
+      Hooks.off("updateUser", this._refresh);
+    }
+    this._hooksWired = false;
+    return super.close(options);
+  }
+
+  async _onAdd() {
+    const data = await promptTrackDetails();
+    if (!data) return;
+    await ensureTrackRegistered(foundry.utils.randomID(), data);
+    await syncPlaylistWithRegistry();
+    this.render();
+  }
+
+  async _onToggleCollecting() {
+    await game.settings.set(MODULE_ID, COLLECTION_ENABLED_SETTING, !isCollectionEnabled());
+    this.render();
+  }
+
+  async _onCollectAll() {
+    await setAllTracksCollectedForParty(true);
+    this.render();
+  }
+
+  async _onResetAll() {
+    const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.${k}`);
+    const confirmed = await foundry.applications.api.DialogV2.confirm({
+      window: { title: i18n("Manager.ResetAllConfirmTitle") },
+      content: `<p>${i18n("Manager.ResetAllConfirmBody")}</p>`,
+      rejectClose: false
+    });
+    if (!confirmed) return;
+    await setAllTracksCollectedForParty(false);
+    this.render();
+  }
+
+  async _onToggleCollected(event, target) {
+    const trackId = target.dataset.trackId;
+    await setTrackCollectedForParty(trackId, !getPartyCollectedTrackIds().has(trackId));
+    this.render();
+  }
+
+  async _onPlay(event, target) {
+    await playTrack(target.dataset.trackId);
+    this.render();
+  }
+
+  async _onStop(event, target) {
+    await stopTrack(target.dataset.trackId);
+    this.render();
+  }
+
+  async _onEdit(event, target) {
+    const trackId = target.dataset.trackId;
+    const current = getRegistry()[trackId];
+    if (!current) return;
+    const data = await promptTrackDetails(current);
+    if (!data) return;
+    await ensureTrackRegistered(trackId, data);
+    await syncPlaylistWithRegistry();
+    this.render();
+  }
+
+  async _onDelete(event, target) {
+    const trackId = target.dataset.trackId;
+    const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.${k}`);
+    const name = getRegistry()[trackId]?.name ?? trackId;
+    const confirmed = await foundry.applications.api.DialogV2.confirm({
+      window: { title: i18n("GM.DeleteConfirmTitle") },
+      content: `<p>${game.i18n.format("FIMBLEWOOD.Jukebox.GM.DeleteConfirmBody", { name })}</p>`,
+      rejectClose: false
+    });
+    if (!confirmed) return;
+    await setTrackCollectedForParty(trackId, false);
+    await removeTrackFromRegistry(trackId);
+    await syncPlaylistWithRegistry();
+    this.render();
+  }
+}
+
+let _jukeboxManagerInstance = null;
+
+export function openJukeboxManager() {
+  if (!game.user.isGM) return;
+  if (!_jukeboxManagerInstance || !_jukeboxManagerInstance.rendered) {
+    _jukeboxManagerInstance = new JukeboxManagerApp();
+    _jukeboxManagerInstance.render(true);
+  } else {
+    _jukeboxManagerInstance.bringToTop();
+  }
+}
+
+/* -------------------------------------------- */
 /*  Registration                                 */
 /* -------------------------------------------- */
 
 export function registerJukebox() {
   game.settings.register(MODULE_ID, REGISTRY_SETTING, {
     scope: "world", config: false, type: Object, default: {}
+  });
+  game.settings.register(MODULE_ID, COLLECTION_ENABLED_SETTING, {
+    scope: "world", config: true, type: Boolean, default: true,
+    name: "FIMBLEWOOD.Jukebox.Settings.CollectionEnabledName",
+    hint: "FIMBLEWOOD.Jukebox.Settings.CollectionEnabledHint",
+    onChange: (enabled) => {
+      if (_jukeboxManagerInstance?.rendered) _jukeboxManagerInstance.render();
+      // Re-open collecting and a character already parked inside a tagged sound's
+      // radius should get its record now, without having to walk out and back in.
+      if (enabled) checkAmbientSoundProximity();
+    }
   });
   game.settings.register(MODULE_ID, REWARD_SOUND_SETTING, {
     scope: "world", config: true, type: String,
@@ -597,6 +881,23 @@ export function registerJukebox() {
   Hooks.on("createToken", (tokenDoc) => forceJukeboxTokenOwnership(tokenDoc));
   Hooks.on("controlToken", onControlToken);
   Hooks.on("createItem", onCreateItem);
+
+  // Slots the GM track manager into the Fimblewood control category created by
+  // registerDrawPad — which runs first at init, so the category already exists
+  // by the time this listener fires.
+  Hooks.on("getSceneControlButtons", (controls) => {
+    const group = controls[CONTROL_GROUP];
+    if (!group) return;
+    group.tools.jukebox = {
+      name: "jukebox",
+      title: "FIMBLEWOOD.Jukebox.Manager.ButtonTitle",
+      icon: "fas fa-compact-disc",
+      button: true,
+      visible: game.user.isGM,
+      order: 2,
+      onChange: () => openJukeboxManager()
+    };
+  });
 
   Hooks.on("renderAmbientSoundConfig", injectAmbientSoundTrackPicker);
   Hooks.on("renderItemSheet5e", injectItemTrackPicker);

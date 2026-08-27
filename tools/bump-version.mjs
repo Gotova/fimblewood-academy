@@ -6,6 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const MODULE_JSON = path.join(ROOT, "module.json");
 const PACKAGE_JSON = path.join(ROOT, "package.json");
+const README = path.join(ROOT, "README.md");
 
 const arg = process.argv[2];
 if (!arg) {
@@ -38,6 +39,18 @@ if (existsSync(PACKAGE_JSON)) {
   const pkg = JSON.parse(readFileSync(PACKAGE_JSON, "utf8"));
   pkg.version = next;
   writeFileSync(PACKAGE_JSON, `${JSON.stringify(pkg, null, 2)}\n`);
+}
+
+// The README's version line drifted for several releases when it was a manual
+// step, so the bump owns it now.
+if (existsSync(README)) {
+  const readme = readFileSync(README, "utf8");
+  const updated = readme.replace(
+    /^- \*\*Current version:\*\* .+$/m,
+    `- **Current version:** ${next}`
+  );
+  if (updated !== readme) writeFileSync(README, updated);
+  else console.warn("Warning: README.md has no '- **Current version:**' line to update.");
 }
 
 console.log(`Version bumped: ${current} -> ${next}`);

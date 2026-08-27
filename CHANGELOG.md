@@ -4,6 +4,22 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-08-27
+
+### Added
+
+- **Music Tracks manager** — a GM-only console for the Hideout Jukebox, opened from a new "Music Tracks" button in the Fimblewood Controls scene-control category (next to the Draw Pad and Gallery). Unlike the player-facing Jukebox window, it lists *every* registered record, collected or not:
+  - Each row shows its cover art, name, audio path and a Collected/Uncollected status pill. Clicking the pill flips the party's collection state for that record — granting writes it to every non-GM user, revoking clears it from everyone — so a test run can be wound back before the real session.
+  - "Collect All" and "Reset All" do the same across the whole registry in one click.
+  - Add, edit (name, audio file and cover art) and delete records without going through a token/item/sound config sheet. Edits sync straight into the managed Playlist.
+  - Play/Stop each record straight from the manager for a quick audition.
+- **Collecting on/off master switch** (`jukeboxCollectionEnabled`, also exposed as a world setting) — toggled from the top of the Music Tracks window. While off, no player-facing source hands out records: ambient-sound proximity, map pickups and item grants all no-op, and a clicked pickup token stays on the map instead of being consumed. The GM's manual grants in the manager still work.
+
+### Fixed
+
+- The Jukebox window re-registered its `updatePlaylistSound` hook on every render, stacking duplicate listeners that each triggered another render. It now wires its hooks exactly once per open window.
+- The Jukebox window now also refreshes when collection state changes, so records the GM grants or revokes appear and disappear live on player clients instead of needing the window reopened.
+
 ## [0.6.2] - 2026-08-26
 
 ### Fixed

@@ -99,6 +99,33 @@
         "Confirm": "Add Track",
         "Cancel": "Cancel"
       },
+      "EditTrackDialog": {
+        "Title": "Edit Track",
+        "Confirm": "Save Changes"
+      },
+      "Manager": {
+        "ButtonTitle": "Music Tracks",
+        "WindowTitle": "Music Tracks (GM)",
+        "Empty": "No records registered yet. Use \"Add Track\" to create one.",
+        "AddTrack": "Add Track",
+        "CollectAll": "Collect All",
+        "ResetAll": "Reset All",
+        "ResetAllConfirmTitle": "Reset All Records",
+        "ResetAllConfirmBody": "Mark every record as uncollected for the whole party? The records themselves are kept — only the party's collection progress is cleared.",
+        "CountSummary": "{collected} of {total} collected",
+        "Collected": "Collected",
+        "Uncollected": "Uncollected",
+        "MarkCollected": "Mark as collected for the party",
+        "MarkUncollected": "Mark as uncollected for the party",
+        "Edit": "Edit record details",
+        "NoAudio": "No audio file set",
+        "CollectingOn": "Collecting enabled",
+        "CollectingOff": "Collecting disabled",
+        "CollectingEnableHint": "Allow the party to collect records again",
+        "CollectingDisableHint": "Stop the party from collecting records",
+        "CollectingOnHint": "Players can pick up records from sounds, pickups and items.",
+        "CollectingOffHint": "Players cannot collect any records; only you can grant them here."
+      },
       "SourceConfig": {
         "TrackLabel": "Jukebox Track",
         "TrackNone": "— None —",
@@ -111,6 +138,8 @@
         "Broadcast": "Record \"{name}\" collected!"
       },
       "Settings": {
+        "CollectionEnabledName": "Jukebox Collecting Enabled",
+        "CollectionEnabledHint": "When off, players cannot collect any records from ambient sounds, map pickups or items. The GM can still grant records from the Music Tracks window.",
         "RewardSoundName": "Jukebox Reward Sound",
         "RewardSoundHint": "A short sound effect played for everyone whenever the party collects a new Jukebox track."
       }

@@ -99,6 +99,33 @@
         "Confirm": "Titel hinzufuegen",
         "Cancel": "Abbrechen"
       },
+      "EditTrackDialog": {
+        "Title": "Titel bearbeiten",
+        "Confirm": "Aenderungen speichern"
+      },
+      "Manager": {
+        "ButtonTitle": "Musiktitel",
+        "WindowTitle": "Musiktitel (SL)",
+        "Empty": "Noch keine Schallplatten angelegt. Nutze \"Titel hinzufuegen\", um eine zu erstellen.",
+        "AddTrack": "Titel hinzufuegen",
+        "CollectAll": "Alle sammeln",
+        "ResetAll": "Alle zuruecksetzen",
+        "ResetAllConfirmTitle": "Alle Schallplatten zuruecksetzen",
+        "ResetAllConfirmBody": "Alle Schallplatten fuer die gesamte Gruppe als nicht gesammelt markieren? Die Schallplatten selbst bleiben erhalten — nur der Sammelfortschritt wird geloescht.",
+        "CountSummary": "{collected} von {total} gesammelt",
+        "Collected": "Gesammelt",
+        "Uncollected": "Nicht gesammelt",
+        "MarkCollected": "Fuer die Gruppe als gesammelt markieren",
+        "MarkUncollected": "Fuer die Gruppe als nicht gesammelt markieren",
+        "Edit": "Details bearbeiten",
+        "NoAudio": "Keine Audiodatei gesetzt",
+        "CollectingOn": "Sammeln aktiviert",
+        "CollectingOff": "Sammeln deaktiviert",
+        "CollectingEnableHint": "Der Gruppe das Sammeln wieder erlauben",
+        "CollectingDisableHint": "Der Gruppe das Sammeln verbieten",
+        "CollectingOnHint": "Spieler koennen Schallplatten ueber Klaenge, Fundstuecke und Gegenstaende aufsammeln.",
+        "CollectingOffHint": "Spieler koennen keine Schallplatten sammeln; nur du kannst sie hier vergeben."
+      },
       "SourceConfig": {
         "TrackLabel": "Musikbox-Titel",
         "TrackNone": "— Keiner —",
@@ -111,6 +138,8 @@
         "Broadcast": "Schallplatte \"{name}\" gesammelt!"
       },
       "Settings": {
+        "CollectionEnabledName": "Musikbox-Sammeln aktiviert",
+        "CollectionEnabledHint": "Wenn deaktiviert, koennen Spieler keine Schallplatten ueber Klaenge, Fundstuecke oder Gegenstaende sammeln. Der Spielleiter kann sie weiterhin im Fenster \"Musiktitel\" vergeben.",
         "RewardSoundName": "Musikbox-Belohnungston",
         "RewardSoundHint": "Ein kurzer Soundeffekt, der fuer alle abgespielt wird, sobald die Gruppe einen neuen Musikbox-Titel sammelt."
       }
