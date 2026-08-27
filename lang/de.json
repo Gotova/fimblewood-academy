@@ -80,6 +80,7 @@
       "WindowTitle": "Unterschlupf-Musikbox",
       "TrackList": {
         "Empty": "Noch keine Titel gesammelt.",
+        "ShowArt": "Cover ansehen",
         "Play": "Abspielen",
         "Stop": "Stopp"
       },

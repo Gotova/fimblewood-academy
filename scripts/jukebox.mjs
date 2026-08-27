@@ -610,7 +610,7 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
 
   // action name -> instance method. Dispatched manually (see _replaceHTML) rather
   // than via DEFAULT_OPTIONS.actions/data-action, which did not reliably fire.
-  static #ACTIONS = { play: "_onPlay", stop: "_onStop", rename: "_onRename", delete: "_onDelete" };
+  static #ACTIONS = { play: "_onPlay", stop: "_onStop", art: "_onShowArt", rename: "_onRename", delete: "_onDelete" };
 
   async _renderHTML() {
     const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.${k}`);
@@ -626,8 +626,10 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
         const track = registry[id];
         const sound = playlist?.sounds.find(s => s.getFlag(MODULE_ID, "trackId") === id);
         const isPlaying = !!sound?.playing;
+        // Only real cover art is clickable — the fallback vinyl icon has nothing
+        // worth blowing up to full size.
         const art = track.img
-          ? `<img class="fw-jukebox-track-art" src="${track.img}" alt="">`
+          ? `<img class="fw-jukebox-track-art is-clickable" src="${esc(track.img)}" alt="" data-action="art" data-track-id="${id}" title="${i18n("TrackList.ShowArt")}">`
           : `<i class="fw-jukebox-track-art fas fa-record-vinyl"></i>`;
         const gmActions = game.user.isGM ? `
           <button type="button" class="fw-jukebox-icon-btn" data-action="rename" data-track-id="${id}" title="${i18n("GM.Rename")}"><i class="fas fa-i-cursor"></i></button>
@@ -696,6 +698,16 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
   async _onStop(event, target) {
     await stopTrack(target.dataset.trackId);
     this.render();
+  }
+
+  _onShowArt(event, target) {
+    const track = getRegistry()[target.dataset.trackId];
+    if (!track?.img) return;
+    // shareable lets the GM push the sleeve to everyone from the popout itself.
+    new ImagePopout(track.img, {
+      window: { title: track.name },
+      shareable: game.user.isGM
+    }).render(true);
   }
 
   async _onRename(event, target) {

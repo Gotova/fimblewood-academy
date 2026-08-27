@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-08-27
+
+### Added
+
+- Clicking a track's cover art in the Hideout Jukebox window opens it full size in an image popout, so the table can actually see what's on the sleeve. Art gets a hover highlight to show it's clickable; tracks with no cover art keep the plain vinyl icon and aren't clickable. For the GM the popout is shareable, so the sleeve can be pushed out to every player from the popout itself.
+
 ## [0.8.0] - 2026-08-27
 
 ### Added

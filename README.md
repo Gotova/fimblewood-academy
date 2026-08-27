@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.8.0
+- **Current version:** 0.9.0
 
 ## Installation
 
@@ -53,7 +53,7 @@ A party can **collect** music tracks the GM has set up as Ambient Sound themes, 
 **Playing it (players):**
 
 - Walking a character within earshot of a tagged Ambient Sound, receiving a tagged item, or clicking a map pickup token all unlock that track for the **whole party** (not just whoever triggered it) — collection is shared. Every collection announces itself to the whole table with a short reward sound and a "Record *\<name>* collected!" banner (the reward sound itself is a world setting the GM sets once, under Foundry's Configure Settings).
-- Clicking the record-player prop token opens the Jukebox window, listing every track the party has collected so far. Hit Play on any of them — it plays looped, for every connected player, using Foundry's own synced Playlist system (no lag or "your client is playing something different" issues, and it's still correct for anyone who reconnects mid-song).
+- Clicking the record-player prop token opens the Jukebox window, listing every track the party has collected so far. Click a track's cover art to blow it up full size for the table (the GM can share that popout out to everyone). Hit Play on any of them — it plays looped, for every connected player, using Foundry's own synced Playlist system (no lag or "your client is playing something different" issues, and it's still correct for anyone who reconnects mid-song).
 - The music is **local to the hideout**: you only hear it while you're looking at the scene the record-player prop stands on. Leave the scene and it fades out for you; come back and you rejoin the song already in progress, while anyone still in the hideout hears it uninterrupted throughout. Playback itself stays shared and in sync — it's only *your* client that goes quiet, so one player wandering off doesn't stop the music for the rest of the table.
 - The GM can rename or delete tracks from the same window; deleting a track just removes it from the Jukebox going forward — nobody who already collected it loses anything.
 

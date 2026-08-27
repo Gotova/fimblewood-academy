@@ -48,6 +48,17 @@ img.fw-jukebox-track-art {
   font-size: 0;
 }
 
+.fw-jukebox-track-art.is-clickable {
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.fw-jukebox-track-art.is-clickable:hover {
+  border-color: #c8962a;
+  transform: scale(1.06);
+}
+
 .fw-jukebox-track-name {
   flex: 1;
   color: #e8d5a3;

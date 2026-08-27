@@ -80,6 +80,7 @@
       "WindowTitle": "Hideout Jukebox",
       "TrackList": {
         "Empty": "No tracks collected yet.",
+        "ShowArt": "View cover art",
         "Play": "Play",
         "Stop": "Stop"
       },
