@@ -106,6 +106,7 @@ const STRINGS = {
     KingAttackBanner: "{attacker} greift den Koenig an — {defender} hat dagegen keine Abwehr …",
     KingAttackerBanner: "{attacker} greift {defender} an — der Angriff des Koenigs gelingt immer!",
     EntrenchedNote: "(eingegraben — Wurf mit Nachteil)",
+    EntrenchedTooltip: "Eingegraben — der naechste Angriff auf dieses Feld hat Nachteil.",
     EndStalemate: "Patt — die Partie endet unentschieden.",
     EndResign: "{winner} gewinnt durch Aufgabe.",
     EndKingCaptured: "{winner} gewinnt — der gegnerische Koenig ist gefallen!",

@@ -108,7 +108,11 @@ export class DragonchessBoardApp extends foundry.applications.api.ApplicationV2 
         const dark = (file + rank) % 2 === 0;
         const classes = ["fw-dc-square", dark ? "is-dark" : "is-light"];
         if (this.selectedSquare === s) classes.push("is-selected");
-        if (record.state.entrenched === s) classes.push("is-entrenched");
+        let entrenchedBadge = "";
+        if (record.state.entrenched === s) {
+          classes.push("is-entrenched");
+          entrenchedBadge = `<span class="fw-dc-entrenched-badge" title="${i18n("Board.EntrenchedTooltip")}">🛡</span>`;
+        }
         if (announce && (announce.from === s || announce.to === s)) classes.push("is-announcing");
         let badge = "";
         if (legalDestinations.has(s)) {
@@ -121,7 +125,7 @@ export class DragonchessBoardApp extends foundry.applications.api.ApplicationV2 
             badge = `<span class="fw-dc-hit-badge">${pct}%</span>`;
           }
         }
-        squares.push(`<div class="${classes.join(" ")}" data-square="${s}">${badge}</div>`);
+        squares.push(`<div class="${classes.join(" ")}" data-square="${s}">${entrenchedBadge}${badge}</div>`);
       }
     }
 
@@ -166,13 +170,13 @@ export class DragonchessBoardApp extends foundry.applications.api.ApplicationV2 
       const piece = record.state.board[s];
       if (!piece) continue;
       const { x, y } = squareCenter(s);
-      spans.push(this.#pieceTokenHtml(piece.type, piece.color, x, y, { square: s }));
+      spans.push(this.#pieceTokenHtml(piece.type, piece.color, x, y, { square: s, entrenched: record.state.entrenched === s }));
     }
     return `<div class="fw-dc-piece-layer">${spans.join("")}</div>`;
   }
 
-  #pieceTokenHtml(type, color, x, y, { square, extraClass = "", moveId } = {}) {
-    const title = `${esc(PIECE_DISPLAY[type])} (${esc(COLOR_LABEL[color])}, ${PIECE_VALUES[type]})`;
+  #pieceTokenHtml(type, color, x, y, { square, extraClass = "", moveId, entrenched = false } = {}) {
+    const title = `${esc(PIECE_DISPLAY[type])} (${esc(COLOR_LABEL[color])}, ${PIECE_VALUES[type]})${entrenched ? ` — ${i18n("Board.EntrenchedTooltip")}` : ""}`;
     const squareAttr = square != null ? ` data-square="${square}"` : "";
     const moveIdAttr = moveId != null ? ` data-move-id="${moveId}"` : "";
     return `<span class="fw-dc-piece-token ${extraClass} is-${color === "w" ? "blau" : "rot"}" style="left:${x}px; top:${y}px;"${squareAttr}${moveIdAttr} title="${title}">${PIECE_GLYPH[type]}</span>`;

@@ -2,7 +2,7 @@
   "id": "fimblewood-academy",
   "title": "Fimblewood Academy",
   "description": "Homebrew classes, subclasses, and content for the Fimblewood Academy campaign, built for the dnd5e system.",
-  "version": "0.12.1",
+  "version": "0.12.2",
   "compatibility": {
     "minimum": "13",
     "verified": "13.351",
@@ -96,7 +96,7 @@
   ],
   "url": "https://github.com/Gotova/fimblewood-academy",
   "manifest": "https://github.com/Gotova/fimblewood-academy/releases/latest/download/module.json",
-  "download": "https://github.com/Gotova/fimblewood-academy/releases/download/v0.12.1/module.zip",
+  "download": "https://github.com/Gotova/fimblewood-academy/releases/download/v0.12.2/module.zip",
   "readme": "https://github.com/Gotova/fimblewood-academy/blob/main/README.md",
   "bugs": "https://github.com/Gotova/fimblewood-academy/issues",
   "changelog": "https://github.com/Gotova/fimblewood-academy/blob/main/CHANGELOG.md"

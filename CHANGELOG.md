@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.12.2] - 2026-08-27
+
+### Changed
+
+- **Entrenched pieces are now clearly marked** on the Dragonchess board: a small shield badge in the corner of the square (guaranteed visible above the piece standing there), a brighter dashed amber outline with a glow (replacing a dark-red dashed border that was easy to miss, especially on dark squares), and a note in the piece's own tooltip.
+
 ## [0.12.1] - 2026-08-27
 
 ### Fixed
