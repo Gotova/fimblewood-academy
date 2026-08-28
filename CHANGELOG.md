@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.13.0] - 2026-08-28
+
+### Added
+
+- **Timetable**: a GM-authored weekly class schedule for the Academy's PCs, with two new buttons in the Fimblewood Controls category — "Timetable" (everyone) shows a read-only view of one week's courses at a time with a "This Week" / "Next Week" toggle, and "Timetable Editor" (GM only) lets the DM set up courses (name, professor, day, one of 4 daily periods, a note, and an attendee roster) for the current and next week ahead of time. Attendees can be added by picking any actor from a dropdown or by dragging one straight from the sidebar onto a course or an empty slot; assigning the same PC to two courses in the same period shows a warning but doesn't block it. Which week counts as "current" is derived live from Simple Calendar Reborn's in-game date (a hard dependency for this feature — the DM sets a term start date once, and the app tracks the rotation automatically from there), and weekdays/week length follow whatever the active calendar defines.
+
 ## [0.12.3] - 2026-08-28
 
 ### Fixed

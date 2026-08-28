@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.12.3
+- **Current version:** 0.13.0
 
 ## Installation
 

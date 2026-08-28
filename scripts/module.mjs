@@ -4,6 +4,7 @@ import {
 import { registerDrawPad, openDrawApp, openGallery } from "./draw.mjs";
 import { registerJukebox, openJukeboxWindow, openJukeboxManager, diagnoseJukebox, playTrack, stopTrack } from "./jukebox.mjs";
 import { registerDragonchess, openBoardForCurrentUser, getGameRecord, selftest as dragonchessSelftest } from "./dragonchess/index.mjs";
+import { registerTimetable, openTimetableViewer, openTimetableEditor } from "./timetable/index.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 
@@ -14,13 +15,15 @@ Hooks.once("init", () => {
   registerDrawPad();
   registerJukebox();
   registerDragonchess();
+  registerTimetable();
 
   game.modules.get(MODULE_ID).api = {
     id: MODULE_ID,
     unbloodedSorcery: { hasUnbloodedSorcery, getResonanceValue, getResonanceMax, addResonance },
     draw: { openDrawApp, openGallery },
     jukebox: { openJukeboxWindow, openJukeboxManager, diagnoseJukebox, playTrack, stopTrack },
-    dragonchess: { openBoard: openBoardForCurrentUser, getGameRecord, selftest: dragonchessSelftest }
+    dragonchess: { openBoard: openBoardForCurrentUser, getGameRecord, selftest: dragonchessSelftest },
+    timetable: { openViewer: openTimetableViewer, openEditor: openTimetableEditor }
   };
 });
 

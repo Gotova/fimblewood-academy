@@ -1,0 +1,221 @@
+/* Fimblewood Academy — Timetable */
+
+.fimblewood-timetable-app .window-content {
+  padding: 8px;
+  overflow: auto;
+}
+
+.fw-tt-empty {
+  text-align: center;
+  padding: 40px 16px;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.fw-tt-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.fw-tt-tab {
+  flex: 0 0 auto;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  opacity: 0.6;
+}
+.fw-tt-tab.is-active {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.fw-tt-today {
+  margin-left: auto;
+  font-style: italic;
+  opacity: 0.85;
+  font-size: 12px;
+}
+
+.fw-tt-term-start {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.fw-tt-btn-small {
+  padding: 1px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.fw-tt-grid-wrap {
+  overflow: auto;
+}
+
+.fw-tt-grid {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.fw-tt-grid th, .fw-tt-grid td {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  vertical-align: top;
+  padding: 4px;
+}
+.fw-tt-grid thead th {
+  text-align: center;
+  padding: 6px 4px;
+}
+.fw-tt-slot-label {
+  width: 28px;
+  text-align: center;
+  font-weight: bold;
+  opacity: 0.7;
+}
+
+.fw-tt-cell {
+  min-width: 120px;
+  min-height: 64px;
+}
+
+.fw-tt-course {
+  border-radius: 4px;
+  padding: 4px 6px;
+  margin-bottom: 4px;
+  background: rgba(255, 255, 255, 0.06);
+}
+.fw-tt-course.is-mine {
+  background: rgba(80, 160, 120, 0.28);
+  box-shadow: inset 0 0 0 1px rgba(80, 200, 140, 0.6);
+}
+.fw-tt-course.is-editable {
+  cursor: pointer;
+}
+.fw-tt-course.is-editable:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.fw-tt-course-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.fw-tt-course-name {
+  font-weight: bold;
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+.fw-tt-course-professor {
+  font-size: 11px;
+  opacity: 0.8;
+  font-style: italic;
+}
+.fw-tt-course-count {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.fw-tt-note-btn, .fw-tt-course-delete {
+  flex: 0 0 auto;
+  cursor: pointer;
+  opacity: 0.75;
+  background: none;
+  border: none;
+  padding: 0 2px;
+}
+.fw-tt-note-btn:hover, .fw-tt-course-delete:hover {
+  opacity: 1;
+}
+
+.fw-tt-conflict {
+  color: #e0a030;
+  flex: 0 0 auto;
+}
+
+.fw-tt-add-btn {
+  width: 100%;
+  font-size: 11px;
+  padding: 2px 4px;
+  opacity: 0.7;
+  cursor: pointer;
+  background: none;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+}
+.fw-tt-add-btn:hover {
+  opacity: 1;
+}
+
+/* Course edit window */
+
+.fw-tt-course-edit-body label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+.fw-tt-course-edit-body input[type="text"],
+.fw-tt-course-edit-body textarea,
+.fw-tt-course-edit-body select {
+  width: 100%;
+  font-weight: normal;
+  margin-top: 2px;
+}
+.fw-tt-slot-summary {
+  font-style: italic;
+  opacity: 0.85;
+}
+.fw-tt-attendees {
+  margin: 8px 0;
+}
+.fw-tt-drop-hint {
+  font-size: 11px;
+  opacity: 0.7;
+  margin: 2px 0 6px;
+}
+.fw-tt-attendee-list {
+  list-style: none;
+  margin: 0 0 6px;
+  padding: 0;
+}
+.fw-tt-attendee-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+}
+.fw-tt-attendee-row span:first-child {
+  flex: 1;
+}
+.fw-tt-empty-list {
+  font-style: italic;
+  opacity: 0.7;
+}
+.fw-tt-remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.fw-tt-remove-btn:hover {
+  opacity: 1;
+}
+.fw-tt-add-attendee {
+  display: flex;
+  gap: 6px;
+}
+.fw-tt-add-attendee select {
+  flex: 1;
+}
+.fw-tt-course-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
