@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.12.3] - 2026-08-28
+
+### Fixed
+
+- The hideout jukebox UI could pop open on its own right after logging in (or on any scene load), with no click involved — same for record pickups vanishing unclicked. Foundry can auto-control a token that's the only one a user owns on a scene while it's still loading, and since the jukebox prop and record pickups grant every player ownership so they can be clicked, that auto-control was being read as a real click. Both now ignore control events that land while the canvas is still settling in from a scene load.
+
 ## [0.12.2] - 2026-08-27
 
 ### Changed

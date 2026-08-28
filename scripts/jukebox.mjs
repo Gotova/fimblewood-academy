@@ -230,11 +230,25 @@ function applyJukeboxSceneAudioSoon() {
   setTimeout(applyJukeboxSceneAudio, 300);
 }
 
+/**
+ * True from the moment a scene starts loading until shortly after it finishes
+ * drawing. Foundry can auto-control a token during this window — most notably
+ * the lone token a user owns on a scene, which is exactly what the record-player
+ * prop and record pickups become once their actor's ownership is opened up to
+ * every player — with no click involved, so onControlToken uses this to tell
+ * that apart from a real one.
+ */
+let _canvasSettling = false;
+
 export async function playTrack(trackId) {
   const found = findPlaylistSound(trackId);
   if (!found) return;
   await found.playlist.playSound(found.sound);
   applyJukeboxSceneAudioSoon();
+}
+
+function isCanvasSettling() {
+  return _canvasSettling;
 }
 
 export async function stopTrack(trackId) {
@@ -366,6 +380,15 @@ async function reapplyJukeboxTokenOwnership() {
 
 async function onControlToken(token, controlled) {
   if (!controlled) return;
+  // Foundry auto-controls a lone owned token while the canvas is still settling
+  // in (e.g. right after login/scene load, before the player has clicked
+  // anything) — see isCanvasSettling(). Both the pickup and record-player flags
+  // read "controlled" as a stand-in for a deliberate click, so an auto-control
+  // here must be ignored rather than treated as one.
+  if (isCanvasSettling()) {
+    token.release();
+    return;
+  }
   const pickupTrackId = token.document.getFlag(MODULE_ID, "recordPickup");
   if (pickupTrackId) {
     token.release();
@@ -998,10 +1021,17 @@ export function registerJukebox() {
     });
   });
 
+  // Brackets the whole scene load: canvasInit fires before layers (including
+  // tokens) draw, canvasReady only once drawing is done — so any auto-control
+  // Foundry performs along the way falls inside this window. The flag lingers a
+  // little past canvasReady since it can take a beat for that auto-control to
+  // actually land on the client.
+  Hooks.on("canvasInit", () => { _canvasSettling = true; });
   Hooks.on("canvasReady", () => {
     checkAmbientSoundProximity();
     // The client just changed scene — re-decide whether the jukebox is audible here.
     applyJukeboxSceneAudioSoon();
+    setTimeout(() => { _canvasSettling = false; }, 500);
   });
   // Core re-syncs a sound's volume whenever it updates (play, stop, volume
   // change), which would undo the local mute, so it is re-applied afterwards.
