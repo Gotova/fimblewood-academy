@@ -21,6 +21,15 @@ const MODULE_ID = "fimblewood-academy";
 export const TIMETABLE_SETTING = "timetable";
 export const TIMESLOTS_PER_DAY = 4;
 
+/** Fixed real-world start/end times for each of the 4 daily periods; a lunch break separates periods 2 and 3. */
+export const TIMESLOTS = [
+  { start: "08:00", end: "09:30" },
+  { start: "10:00", end: "11:30" },
+  { start: "13:00", end: "14:30" },
+  { start: "15:00", end: "16:30" }
+];
+export const LUNCH_BREAK_AFTER_SLOT = 1; // the break renders after this slot index (i.e. between periods 2 and 3)
+
 function emptySchedule() {
   return { termStartTimestamp: null, buffers: { A: [], B: [] } };
 }

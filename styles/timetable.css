@@ -73,11 +73,42 @@
   text-align: center;
   padding: 6px 4px;
 }
+.fw-tt-grid thead th.is-today {
+  background: rgba(80, 160, 220, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(100, 180, 240, 0.6);
+}
+.fw-tt-col-date {
+  font-size: 11px;
+  font-weight: normal;
+  opacity: 0.75;
+}
 .fw-tt-slot-label {
-  width: 28px;
+  width: 56px;
   text-align: center;
   font-weight: bold;
   opacity: 0.7;
+}
+.fw-tt-slot-number {
+  font-size: 13px;
+}
+.fw-tt-slot-time {
+  font-size: 10px;
+  font-weight: normal;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+.fw-tt-cell.is-today {
+  background: rgba(80, 160, 220, 0.1);
+}
+
+.fw-tt-lunch-row td {
+  text-align: center;
+  font-style: italic;
+  font-size: 11px;
+  opacity: 0.7;
+  padding: 3px;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .fw-tt-cell {
@@ -95,10 +126,10 @@
   background: rgba(80, 160, 120, 0.28);
   box-shadow: inset 0 0 0 1px rgba(80, 200, 140, 0.6);
 }
-.fw-tt-course.is-editable {
+.fw-tt-course.is-editable, .fw-tt-course.is-clickable {
   cursor: pointer;
 }
-.fw-tt-course.is-editable:hover {
+.fw-tt-course.is-editable:hover, .fw-tt-course.is-clickable:hover {
   background: rgba(255, 255, 255, 0.12);
 }
 
@@ -122,7 +153,11 @@
   opacity: 0.7;
 }
 
-.fw-tt-note-btn, .fw-tt-course-delete {
+.fw-tt-note-indicator {
+  flex: 0 0 auto;
+  opacity: 0.75;
+}
+.fw-tt-course-delete {
   flex: 0 0 auto;
   cursor: pointer;
   opacity: 0.75;
@@ -130,7 +165,7 @@
   border: none;
   padding: 0 2px;
 }
-.fw-tt-note-btn:hover, .fw-tt-course-delete:hover {
+.fw-tt-course-delete:hover {
   opacity: 1;
 }
 

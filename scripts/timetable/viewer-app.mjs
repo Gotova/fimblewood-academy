@@ -13,8 +13,8 @@
  * _replaceHTML() dispatching through a small action map.
  */
 
-import { getWeekdays, currentDateDisplay } from "./calendar.mjs";
-import { getSchedule, getCourses, currentBufferKey, nextBufferKey, TIMESLOTS_PER_DAY } from "./data.mjs";
+import { getWeekdays, currentDateDisplay, timestampForColumn, shortDateForTimestamp, currentWeekdayIndex } from "./calendar.mjs";
+import { getSchedule, getCourses, currentBufferKey, nextBufferKey, TIMESLOTS_PER_DAY, TIMESLOTS, LUNCH_BREAK_AFTER_SLOT } from "./data.mjs";
 
 function esc(value) {
   return String(value ?? "").replace(/[&<>"']/g, (c) => ({
@@ -22,20 +22,23 @@ function esc(value) {
   })[c]);
 }
 
-function myActorIds() {
-  return new Set(game.actors.filter((a) => a.isOwner).map((a) => a.id));
+/** The actor the highlight should follow: the user's assigned character, falling back to any owned PC (e.g. for the GM, or a player with none assigned). */
+function highlightActorIds() {
+  const character = game.user.character;
+  if (character) return new Set([character.id]);
+  return new Set(game.actors.filter((a) => a.isOwner && a.type === "character").map((a) => a.id));
 }
 
 export class TimetableViewerApp extends foundry.applications.api.ApplicationV2 {
   static DEFAULT_OPTIONS = {
     id: "fimblewood-timetable-viewer",
     tag: "div",
-    window: { title: "FIMBLEWOOD.Timetable.ViewerTitle", icon: "fas fa-calendar-week" },
+    window: { title: "FIMBLEWOOD.Timetable.ViewerTitle", icon: "fas fa-calendar-week", resizable: true },
     position: { width: 780, height: 560 },
     classes: ["fimblewood-timetable-app"]
   };
 
-  static #ACTIONS = { tabCurrent: "_onTabCurrent", tabNext: "_onTabNext", viewNote: "_onViewNote" };
+  static #ACTIONS = { tabCurrent: "_onTabCurrent", tabNext: "_onTabNext", viewDetails: "_onViewDetails" };
 
   constructor(options) {
     super(options);
@@ -59,25 +62,44 @@ export class TimetableViewerApp extends foundry.applications.api.ApplicationV2 {
 
     const bufferKey = this.#resolveBufferKey(schedule);
     const courses = getCourses(bufferKey, schedule);
-    const mine = myActorIds();
+    const highlight = highlightActorIds();
+    const weeksAhead = this.viewMode === "next" ? 1 : 0;
+    const todayIdx = currentWeekdayIndex(weekdays);
 
     const rows = [];
     for (let slot = 0; slot < TIMESLOTS_PER_DAY; slot++) {
-      const cells = weekdays.map((day) => {
+      const cells = weekdays.map((day, idx) => {
         const here = courses.filter((c) => c.weekdayId === day.id && c.slot === slot);
-        return `<td class="fw-tt-cell">${here.map((c) => this.#courseCard(c, mine)).join("")}</td>`;
+        const isToday = weeksAhead === 0 && idx === todayIdx;
+        return `<td class="fw-tt-cell ${isToday ? "is-today" : ""}">${here.map((c) => this.#courseCard(c, highlight)).join("")}</td>`;
       });
-      rows.push(`<tr><th class="fw-tt-slot-label">${slot + 1}</th>${cells.join("")}</tr>`);
+      rows.push(`<tr><th class="fw-tt-slot-label">${this.#slotLabel(slot)}</th>${cells.join("")}</tr>`);
+      if (slot === LUNCH_BREAK_AFTER_SLOT) rows.push(this.#lunchRow(weekdays.length));
     }
+
+    const headerCells = weekdays.map((day, idx) => {
+      const isToday = weeksAhead === 0 && idx === todayIdx;
+      const date = shortDateForTimestamp(timestampForColumn(idx, weeksAhead, weekdays));
+      return `<th class="${isToday ? "is-today" : ""}">${date ? `<div class="fw-tt-col-date">${esc(date)}</div>` : ""}<div>${esc(day.name)}</div></th>`;
+    });
 
     return `
       ${this.#renderTabs()}
       <div class="fw-tt-grid-wrap">
         <table class="fw-tt-grid">
-          <thead><tr><th></th>${weekdays.map((d) => `<th>${esc(d.name)}</th>`).join("")}</tr></thead>
+          <thead><tr><th></th>${headerCells.join("")}</tr></thead>
           <tbody>${rows.join("")}</tbody>
         </table>
       </div>`;
+  }
+
+  #slotLabel(slot) {
+    const t = TIMESLOTS[slot];
+    return `<div class="fw-tt-slot-number">${slot + 1}</div>${t ? `<div class="fw-tt-slot-time">${t.start}–${t.end}</div>` : ""}`;
+  }
+
+  #lunchRow(columnCount) {
+    return `<tr class="fw-tt-lunch-row"><td colspan="${columnCount + 1}">${game.i18n.localize("FIMBLEWOOD.Timetable.LunchBreakLabel")}</td></tr>`;
   }
 
   #renderTabs() {
@@ -94,17 +116,17 @@ export class TimetableViewerApp extends foundry.applications.api.ApplicationV2 {
       </div>`;
   }
 
-  #courseCard(course, mine) {
-    const isMine = course.attendees.some((id) => mine.has(id));
-    const classes = ["fw-tt-course", isMine ? "is-mine" : ""].filter(Boolean).join(" ");
-    const note = course.note
-      ? `<button type="button" class="fw-tt-note-btn" data-action="viewNote" data-course-id="${course.id}" title="${game.i18n.localize("FIMBLEWOOD.Timetable.ViewNote")}"><i class="fas fa-note-sticky"></i></button>`
+  #courseCard(course, highlight) {
+    const isMine = course.attendees.some((id) => highlight.has(id));
+    const classes = ["fw-tt-course", "is-clickable", isMine ? "is-mine" : ""].filter(Boolean).join(" ");
+    const noteIndicator = course.note
+      ? `<span class="fw-tt-note-indicator" title="${game.i18n.localize("FIMBLEWOOD.Timetable.HasNoteHint")}"><i class="fas fa-note-sticky"></i></span>`
       : "";
     return `
-      <div class="${classes}">
+      <div class="${classes}" data-action="viewDetails" data-course-id="${course.id}">
         <div class="fw-tt-course-header">
           <span class="fw-tt-course-name">${esc(course.name)}</span>
-          ${note}
+          ${noteIndicator}
         </div>
         ${course.professor ? `<div class="fw-tt-course-professor">${esc(course.professor)}</div>` : ""}
       </div>`;
@@ -127,14 +149,23 @@ export class TimetableViewerApp extends foundry.applications.api.ApplicationV2 {
   _onTabCurrent() { this.viewMode = "current"; this.render(); }
   _onTabNext() { this.viewMode = "next"; this.render(); }
 
-  _onViewNote(event, target) {
+  _onViewDetails(event, target) {
     const schedule = getSchedule();
     const bufferKey = this.#resolveBufferKey(schedule);
     const course = getCourses(bufferKey, schedule).find((c) => c.id === target.dataset.courseId);
     if (!course) return;
+
+    const parts = [];
+    if (course.professor) {
+      parts.push(`<p><strong>${game.i18n.localize("FIMBLEWOOD.Timetable.Professor")}:</strong> ${esc(course.professor)}</p>`);
+    }
+    parts.push(`<p><strong>${game.i18n.localize("FIMBLEWOOD.Timetable.Note")}:</strong><br>${
+      course.note ? esc(course.note).replace(/\n/g, "<br>") : `<em>${game.i18n.localize("FIMBLEWOOD.Timetable.NoNote")}</em>`
+    }</p>`);
+
     foundry.applications.api.DialogV2.wait({
       window: { title: course.name },
-      content: `<p>${esc(course.note).replace(/\n/g, "<br>")}</p>`,
+      content: parts.join(""),
       buttons: [{ action: "close", label: game.i18n.localize("FIMBLEWOOD.Timetable.Close"), type: "button", callback: () => true }],
       rejectClose: false
     });

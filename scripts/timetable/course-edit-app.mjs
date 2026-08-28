@@ -22,7 +22,7 @@ export class CourseEditApp extends foundry.applications.api.ApplicationV2 {
   static DEFAULT_OPTIONS = {
     id: "fimblewood-timetable-course-edit",
     tag: "div",
-    window: { title: "FIMBLEWOOD.Timetable.CourseEditTitle", icon: "fas fa-chalkboard-user" },
+    window: { title: "FIMBLEWOOD.Timetable.CourseEditTitle", icon: "fas fa-chalkboard-user", resizable: true },
     position: { width: 420, height: "auto" },
     classes: ["fimblewood-timetable-app", "is-course-edit"]
   };

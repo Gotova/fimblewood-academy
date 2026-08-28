@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.13.1] - 2026-08-28
+
+### Changed
+
+- **Timetable**: both windows are now resizable; each weekday column header shows its actual in-game date above the weekday name, and today's column is highlighted. Periods now show their real start/end times (08:00–09:30, 10:00–11:30, 13:00–14:30, 15:00–16:30) with a "Lunch Break Until 13:00" row between periods 2 and 3. In the player-facing viewer, clicking a course now opens a details popup with its professor and note, and the highlight for "your course" follows your assigned character specifically rather than any actor you happen to own.
+
 ## [0.13.0] - 2026-08-28
 
 ### Added

@@ -54,6 +54,19 @@ export function formatTimestamp(timestamp) {
   }
 }
 
+/** Compact "12th June" style date for a timestamp, meant to sit above a weekday column header. */
+export function shortDateForTimestamp(timestamp) {
+  if (!isCalendarAvailable() || timestamp == null) return null;
+  try {
+    const display = SimpleCalendar.api.timestampToDate(timestamp)?.display;
+    if (!display) return null;
+    return `${display.day}${display.daySuffix ?? ""} ${display.monthName}`;
+  } catch (err) {
+    console.error("fimblewood-academy | Timetable: failed to format a short date", err);
+    return null;
+  }
+}
+
 function secondsPerDay() {
   const cfg = SimpleCalendar.api.getTimeConfiguration();
   return cfg.hoursInDay * cfg.minutesInHour * cfg.secondsInMinute;
@@ -63,6 +76,43 @@ function secondsPerDay() {
 function absoluteDay(timestamp) {
   const ts = timestamp ?? SimpleCalendar.api.timestamp();
   return Math.floor(ts / secondsPerDay());
+}
+
+/** Index of `weekdayId` within `weekdays` (array order = column order in the grid), or -1 if not found. */
+export function weekdayIndex(weekdayId, weekdays = getWeekdays()) {
+  return weekdays.findIndex((d) => d.id === weekdayId);
+}
+
+/** Column index of today's weekday, or null if Simple Calendar isn't available. */
+export function currentWeekdayIndex(weekdays = getWeekdays()) {
+  if (!isCalendarAvailable()) return null;
+  try {
+    const id = SimpleCalendar.api.getCurrentWeekday()?.id;
+    const idx = weekdayIndex(id, weekdays);
+    return idx === -1 ? null : idx;
+  } catch (err) {
+    console.error("fimblewood-academy | Timetable: failed to read Simple Calendar's current weekday", err);
+    return null;
+  }
+}
+
+/**
+ * Timestamp for the given weekday column, in the real-calendar week that is
+ * `weeksAhead` full weeks from the week containing today (0 = this week,
+ * 1 = next week) — i.e. the actual date a "This Week"/"Next Week" column
+ * represents, regardless of which schedule buffer ("A"/"B") is shown there.
+ */
+export function timestampForColumn(colIndex, weeksAhead, weekdays = getWeekdays()) {
+  if (!isCalendarAvailable()) return null;
+  const todayIdx = currentWeekdayIndex(weekdays);
+  if (todayIdx == null || !weekdays.length) return null;
+  try {
+    const dayOffset = (colIndex - todayIdx) + weeksAhead * weekdays.length;
+    return SimpleCalendar.api.timestamp() + dayOffset * secondsPerDay();
+  } catch (err) {
+    console.error("fimblewood-academy | Timetable: failed to compute a column's date", err);
+    return null;
+  }
 }
 
 /**

@@ -8,11 +8,14 @@
  * course-edit-app.mjs for the actual course form).
  */
 
-import { getWeekdays, currentDateDisplay, isCalendarAvailable, currentTimestamp, formatTimestamp } from "./calendar.mjs";
+import {
+  getWeekdays, currentDateDisplay, isCalendarAvailable, currentTimestamp, formatTimestamp,
+  timestampForColumn, shortDateForTimestamp, currentWeekdayIndex
+} from "./calendar.mjs";
 import {
   getSchedule, getCourses, getCoursesAt, conflictingAttendees,
   currentBufferKey, nextBufferKey, setTermStart, addAttendee, deleteCourse,
-  TIMESLOTS_PER_DAY
+  TIMESLOTS_PER_DAY, TIMESLOTS, LUNCH_BREAK_AFTER_SLOT
 } from "./data.mjs";
 
 function esc(value) {
@@ -25,7 +28,7 @@ export class TimetableEditorApp extends foundry.applications.api.ApplicationV2 {
   static DEFAULT_OPTIONS = {
     id: "fimblewood-timetable-editor",
     tag: "div",
-    window: { title: "FIMBLEWOOD.Timetable.EditorTitle", icon: "fas fa-calendar-pen" },
+    window: { title: "FIMBLEWOOD.Timetable.EditorTitle", icon: "fas fa-calendar-pen", resizable: true },
     position: { width: 900, height: 640 },
     classes: ["fimblewood-timetable-app", "is-editor"]
   };
@@ -54,31 +57,50 @@ export class TimetableEditorApp extends foundry.applications.api.ApplicationV2 {
     const schedule = getSchedule();
     const bufferKey = this.#resolveBufferKey(schedule);
     const courses = getCourses(bufferKey, schedule);
+    const weeksAhead = this.viewMode === "next" ? 1 : 0;
+    const todayIdx = currentWeekdayIndex(weekdays);
 
     const rows = [];
     for (let slot = 0; slot < TIMESLOTS_PER_DAY; slot++) {
-      const cells = weekdays.map((day) => {
+      const cells = weekdays.map((day, idx) => {
         const here = getCoursesAt(bufferKey, day.id, slot, schedule);
         const cards = here.map((c) => this.#courseCard(c, bufferKey, schedule)).join("");
+        const isToday = weeksAhead === 0 && idx === todayIdx;
         return `
-          <td class="fw-tt-cell" data-weekday="${day.id}" data-slot="${slot}">
+          <td class="fw-tt-cell ${isToday ? "is-today" : ""}" data-weekday="${day.id}" data-slot="${slot}">
             ${cards}
             <button type="button" class="fw-tt-add-btn" data-action="addCourse" data-weekday="${day.id}" data-slot="${slot}">
               <i class="fas fa-plus"></i> ${game.i18n.localize("FIMBLEWOOD.Timetable.AddCourse")}
             </button>
           </td>`;
       });
-      rows.push(`<tr><th class="fw-tt-slot-label">${slot + 1}</th>${cells.join("")}</tr>`);
+      rows.push(`<tr><th class="fw-tt-slot-label">${this.#slotLabel(slot)}</th>${cells.join("")}</tr>`);
+      if (slot === LUNCH_BREAK_AFTER_SLOT) rows.push(this.#lunchRow(weekdays.length));
     }
+
+    const headerCells = weekdays.map((day, idx) => {
+      const isToday = weeksAhead === 0 && idx === todayIdx;
+      const date = shortDateForTimestamp(timestampForColumn(idx, weeksAhead, weekdays));
+      return `<th class="${isToday ? "is-today" : ""}">${date ? `<div class="fw-tt-col-date">${esc(date)}</div>` : ""}<div>${esc(day.name)}</div></th>`;
+    });
 
     return `
       ${this.#renderHeader(schedule)}
       <div class="fw-tt-grid-wrap">
         <table class="fw-tt-grid">
-          <thead><tr><th></th>${weekdays.map((d) => `<th>${esc(d.name)}</th>`).join("")}</tr></thead>
+          <thead><tr><th></th>${headerCells.join("")}</tr></thead>
           <tbody>${rows.join("")}</tbody>
         </table>
       </div>`;
+  }
+
+  #slotLabel(slot) {
+    const t = TIMESLOTS[slot];
+    return `<div class="fw-tt-slot-number">${slot + 1}</div>${t ? `<div class="fw-tt-slot-time">${t.start}–${t.end}</div>` : ""}`;
+  }
+
+  #lunchRow(columnCount) {
+    return `<tr class="fw-tt-lunch-row"><td colspan="${columnCount + 1}">${game.i18n.localize("FIMBLEWOOD.Timetable.LunchBreakLabel")}</td></tr>`;
   }
 
   #renderHeader(schedule) {
