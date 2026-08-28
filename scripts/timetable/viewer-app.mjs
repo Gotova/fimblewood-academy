@@ -14,7 +14,7 @@
  */
 
 import { getWeekdays, currentDateDisplay, timestampForColumn, shortDateForTimestamp, currentWeekdayIndex } from "./calendar.mjs";
-import { getSchedule, getCourses, currentBufferKey, nextBufferKey, TIMESLOTS_PER_DAY, TIMESLOTS, LUNCH_BREAK_AFTER_SLOT } from "./data.mjs";
+import { getSchedule, getCourses, currentBufferKey, nextBufferKey, currentPeriod, TIMESLOTS_PER_DAY, TIMESLOTS, LUNCH_BREAK_AFTER_SLOT } from "./data.mjs";
 
 function esc(value) {
   return String(value ?? "").replace(/[&<>"']/g, (c) => ({
@@ -65,16 +65,18 @@ export class TimetableViewerApp extends foundry.applications.api.ApplicationV2 {
     const highlight = highlightActorIds();
     const weeksAhead = this.viewMode === "next" ? 1 : 0;
     const todayIdx = currentWeekdayIndex(weekdays);
+    const period = weeksAhead === 0 ? currentPeriod() : null; // only "this week" can contain the live moment
 
     const rows = [];
     for (let slot = 0; slot < TIMESLOTS_PER_DAY; slot++) {
       const cells = weekdays.map((day, idx) => {
         const here = courses.filter((c) => c.weekdayId === day.id && c.slot === slot);
         const isToday = weeksAhead === 0 && idx === todayIdx;
-        return `<td class="fw-tt-cell ${isToday ? "is-today" : ""}">${here.map((c) => this.#courseCard(c, highlight)).join("")}</td>`;
+        const isNow = isToday && period === slot;
+        return `<td class="fw-tt-cell ${isToday ? "is-today" : ""} ${isNow ? "is-current-slot" : ""}">${here.map((c) => this.#courseCard(c, highlight)).join("")}</td>`;
       });
       rows.push(`<tr><th class="fw-tt-slot-label">${this.#slotLabel(slot)}</th>${cells.join("")}</tr>`);
-      if (slot === LUNCH_BREAK_AFTER_SLOT) rows.push(this.#lunchRow(weekdays.length));
+      if (slot === LUNCH_BREAK_AFTER_SLOT) rows.push(this.#lunchRow(weekdays.length, period === "lunch"));
     }
 
     const headerCells = weekdays.map((day, idx) => {
@@ -98,8 +100,8 @@ export class TimetableViewerApp extends foundry.applications.api.ApplicationV2 {
     return `<div class="fw-tt-slot-number">${slot + 1}</div>${t ? `<div class="fw-tt-slot-time">${t.start}–${t.end}</div>` : ""}`;
   }
 
-  #lunchRow(columnCount) {
-    return `<tr class="fw-tt-lunch-row"><td colspan="${columnCount + 1}">${game.i18n.localize("FIMBLEWOOD.Timetable.LunchBreakLabel")}</td></tr>`;
+  #lunchRow(columnCount, isNow) {
+    return `<tr class="fw-tt-lunch-row ${isNow ? "is-current-slot" : ""}"><td colspan="${columnCount + 1}">${game.i18n.localize("FIMBLEWOOD.Timetable.LunchBreakLabel")}</td></tr>`;
   }
 
   #renderTabs() {

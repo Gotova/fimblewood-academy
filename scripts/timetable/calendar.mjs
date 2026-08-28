@@ -34,6 +34,19 @@ export function currentTimestamp() {
   }
 }
 
+/** Current in-game clock time as {hour, minute}, or null if unavailable. */
+export function currentTimeOfDay() {
+  if (!isCalendarAvailable()) return null;
+  try {
+    const dt = SimpleCalendar.api.currentDateTime();
+    if (!dt) return null;
+    return { hour: dt.hour, minute: dt.minute };
+  } catch (err) {
+    console.error("fimblewood-academy | Timetable: failed to read Simple Calendar's current time of day", err);
+    return null;
+  }
+}
+
 export function currentDateDisplay() {
   if (!isCalendarAvailable()) return null;
   try {

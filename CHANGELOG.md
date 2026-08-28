@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.13.2] - 2026-08-28
+
+### Changed
+
+- **Timetable**: today's actual current period (or the lunch break) is now highlighted at a glance in both the player viewer and the GM editor, worked out live from Simple Calendar's clock time against the fixed period start/end times.
+
 ## [0.13.1] - 2026-08-28
 
 ### Changed

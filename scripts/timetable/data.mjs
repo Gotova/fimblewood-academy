@@ -15,7 +15,7 @@
  * callback, which is what keeps every open Timetable window in sync.
  */
 
-import { currentWeekParity } from "./calendar.mjs";
+import { currentWeekParity, currentTimeOfDay } from "./calendar.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 export const TIMETABLE_SETTING = "timetable";
@@ -29,6 +29,30 @@ export const TIMESLOTS = [
   { start: "15:00", end: "16:30" }
 ];
 export const LUNCH_BREAK_AFTER_SLOT = 1; // the break renders after this slot index (i.e. between periods 2 and 3)
+
+function timeToMinutes(str) {
+  const [h, m] = str.split(":").map(Number);
+  return h * 60 + m;
+}
+
+/**
+ * Which period we're in right now, by Simple Calendar's clock time:
+ * a period index (0-based), the string "lunch" during the lunch break, or
+ * null outside school hours (or if Simple Calendar can't say). Used to
+ * highlight "you are here" for whichever weekday column is today.
+ */
+export function currentPeriod() {
+  const t = currentTimeOfDay();
+  if (!t) return null;
+  const nowMin = t.hour * 60 + t.minute;
+  for (let i = 0; i < TIMESLOTS.length; i++) {
+    if (nowMin >= timeToMinutes(TIMESLOTS[i].start) && nowMin < timeToMinutes(TIMESLOTS[i].end)) return i;
+  }
+  const lunchStart = timeToMinutes(TIMESLOTS[LUNCH_BREAK_AFTER_SLOT].end);
+  const lunchEnd = timeToMinutes(TIMESLOTS[LUNCH_BREAK_AFTER_SLOT + 1].start);
+  if (nowMin >= lunchStart && nowMin < lunchEnd) return "lunch";
+  return null;
+}
 
 function emptySchedule() {
   return { termStartTimestamp: null, buffers: { A: [], B: [] } };

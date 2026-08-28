@@ -14,7 +14,7 @@ import {
 } from "./calendar.mjs";
 import {
   getSchedule, getCourses, getCoursesAt, conflictingAttendees,
-  currentBufferKey, nextBufferKey, setTermStart, addAttendee, deleteCourse,
+  currentBufferKey, nextBufferKey, currentPeriod, setTermStart, addAttendee, deleteCourse,
   TIMESLOTS_PER_DAY, TIMESLOTS, LUNCH_BREAK_AFTER_SLOT
 } from "./data.mjs";
 
@@ -59,6 +59,7 @@ export class TimetableEditorApp extends foundry.applications.api.ApplicationV2 {
     const courses = getCourses(bufferKey, schedule);
     const weeksAhead = this.viewMode === "next" ? 1 : 0;
     const todayIdx = currentWeekdayIndex(weekdays);
+    const period = weeksAhead === 0 ? currentPeriod() : null; // only "this week" can contain the live moment
 
     const rows = [];
     for (let slot = 0; slot < TIMESLOTS_PER_DAY; slot++) {
@@ -66,8 +67,9 @@ export class TimetableEditorApp extends foundry.applications.api.ApplicationV2 {
         const here = getCoursesAt(bufferKey, day.id, slot, schedule);
         const cards = here.map((c) => this.#courseCard(c, bufferKey, schedule)).join("");
         const isToday = weeksAhead === 0 && idx === todayIdx;
+        const isNow = isToday && period === slot;
         return `
-          <td class="fw-tt-cell ${isToday ? "is-today" : ""}" data-weekday="${day.id}" data-slot="${slot}">
+          <td class="fw-tt-cell ${isToday ? "is-today" : ""} ${isNow ? "is-current-slot" : ""}" data-weekday="${day.id}" data-slot="${slot}">
             ${cards}
             <button type="button" class="fw-tt-add-btn" data-action="addCourse" data-weekday="${day.id}" data-slot="${slot}">
               <i class="fas fa-plus"></i> ${game.i18n.localize("FIMBLEWOOD.Timetable.AddCourse")}
@@ -75,7 +77,7 @@ export class TimetableEditorApp extends foundry.applications.api.ApplicationV2 {
           </td>`;
       });
       rows.push(`<tr><th class="fw-tt-slot-label">${this.#slotLabel(slot)}</th>${cells.join("")}</tr>`);
-      if (slot === LUNCH_BREAK_AFTER_SLOT) rows.push(this.#lunchRow(weekdays.length));
+      if (slot === LUNCH_BREAK_AFTER_SLOT) rows.push(this.#lunchRow(weekdays.length, period === "lunch"));
     }
 
     const headerCells = weekdays.map((day, idx) => {
@@ -99,8 +101,8 @@ export class TimetableEditorApp extends foundry.applications.api.ApplicationV2 {
     return `<div class="fw-tt-slot-number">${slot + 1}</div>${t ? `<div class="fw-tt-slot-time">${t.start}–${t.end}</div>` : ""}`;
   }
 
-  #lunchRow(columnCount) {
-    return `<tr class="fw-tt-lunch-row"><td colspan="${columnCount + 1}">${game.i18n.localize("FIMBLEWOOD.Timetable.LunchBreakLabel")}</td></tr>`;
+  #lunchRow(columnCount, isNow) {
+    return `<tr class="fw-tt-lunch-row ${isNow ? "is-current-slot" : ""}"><td colspan="${columnCount + 1}">${game.i18n.localize("FIMBLEWOOD.Timetable.LunchBreakLabel")}</td></tr>`;
   }
 
   #renderHeader(schedule) {
