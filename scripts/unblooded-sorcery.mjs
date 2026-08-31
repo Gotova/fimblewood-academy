@@ -3,6 +3,7 @@ import { playSiphon } from "./siphon-fx.mjs";
 const MODULE_ID = "fimblewood-academy";
 const FLAG_RESONANCE = "resonance";
 const SIPHONED_FLAG = "siphonedSpells";
+const HIDE_SIPHON_FX_FLAG = "hideSiphonFx";
 const INNATE_SORCERY_MARKER = "Unblooded Magic: Innate Sorcery Active";
 
 /* -------------------------------------------- */
@@ -27,6 +28,12 @@ export function getResonanceValue(actor) {
 
 export function getResonanceMax(actor) {
   return 2 * (actor?.system?.attributes?.prof ?? 0);
+}
+
+/** Aster's own choice, not a viewer preference: when set, the siphon animation never
+ * broadcasts for this actor at all — nobody at the table sees it, in or out of fiction. */
+function hidesSiphonFx(actor) {
+  return !!actor?.getFlag(MODULE_ID, HIDE_SIPHON_FX_FLAG);
 }
 
 async function setResonance(actor, value, { allowOverflow=false }={}) {
@@ -103,7 +110,13 @@ function injectResonanceBar(app, html) {
         <span class="separator">/</span>
         <span class="max">${max}</span>
       </div>
-    </div>`;
+    </div>
+    ${actor.isOwner ? `
+    <label class="fimblewood-siphon-hide-toggle"
+           data-tooltip="When on, the siphon animation never appears for anyone at the table — not even you. Use this if you're keeping your powers hidden in the fiction.">
+      <input type="checkbox" class="fimblewood-siphon-hide-checkbox" ${hidesSiphonFx(actor) ? "checked" : ""}>
+      Hide Siphon Animation
+    </label>` : ""}`;
   hdGroup.insertAdjacentElement("afterend", group);
 
   const bar = group.querySelector(".fimblewood-resonance");
@@ -113,6 +126,10 @@ function injectResonanceBar(app, html) {
   bar.addEventListener("contextmenu", async (event) => {
     event.preventDefault();
     await addResonance(actor, -1);
+  });
+
+  group.querySelector(".fimblewood-siphon-hide-checkbox")?.addEventListener("change", async (event) => {
+    await actor.setFlag(MODULE_ID, HIDE_SIPHON_FX_FLAG, event.currentTarget.checked);
   });
 }
 
@@ -171,7 +188,7 @@ async function offerActiveSiphon(sorcererActor, spellLevel, casterName, casterTo
   await siphonItem.update({ "system.uses.spent": (siphonItem.system.uses.spent ?? 0) + 1 });
   await addResonance(sorcererActor, gain, { flavor: `${sorcererActor.name} siphons ${casterName}'s spell (Active Siphon)` });
 
-  if (casterToken && sorcererToken) {
+  if (casterToken && sorcererToken && !hidesSiphonFx(sorcererActor)) {
     playSiphon({
       sceneId: canvas.scene?.id,
       fromTokenId: casterToken.id,
@@ -202,7 +219,7 @@ async function offerPassiveSiphon(sorcererActor, spellItem, reason) {
 
   const casterToken = tokenForActor(spellItem.actor);
   const sorcererToken = tokenForActor(sorcererActor);
-  if (casterToken && sorcererToken) {
+  if (casterToken && sorcererToken && !hidesSiphonFx(sorcererActor)) {
     playSiphon({
       sceneId: canvas.scene?.id,
       fromTokenId: casterToken.id,

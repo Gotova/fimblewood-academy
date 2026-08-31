@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.14.1] - 2026-08-31
+
+### Added
+
+- **Unblooded Sorcery**: an Unblooded Sorcery character can now hide their siphon animation from the whole table via a "Hide Siphon Animation" toggle on their own character sheet, next to the Resonance meter — for a character keeping their power secret in the fiction. This is separate from the existing "Show Siphon Animation" client setting, which only affects what a given viewer sees on their own screen.
+
 ## [0.14.0] - 2026-08-31
 
 ### Added

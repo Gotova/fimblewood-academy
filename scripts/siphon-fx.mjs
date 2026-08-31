@@ -231,7 +231,7 @@ export function registerSiphonFx() {
   game.settings.register(MODULE_ID, SETTING_SHOW, {
     scope: "client", config: true, type: Boolean, default: true,
     name: "Show Siphon Animation",
-    hint: "Show the on-canvas siphon animation when Unblooded Sorcery drains Resonance from a spell. Purely visual — turning it off doesn't affect other players."
+    hint: "Show the on-canvas siphon animation on your own screen when Unblooded Sorcery drains Resonance from a spell. This only affects your own view — turning it off doesn't hide the animation from other players. (An Unblooded Sorcery character can hide it from everyone via the toggle on their own sheet.)"
   });
 
   Hooks.once("ready", () => {
