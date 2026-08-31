@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.14.2] - 2026-08-31
+
+### Fixed
+
+- The hideout jukebox UI could still pop open on its own on login (for the GM too, not just players) despite the 0.12.3 fix — same for record pickups vanishing unclicked. That fix ignored control events for a fixed window after scene load, but a slow/cold-cache login can push Foundry's own "auto-control the lone token a user owns" behavior past that window. Replaced the timing window with a check for an actual pointerdown on the token itself, so a real click is required regardless of how long the scene took to load.
+
 ## [0.14.1] - 2026-08-31
 
 ### Added

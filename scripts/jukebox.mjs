@@ -231,24 +231,36 @@ function applyJukeboxSceneAudioSoon() {
 }
 
 /**
- * True from the moment a scene starts loading until shortly after it finishes
- * drawing. Foundry can auto-control a token during this window — most notably
- * the lone token a user owns on a scene, which is exactly what the record-player
- * prop and record pickups become once their actor's ownership is opened up to
- * every player — with no click involved, so onControlToken uses this to tell
- * that apart from a real one.
+ * Timestamp of the last genuine pointerdown Foundry's canvas reported directly
+ * on a given token placeable, keyed by placeable instance (a fresh instance
+ * per draw, so nothing here survives a scene reload or scene switch). Foundry
+ * can `.control()` a token with no interaction at all — most notably its own
+ * "auto-control the lone token a user owns" behavior while a scene is loading,
+ * which is exactly what the record-player prop and record pickups become once
+ * their actor's ownership is opened up to every player so they can be clicked.
+ * A fixed post-load timing window was tried first (see CHANGELOG 0.12.3) but a
+ * slow/cold-cache scene load can push that auto-control past any fixed window;
+ * checking for an actual pointerdown on this exact token instead ties the
+ * check to a real user gesture rather than to how long loading happens to
+ * take, so it can't race.
  */
-let _canvasSettling = false;
+const _recentTokenPointerdowns = new WeakMap();
+const CLICK_FRESHNESS_MS = 500;
+
+function markGenuineTokenClick(token) {
+  _recentTokenPointerdowns.set(token, Date.now());
+}
+
+function hasRecentGenuineClick(token) {
+  const at = _recentTokenPointerdowns.get(token);
+  return typeof at === "number" && (Date.now() - at) < CLICK_FRESHNESS_MS;
+}
 
 export async function playTrack(trackId) {
   const found = findPlaylistSound(trackId);
   if (!found) return;
   await found.playlist.playSound(found.sound);
   applyJukeboxSceneAudioSoon();
-}
-
-function isCanvasSettling() {
-  return _canvasSettling;
 }
 
 export async function stopTrack(trackId) {
@@ -380,16 +392,20 @@ async function reapplyJukeboxTokenOwnership() {
 
 async function onControlToken(token, controlled) {
   if (!controlled) return;
-  // Foundry auto-controls a lone owned token while the canvas is still settling
-  // in (e.g. right after login/scene load, before the player has clicked
-  // anything) — see isCanvasSettling(). Both the pickup and record-player flags
-  // read "controlled" as a stand-in for a deliberate click, so an auto-control
-  // here must be ignored rather than treated as one.
-  if (isCanvasSettling()) {
+  const pickupTrackId = token.document.getFlag(MODULE_ID, "recordPickup");
+  const isRecordPlayer = token.document.getFlag(MODULE_ID, "recordPlayer");
+  if (!pickupTrackId && !isRecordPlayer) return;
+  // Foundry can control a token with no click at all — most notably its own
+  // "auto-control the lone token a user owns" behavior while a scene is still
+  // loading, which is exactly what this token becomes once its actor's
+  // ownership is opened up to every player. Both the pickup and record-player
+  // flags read "controlled" as a stand-in for a deliberate click, so anything
+  // without a pointerdown that just landed on this very token gets ignored
+  // rather than treated as one — see markGenuineTokenClick/hasRecentGenuineClick.
+  if (!hasRecentGenuineClick(token)) {
     token.release();
     return;
   }
-  const pickupTrackId = token.document.getFlag(MODULE_ID, "recordPickup");
   if (pickupTrackId) {
     token.release();
     // Collecting is switched off: leave the pickup sitting on the map untouched
@@ -403,7 +419,7 @@ async function onControlToken(token, controlled) {
     }
     return;
   }
-  if (token.document.getFlag(MODULE_ID, "recordPlayer")) {
+  if (isRecordPlayer) {
     token.release();
     openJukeboxWindow();
   }
@@ -1021,17 +1037,10 @@ export function registerJukebox() {
     });
   });
 
-  // Brackets the whole scene load: canvasInit fires before layers (including
-  // tokens) draw, canvasReady only once drawing is done — so any auto-control
-  // Foundry performs along the way falls inside this window. The flag lingers a
-  // little past canvasReady since it can take a beat for that auto-control to
-  // actually land on the client.
-  Hooks.on("canvasInit", () => { _canvasSettling = true; });
   Hooks.on("canvasReady", () => {
     checkAmbientSoundProximity();
     // The client just changed scene — re-decide whether the jukebox is audible here.
     applyJukeboxSceneAudioSoon();
-    setTimeout(() => { _canvasSettling = false; }, 500);
   });
   // Core re-syncs a sound's volume whenever it updates (play, stop, volume
   // change), which would undo the local mute, so it is re-applied afterwards.
@@ -1045,6 +1054,10 @@ export function registerJukebox() {
     if ("x" in changes || "y" in changes || "elevation" in changes) checkAmbientSoundProximity();
   });
   Hooks.on("createToken", (tokenDoc) => forceJukeboxTokenOwnership(tokenDoc));
+  // Records a real pointerdown against this exact placeable instance so
+  // onControlToken can tell a genuine click apart from Foundry controlling the
+  // token on its own — see hasRecentGenuineClick.
+  Hooks.on("drawToken", (token) => token.on("pointerdown", () => markGenuineTokenClick(token)));
   Hooks.on("controlToken", onControlToken);
   Hooks.on("createItem", onCreateItem);
 
