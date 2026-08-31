@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.14.0] - 2026-08-31
+
+### Added
+
+- **Unblooded Sorcery**: Active Siphon and Passive Siphon now play an on-canvas animation — a glowing tether from the casting token to the sorcerer's, with motes shifting from the spell's school colour to Resonance violet as they arrive — so the table can see the drain happen instead of only reading it in chat. Active Siphon draws a bright tether scaled to the spell's level; Passive Siphon draws a fainter, raggeder one. Players can turn the effect off for themselves via a new client setting.
+
 ## [0.13.2] - 2026-08-28
 
 ### Changed

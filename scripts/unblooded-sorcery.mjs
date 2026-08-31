@@ -1,3 +1,5 @@
+import { playSiphon } from "./siphon-fx.mjs";
+
 const MODULE_ID = "fimblewood-academy";
 const FLAG_RESONANCE = "resonance";
 const SIPHONED_FLAG = "siphonedSpells";
@@ -151,7 +153,7 @@ async function syncResonantSundering(actor, shouldBeActive) {
 /*  Active Siphon / Passive Siphon               */
 /* -------------------------------------------- */
 
-async function offerActiveSiphon(sorcererActor, spellLevel, casterName) {
+async function offerActiveSiphon(sorcererActor, spellLevel, casterName, casterToken, sorcererToken, school) {
   const siphonItem = getFeature(sorcererActor, "isManaSiphon");
   if (!siphonItem || (siphonItem.system.uses?.value ?? 0) <= 0) return;
 
@@ -168,6 +170,17 @@ async function offerActiveSiphon(sorcererActor, spellLevel, casterName) {
 
   await siphonItem.update({ "system.uses.spent": (siphonItem.system.uses.spent ?? 0) + 1 });
   await addResonance(sorcererActor, gain, { flavor: `${sorcererActor.name} siphons ${casterName}'s spell (Active Siphon)` });
+
+  if (casterToken && sorcererToken) {
+    playSiphon({
+      sceneId: canvas.scene?.id,
+      fromTokenId: casterToken.id,
+      toTokenId: sorcererToken.id,
+      school,
+      motes: spellLevel,
+      variant: "active"
+    });
+  }
 }
 
 async function offerPassiveSiphon(sorcererActor, spellItem, reason) {
@@ -186,6 +199,19 @@ async function offerPassiveSiphon(sorcererActor, spellItem, reason) {
 
   await sorcererActor.setFlag(MODULE_ID, key, true);
   await addResonance(sorcererActor, 1, { flavor: `${sorcererActor.name} siphons ${spellItem.name} (Passive Siphon)` });
+
+  const casterToken = tokenForActor(spellItem.actor);
+  const sorcererToken = tokenForActor(sorcererActor);
+  if (casterToken && sorcererToken) {
+    playSiphon({
+      sceneId: canvas.scene?.id,
+      fromTokenId: casterToken.id,
+      toTokenId: sorcererToken.id,
+      school: spellItem.system.school,
+      motes: 1,
+      variant: "passive"
+    });
+  }
 }
 
 /* -------------------------------------------- */
@@ -464,7 +490,7 @@ export function registerUnbloodedSorcery() {
       const nearby = tokensWithinFeet(casterToken, 60).filter(t => t.actor !== item.actor && hasUnbloodedSorcery(t.actor));
       for (const t of nearby) {
         if (item.actor === t.actor) continue;
-        await offerActiveSiphon(t.actor, item.system.level, item.actor.name);
+        await offerActiveSiphon(t.actor, item.system.level, item.actor.name, casterToken, t, item.system.school);
         await offerBendMagic(t.actor, item, item.actor.name);
         await offerRedirectMagic(t.actor, item, item.actor.name, item.system.level);
       }

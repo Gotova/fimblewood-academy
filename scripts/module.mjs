@@ -1,6 +1,7 @@
 import {
   registerUnbloodedSorcery, hasUnbloodedSorcery, getResonanceValue, getResonanceMax, addResonance, cleanupStaleResonance
 } from "./unblooded-sorcery.mjs";
+import { registerSiphonFx, playSiphon, selftest as siphonFxSelftest } from "./siphon-fx.mjs";
 import { registerDrawPad, openDrawApp, openGallery } from "./draw.mjs";
 import { registerJukebox, openJukeboxWindow, openJukeboxManager, diagnoseJukebox, playTrack, stopTrack } from "./jukebox.mjs";
 import { registerDragonchess, openBoardForCurrentUser, getGameRecord, selftest as dragonchessSelftest } from "./dragonchess/index.mjs";
@@ -12,6 +13,7 @@ Hooks.once("init", () => {
   console.log(`${MODULE_ID} | Initializing Fimblewood Academy`);
 
   registerUnbloodedSorcery();
+  registerSiphonFx();
   registerDrawPad();
   registerJukebox();
   registerDragonchess();
@@ -20,6 +22,7 @@ Hooks.once("init", () => {
   game.modules.get(MODULE_ID).api = {
     id: MODULE_ID,
     unbloodedSorcery: { hasUnbloodedSorcery, getResonanceValue, getResonanceMax, addResonance },
+    siphonFx: { play: playSiphon, selftest: siphonFxSelftest },
     draw: { openDrawApp, openGallery },
     jukebox: { openJukeboxWindow, openJukeboxManager, diagnoseJukebox, playTrack, stopTrack },
     dragonchess: { openBoard: openBoardForCurrentUser, getGameRecord, selftest: dragonchessSelftest },
