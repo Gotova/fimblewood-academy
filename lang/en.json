@@ -148,7 +148,7 @@
     "AmbientSoundFade": {
       "Settings": {
         "FadeName": "Ambient Sound Fade (ms)",
-        "FadeHint": "How long ambient music fades in when a token walks into a sound's radius, and fades out when it walks out. 0 switches instantly; Foundry's own default is 250."
+        "FadeHint": "How long ambient music fades in when a token walks into a sound's radius, and fades out when it walks out. 0 switches instantly (Foundry's own behavior)."
       }
     },
     "Timetable": {

@@ -203,7 +203,7 @@ function anySceneHasJukebox() {
  * and the music stops for you; walk back and you rejoin the song already in
  * progress, while everyone still in the hideout keeps hearing it throughout.
  */
-function applyJukeboxSceneAudio() {
+function applyJukeboxSceneAudio({ immediate = false } = {}) {
   const playlist = findJukeboxPlaylist();
   if (!playlist) return;
   // Before the prop is placed anywhere there is no hideout to be scoped to, so
@@ -212,36 +212,41 @@ function applyJukeboxSceneAudio() {
   for (const playlistSound of playlist.sounds) {
     if (!playlistSound.getFlag(MODULE_ID, "trackId")) continue;
     const sound = playlistSound.sound;
-    if (!sound) continue;
-    if (!sound.playing) {
-      // Not started yet — on login the browser holds all audio back until the
-      // first click/keypress, and a cold cache can take a while to load the
-      // track, both easily outlasting applyJukeboxSceneAudioSoon's retry. Catch
-      // the moment it actually starts instead, or it would begin at full volume
-      // on whatever scene the client is looking at (e.g. the landing scene).
-      if (playlistSound.playing) watchForSoundStart(sound);
-      continue;
-    }
-    const target = audible ? (playlistSound.effectiveVolume ?? playlistSound.volume ?? 1) : 0;
+    // Not created or not started yet — the "play" listener attached in
+    // _createSound (see registerJukebox) catches it the moment it starts.
+    if (!sound?.playing) continue;
+    const target = audible ? (playlistSound.volume ?? 1) : 0;
     // No "already at target" shortcut when muting: during core's fade-in the
     // gain reads ~0 while a ramp up to full volume is still scheduled, so a
     // sound that looks silent may be seconds away from being loud.
     if (audible && sound.volume === target) continue;
-    if (typeof sound.fade === "function") sound.fade(target, { duration: 400 });
-    else sound.volume = target;
+    // fade() cancels any ramp core has scheduled; a plain volume assignment
+    // would be overridden by it.
+    sound.fade(target, { duration: immediate ? 0 : 400 });
   }
 }
 
-/** Sounds that already have a one-shot "play" listener attached. */
-const _watchedSounds = new WeakSet();
-
-function watchForSoundStart(sound) {
-  if (_watchedSounds.has(sound) || typeof sound.addEventListener !== "function") return;
-  _watchedSounds.add(sound);
-  sound.addEventListener("play", () => {
-    _watchedSounds.delete(sound);
-    applyJukeboxSceneAudioSoon();
-  }, { once: true });
+/**
+ * Core only creates a PlaylistSound's Sound once the browser unlocks audio (the
+ * first click/keypress after login), then starts it straight away at full
+ * volume — long after canvasReady, with no document update to hook. So every
+ * jukebox Sound gets a "play" listener at creation that mutes it on the spot
+ * when this client is not in the hideout. It is added after core's own listener,
+ * so it runs after core has kicked off its fade-in and overrides it.
+ */
+function patchPlaylistSoundCreation() {
+  const PlaylistSoundCls = CONFIG.PlaylistSound.documentClass;
+  const original = PlaylistSoundCls.prototype._createSound;
+  PlaylistSoundCls.prototype._createSound = function (...args) {
+    const sound = original.apply(this, args);
+    if (sound && this.getFlag(MODULE_ID, "trackId")) {
+      sound.addEventListener("play", () => {
+        applyJukeboxSceneAudio({ immediate: true });
+        applyJukeboxSceneAudioSoon();
+      });
+    }
+    return sound;
+  };
 }
 
 /**
@@ -1032,6 +1037,7 @@ export function openJukeboxManager() {
 /* -------------------------------------------- */
 
 export function registerJukebox() {
+  patchPlaylistSoundCreation();
   game.settings.register(MODULE_ID, REGISTRY_SETTING, {
     scope: "world", config: false, type: Object, default: {}
   });

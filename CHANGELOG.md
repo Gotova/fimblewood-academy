@@ -4,6 +4,14 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.15.1] - 2026-09-26
+
+### Fixed
+
+- The 0.15.0 fixes did not take effect:
+  - **Jukebox**: core only creates a playlist track's sound once the browser unlocks audio (the first click after login) and then starts it at full volume. The mute skipped tracks whose sound didn't exist yet, so the hideout song still played on the landing scene. Jukebox sounds now get a listener when they are created that mutes them the instant they start outside the hideout.
+  - **Ambient Sound Fade**: token movement refreshes ambient sounds with an explicit fade of 0, which the patch deliberately left alone. Every sounds-layer refresh now uses the configured duration. The default is now 3.5 seconds, under a new setting key, so an older stored value doesn't carry over. Walking back into a radius while its sound is still fading out now fades it back in once the fade-out ends, instead of leaving it silent until the token moves again.
+
 ## [0.15.0] - 2026-09-26
 
 ### Added
