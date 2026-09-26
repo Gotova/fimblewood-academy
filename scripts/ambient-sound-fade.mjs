@@ -16,7 +16,8 @@
 const MODULE_ID = "fimblewood-academy";
 const FADE_SETTING = "ambientSoundFadeDuration";
 
-function getFadeMs() {
+/** The configured fade, also used by the jukebox for its own local playback. */
+export function getAmbientFadeMs() {
   return game.settings.get(MODULE_ID, FADE_SETTING);
 }
 
@@ -49,7 +50,7 @@ export function registerAmbientSoundFade() {
   const SoundsLayer = foundry.canvas.layers.SoundsLayer;
   const originalRefresh = SoundsLayer.prototype.refresh;
   SoundsLayer.prototype.refresh = function (options = {}) {
-    return originalRefresh.call(this, { ...options, fade: getFadeMs() });
+    return originalRefresh.call(this, { ...options, fade: getAmbientFadeMs() });
   };
 
   const AmbientSound = foundry.canvas.placeables.AmbientSound;

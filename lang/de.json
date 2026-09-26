@@ -133,7 +133,9 @@
         "TrackNew": "+ Neuen Titel erstellen…",
         "ItemGrantsTrack": "Schaltet einen Musikbox-Titel frei",
         "TokenIsPickup": "Fundstueck auf der Karte — schaltet Titel frei",
-        "TokenIsPlayer": "Dies ist die Musikbox"
+        "TokenIsPlayer": "Dies ist die Musikbox",
+        "HearingRange": "Hoerweite (Felder)",
+        "HearingRangeHint": "Spieler hoeren die Musikbox in voller Lautstaerke, solange einer ihrer Tokens in dieser Reichweite steht, unabhaengig von Waenden. 0 = die ganze Szene."
       },
       "Notify": {
         "Broadcast": "Schallplatte \"{name}\" gesammelt!"

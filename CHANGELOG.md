@@ -4,6 +4,17 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.17.0] - 2026-09-26
+
+### Changed
+
+- **Hideout Jukebox**: the jukebox no longer plays through the Playlist for everyone. The record put on is stored as shared state that any player can set without a GM, and each client plays the song locally only while one of its tokens is within the record player's **hearing range**. The volume is the same everywhere inside the range, walls are ignored, and the global music slider still applies. Entering and leaving the range fades the music in and out, using the Ambient Sound Fade duration. Everyone in range hears the same spot in the song. The song keeps running "virtually" while nobody is in range, so coming back picks it up where it would be by now. Outside the range nothing plays at all, not even muted.
+- The hearing range is set in grid squares in the record player's token config (default 6; 0 = the whole scene). As with core ambient sounds, a GM only hears the jukebox with a token selected within range, unless the range is 0.
+
+### Removed
+
+- The per-client muting and the GM-driven pause/resume from 0.15.x–0.16.0. A jukebox track started through the Playlist sidebar, or left playing by an older version, is automatically converted to the new shared state.
+
 ## [0.16.0] - 2026-09-26
 
 ### Changed

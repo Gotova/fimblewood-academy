@@ -133,7 +133,9 @@
         "TrackNew": "+ Create new track…",
         "ItemGrantsTrack": "Grants a Jukebox track",
         "TokenIsPickup": "Map pickup — grants track",
-        "TokenIsPlayer": "This is the Jukebox prop"
+        "TokenIsPlayer": "This is the Jukebox prop",
+        "HearingRange": "Hearing range (grid squares)",
+        "HearingRangeHint": "Players hear the record player at full volume while one of their tokens is within this range, regardless of walls. 0 = the whole scene."
       },
       "Notify": {
         "Broadcast": "Record \"{name}\" collected!"

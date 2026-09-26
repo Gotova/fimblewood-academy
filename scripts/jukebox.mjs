@@ -2,11 +2,13 @@
  * Fimblewood Academy — Hideout Jukebox
  *
  * Players collect music tracks (Ambient Sound proximity, GM-given items, or map
- * pickups) and play any collected track together on a physical record-player prop,
- * in sync for the whole table via a module-managed Foundry Playlist.
+ * pickups) and play any collected track on a physical record-player prop. The song
+ * is shared and in sync for the whole table, but each client only plays it locally
+ * while one of its tokens is within the prop's hearing range (see Local playback).
  */
 
 import { CONTROL_GROUP } from "./draw.mjs";
+import { getAmbientFadeMs } from "./ambient-sound-fade.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 const REGISTRY_SETTING = "jukeboxRegistry";
@@ -184,150 +186,142 @@ function findPlaylistSound(trackId) {
 }
 
 /* -------------------------------------------- */
-/*  Scene-scoped audibility                      */
+/*  Local, range-based playback                  */
 /* -------------------------------------------- */
+
+/**
+ * Playlist flag holding what the record player is playing, shared by the whole
+ * table: `{ trackId, startedAt }`, startedAt in server time (ms). The Playlist
+ * itself never plays a jukebox track — it is only the track library. Every
+ * player owns the Playlist, so anyone can put on or take off a record without
+ * a GM being connected.
+ */
+const NOW_PLAYING_FLAG = "nowPlaying";
+
+/** Default hearing range, in grid squares, for a record player with none set. */
+const DEFAULT_HEARING_RANGE = 6;
 
 /** True if this scene has the record-player prop standing on it. */
 function isJukeboxScene(scene) {
   return !!scene?.tokens.some(t => t.getFlag(MODULE_ID, "recordPlayer"));
 }
 
-function anySceneHasJukebox() {
-  return game.scenes.some(s => isJukeboxScene(s));
+function getNowPlaying() {
+  return findJukeboxPlaylist()?.getFlag(MODULE_ID, NOW_PLAYING_FLAG) ?? null;
+}
+
+function isJukeboxPropToken(tokenDoc) {
+  const flags = tokenDoc.flags?.[MODULE_ID];
+  return !!(flags?.recordPlayer || flags?.recordPickup);
 }
 
 /**
- * Keeps the jukebox audible only on the scene its prop stands on, per client:
- * playback stays shared and in sync (the Playlist is untouched), but each client
- * silences it locally while looking at a different scene. Walk out of the hideout
- * and the music stops for you; walk back and you rejoin the song already in
- * progress, while everyone still in the hideout keeps hearing it throughout.
+ * The points this client "hears" from, mirroring core's ambient-sound listeners
+ * (SoundsLayer#getListenerPositions): controlled tokens, or for a player with
+ * none controlled, every visible token they own. Uses the placeable's animated
+ * center so the music fades while the token is still walking, not only once it
+ * lands. The prop and record pickups are left out — every player owns their
+ * actors so they can be clicked, which would otherwise make the record player
+ * permanently "hear itself".
  */
-function applyJukeboxSceneAudio({ immediate = false } = {}) {
-  const playlist = findJukeboxPlaylist();
-  if (!playlist) return;
-  // Before the prop is placed anywhere there is no hideout to be scoped to, so
-  // muting every scene would just make the jukebox silent everywhere.
-  const audible = !anySceneHasJukebox() || isJukeboxScene(canvas.scene);
-  for (const playlistSound of playlist.sounds) {
-    if (!playlistSound.getFlag(MODULE_ID, "trackId")) continue;
-    const sound = playlistSound.sound;
-    // Not created or not started yet — the "play" listener attached in
-    // _createSound (see registerJukebox) catches it the moment it starts.
-    if (!sound?.playing) continue;
-    const target = audible ? (playlistSound.volume ?? 1) : 0;
-    // No "already at target" shortcut when muting: during core's fade-in the
-    // gain reads ~0 while a ramp up to full volume is still scheduled, so a
-    // sound that looks silent may be seconds away from being loud.
-    if (audible && sound.volume === target) continue;
-    // fade() cancels any ramp core has scheduled; a plain volume assignment
-    // would be overridden by it.
-    sound.fade(target, { duration: immediate ? 0 : 400 });
-  }
-}
-
-/**
- * Core only creates a PlaylistSound's Sound once the browser unlocks audio (the
- * first click/keypress after login), then starts it straight away at full
- * volume — long after canvasReady, with no document update to hook. So every
- * jukebox Sound gets a "play" listener at creation that mutes it on the spot
- * when this client is not in the hideout. It is added after core's own listener,
- * so it runs after core has kicked off its fade-in and overrides it.
- */
-function patchPlaylistSoundCreation() {
-  const PlaylistSoundCls = CONFIG.PlaylistSound.documentClass;
-  const original = PlaylistSoundCls.prototype._createSound;
-  PlaylistSoundCls.prototype._createSound = function (...args) {
-    const sound = original.apply(this, args);
-    if (sound && this.getFlag(MODULE_ID, "trackId")) {
-      sound.addEventListener("play", () => {
-        applyJukeboxSceneAudio({ immediate: true });
-        applyJukeboxSceneAudioSoon();
-      });
-    }
-    return sound;
-  };
-}
-
-/**
- * A sound that has only just been told to play may not have its audio buffer yet,
- * and there is nothing to set a volume on until it does — so the mute is applied
- * again shortly after, once playback has actually started.
- */
-function applyJukeboxSceneAudioSoon() {
-  applyJukeboxSceneAudio();
-  setTimeout(applyJukeboxSceneAudio, 300);
-}
-
-/* -------------------------------------------- */
-/*  Hideout presence: pause when no one is there */
-/* -------------------------------------------- */
-
-/** PlaylistSound flag marking a track this module paused because the hideout emptied. */
-const HIDEOUT_PAUSED_FLAG = "pausedForEmptyHideout";
-
-/** True if any connected player (not the GM) is currently viewing a scene with the prop. */
-function anyPlayerInHideout() {
-  return game.users.some(u =>
-    u.active && !u.isGM && u.viewedScene && isJukeboxScene(game.scenes.get(u.viewedScene))
-  );
-}
-
-/**
- * Makes the jukebox actually stop playing (not just go silent) whenever no
- * player is in the hideout, and pick up where it left off once one walks back
- * in. Runs on the active GM only, since it writes the shared Playlist. The
- * per-client mute in applyJukeboxSceneAudio stays as the fallback for the mixed
- * case (some players in the hideout, others elsewhere) and for when no GM is
- * connected to do this.
- *
- * Pause/resume go through PlaylistSound#update (which fires updatePlaylistSound)
- * rather than Playlist#playSound/stopSound (which update the parent Playlist and
- * fire updatePlaylist instead), so clearStaleHideoutPauseFlags can tell this
- * module's own changes apart from someone deliberately starting or stopping a
- * track.
- */
-async function reconcileHideoutPlayback() {
-  if (game.user !== game.users.activeGM) return;
-  const playlist = findJukeboxPlaylist();
-  if (!playlist || !anySceneHasJukebox()) return;
-  const occupied = anyPlayerInHideout();
-  for (const sound of playlist.sounds) {
-    if (!sound.getFlag(MODULE_ID, "trackId")) continue;
-    if (!occupied && sound.playing) {
-      // The GM's own copy of the track is still running (just muted) if their
-      // audio is unlocked, so its position is the one to resume from; without it
-      // the track simply restarts from the top.
-      const pausedTime = sound.sound?.currentTime ?? null;
-      await sound.update({
-        playing: false, pausedTime,
-        [`flags.${MODULE_ID}.${HIDEOUT_PAUSED_FLAG}`]: true
-      });
-    } else if (occupied && !sound.playing && sound.getFlag(MODULE_ID, HIDEOUT_PAUSED_FLAG)) {
-      await sound.update({ playing: true, [`flags.${MODULE_ID}.${HIDEOUT_PAUSED_FLAG}`]: false });
+function getListenerPoints() {
+  const candidates = canvas.tokens.controlled.filter(t => !isJukeboxPropToken(t.document));
+  if (!candidates.length && !game.user.isGM) {
+    for (const token of canvas.tokens.placeables) {
+      if (token.actor?.isOwner && token.isVisible && !isJukeboxPropToken(token.document)) candidates.push(token);
     }
   }
+  return candidates.map(t => t.center);
 }
 
-const reconcileHideoutPlaybackSoon = foundry.utils.debounce(reconcileHideoutPlayback, 250);
+/**
+ * Whether this client should hear the record player right now: it has to be on
+ * the prop's scene, and one of its listener tokens within the prop's hearing
+ * range. Volume is the same everywhere inside the range, and walls are ignored.
+ * A range of 0 covers the whole scene, with no token needed.
+ */
+function isInJukeboxRange() {
+  if (!canvas.ready) return false;
+  const prop = canvas.tokens.placeables.find(t => t.document.getFlag(MODULE_ID, "recordPlayer"));
+  if (!prop) return false;
+  const range = Number(prop.document.getFlag(MODULE_ID, "hearingRange") ?? DEFAULT_HEARING_RANGE);
+  if (!(range > 0)) return true;
+  const rangePx = range * canvas.grid.size;
+  const { x, y } = prop.center;
+  return getListenerPoints().some(p => Math.hypot(p.x - x, p.y - y) <= rangePx);
+}
+
+/** The Sound this client is playing for the record player, if any. */
+let _local = null; // { trackId, startedAt, sound }
+
+function stopLocalJukebox() {
+  if (!_local) return;
+  const { sound } = _local;
+  _local = null;
+  // Still loading: startLocalJukebox sees it was superseded and never plays it.
+  if (!sound) return;
+  // A fresh Sound is created for every start, so this one can fade out on its
+  // own while a new one fades in — walking back in mid fade-out just crossfades.
+  sound.stop({ volume: 0, fade: getAmbientFadeMs() });
+}
+
+async function startLocalJukebox(nowPlaying) {
+  const playlistSound = findPlaylistSound(nowPlaying.trackId)?.sound;
+  if (!playlistSound?.path) return;
+  const entry = { trackId: nowPlaying.trackId, startedAt: nowPlaying.startedAt, sound: null };
+  _local = entry;
+  // The music context doesn't exist until the browser allows audio (first
+  // click/keypress after login). Its gain is the global music volume slider.
+  await game.audio.unlock;
+  const sound = game.audio.create({ src: playlistSound.path, context: game.audio.music, singleton: false });
+  await sound.load();
+  // Superseded (stopped, or another track put on) while loading.
+  if (_local !== entry || sound.failed) return;
+  entry.sound = sound;
+  // Everyone in range hears the same spot in the song: it keeps "playing" from
+  // startedAt even while nobody is in range to hear it.
+  const elapsed = Math.max(0, (game.time.serverTime - nowPlaying.startedAt) / 1000);
+  const offset = Number.isFinite(sound.duration) && sound.duration > 0 ? elapsed % sound.duration : 0;
+  await sound.play({ loop: true, offset, volume: playlistSound.volume ?? 1, fade: getAmbientFadeMs() });
+}
+
+/** Brings this client's local playback in line with the shared state and its position. */
+function refreshLocalJukebox() {
+  const nowPlaying = getNowPlaying();
+  const shouldPlay = !!nowPlaying && isInJukeboxRange();
+  const isCurrent = !!_local && !!nowPlaying
+    && _local.trackId === nowPlaying.trackId && _local.startedAt === nowPlaying.startedAt;
+  if (shouldPlay && isCurrent) return;
+  stopLocalJukebox();
+  if (shouldPlay) startLocalJukebox(nowPlaying);
+}
+
+const refreshLocalJukeboxThrottled = foundry.utils.throttle(refreshLocalJukebox, 150);
+
+/** Follows a GM volume change on the track's PlaylistSound. */
+function onJukeboxSoundVolumeChange(playlistSound) {
+  if (!_local?.sound || playlistSound.getFlag(MODULE_ID, "trackId") !== _local.trackId) return;
+  _local.sound.fade(playlistSound.volume ?? 1, { duration: 500 });
+}
 
 /**
- * Someone started or stopped jukebox tracks by hand through the Playlist (jukebox
- * window, sidebar, stop-all): a pause this module made earlier no longer
- * reflects what should resume, so its marker is dropped. A track started with no
- * player in the hideout is then simply paused again (and marked) by the next
- * reconcile, to start once a player arrives.
+ * Converts a jukebox track started the old way — through the Playlist itself
+ * (sidebar play button, or a world still carrying state from before this
+ * version) — into the shared nowPlaying flag, and stops the Playlist playback so
+ * it isn't heard everywhere. Only the client that made the change (or, for the
+ * leftover state at startup, the active GM or failing that any player) acts.
  */
-async function clearStaleHideoutPauseFlags(playlist, changes) {
-  if (game.user !== game.users.activeGM || !playlist.getFlag(MODULE_ID, "isJukeboxPlaylist")) return;
-  const touchedIds = changes.playing === false
-    ? playlist.sounds.map(s => s.id)
-    : (changes.sounds ?? []).filter(s => "playing" in s).map(s => s._id);
-  const updates = touchedIds
-    .map(id => playlist.sounds.get(id))
-    .filter(s => s?.getFlag(MODULE_ID, HIDEOUT_PAUSED_FLAG))
-    .map(s => ({ _id: s.id, [`flags.${MODULE_ID}.${HIDEOUT_PAUSED_FLAG}`]: false }));
-  if (updates.length) await playlist.updateEmbeddedDocuments("PlaylistSound", updates);
+async function adoptPlaylistPlayback(playlist) {
+  const playing = playlist.sounds.find(s => s.playing && s.getFlag(MODULE_ID, "trackId"));
+  if (!playing) return;
+  await playlist.update({
+    playing: false,
+    sounds: playlist.sounds.map(s => ({ _id: s.id, playing: false, pausedTime: null })),
+    [`flags.${MODULE_ID}.${NOW_PLAYING_FLAG}`]: {
+      trackId: playing.getFlag(MODULE_ID, "trackId"),
+      startedAt: game.time.serverTime
+    }
+  });
 }
 
 /**
@@ -357,16 +351,15 @@ function hasRecentGenuineClick(token) {
 }
 
 export async function playTrack(trackId) {
-  const found = findPlaylistSound(trackId);
-  if (!found) return;
-  await found.playlist.playSound(found.sound);
-  applyJukeboxSceneAudioSoon();
+  const playlist = findJukeboxPlaylist();
+  if (!playlist || !findPlaylistSound(trackId)) return;
+  await playlist.setFlag(MODULE_ID, NOW_PLAYING_FLAG, { trackId, startedAt: game.time.serverTime });
 }
 
 export async function stopTrack(trackId) {
-  const found = findPlaylistSound(trackId);
-  if (!found) return;
-  await found.playlist.stopSound(found.sound);
+  const playlist = findJukeboxPlaylist();
+  if (!playlist || getNowPlaying()?.trackId !== trackId) return;
+  await playlist.unsetFlag(MODULE_ID, NOW_PLAYING_FLAG);
 }
 
 /* -------------------------------------------- */
@@ -426,6 +419,9 @@ export function diagnoseJukebox() {
     registeredTracks: Object.keys(registry).length,
     jukeboxScenes: game.scenes.filter(s => isJukeboxScene(s)).map(s => s.name),
     viewingJukeboxScene: canvas.ready ? isJukeboxScene(canvas.scene) : "canvas not ready",
+    nowPlaying: registry[getNowPlaying()?.trackId]?.name ?? null,
+    inHearingRange: isInJukeboxRange(),
+    playingLocally: !!_local?.sound?.playing,
     myCollectedTracks: getCollectedTracks().map(id => registry[id]?.name ?? `${id} (not in registry)`),
     ownedTokensOnCanvas: canvas.ready
       ? canvas.tokens.placeables.filter(t => t.actor?.isOwner).map(t => t.name)
@@ -679,6 +675,7 @@ function injectTokenTrackPicker(app, html) {
   const tokenDoc = app.document ?? app.token;
   const currentPickup = tokenDoc?.getFlag(MODULE_ID, "recordPickup") ?? "";
   const isPlayer = !!tokenDoc?.getFlag(MODULE_ID, "recordPlayer");
+  const hearingRange = tokenDoc?.getFlag(MODULE_ID, "hearingRange") ?? DEFAULT_HEARING_RANGE;
   const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.${k}`);
 
   const wrap = document.createElement("fieldset");
@@ -690,15 +687,28 @@ function injectTokenTrackPicker(app, html) {
       ${buildTrackPickerHtml(currentPickup, { includeNone: false })}
     </div>
     <label><input type="radio" name="fw-jukebox-role" value="player" ${isPlayer ? "checked" : ""}> ${i18n("SourceConfig.TokenIsPlayer")}</label>
+    <div class="fw-jukebox-range-field" style="display:${isPlayer ? "block" : "none"}">
+      <label>${i18n("SourceConfig.HearingRange")}
+        <input type="number" class="fw-jukebox-hearing-range" min="0" step="1" value="${esc(hearingRange)}">
+      </label>
+      <p class="hint">${i18n("SourceConfig.HearingRangeHint")}</p>
+    </div>
     <label><input type="radio" name="fw-jukebox-role" value="none" ${!currentPickup && !isPlayer ? "checked" : ""}> ${i18n("SourceConfig.TrackNone")}</label>`;
   root.querySelector("form")?.appendChild(wrap) ?? root.appendChild(wrap);
 
   const pickerWrap = wrap.querySelector(".fw-jukebox-pickup-picker");
+  const rangeWrap = wrap.querySelector(".fw-jukebox-range-field");
+  // No name attribute, so core's own form submit ignores it; saved as a flag here.
+  wrap.querySelector(".fw-jukebox-hearing-range").addEventListener("change", async (event) => {
+    const value = Math.max(0, Number(event.currentTarget.value) || 0);
+    await tokenDoc.setFlag(MODULE_ID, "hearingRange", value);
+  });
   const radios = wrap.querySelectorAll('input[name="fw-jukebox-role"]');
   for (const radio of radios) {
     radio.addEventListener("change", async (event) => {
       const value = event.currentTarget.value;
       pickerWrap.style.display = value === "pickup" ? "block" : "none";
+      rangeWrap.style.display = value === "player" ? "block" : "none";
       if (value === "player") {
         await tokenDoc.update({ [`flags.${MODULE_ID}.recordPlayer`]: true, [`flags.${MODULE_ID}.-=recordPickup`]: null });
       } else if (value === "none") {
@@ -760,11 +770,9 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
     if (!trackIds.length) {
       rows = `<p class="fw-jukebox-empty">${i18n("TrackList.Empty")}</p>`;
     } else {
-      const playlist = findJukeboxPlaylist();
       rows = trackIds.map(id => {
         const track = registry[id];
-        const sound = playlist?.sounds.find(s => s.getFlag(MODULE_ID, "trackId") === id);
-        const isPlaying = !!sound?.playing;
+        const isPlaying = getNowPlaying()?.trackId === id;
         // Only real cover art is clickable — the fallback vinyl icon has nothing
         // worth blowing up to full size.
         const art = track.img
@@ -812,8 +820,11 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
     // in turn — registering them more than once would stack duplicate listeners.
     if (this._hooksWired) return;
     this._hooksWired = true;
-    this._soundUpdateHandler = () => this.render();
-    Hooks.on("updatePlaylistSound", this._soundUpdateHandler);
+    // What's playing lives in a flag on the jukebox Playlist.
+    this._soundUpdateHandler = (playlist) => {
+      if (playlist.getFlag(MODULE_ID, "isJukeboxPlaylist")) this.render();
+    };
+    Hooks.on("updatePlaylist", this._soundUpdateHandler);
     // Collection state lives on user flags, so a GM granting or revoking a record
     // from the manager has to redraw this list on every client that has it open.
     this._userUpdateHandler = (user, changes) => {
@@ -823,7 +834,7 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
   }
 
   async close(options) {
-    if (this._soundUpdateHandler) Hooks.off("updatePlaylistSound", this._soundUpdateHandler);
+    if (this._soundUpdateHandler) Hooks.off("updatePlaylist", this._soundUpdateHandler);
     if (this._userUpdateHandler) Hooks.off("updateUser", this._userUpdateHandler);
     this._hooksWired = false;
     return super.close(options);
@@ -928,7 +939,6 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
     const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.${k}`);
     const registry = getRegistry();
     const collectedIds = getPartyCollectedTrackIds();
-    const playlist = findJukeboxPlaylist();
 
     const entries = Object.entries(registry)
       .sort(([, a], [, b]) => (a.name ?? "").localeCompare(b.name ?? ""));
@@ -937,7 +947,7 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
     const rows = entries.length
       ? entries.map(([id, track]) => {
         const isCollected = collectedIds.has(id);
-        const isPlaying = !!playlist?.sounds.find(s => s.getFlag(MODULE_ID, "trackId") === id)?.playing;
+        const isPlaying = getNowPlaying()?.trackId === id;
         const art = track.img
           ? `<img class="fw-jukebox-track-art" src="${esc(track.img)}" alt="">`
           : `<i class="fw-jukebox-track-art fas fa-record-vinyl"></i>`;
@@ -1004,13 +1014,13 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
     if (this._hooksWired) return;
     this._hooksWired = true;
     this._refresh = () => this.render();
-    Hooks.on("updatePlaylistSound", this._refresh);
+    Hooks.on("updatePlaylist", this._refresh);
     Hooks.on("updateUser", this._refresh);
   }
 
   async close(options) {
     if (this._refresh) {
-      Hooks.off("updatePlaylistSound", this._refresh);
+      Hooks.off("updatePlaylist", this._refresh);
       Hooks.off("updateUser", this._refresh);
     }
     this._hooksWired = false;
@@ -1108,7 +1118,6 @@ export function openJukeboxManager() {
 /* -------------------------------------------- */
 
 export function registerJukebox() {
-  patchPlaylistSoundCreation();
   game.settings.register(MODULE_ID, REGISTRY_SETTING, {
     scope: "world", config: false, type: Object, default: {}
   });
@@ -1133,44 +1142,42 @@ export function registerJukebox() {
   Hooks.once("ready", async () => {
     await ensureJukeboxPlaylist();
     await reapplyJukeboxTokenOwnership();
-    reconcileHideoutPlaybackSoon();
+    const playlist = findJukeboxPlaylist();
+    // Leftover Playlist playback from an older version: the active GM converts it,
+    // or with no GM online any player (they all own the Playlist).
+    const adopter = game.users.activeGM ? game.user === game.users.activeGM : playlist?.isOwner;
+    if (playlist && adopter) await adoptPlaylistPlayback(playlist);
     game.socket.on(`module.${MODULE_ID}`, (data) => {
       if (data.type === "trackCollected") showCollectionBanner(data.name);
     });
   });
 
+  // Local jukebox playback: re-evaluated whenever the record, the scene, or where
+  // this client's tokens stand could have changed.
   Hooks.on("canvasReady", () => {
     checkAmbientSoundProximity();
-    // The client just changed scene — re-decide whether the jukebox is audible here.
-    applyJukeboxSceneAudioSoon();
+    refreshLocalJukebox();
   });
-  // Core re-syncs a sound's volume whenever it updates (play, stop, volume
-  // change), which would undo the local mute, so it is re-applied afterwards.
-  Hooks.on("updatePlaylistSound", () => applyJukeboxSceneAudioSoon());
-  // Changing the global music slider re-applies every playlist sound's volume.
-  Hooks.on("globalPlaylistVolumeChanged", () => applyJukeboxSceneAudioSoon());
-  // Pause the jukebox for real while no player is in the hideout, resume on return.
-  // A user's viewed scene is not a document field (it arrives over core's
-  // userActivity socket), so there is no update hook for it — but core re-renders
-  // the scene navigation right after recording the change, which serves as one.
-  Hooks.on("renderSceneNavigation", () => reconcileHideoutPlaybackSoon());
-  Hooks.on("userConnected", () => reconcileHideoutPlaybackSoon());
-  Hooks.on("updatePlaylist", async (playlist, changes) => {
-    await clearStaleHideoutPauseFlags(playlist, changes);
-    if (playlist.getFlag(MODULE_ID, "isJukeboxPlaylist")) reconcileHideoutPlaybackSoon();
-    // Playlist#playSound/stopSound change sounds through the parent, which does
-    // not fire updatePlaylistSound, so the local mute is re-applied from here too.
-    applyJukeboxSceneAudioSoon();
+  Hooks.on("canvasTearDown", () => stopLocalJukebox());
+  Hooks.on("refreshToken", () => refreshLocalJukeboxThrottled());
+  Hooks.on("controlToken", () => refreshLocalJukeboxThrottled());
+  Hooks.on("createToken", () => refreshLocalJukeboxThrottled());
+  Hooks.on("deleteToken", () => refreshLocalJukeboxThrottled());
+  Hooks.on("updatePlaylist", (playlist, changes, options, userId) => {
+    if (!playlist.getFlag(MODULE_ID, "isJukeboxPlaylist")) return;
+    if (userId === game.user.id) adoptPlaylistPlayback(playlist);
+    if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}`)) refreshLocalJukebox();
   });
-  Hooks.on("deleteToken", (tokenDoc) => {
-    if (tokenDoc.getFlag(MODULE_ID, "recordPlayer")) reconcileHideoutPlaybackSoon();
+  Hooks.on("updatePlaylistSound", (playlistSound, changes, options, userId) => {
+    if (!playlistSound.parent?.getFlag(MODULE_ID, "isJukeboxPlaylist")) return;
+    if (changes.playing && userId === game.user.id) adoptPlaylistPlayback(playlistSound.parent);
+    if ("volume" in changes) onJukeboxSoundVolumeChange(playlistSound);
   });
   Hooks.on("updateToken", (tokenDoc, changes) => {
     if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}`)) {
       forceJukeboxTokenOwnership(tokenDoc);
-      // The prop may have just been placed on, or cleared from, this scene.
-      applyJukeboxSceneAudio();
-      reconcileHideoutPlaybackSoon();
+      // The prop may have just been placed, cleared, or had its range changed.
+      refreshLocalJukeboxThrottled();
     }
     if ("x" in changes || "y" in changes || "elevation" in changes) checkAmbientSoundProximity();
   });
