@@ -145,6 +145,12 @@
         "RewardSoundHint": "Ein kurzer Soundeffekt, der fuer alle abgespielt wird, sobald die Gruppe einen neuen Musikbox-Titel sammelt."
       }
     },
+    "AmbientSoundFade": {
+      "Settings": {
+        "FadeName": "Ueberblendzeit fuer Umgebungsklaenge (ms)",
+        "FadeHint": "Wie lange Umgebungsmusik ein- bzw. ausgeblendet wird, wenn ein Token den Radius eines Klangs betritt oder verlaesst. 0 schaltet sofort um; Foundrys eigener Standard ist 250."
+      }
+    },
     "Timetable": {
       "ButtonTitle": "Stundenplan",
       "EditorButtonTitle": "Stundenplan-Editor",

@@ -212,12 +212,36 @@ function applyJukeboxSceneAudio() {
   for (const playlistSound of playlist.sounds) {
     if (!playlistSound.getFlag(MODULE_ID, "trackId")) continue;
     const sound = playlistSound.sound;
-    if (!sound?.playing) continue;
+    if (!sound) continue;
+    if (!sound.playing) {
+      // Not started yet — on login the browser holds all audio back until the
+      // first click/keypress, and a cold cache can take a while to load the
+      // track, both easily outlasting applyJukeboxSceneAudioSoon's retry. Catch
+      // the moment it actually starts instead, or it would begin at full volume
+      // on whatever scene the client is looking at (e.g. the landing scene).
+      if (playlistSound.playing) watchForSoundStart(sound);
+      continue;
+    }
     const target = audible ? (playlistSound.effectiveVolume ?? playlistSound.volume ?? 1) : 0;
-    if (sound.volume === target) continue;
+    // No "already at target" shortcut when muting: during core's fade-in the
+    // gain reads ~0 while a ramp up to full volume is still scheduled, so a
+    // sound that looks silent may be seconds away from being loud.
+    if (audible && sound.volume === target) continue;
     if (typeof sound.fade === "function") sound.fade(target, { duration: 400 });
     else sound.volume = target;
   }
+}
+
+/** Sounds that already have a one-shot "play" listener attached. */
+const _watchedSounds = new WeakSet();
+
+function watchForSoundStart(sound) {
+  if (_watchedSounds.has(sound) || typeof sound.addEventListener !== "function") return;
+  _watchedSounds.add(sound);
+  sound.addEventListener("play", () => {
+    _watchedSounds.delete(sound);
+    applyJukeboxSceneAudioSoon();
+  }, { once: true });
 }
 
 /**
@@ -1045,6 +1069,8 @@ export function registerJukebox() {
   // Core re-syncs a sound's volume whenever it updates (play, stop, volume
   // change), which would undo the local mute, so it is re-applied afterwards.
   Hooks.on("updatePlaylistSound", () => applyJukeboxSceneAudioSoon());
+  // Changing the global music slider re-applies every playlist sound's volume.
+  Hooks.on("globalPlaylistVolumeChanged", () => applyJukeboxSceneAudioSoon());
   Hooks.on("updateToken", (tokenDoc, changes) => {
     if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}`)) {
       forceJukeboxTokenOwnership(tokenDoc);

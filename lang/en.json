@@ -145,6 +145,12 @@
         "RewardSoundHint": "A short sound effect played for everyone whenever the party collects a new Jukebox track."
       }
     },
+    "AmbientSoundFade": {
+      "Settings": {
+        "FadeName": "Ambient Sound Fade (ms)",
+        "FadeHint": "How long ambient music fades in when a token walks into a sound's radius, and fades out when it walks out. 0 switches instantly; Foundry's own default is 250."
+      }
+    },
     "Timetable": {
       "ButtonTitle": "Timetable",
       "EditorButtonTitle": "Timetable Editor",

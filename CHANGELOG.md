@@ -4,6 +4,16 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.15.0] - 2026-09-26
+
+### Added
+
+- **Ambient Sound Fade**: ambient music now fades in smoothly when a token walks into a sound's radius, and fades out when it walks out, instead of switching on and off almost instantly (core only fades over 250ms). The duration is set with the new world setting "Ambient Sound Fade (ms)" (default 1500, 0 restores instant switching).
+
+### Fixed
+
+- The hideout jukebox song could be heard outside the hideout (e.g. on the landing scene) after logging in. The local mute only ran on scene load and once shortly after, but the browser holds audio back until the first click and a cold cache delays loading, so the track started later at full volume and was never muted. The mute now also applies when the track actually starts. Muting also no longer gets skipped during core's fade-in, when the volume briefly reads 0 but is about to ramp up. Changing the global music volume now re-applies the mute too.
+
 ## [0.14.2] - 2026-08-31
 
 ### Fixed

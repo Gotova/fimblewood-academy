@@ -5,6 +5,7 @@ import { registerSiphonFx, playSiphon, selftest as siphonFxSelftest } from "./si
 import { registerDrawPad, openDrawApp, openGallery } from "./draw.mjs";
 import { registerJukebox, openJukeboxWindow, openJukeboxManager, diagnoseJukebox, playTrack, stopTrack } from "./jukebox.mjs";
 import { registerDragonchess, openBoardForCurrentUser, getGameRecord, selftest as dragonchessSelftest } from "./dragonchess/index.mjs";
+import { registerAmbientSoundFade } from "./ambient-sound-fade.mjs";
 import { registerTimetable, openTimetableViewer, openTimetableEditor } from "./timetable/index.mjs";
 
 const MODULE_ID = "fimblewood-academy";
@@ -16,6 +17,7 @@ Hooks.once("init", () => {
   registerSiphonFx();
   registerDrawPad();
   registerJukebox();
+  registerAmbientSoundFade();
   registerDragonchess();
   registerTimetable();
 
