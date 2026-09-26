@@ -259,6 +259,77 @@ function applyJukeboxSceneAudioSoon() {
   setTimeout(applyJukeboxSceneAudio, 300);
 }
 
+/* -------------------------------------------- */
+/*  Hideout presence: pause when no one is there */
+/* -------------------------------------------- */
+
+/** PlaylistSound flag marking a track this module paused because the hideout emptied. */
+const HIDEOUT_PAUSED_FLAG = "pausedForEmptyHideout";
+
+/** True if any connected player (not the GM) is currently viewing a scene with the prop. */
+function anyPlayerInHideout() {
+  return game.users.some(u =>
+    u.active && !u.isGM && u.viewedScene && isJukeboxScene(game.scenes.get(u.viewedScene))
+  );
+}
+
+/**
+ * Makes the jukebox actually stop playing (not just go silent) whenever no
+ * player is in the hideout, and pick up where it left off once one walks back
+ * in. Runs on the active GM only, since it writes the shared Playlist. The
+ * per-client mute in applyJukeboxSceneAudio stays as the fallback for the mixed
+ * case (some players in the hideout, others elsewhere) and for when no GM is
+ * connected to do this.
+ *
+ * Pause/resume go through PlaylistSound#update (which fires updatePlaylistSound)
+ * rather than Playlist#playSound/stopSound (which update the parent Playlist and
+ * fire updatePlaylist instead), so clearStaleHideoutPauseFlags can tell this
+ * module's own changes apart from someone deliberately starting or stopping a
+ * track.
+ */
+async function reconcileHideoutPlayback() {
+  if (game.user !== game.users.activeGM) return;
+  const playlist = findJukeboxPlaylist();
+  if (!playlist || !anySceneHasJukebox()) return;
+  const occupied = anyPlayerInHideout();
+  for (const sound of playlist.sounds) {
+    if (!sound.getFlag(MODULE_ID, "trackId")) continue;
+    if (!occupied && sound.playing) {
+      // The GM's own copy of the track is still running (just muted) if their
+      // audio is unlocked, so its position is the one to resume from; without it
+      // the track simply restarts from the top.
+      const pausedTime = sound.sound?.currentTime ?? null;
+      await sound.update({
+        playing: false, pausedTime,
+        [`flags.${MODULE_ID}.${HIDEOUT_PAUSED_FLAG}`]: true
+      });
+    } else if (occupied && !sound.playing && sound.getFlag(MODULE_ID, HIDEOUT_PAUSED_FLAG)) {
+      await sound.update({ playing: true, [`flags.${MODULE_ID}.${HIDEOUT_PAUSED_FLAG}`]: false });
+    }
+  }
+}
+
+const reconcileHideoutPlaybackSoon = foundry.utils.debounce(reconcileHideoutPlayback, 250);
+
+/**
+ * Someone started or stopped jukebox tracks by hand through the Playlist (jukebox
+ * window, sidebar, stop-all): a pause this module made earlier no longer
+ * reflects what should resume, so its marker is dropped. A track started with no
+ * player in the hideout is then simply paused again (and marked) by the next
+ * reconcile, to start once a player arrives.
+ */
+async function clearStaleHideoutPauseFlags(playlist, changes) {
+  if (game.user !== game.users.activeGM || !playlist.getFlag(MODULE_ID, "isJukeboxPlaylist")) return;
+  const touchedIds = changes.playing === false
+    ? playlist.sounds.map(s => s.id)
+    : (changes.sounds ?? []).filter(s => "playing" in s).map(s => s._id);
+  const updates = touchedIds
+    .map(id => playlist.sounds.get(id))
+    .filter(s => s?.getFlag(MODULE_ID, HIDEOUT_PAUSED_FLAG))
+    .map(s => ({ _id: s.id, [`flags.${MODULE_ID}.${HIDEOUT_PAUSED_FLAG}`]: false }));
+  if (updates.length) await playlist.updateEmbeddedDocuments("PlaylistSound", updates);
+}
+
 /**
  * Timestamp of the last genuine pointerdown Foundry's canvas reported directly
  * on a given token placeable, keyed by placeable instance (a fresh instance
@@ -1062,6 +1133,7 @@ export function registerJukebox() {
   Hooks.once("ready", async () => {
     await ensureJukeboxPlaylist();
     await reapplyJukeboxTokenOwnership();
+    reconcileHideoutPlaybackSoon();
     game.socket.on(`module.${MODULE_ID}`, (data) => {
       if (data.type === "trackCollected") showCollectionBanner(data.name);
     });
@@ -1077,11 +1149,28 @@ export function registerJukebox() {
   Hooks.on("updatePlaylistSound", () => applyJukeboxSceneAudioSoon());
   // Changing the global music slider re-applies every playlist sound's volume.
   Hooks.on("globalPlaylistVolumeChanged", () => applyJukeboxSceneAudioSoon());
+  // Pause the jukebox for real while no player is in the hideout, resume on return.
+  // A user's viewed scene is not a document field (it arrives over core's
+  // userActivity socket), so there is no update hook for it — but core re-renders
+  // the scene navigation right after recording the change, which serves as one.
+  Hooks.on("renderSceneNavigation", () => reconcileHideoutPlaybackSoon());
+  Hooks.on("userConnected", () => reconcileHideoutPlaybackSoon());
+  Hooks.on("updatePlaylist", async (playlist, changes) => {
+    await clearStaleHideoutPauseFlags(playlist, changes);
+    if (playlist.getFlag(MODULE_ID, "isJukeboxPlaylist")) reconcileHideoutPlaybackSoon();
+    // Playlist#playSound/stopSound change sounds through the parent, which does
+    // not fire updatePlaylistSound, so the local mute is re-applied from here too.
+    applyJukeboxSceneAudioSoon();
+  });
+  Hooks.on("deleteToken", (tokenDoc) => {
+    if (tokenDoc.getFlag(MODULE_ID, "recordPlayer")) reconcileHideoutPlaybackSoon();
+  });
   Hooks.on("updateToken", (tokenDoc, changes) => {
     if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}`)) {
       forceJukeboxTokenOwnership(tokenDoc);
       // The prop may have just been placed on, or cleared from, this scene.
       applyJukeboxSceneAudio();
+      reconcileHideoutPlaybackSoon();
     }
     if ("x" in changes || "y" in changes || "elevation" in changes) checkAmbientSoundProximity();
   });

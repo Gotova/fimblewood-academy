@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-09-26
+
+### Changed
+
+- **Hideout Jukebox**: the jukebox song now actually stops playing, instead of just being muted, whenever no player is in the hideout scene. It resumes where it left off as soon as a player enters again. A track started while nobody is in the hideout waits and starts when the first player arrives. The GM's own client does this, so a GM needs to be connected. Without one, and for players looking at other scenes while someone else is in the hideout, the song is still just muted locally.
+
 ## [0.15.1] - 2026-09-26
 
 ### Fixed
