@@ -196,6 +196,39 @@
       "NameRequired": "Der Kurs braucht einen Namen, bevor er gespeichert werden kann.",
       "UnknownActor": "Unbekannter Akteur",
       "DropAmbiguous": "In diesem Slot gibt es mehrere Kurse — den Akteur direkt auf den gewuenschten Kurs ziehen."
+    },
+    "NpcSpawner": {
+      "Label": "Zufaellige NPCs",
+      "FIELDS": {
+        "folder": {
+          "label": "Akteur-Ordner",
+          "hint": "Bei jeder Aktivierung der Szene werden zufaellige Akteure aus diesem Ordner in der Region platziert."
+        },
+        "includeSubfolders": {
+          "label": "Unterordner einbeziehen",
+          "hint": "Auch Akteure aus Ordnern innerhalb des gewaehlten Ordners verwenden."
+        },
+        "baseChance": {
+          "label": "Chance pro Feld (%)",
+          "hint": "Die Chance, dass ein freies Feld in der Region einen NPC bekommt."
+        },
+        "neighborChance": {
+          "label": "Chance neben einem NPC (%)",
+          "hint": "Stattdessen diese Chance, wenn ein angrenzendes Feld schon einen NPC hat. Hoehere Werte bilden Gruppen."
+        },
+        "maxNpcs": {
+          "label": "Maximale Anzahl NPCs",
+          "hint": "Hoechstens so viele NPCs werden platziert. 0 = unbegrenzt."
+        },
+        "hidden": {
+          "label": "Versteckt platzieren",
+          "hint": "Die NPCs fuer Spieler versteckt platzieren."
+        }
+      },
+      "Warn": {
+        "NoActors": "Zufaellige NPCs (Region \"{region}\"): der gewaehlte Ordner enthaelt keine Akteure.",
+        "Gridless": "Zufaellige NPCs (Region \"{region}\"): Szenen ohne Raster werden nicht unterstuetzt."
+      }
     }
   }
 }

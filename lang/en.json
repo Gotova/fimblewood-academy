@@ -196,6 +196,39 @@
       "NameRequired": "The course needs a name before it can be saved.",
       "UnknownActor": "Unknown actor",
       "DropAmbiguous": "This slot has more than one course — drop the actor directly onto the course you want."
+    },
+    "NpcSpawner": {
+      "Label": "Random NPCs",
+      "FIELDS": {
+        "folder": {
+          "label": "Actor Folder",
+          "hint": "Random actors from this folder are placed in the region each time the scene is activated."
+        },
+        "includeSubfolders": {
+          "label": "Include Subfolders",
+          "hint": "Also use actors from folders inside the chosen folder."
+        },
+        "baseChance": {
+          "label": "Chance per Space (%)",
+          "hint": "The chance that a free grid space inside the region receives an NPC."
+        },
+        "neighborChance": {
+          "label": "Chance next to an NPC (%)",
+          "hint": "The chance instead, if an adjacent space already has an NPC. Higher values form groups."
+        },
+        "maxNpcs": {
+          "label": "Maximum NPCs",
+          "hint": "At most this many NPCs are placed. 0 = no limit."
+        },
+        "hidden": {
+          "label": "Place Hidden",
+          "hint": "Place the NPCs hidden from players."
+        }
+      },
+      "Warn": {
+        "NoActors": "Random NPCs (region \"{region}\"): the chosen folder contains no actors.",
+        "Gridless": "Random NPCs (region \"{region}\"): gridless scenes are not supported."
+      }
     }
   }
 }

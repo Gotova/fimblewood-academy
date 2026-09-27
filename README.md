@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.17.0
+- **Current version:** 0.18.0
 
 ## Installation
 
@@ -69,6 +69,16 @@ Open **Music Tracks** from the Fimblewood Controls category in the scene control
 - **Play / Stop** — audition any record, collected or not.
 
 For players there's no sidebar shortcut to the Jukebox by design — the only way in is the physical prop, to keep it grounded in the fiction. The Music Tracks window is the GM's side of it, and is never shown to players.
+
+### Random NPCs
+
+Fills a scene region with random NPC tokens that are rolled anew every time the scene is activated.
+
+- Draw a **Region**, open its **Behaviors** tab and add **Random NPCs**. Pick an Actor folder (subfolders are included by default).
+- Each free grid space inside the region gets an NPC with the **chance per space** (default 5%). A space next to one that already has an NPC uses the **chance next to an NPC** instead (default 15%), so small groups form. The spaces are rolled in random order. Optionally cap the number of NPCs or place them hidden.
+- On every activation the tokens placed last time are removed first; tokens placed by hand are never touched. Spaces with other tokens are left free, and larger tokens are only placed where they fit completely inside the region.
+- To reroll without re-activating: `game.modules.get("fimblewood-academy").api.npcSpawner.rerollScene()`.
+- Square and hex grids only.
 
 ### Dragonchess
 

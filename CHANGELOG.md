@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.18.0] - 2026-09-27
+
+### Added
+
+- **Random NPCs**: a new Region Behavior that fills its region with random tokens from a chosen Actor folder whenever the scene is activated. Each free grid space has a 5% chance of getting an NPC, or 15% next to a space that already has one, so small groups form (both adjustable per region, plus an optional maximum and a "place hidden" option). The previously spawned tokens are replaced on each activation; hand-placed tokens stay. `api.npcSpawner.rerollScene()` rerolls manually.
+
 ## [0.17.0] - 2026-09-26
 
 ### Changed
