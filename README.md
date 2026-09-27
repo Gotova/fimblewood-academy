@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.18.0
+- **Current version:** 0.19.0
 
 ## Installation
 
@@ -77,7 +77,9 @@ Fills a scene region with random NPC tokens that are rolled anew every time the 
 - Draw a **Region**, open its **Behaviors** tab and add **Random NPCs**. Pick an Actor folder (subfolders are included by default).
 - Each free grid space inside the region gets an NPC with the **chance per space** (default 5%). A space next to one that already has an NPC uses the **chance next to an NPC** instead (default 15%), so small groups form. The spaces are rolled in random order. Optionally cap the number of NPCs or place them hidden.
 - On every activation the tokens placed last time are removed first; tokens placed by hand are never touched. Spaces with other tokens are left free, and larger tokens are only placed where they fit completely inside the region.
-- To reroll without re-activating: `game.modules.get("fimblewood-academy").api.npcSpawner.rerollScene()`.
+- With the **Regions** controls open, every such region shows a small button bar above it (GM only): the number of NPCs it placed, **+** add an NPC (preferring spaces next to existing ones), **−** remove a random one, **dice** reroll the region, **trash** remove all of them. Shift-click + or − to add or remove 5 at once.
+- To reroll a whole scene from a macro: `game.modules.get("fimblewood-academy").api.npcSpawner.rerollScene()`.
+- A disabled behavior is skipped on scene activation, but its buttons still work.
 - Square and hex grids only.
 
 ### Dragonchess

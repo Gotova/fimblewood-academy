@@ -4,6 +4,16 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.19.0] - 2026-09-27
+
+### Added
+
+- **Random NPCs**: with the Regions controls open, every region with the behavior gets a small button bar (GM only) showing how many NPCs it placed, with buttons to add one, remove a random one, reroll the region, or remove all of them. Shift-click adds or removes 5 at once. Added NPCs prefer spaces next to existing ones, weighted like the configured chances. The buttons stay the same size at any zoom.
+
+### Changed
+
+- A disabled Random NPCs behavior now leaves its NPCs alone on scene activation, instead of removing them.
+
 ## [0.18.0] - 2026-09-27
 
 ### Added

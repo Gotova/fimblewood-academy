@@ -227,7 +227,15 @@
       },
       "Warn": {
         "NoActors": "Random NPCs (region \"{region}\"): the chosen folder contains no actors.",
-        "Gridless": "Random NPCs (region \"{region}\"): gridless scenes are not supported."
+        "Gridless": "Random NPCs (region \"{region}\"): gridless scenes are not supported.",
+        "NoSpace": "Random NPCs (region \"{region}\"): no free space left."
+      },
+      "Hud": {
+        "count": "NPCs placed by this region",
+        "add": "Add an NPC (Shift: 5)",
+        "remove": "Remove a random NPC (Shift: 5)",
+        "reroll": "Reroll all NPCs",
+        "clear": "Remove all NPCs"
       }
     }
   }

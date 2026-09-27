@@ -7,7 +7,7 @@ import { registerJukebox, openJukeboxWindow, openJukeboxManager, diagnoseJukebox
 import { registerDragonchess, openBoardForCurrentUser, getGameRecord, selftest as dragonchessSelftest } from "./dragonchess/index.mjs";
 import { registerAmbientSoundFade } from "./ambient-sound-fade.mjs";
 import { registerTimetable, openTimetableViewer, openTimetableEditor } from "./timetable/index.mjs";
-import { registerNpcSpawner, rerollScene, rerollRegion } from "./npc-spawner.mjs";
+import { registerNpcSpawner, rerollScene, rerollRegion, addNpcs, removeNpcs, clearRegion } from "./npc-spawner.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 
@@ -31,7 +31,7 @@ Hooks.once("init", () => {
     jukebox: { openJukeboxWindow, openJukeboxManager, diagnoseJukebox, playTrack, stopTrack },
     dragonchess: { openBoard: openBoardForCurrentUser, getGameRecord, selftest: dragonchessSelftest },
     timetable: { openViewer: openTimetableViewer, openEditor: openTimetableEditor },
-    npcSpawner: { rerollScene, rerollRegion }
+    npcSpawner: { rerollScene, rerollRegion, addNpcs, removeNpcs, clearRegion }
   };
 });
 

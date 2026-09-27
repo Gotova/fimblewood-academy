@@ -227,7 +227,15 @@
       },
       "Warn": {
         "NoActors": "Zufaellige NPCs (Region \"{region}\"): der gewaehlte Ordner enthaelt keine Akteure.",
-        "Gridless": "Zufaellige NPCs (Region \"{region}\"): Szenen ohne Raster werden nicht unterstuetzt."
+        "Gridless": "Zufaellige NPCs (Region \"{region}\"): Szenen ohne Raster werden nicht unterstuetzt.",
+        "NoSpace": "Zufaellige NPCs (Region \"{region}\"): kein freies Feld mehr."
+      },
+      "Hud": {
+        "count": "Von dieser Region platzierte NPCs",
+        "add": "NPC hinzufuegen (Shift: 5)",
+        "remove": "Zufaelligen NPC entfernen (Shift: 5)",
+        "reroll": "Alle NPCs neu wuerfeln",
+        "clear": "Alle NPCs entfernen"
       }
     }
   }
