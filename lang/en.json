@@ -309,6 +309,10 @@
         "face_autumn": {
           "name": "Visage face: Autumn",
           "hint": "Label of the Visage face used for Autumn."
+        },
+        "face_default": {
+          "name": "Visage face: Default form",
+          "hint": "Label of the Visage face for her default form, shown whenever the ring is on or drained. Leave blank to use the token's own base appearance (recommended)."
         }
       },
       "SurgeHeader": "Wild Magic Surge",

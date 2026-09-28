@@ -8,7 +8,7 @@
  * State lives in one actor flag, `flags.fimblewood-academy.ewm`:
  *   ring        "on" | "off" | "drained"   (drained lasts until the next short rest)
  *   containment 0..20                      (the sinking counter; shown on the sheet, the token and in chat)
- *   season      "winter"|"spring"|"summer"|"autumn"|"pact"
+ *   season      "winter"|"spring"|"summer"|"autumn"|"pact"  (ring on/drained: winter; a surge sets it)
  *   lastSurge   { roll, season } | null    (what a Surge Reroll replaces)
  *
  * Spell-point spending is detected by watching the Spell Points item of the `dnd5e-spellpoints`
@@ -140,7 +140,8 @@ export async function setRingState(actor, state, { keepSeason = false, silent = 
     const costKey = state === "on" ? { action: "CostAction", bonus: "CostBonus", free: "CostFree" }[setting("ringCost")] : null;
     await post(actor, `<strong>${i18n("Ring")}:</strong> ${i18n(`Ring_${from}`)} → <strong>${i18n(`Ring_${state}`)}</strong>${costKey ? ` <em>(${i18n(costKey)})</em>` : ""}`);
   }
-  if (state !== "off" && !keepSeason) await applySeason(actor, "winter");
+  if (state !== "off" && !keepSeason) await patchState(actor, { season: "winter" });
+  await syncFace(actor);
 }
 
 /** Sheet / HUD entry point: enforces who may switch what. */
@@ -163,33 +164,51 @@ function warn(message) {
   ui.notifications.warn(message);
 }
 
-/** Switch her Visage face to the named season. Resolved by label so reordering faces is harmless. */
-async function switchVisage(actor, season) {
+/**
+ * Switch her Visage face. `key` is "default" or a season. Faces are resolved by label so reordering
+ * them is harmless; a blank Default label means the token's own base appearance (Visage revert).
+ */
+async function switchVisage(actor, key) {
   const api = game.modules.get("visage")?.api;
   if (!api) return warn(i18n("WarnNoVisage"));
   const token = actor.getActiveTokens().find(t => t.controlled) ?? actor.getActiveTokens()[0];
   if (!token) return warn(i18n("WarnNoToken", { actor: actor.name }));
 
-  const label = String(setting(`face_${season}`)).trim().toLowerCase();
+  const label = String(setting(`face_${key}`)).trim().toLowerCase();
+  if (key === "default" && !label) return api.revert(token.id);
   const faces = api.getAvailable(token.id);
   const exact = faces.filter(f => String(f.label).trim().toLowerCase() === label);
   const loose = faces.filter(f => String(f.label).toLowerCase().includes(label));
   const face = exact[0] ?? (loose.length === 1 ? loose[0] : null);
-  if (!face) return warn(i18n("WarnNoFace", { actor: actor.name, label: setting(`face_${season}`) }));
+  if (!face) return warn(i18n("WarnNoFace", { actor: actor.name, label: setting(`face_${key}`) }));
   if (api.isActive(token.id, face.id)) return;
   await api.apply(token.id, face.id);
 }
 
-/** Store the season on the actor and swap her face. The Pact has no face and changes nothing visible. */
-export async function applySeason(actor, season) {
-  await patchState(actor, { season });
-  if (season === "pact") return;
+/**
+ * Bring her face in line with the state: with the ring on or drained she always shows her Default
+ * form. With the ring off she shows the season of her last surge (until the next long rest), or
+ * Default if she has not surged. The Pact has no face and leaves the current one alone.
+ */
+export async function syncFace(actor) {
+  const s = getState(actor);
+  let key = "default";
+  if (s.ring === "off" && s.lastSurge?.season) {
+    if (s.lastSurge.season === "pact") return;
+    key = s.lastSurge.season;
+  }
   try {
-    await switchVisage(actor, season);
+    await switchVisage(actor, key);
   } catch (err) {
     console.error(`${MODULE_ID} | Visage switch failed:`, err);
     ui.notifications.error(i18n("WarnVisageFailed"));
   }
+}
+
+/** Store the season on the actor and update her face. */
+export async function applySeason(actor, season) {
+  await patchState(actor, { season });
+  await syncFace(actor);
 }
 
 /* -------------------------------------------- */
@@ -428,6 +447,7 @@ function registerSettings() {
   reg("floor", { type: Number, default: 11, range: { min: 1, max: 20, step: 1 } });
   reg("ringCost", { type: String, default: "action", choices: { action: "FIMBLEWOOD.EladrinWildMagic.CostAction", bonus: "FIMBLEWOOD.EladrinWildMagic.CostBonus", free: "FIMBLEWOOD.EladrinWildMagic.CostFree" } });
   reg("spellPointsItem", { type: String, default: "Spell Points" });
+  reg("face_default", { type: String, default: "" });
   for (const s of SEASONS) reg(`face_${s}`, { type: String, default: s.charAt(0).toUpperCase() + s.slice(1) });
 }
 
@@ -539,7 +559,8 @@ export function registerEladrinWildMagic() {
 /** Fey Step (Season Rider): follows her current season flag; only Winter is defined so far. */
 async function postFeyStepRider(actor) {
   if (!getFeature(actor, "isEwmFeyRider")) return;
-  const season = getState(actor).season;
+  const s = getState(actor);
+  const season = s.ring === "off" ? s.season : "winter"; // with the ring worn it is always Winter
   const dc = actor.system.attributes?.spell?.dc ?? "?";
   const body = season === "winter"
     ? i18n("FeyWinter", { dc })

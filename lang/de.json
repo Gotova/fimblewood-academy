@@ -309,6 +309,10 @@
         "face_autumn": {
           "name": "Visage-Gesicht: Herbst",
           "hint": "Name des Visage-Gesichts für den Herbst."
+        },
+        "face_default": {
+          "name": "Visage-Gesicht: Standardform",
+          "hint": "Name des Visage-Gesichts für ihre Standardform, sichtbar solange der Ring an oder geleert ist. Leer lassen, um das Grundaussehen des Tokens zu verwenden (empfohlen)."
         }
       },
       "SurgeHeader": "Wild Magic Surge",

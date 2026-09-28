@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.20.2
+- **Current version:** 0.21.0
 
 ## Installation
 
@@ -153,7 +153,8 @@ Requires the [Advanced Magic (dnd5e-spellpoints)](https://foundryvtt.com/package
 
 - **Ring state** (on / off / drained) with one-click switching from the Containment bar or the token HUD; the three linked effects follow. *Drained* ends at the next short rest.
 - **Containment** (20 max): shown as a bar under the Spell Points bar (the GM can click it to edit), as a half-transparent ring around the token that fills as it drops, and as a chat line on every change. With the ring off it drops by 1 per spell; it recovers 1 per round while the ring is on (in combat) and resets on a long rest. It never drops while the ring is on, and never recovers while drained.
-- **Surge**: after a level 1+ spell paid for with spell points (cantrips never trigger), the module rolls a d20 against Containment; on a hit it rolls the d100 table, stores the season and switches the Visage face named Winter / Spring / Summer / Autumn (a 97–00 result changes nothing). With the ring on the roll is offered once per turn; otherwise it is forced.
+- **Surge**: after a level 1+ spell paid for with spell points (cantrips never trigger), the module rolls a d20 against Containment; on a hit it rolls the d100 table and stores the season (a 97–00 result, The Pact, changes nothing visible). With the ring on the roll is offered once per turn; otherwise it is forced.
+- **Appearance (Visage)**: with the ring **on or drained** she always shows her **Default** form. With the ring **off**, she shows the face of her last surge's season (Winter / Spring / Summer / Autumn) until the next long rest, or Default if she has not surged. Faces are found by their label, and a missing one gives a warning. To set it up, create four **Identity** Visages in her Local Library labelled *Winter*, *Spring*, *Summer* and *Autumn*; her Default form is the token's own base appearance (or a fifth Visage, if you enter its label in the *Visage face: Default form* setting).
 - **Surge Reroll**: once per short rest after a surge, rerolls the d100 and drains the ring.
 - **Fey Step (Season Rider)**: posts a chat card with the current season's rider (only Winter is defined). Marked as a proposal.
 

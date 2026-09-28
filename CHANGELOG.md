@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.21.0] - 2026-09-29
+
+### Changed
+
+- **Eladrin Wild Magic**: her appearance now follows the ring. With the ring on or drained she shows her Default form; with the ring off she shows the season face of her last surge until the next long rest (Default if she has not surged). A surge with the ring on records the season but no longer changes her face. Her Default form is the token's own base appearance unless a label is set in the new *Visage face: Default form* setting.
+
 ## [0.20.2] - 2026-09-28
 
 ### Changed
