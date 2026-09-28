@@ -400,7 +400,7 @@ function refreshGauge(token) {
   }
   const c = getState(actor).containment;
   const { w, h } = token;
-  const sig = `${c}|${w}|${h}|${canvas.grid.size}`;
+  const sig = `${c}|${w}|${h}|${canvas.grid.size}|${setting("floor")}`;
   if (g._fwSig === sig) return;
   g._fwSig = sig;
 
@@ -409,7 +409,8 @@ function refreshGauge(token) {
   const cy = h / 2;
   // Sits well outside the token art (the token's corners included), so the token stays fully visible.
   const r = (Math.min(w, h) + Math.hypot(w, h)) / 4 + stroke / 2 + canvas.grid.size * 0.03;
-  const frac = 1 - Math.clamp(c / MAX_CONTAINMENT, 0, 1); // empty at 20, fills as Containment drops
+  const floor = Math.clamp(setting("floor"), 0, MAX_CONTAINMENT - 1);
+  const frac = Math.clamp((MAX_CONTAINMENT - c) / (MAX_CONTAINMENT - floor), 0, 1); // empty at 20, full at the floor
 
   g.clear();
   if (frac > 0) {

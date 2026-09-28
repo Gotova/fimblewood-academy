@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.21.2] - 2026-09-29
+
+### Fixed
+
+- **Eladrin Wild Magic**: the token ring is now fully filled when Containment reaches its floor (11 by default) instead of at 0, so it fills over the range the counter can actually move through.
+
 ## [0.21.1] - 2026-09-29
 
 ### Fixed
