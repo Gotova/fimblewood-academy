@@ -9,6 +9,7 @@ import { registerAmbientSoundFade } from "./ambient-sound-fade.mjs";
 import { registerTimetable, openTimetableViewer, openTimetableEditor } from "./timetable/index.mjs";
 import { registerNpcSpawner, rerollScene, rerollRegion, addNpcs, removeNpcs, clearRegion } from "./npc-spawner.mjs";
 import { registerEladrinWildMagic, hasEladrinWildMagic, getState as getWildMagicState, setRingState, setContainment } from "./eladrin-wild-magic.mjs";
+import { registerSubclassDrop } from "./subclass-drop.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 
@@ -24,6 +25,7 @@ Hooks.once("init", () => {
   registerTimetable();
   registerNpcSpawner();
   registerEladrinWildMagic();
+  registerSubclassDrop();
 
   game.modules.get(MODULE_ID).api = {
     id: MODULE_ID,

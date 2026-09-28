@@ -372,17 +372,18 @@ function refreshGauge(token) {
   const stroke = Math.max(5, canvas.grid.size * 0.09);
   const cx = w / 2;
   const cy = h / 2;
-  const r = Math.min(w, h) / 2 + stroke / 2 + 2;
-  const frac = Math.clamp(c / MAX_CONTAINMENT, 0, 1);
+  // Sits well outside the token art (the token's corners included), so the token stays fully visible.
+  const r = Math.hypot(w, h) / 2 + stroke / 2 + canvas.grid.size * 0.06;
+  const frac = 1 - Math.clamp(c / MAX_CONTAINMENT, 0, 1); // empty at 20, fills as Containment drops
 
   g.clear();
-  g.lineStyle({ width: stroke + 4, color: 0x000000, alpha: 0.85 });
+  g.lineStyle({ width: stroke + 3, color: 0x000000, alpha: 0.3 });
   g.drawCircle(cx, cy, r);
-  g.lineStyle({ width: stroke, color: 0x2b2b33, alpha: 1 });
+  g.lineStyle({ width: stroke, color: 0x2b2b33, alpha: 0.35 });
   g.drawCircle(cx, cy, r);
   if (frac > 0) {
-    g.lineStyle({ width: stroke, color: containmentColors(c).solid, alpha: 1, cap: PIXI.LINE_CAP.ROUND });
-    const start = -Math.PI / 2; // from the top, clockwise; the arc's end retreats counter-clockwise as it drains
+    g.lineStyle({ width: stroke, color: containmentColors(c).solid, alpha: 0.6, cap: PIXI.LINE_CAP.ROUND });
+    const start = -Math.PI / 2; // from the top, clockwise; the arc's end advances clockwise as Containment drops
     if (frac >= 0.999) g.drawCircle(cx, cy, r);
     else {
       g.moveTo(cx + r * Math.cos(start), cy + r * Math.sin(start));

@@ -315,6 +315,9 @@
           "hint": "Name des Visage-Gesichts für den Herbst."
         }
       }
+    },
+    "SubclassDrop": {
+      "NoClass": "Im dnd5e-Kompendium wurde keine Klasse {class} gefunden. Füge zuerst die Klasse hinzu und ziehe dann die Unterklasse auf den Actor."
     }
   }
 }

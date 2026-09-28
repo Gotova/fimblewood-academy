@@ -315,6 +315,9 @@
           "hint": "Label of the Visage face used for Autumn."
         }
       }
+    },
+    "SubclassDrop": {
+      "NoClass": "No {class} class was found in the dnd5e compendiums. Add the class to the actor first, then drop the subclass."
     }
   }
 }

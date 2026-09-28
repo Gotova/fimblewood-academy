@@ -4,6 +4,14 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.20.1] - 2026-09-28
+
+### Fixed
+
+- **Eladrin Wild Magic**: the Containment token ring is now empty at 20 and fills as Containment drops. It is half-transparent and sits outside the token, so the token art stays fully visible.
+- **Eladrin Wild Magic**: the icon of *Fey Step (Season Rider)* was a broken path.
+- **Subclasses**: dropping one of this module's subclasses on an actor without the parent class (e.g. Sorcerer) now adds the class first with its normal advancement dialogs (spells, proficiencies, ...), then the subclass, whose features are granted automatically. Before, the subclass was added bare.
+
 ## [0.20.0] - 2026-09-28
 
 ### Added

@@ -2,7 +2,7 @@
   "_id": "kNA3AFFwf78rb6hk",
   "name": "Fey Step (Season Rider)",
   "type": "feat",
-  "img": "icons/magic/air/wind-swirl-pink.webp",
+  "img": "icons/magic/air/wind-swirl-pink-purple.webp",
   "system": {
     "description": {
       "value": "<p><strong>House-rule proposal (not yet agreed with the player).</strong> When you use Fey Step, its rider follows your <em>current season</em> instead of a freely chosen one. With the ring worn that is always Winter.</p>\n<p><strong>Winter.</strong> One creature of your choice within 5 feet makes a Wisdom saving throw against your spell save DC or has Disadvantage on attack rolls until the end of your next turn.</p><p><em>Automated: using Fey Step posts a chat card showing your current season and the Winter rider with your save DC.</em></p>",
