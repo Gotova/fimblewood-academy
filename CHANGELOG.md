@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.20.0] - 2026-09-28
+
+### Added
+
+- **Eladrin Wild Magic**: a new Sorcerer subclass with the Wild Magic Sorcery level 3 feature split into a level 1 risk half (Wild Magic Surge) and a level 3 reward half (Tides of Chaos). Adds the Containment Ring (on / off / drained), Containment as a sheet bar, a token ring and chat lines, surge automation on spell point spending (d20 against Containment, then the German d100 table *Lilians Wild Magic (d100)*), season faces through Visage, Surge Reroll, Fey Step (Season Rider) and the text-only Prestidigitation on Autopilot. Open decisions (Charisma penalty, tick mode, floor, ring action cost) are world settings.
+
 ## [0.19.0] - 2026-09-27
 
 ### Added

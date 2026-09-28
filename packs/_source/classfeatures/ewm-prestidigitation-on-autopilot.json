@@ -1,0 +1,32 @@
+{
+  "_id": "4F1dHiHgNVe4qWXl",
+  "name": "Prestidigitation on Autopilot",
+  "type": "feat",
+  "img": "icons/magic/air/wind-stream-blue-gray.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>House-rule proposal (still to be agreed with the player).</strong> In any moment of fear or stress a tiny, harmless, but <em>always visible</em> effect escapes her: a gust of wind, a drop in temperature, a bud opening, glass fogging over.</p>\n<p>No roll, no cost, no action. The point is not mechanics — the point is that <strong>someone in the room can see it</strong>.</p>\n<p>With the ring worn, the effect is always winter-coloured.</p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 1, Eladrin Wild Magic",
+    "source": {
+      "custom": "Fimblewood Academy homebrew (Eladrin Wild Magic)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isEwmAutopilot": true
+    }
+  },
+  "_key": "!items!4F1dHiHgNVe4qWXl"
+}

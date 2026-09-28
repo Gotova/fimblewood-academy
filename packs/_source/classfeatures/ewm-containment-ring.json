@@ -1,0 +1,84 @@
+{
+  "_id": "crVU5d0G5DUVUKpQ",
+  "name": "Containment Ring",
+  "type": "feat",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "description": {
+      "value": "<p>A filigree magical damper, worn day and night. It forces your fey nature into a permanent, artificial winter. Exactly one state is active at any time:</p>\n<table><thead><tr><th></th><th>Ring on</th><th>Ring off</th><th>Ring drained</th></tr></thead><tbody>\n<tr><td>Surge roll</td><td>Once per turn, voluntary</td><td>Forced</td><td>Forced</td></tr>\n<tr><td>Containment</td><td>20, recovers</td><td>20, drops by 1 per spell</td><td>Drops, no recovery</td></tr>\n<tr><td>Charisma</td><td>Damped</td><td>Full</td><td>Damped</td></tr>\n<tr><td>Season</td><td>Winter, fixed</td><td>Follows your emotional state</td><td>Winter, fixed</td></tr>\n<tr><td>Reroll</td><td>Available</td><td>n/a</td><td>Spent</td></tr></tbody></table>\n<p>Putting the ring on takes an Action. <em>Drained</em> lasts until your next Short Rest. A surge overrides the fixed Winter: the ring damps the magic, not what breaks through.</p>\n<p><strong>Open (GM):</strong> the exact Charisma penalty is not settled yet and is a module setting (default 0).</p><p><em>Automated: use the Ring buttons in the Containment bar on the character sheet or on the token HUD to switch state. The linked effects below switch with it.</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 1, Eladrin Wild Magic",
+    "source": {
+      "custom": "Fimblewood Academy homebrew (Eladrin Wild Magic)."
+    }
+  },
+  "effects": [
+    {
+      "_id": "jUir4NWGdWMHvk3x",
+      "name": "Containment Ring: On",
+      "img": "icons/svg/aura.svg",
+      "transfer": true,
+      "changes": [],
+      "disabled": false,
+      "duration": {},
+      "flags": {
+        "fimblewood-academy": {
+          "ewmRingState": "on"
+        }
+      },
+      "statuses": [],
+      "origin": "Compendium.fimblewood-academy.classfeatures.Item.crVU5d0G5DUVUKpQ",
+      "_key": "!items.effects!crVU5d0G5DUVUKpQ.jUir4NWGdWMHvk3x"
+    },
+    {
+      "_id": "54jCGupDME73hCU9",
+      "name": "Containment Ring: Off",
+      "img": "icons/svg/aura.svg",
+      "transfer": true,
+      "changes": [],
+      "disabled": true,
+      "duration": {},
+      "flags": {
+        "fimblewood-academy": {
+          "ewmRingState": "off"
+        }
+      },
+      "statuses": [],
+      "origin": "Compendium.fimblewood-academy.classfeatures.Item.crVU5d0G5DUVUKpQ",
+      "_key": "!items.effects!crVU5d0G5DUVUKpQ.54jCGupDME73hCU9"
+    },
+    {
+      "_id": "tpPBE3MKZaDlo79n",
+      "name": "Containment Ring: Drained",
+      "img": "icons/svg/aura.svg",
+      "transfer": true,
+      "changes": [],
+      "disabled": true,
+      "duration": {},
+      "flags": {
+        "fimblewood-academy": {
+          "ewmRingState": "drained"
+        }
+      },
+      "statuses": [],
+      "origin": "Compendium.fimblewood-academy.classfeatures.Item.crVU5d0G5DUVUKpQ",
+      "_key": "!items.effects!crVU5d0G5DUVUKpQ.tpPBE3MKZaDlo79n"
+    }
+  ],
+  "folder": null,
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isEwmRing": true
+    }
+  },
+  "_key": "!items!crVU5d0G5DUVUKpQ"
+}

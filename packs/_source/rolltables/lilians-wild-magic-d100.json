@@ -1,0 +1,672 @@
+{
+  "_id": "4mLxg1dROLrNEW1Z",
+  "name": "Lilians Wild Magic (d100)",
+  "img": "icons/svg/d20-black.svg",
+  "description": "<p><strong>Das Ergebnis setzt zugleich Lilians sichtbare Jahreszeit</strong> — Haar- und Augenfarbe — bis zur nächsten langen Rast. 01–24 Winter (weißblau, Reif) · 25–48 Frühling (hellgrün, Blüten) · 49–72 Sommer (Gold, leuchtend) · 73–96 Herbst (Kupfer und Grau) · 97–00 Der Pakt (die Farbe weicht ganz).</p><p>Getragener Ring = Winter, fest. Ein Surge überschreibt das trotzdem.</p>",
+  "formula": "1d100",
+  "replacement": true,
+  "displayRoll": true,
+  "results": [
+    {
+      "_id": "EJqyJVtGXfuF1GLk",
+      "type": "text",
+      "text": "WINTER — Reif breitet sich in einem Radius von 15 ft aus. Der Boden ist schwieriges Gelände bis zum Ende ihres nächsten Zuges.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        1,
+        2
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.EJqyJVtGXfuF1GLk"
+    },
+    {
+      "_id": "pQytNs5UDypsWr9C",
+      "type": "text",
+      "text": "WINTER — Jede Flüssigkeit im Umkreis von 30 ft gefriert: Tinte, Tee, Trankphiolen. Getragene Phiolen: DC 10 CON-Save des Trägers, sonst unbrauchbar, bis sie 10 Minuten aufgetaut sind.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        3,
+        4
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.pQytNs5UDypsWr9C"
+    },
+    {
+      "_id": "L7F235FsFsQMAUaq",
+      "type": "text",
+      "text": "WINTER — Die Temperatur im Umkreis von 30 ft fällt spürbar; der Atem aller Anwesenden wird sichtbar. Rein kosmetisch, 1 Stunde — aber JEDER IM RAUM MERKT ES.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        5,
+        6
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.L7F235FsFsQMAUaq"
+    },
+    {
+      "_id": "0AUsULiY2cOi3jyZ",
+      "type": "text",
+      "text": "WINTER — Alle Geräusche im Umkreis von 20 ft erlöschen für 1 Runde. Keine Zauber mit verbaler Komponente. TRIFFT AUCH SIE.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        7,
+        8
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.0AUsULiY2cOi3jyZ"
+    },
+    {
+      "_id": "fLi5WJuwoB7EGyiq",
+      "type": "text",
+      "text": "WINTER — Sie und alle Verbündeten im Umkreis von 10 ft erhalten für 1 Minute Resistenz gegen Kälteschaden.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        9,
+        10
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.fLi5WJuwoB7EGyiq"
+    },
+    {
+      "_id": "Z0HZUm5h9tzFwcvH",
+      "type": "text",
+      "text": "WINTER — Reifmuster überziehen ihre Haut. Wer sie berührt, nimmt 1d4 Kälteschaden. 1 Minute — auch beim Händeschütteln.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        11,
+        12
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.Z0HZUm5h9tzFwcvH"
+    },
+    {
+      "_id": "q38bFHozpicxXli4",
+      "type": "text",
+      "text": "WINTER — Der nächste Zauber, den sie in dieser Minute wirkt, verursacht Kälteschaden statt seines eigenen Schadenstyps.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        13,
+        14
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.q38bFHozpicxXli4"
+    },
+    {
+      "_id": "KMy3ECB5qu5yNDJh",
+      "type": "text",
+      "text": "WINTER — Eine Wand aus klarem Eis (10 ft lang, 1 ft dick, AC 12, 15 TP) erscheint an einem Punkt in 30 ft Entfernung. Die SL wählt den Punkt. Bleibt 1 Minute.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        15,
+        16
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.KMy3ECB5qu5yNDJh"
+    },
+    {
+      "_id": "bdi6BCjYgqRTngEL",
+      "type": "text",
+      "text": "WINTER — Alles Papier, Pergament und jede Tinte im Umkreis von 30 ft gefriert und wird brüchig. Aufgeschlagene Bücher, Notizen und Klausurbögen sind unlesbar, bis sie eine Stunde getrocknet sind.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        17,
+        18
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.bdi6BCjYgqRTngEL"
+    },
+    {
+      "_id": "8xJtMqHP5VE5GMhh",
+      "type": "text",
+      "text": "WINTER — Schneefall setzt im Umkreis von 60 ft ein, auch in Innenräumen. Leicht verdeckt, 1 Minute. Der Schnee bleibt liegen und schmilzt langsam.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        19,
+        20
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.8xJtMqHP5VE5GMhh"
+    },
+    {
+      "_id": "qiHAqYBneO16STah",
+      "type": "text",
+      "text": "WINTER — Sie erstarrt. Bis zum Ende ihres nächsten Zuges ist sie RESTRAINED; sie darf sich mit einem CHA-Rettungswurf gegen ihre eigene Zauber-DC selbst befreien.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        21,
+        22
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.qiHAqYBneO16STah"
+    },
+    {
+      "_id": "tMmU8cv46JCAqx52",
+      "type": "text",
+      "text": "WINTER — Furcht schlägt nach außen: Jede Kreatur ihrer Wahl im Umkreis von 15 ft macht einen WIS-Rettungswurf gegen ihre Zauber-DC oder ist 1 Runde lang FRIGHTENED von ihr. Jeder Betroffene weiß für 10 Minuten, dass die Furcht von ihr kam.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        23,
+        24
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.tMmU8cv46JCAqx52"
+    },
+    {
+      "_id": "m6OWtWXH4SDXnBZX",
+      "type": "text",
+      "text": "FRÜHLING — Blumen und Ranken brechen aus jeder Oberfläche im Umkreis von 20 ft. Schwieriges Gelände, 1 Minute, danach welken sie. Die aufgebrochenen Oberflächen bleiben beschädigt.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        25,
+        26
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.m6OWtWXH4SDXnBZX"
+    },
+    {
+      "_id": "vgRKZ3rn6l3QQAqG",
+      "type": "text",
+      "text": "FRÜHLING — Alles Papier im Umkreis von 30 ft blüht auf: Seiten treiben Knospen, Tinte wird zu Blütenstaub. Dauerhaft unlesbar.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        27,
+        28
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.vgRKZ3rn6l3QQAqG"
+    },
+    {
+      "_id": "vxV5KYhB4JoAUN1Y",
+      "type": "text",
+      "text": "FRÜHLING — Sie und jede Kreatur im Umkreis von 10 ft heilen 1d8 Trefferpunkte.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        29,
+        30
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.vxV5KYhB4JoAUN1Y"
+    },
+    {
+      "_id": "0RXJvxvD2zqCq2sJ",
+      "type": "text",
+      "text": "FRÜHLING — Der Raum füllt sich mit Blütenstaub. Jede Kreatur im Umkreis von 20 ft macht einen CON-Rettungswurf DC 12 oder niest 1 Minute lang laut: Nachteil auf Heimlichkeit und auf Konzentrationswürfe.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        31,
+        32
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.0RXJvxvD2zqCq2sJ"
+    },
+    {
+      "_id": "raeSu3SIXLKNKP93",
+      "type": "text",
+      "text": "FRÜHLING — Aus ihrem Haar wachsen echte Blüten. Sie lassen sich nicht entfernen und fallen nach 24 Stunden von selbst ab.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        33,
+        34
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.raeSu3SIXLKNKP93"
+    },
+    {
+      "_id": "kIsVrcPLNK2UvM8J",
+      "type": "text",
+      "text": "FRÜHLING — Ein völlig gewöhnliches Kleintier (Katze, Rabe, Hase — SL wählt) erscheint neben ihr. Es ist echt, es ist verwirrt, und ES GEHT NICHT WEG.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        35,
+        36
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.kIsVrcPLNK2UvM8J"
+    },
+    {
+      "_id": "PHeXlRzpJDSRwAlh",
+      "type": "text",
+      "text": "FRÜHLING — Jede Pflanze im Umkreis von 60 ft wächst um ein Jahr. Topfpflanzen, Efeu an der Fassade, das Gras im Hof. Dauerhaft. Der Hausmeister wird Fragen stellen.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        37,
+        38
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.PHeXlRzpJDSRwAlh"
+    },
+    {
+      "_id": "nkrS4hQf8Hpzds4C",
+      "type": "text",
+      "text": "FRÜHLING — Ihr nächster Zauber in dieser Minute heilt zusätzlich das Ziel oder den nächstgelegenen Verbündeten um 1d6.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        39,
+        40
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.nkrS4hQf8Hpzds4C"
+    },
+    {
+      "_id": "bs22UlcKsRrdC2GK",
+      "type": "text",
+      "text": "FRÜHLING — Ein Duft nach Regen und Grün haftet 10 Minuten an ihr. Vorteil auf CHA-Würfe — und jeder, der ihr in dieser Zeit begegnet, erinnert sich später an den Geruch. Nicht an ihr Gesicht. An den Geruch.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        41,
+        42
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.bs22UlcKsRrdC2GK"
+    },
+    {
+      "_id": "syCHwV5oVonQeijj",
+      "type": "text",
+      "text": "FRÜHLING — Eine Quelle bricht aus dem Boden. 5-ft-Radius schwieriges Gelände, versiegt nach 1 Minute. Die Pfütze bleibt. In einem oberen Stockwerk ist das ein anderes Problem.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        43,
+        44
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.syCHwV5oVonQeijj"
+    },
+    {
+      "_id": "ziaZDawgjWwQhnRC",
+      "type": "text",
+      "text": "FRÜHLING — Alles Essbare im Umkreis von 30 ft wird frisch und reif, auch das Verdorbene. Und auch das, was nie essbar war: Kerzenwachs, Lederbindungen und Tinte sind 1 Stunde lang genießbar und schmecken nach Honig.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        45,
+        46
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.ziaZDawgjWwQhnRC"
+    },
+    {
+      "_id": "DHawZSEYbYgub1b2",
+      "type": "text",
+      "text": "FRÜHLING — Jede Kreatur im Umkreis von 15 ft macht einen WIS-Rettungswurf gegen ihre Zauber-DC. Bei Misserfolg empfindet sie 1 Minute lang aufrichtige, unbegründete Zuneigung zu Lilian. Sie erinnern sich danach daran und wissen nicht, warum.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        47,
+        48
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.DHawZSEYbYgub1b2"
+    },
+    {
+      "_id": "zZUu30aiXC5yJfnP",
+      "type": "text",
+      "text": "SOMMER — Sie leuchtet wie eine Fackel (20 ft hell, 20 ft dämmrig), 1 Minute. Kein Verstecken.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        49,
+        50
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.zZUu30aiXC5yJfnP"
+    },
+    {
+      "_id": "bHQtimJCfiUIxzJi",
+      "type": "text",
+      "text": "SOMMER — Jede Lichtquelle im Umkreis von 60 ft flammt auf und erlischt. 1 Minute Dunkelheit, danach müssen sie neu entzündet werden.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        51,
+        52
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.bHQtimJCfiUIxzJi"
+    },
+    {
+      "_id": "PXrDUMjtWwiQrZXh",
+      "type": "text",
+      "text": "SOMMER — Ihr nächster Zauber in dieser Minute verursacht MAXIMALEN SCHADEN.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        53,
+        54
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.PXrDUMjtWwiQrZXh"
+    },
+    {
+      "_id": "Kw1LLjwqLOpVqtZn",
+      "type": "text",
+      "text": "SOMMER — Hitzewelle im Umkreis von 30 ft. Wer schwere Rüstung oder Robe trägt und 10 Minuten darin bleibt, macht einen CON-Rettungswurf DC 12 oder erhält 1 Stufe Erschöpfung.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        55,
+        56
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.Kw1LLjwqLOpVqtZn"
+    },
+    {
+      "_id": "wMDObUSWGDHAXWE4",
+      "type": "text",
+      "text": "SOMMER — Funken springen von ihr auf jede Metalloberfläche im Umkreis von 15 ft. 1d6 Feuerschaden an jeden, der gerade Metall trägt oder berührt — auch Verbündete, auch sie selbst.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        57,
+        58
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.wMDObUSWGDHAXWE4"
+    },
+    {
+      "_id": "2T52X6BjG2NtVRlh",
+      "type": "text",
+      "text": "SOMMER — Haar und Augen schlagen in leuchtendes Gold um. 10 Minuten: Vorteil auf Einschüchtern, Nachteil auf jeden Versuch, unauffällig zu bleiben.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        59,
+        60
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.2T52X6BjG2NtVRlh"
+    },
+    {
+      "_id": "8nW0PPGZlNs12r7x",
+      "type": "text",
+      "text": "SOMMER — Sie und alle Verbündeten im Umkreis von 10 ft erhalten 1d10 temporäre Trefferpunkte.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        61,
+        62
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.8nW0PPGZlNs12r7x"
+    },
+    {
+      "_id": "Vq63oErgPVoVXodu",
+      "type": "text",
+      "text": "SOMMER — Jede offene Flamme im Umkreis von 60 ft wird für 1 Runde zu einer 5 ft hohen Feuersäule und brennt danach normal weiter. In einem Alchemielabor ist das kein kosmetischer Effekt.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        63,
+        64
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.Vq63oErgPVoVXodu"
+    },
+    {
+      "_id": "bGPXMVRNLaGcGo2g",
+      "type": "text",
+      "text": "SOMMER — 1 Minute lang ist sie immun gegen FRIGHTENED und CHARMED, MUSS aber in jedem ihrer Züge angreifen oder sich auf den nächsten Feind zubewegen. Ihre Schüchternheit ist weg, und sie hat sie nicht abgelegt.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        65,
+        66
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.bGPXMVRNLaGcGo2g"
+    },
+    {
+      "_id": "raRusAxr0hV6xXwA",
+      "type": "text",
+      "text": "SOMMER — Ein trockener, heißer Wind fegt durch den Raum. Alles Lose — Papier, Notizen, Karten, Staub — wird 30 ft weit verweht.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        67,
+        68
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.raRusAxr0hV6xXwA"
+    },
+    {
+      "_id": "apgpzRxHRJDfB8qB",
+      "type": "text",
+      "text": "SOMMER — 1 Minute lang ist jedes Wort, das sie spricht, im Umkreis von 300 ft zu hören. SIE KANN NICHT FLÜSTERN.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        69,
+        70
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.apgpzRxHRJDfB8qB"
+    },
+    {
+      "_id": "xOCyo8Z40a56hN53",
+      "type": "text",
+      "text": "SOMMER — Der nächste Angriff gegen sie in dieser Runde trifft stattdessen automatisch die nächstgelegene andere Kreatur — Freund oder Feind. Nur dieser eine.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        71,
+        72
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.xOCyo8Z40a56hN53"
+    },
+    {
+      "_id": "dAmLdATeEGIJWmhl",
+      "type": "text",
+      "text": "HERBST — Alle Farben im Umkreis von 30 ft verblassen für 1 Stunde zu Braun und Gold. Rein kosmetisch. Sehr auffällig.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        73,
+        74
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.dAmLdATeEGIJWmhl"
+    },
+    {
+      "_id": "EbNsti6PlsGTDWjp",
+      "type": "text",
+      "text": "HERBST — Jeder nicht getragene, nichtmagische Gegenstand im Umkreis von 20 ft altert sichtbar um zehn Jahre. Bücher vergilben, Stoff verschleißt, Metall setzt Patina an. DAUERHAFT.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        75,
+        76
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.EbNsti6PlsGTDWjp"
+    },
+    {
+      "_id": "Lt9Nl2sUvGWdWeCG",
+      "type": "text",
+      "text": "HERBST — Blätter fallen aus dem Nichts, 20-ft-Radius, 1 Minute. Leicht verdeckt — und sie sind trocken: Nachteil auf Heimlichkeit für alle darin.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        77,
+        78
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.Lt9Nl2sUvGWdWeCG"
+    },
+    {
+      "_id": "zm538abWWyw7a0BJ",
+      "type": "text",
+      "text": "HERBST — Die nächste Kreatur, die sie in dieser Minute mit einem Zauber trifft, vergisst die letzten 60 Sekunden. Kein Rettungswurf. Auch das, was gerade gesagt wurde.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        79,
+        80
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.zm538abWWyw7a0BJ"
+    },
+    {
+      "_id": "oNWVEGPv3FesK2cJ",
+      "type": "text",
+      "text": "HERBST — Ein Windstoß: Jede Kreatur im Umkreis von 15 ft macht einen STR-Rettungswurf DC 12 oder wird 10 ft zurückgestoßen. SIE SELBST EBENFALLS, in eine zufällige Richtung.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        81,
+        82
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.oNWVEGPv3FesK2cJ"
+    },
+    {
+      "_id": "tmHHMZJpvhDK6tbX",
+      "type": "text",
+      "text": "HERBST — 1 Minute lang hört sie die Gedanken der Person, die ihr am nächsten steht. Sie hat nicht darum gebeten. Sie kann es nicht abstellen.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        83,
+        84
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.tmHHMZJpvhDK6tbX"
+    },
+    {
+      "_id": "vcz0yNT23qSTlzKv",
+      "type": "text",
+      "text": "HERBST — Alle Türen und Fenster im Umkreis von 60 ft öffnen sich gleichzeitig — verschlossene ebenfalls, sofern nicht magisch versiegelt.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        85,
+        86
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.vcz0yNT23qSTlzKv"
+    },
+    {
+      "_id": "z4jHVEGAFXABAWUC",
+      "type": "text",
+      "text": "HERBST — Ihr nächster Zauber in dieser Minute kostet keine Manapunkte.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        87,
+        88
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.z4jHVEGAFXABAWUC"
+    },
+    {
+      "_id": "mR2aXGNFft20BGwv",
+      "type": "text",
+      "text": "HERBST — Grauer Nebel steigt aus dem Boden. Stark verdeckt im 20-ft-Radius, 1 Minute. Riecht nach kaltem Kamin.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        89,
+        90
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.mR2aXGNFft20BGwv"
+    },
+    {
+      "_id": "zrvz53bzVYffJqw2",
+      "type": "text",
+      "text": "HERBST — 10 Minuten lang altert ihre Erscheinung sichtbar: graues Haar, feine Linien. Sie ist nicht wirklich gealtert. NIEMAND, DER SIE SO SIEHT, ERKENNT LILIAN VANCE WIEDER.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        91,
+        92
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.zrvz53bzVYffJqw2"
+    },
+    {
+      "_id": "b5J3X0gPykjRWUUQ",
+      "type": "text",
+      "text": "HERBST — Jede Kreatur im Umkreis von 30 ft, die sie in den letzten 24 Stunden belogen hat, weiß in diesem Moment, dass Lilian es weiß. Ohne Details. Nur das Gefühl.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        93,
+        94
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.b5J3X0gPykjRWUUQ"
+    },
+    {
+      "_id": "YgEjtTeaOKlZoScN",
+      "type": "text",
+      "text": "HERBST — 1 Minute lang wirft jede Kreatur im Umkreis von 15 ft zwei Schatten. Der zweite bewegt sich nicht mit.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        95,
+        96
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.YgEjtTeaOKlZoScN"
+    },
+    {
+      "_id": "rWFIuAm7BLpd9DoX",
+      "type": "text",
+      "text": "DER PAKT — Für einen Moment spricht sie nicht mit ihrer Stimme. Ein Satz in Sylvan, den sie nicht formuliert hat, verlässt laut und deutlich ihren Mund, hörbar für alle Anwesenden. SIE VERSTEHT IHN. Die SL wählt: ein Name, eine Frage oder eine Bedingung. Danach Nachteil auf ihren nächsten Rettungswurf.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        97,
+        98
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.rWFIuAm7BLpd9DoX"
+    },
+    {
+      "_id": "TOG9zlYceGkxenV4",
+      "type": "text",
+      "text": "DER PAKT — Eine Tür öffnet sich, wo keine war: ein Riss ins Feywild, 5 ft hoch, für genau eine Runde. Was hindurchgeht, kommt nicht auf demselben Weg zurück. Was hindurchsieht, sieht einen Ort, an dem jemand wartet. PLOT-EREIGNIS, KEIN ZAUBEREFFEKT — die SL entscheidet, was die Gruppe sieht.",
+      "img": null,
+      "weight": 1,
+      "range": [
+        99,
+        100
+      ],
+      "drawn": false,
+      "_key": "!tables.results!4mLxg1dROLrNEW1Z.TOG9zlYceGkxenV4"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isEwmTable": true
+    }
+  },
+  "_key": "!tables!4mLxg1dROLrNEW1Z"
+}

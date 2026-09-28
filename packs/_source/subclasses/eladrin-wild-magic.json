@@ -1,0 +1,65 @@
+{
+  "_id": "LawvMH59kBoT4hZv",
+  "name": "Eladrin Wild Magic",
+  "type": "subclass",
+  "img": "icons/magic/control/energy-stream-link-large-teal.webp",
+  "system": {
+    "description": {
+      "value": "<p>Your innate magic stems from the forces of chaos that underlie the order of creation, and in an eladrin it wears the face of the seasons. This is a house-rule variant of Wild Magic Sorcery built around a magical damper, the Containment Ring.</p>\n<p><strong>House rule:</strong> the level 3 feature of Wild Magic Sorcery is split. The risk half arrives at level 1, the reward half at level 3.</p>\n<ul><li><strong>Level 1:</strong> Wild Magic Surge, Containment Ring, Surge Reroll, Fey Step (Season Rider), Prestidigitation on Autopilot</li>\n<li><strong>Level 3:</strong> Tides of Chaos</li></ul>\n<p><em>Uses the Lilians Wild Magic (d100) table, whose entries are in German on purpose because they are read aloud at the table.</em></p>",
+      "chat": ""
+    },
+    "identifier": "eladrin-wild-magic",
+    "classIdentifier": "sorcerer",
+    "source": {
+      "custom": "Fimblewood Academy homebrew (Eladrin Wild Magic)."
+    },
+    "advancement": [
+      {
+        "_id": "PeQEG4SJB0lDhRad",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.fimblewood-academy.classfeatures.Item.KUQ8fMDEB22hHqJK",
+            "Compendium.fimblewood-academy.classfeatures.Item.crVU5d0G5DUVUKpQ",
+            "Compendium.fimblewood-academy.classfeatures.Item.MK7qm6UECoZfVNx6",
+            "Compendium.fimblewood-academy.classfeatures.Item.kNA3AFFwf78rb6hk",
+            "Compendium.fimblewood-academy.classfeatures.Item.4F1dHiHgNVe4qWXl"
+          ],
+          "optional": false
+        },
+        "value": {},
+        "level": 1,
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "Csc3ao2DXGiyAPHg",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.fimblewood-academy.classfeatures.Item.MuHcvNns8nNTSFB5"
+          ],
+          "optional": false
+        },
+        "value": {},
+        "level": 3,
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isEladrinWildMagic": true
+    }
+  },
+  "_key": "!items!LawvMH59kBoT4hZv"
+}

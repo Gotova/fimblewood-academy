@@ -1,0 +1,46 @@
+{
+  "_id": "MuHcvNns8nNTSFB5",
+  "name": "Tides of Chaos (Eladrin)",
+  "type": "feat",
+  "img": "icons/magic/water/wave-water-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>House rule: the reward half of Wild Magic Sorcery, gained at level 3.</strong> You can manipulate chaos to gain Advantage on one D20 Test before you roll the d20.</p>\n<p>Once you do so, you can't do it again until you finish a Long Rest or a Wild Magic Surge occurs, which restores the use.</p><p><em>Automated: a Wild Magic Surge from this subclass restores the use of this feature.</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 3, Eladrin Wild Magic",
+    "activation": {
+      "type": "special",
+      "cost": 0
+    },
+    "uses": {
+      "max": "1",
+      "recovery": [
+        {
+          "period": "lr",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
+    },
+    "source": {
+      "custom": "Fimblewood Academy homebrew (Eladrin Wild Magic)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isEwmTides": true
+    }
+  },
+  "_key": "!items!MuHcvNns8nNTSFB5"
+}

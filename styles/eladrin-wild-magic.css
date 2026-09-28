@@ -1,0 +1,78 @@
+/* Containment bar: same look as the Advanced Magic Spell Points bar, coloured by how empty it is. */
+.dnd5e2 .fw-ewm-group .meter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 1.5rem;
+  overflow: hidden;
+  border: 1px solid var(--dnd5e-color-gold, #b59e54);
+  border-radius: 4px;
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.25);
+  font-family: var(--dnd5e-font-roboto, sans-serif);
+  font-weight: bold;
+}
+
+.dnd5e2 .fw-ewm-group .progress {
+  position: relative;
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.dnd5e2 .fw-ewm-group .progress::before {
+  content: "";
+  position: absolute;
+  inset: 1px auto 1px 1px;
+  inline-size: calc(var(--fw-pct) - 2px);
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 1px var(--dnd5e-highlight-40, rgba(255, 255, 255, 0.4));
+  background: linear-gradient(to right, var(--fw-left), var(--fw-right), var(--fw-left));
+  transition: inline-size 0.4s ease, background 0.4s ease;
+}
+
+.dnd5e2 .fw-ewm-group .progress > .label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  inline-size: 100%;
+  padding-inline: 8px 12px;
+  color: var(--color-text-light-0, #fff);
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+}
+
+.dnd5e2 .fw-ewm-group .fw-ewm-input {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  inline-size: 100%;
+  height: 100%;
+  padding-inline: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 0;
+  color: #fff;
+  font-weight: bold;
+}
+
+.dnd5e2 .fw-ewm-group .fw-ewm-ring-buttons {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.dnd5e2 .fw-ewm-group .fw-ewm-ring-btn {
+  flex: 1;
+  height: 1.5rem;
+  padding: 0 4px;
+  font-size: var(--font-size-11, 11px);
+  line-height: 1;
+}
+
+.dnd5e2 .fw-ewm-group .fw-ewm-ring-btn.active {
+  background: var(--dnd5e-color-gold, #b59e54);
+  color: #000;
+  font-weight: bold;
+}
+
+.fw-ewm-chat strong { color: inherit; }

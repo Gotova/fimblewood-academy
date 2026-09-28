@@ -8,6 +8,7 @@ import { registerDragonchess, openBoardForCurrentUser, getGameRecord, selftest a
 import { registerAmbientSoundFade } from "./ambient-sound-fade.mjs";
 import { registerTimetable, openTimetableViewer, openTimetableEditor } from "./timetable/index.mjs";
 import { registerNpcSpawner, rerollScene, rerollRegion, addNpcs, removeNpcs, clearRegion } from "./npc-spawner.mjs";
+import { registerEladrinWildMagic, hasEladrinWildMagic, getState as getWildMagicState, setRingState, setContainment } from "./eladrin-wild-magic.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 
@@ -22,6 +23,7 @@ Hooks.once("init", () => {
   registerDragonchess();
   registerTimetable();
   registerNpcSpawner();
+  registerEladrinWildMagic();
 
   game.modules.get(MODULE_ID).api = {
     id: MODULE_ID,
@@ -31,6 +33,7 @@ Hooks.once("init", () => {
     jukebox: { openJukeboxWindow, openJukeboxManager, diagnoseJukebox, playTrack, stopTrack },
     dragonchess: { openBoard: openBoardForCurrentUser, getGameRecord, selftest: dragonchessSelftest },
     timetable: { openViewer: openTimetableViewer, openEditor: openTimetableEditor },
+    eladrinWildMagic: { hasEladrinWildMagic, getState: getWildMagicState, setRingState, setContainment },
     npcSpawner: { rerollScene, rerollRegion, addNpcs, removeNpcs, clearRegion }
   };
 });

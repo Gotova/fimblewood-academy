@@ -237,6 +237,84 @@
         "reroll": "Reroll all NPCs",
         "clear": "Remove all NPCs"
       }
+    },
+    "EladrinWildMagic": {
+      "Containment": "Containment",
+      "Ring": "Ring",
+      "Ring_on": "Ring on",
+      "Ring_off": "Ring off",
+      "Ring_drained": "Ring drained",
+      "CostAction": "costs an Action",
+      "CostBonus": "costs a Bonus Action",
+      "CostFree": "free",
+      "Season_winter": "Winter",
+      "Season_spring": "Spring",
+      "Season_summer": "Summer",
+      "Season_autumn": "Autumn",
+      "Season_pact": "The Pact",
+      "ReasonSpell": "spell cast",
+      "ReasonRound": "new round",
+      "ReasonLongRest": "long rest",
+      "ReasonManual": "set by GM",
+      "SurgeCheck": "Wild Magic Surge check after {spell}: d20 vs Containment {c}",
+      "SurgeYes": "SURGE",
+      "SurgeNo": "no surge",
+      "VolunteerTitle": "Wild Magic Surge",
+      "VolunteerText": "You spent spell points on {spell}. Roll for a Wild Magic Surge? (d20 against Containment {c}; the ring keeps Containment from dropping.)",
+      "Reroll": "Surge Reroll — the ring is drained until the next short rest",
+      "Tooltip": "Containment: a surge happens when the d20 is equal to or higher than this number.",
+      "TooltipGM": "Containment: a surge happens when the d20 is equal to or higher than this number. Click to edit.",
+      "FeyStepRider": "Fey Step rider",
+      "FeyProposal": "House-rule proposal, not yet agreed with the player.",
+      "FeyWinter": "One creature within 5 ft makes a WIS save (DC {dc}) or has disadvantage on attack rolls until the end of her next turn.",
+      "FeyOther": "Current season: {season}. Only the Winter rider is defined so far; use the standard Eladrin effect for this season.",
+      "WarnDrainedLocked": "The ring is drained until the next short rest. Only the GM can change it.",
+      "WarnNoVisage": "Eladrin Wild Magic: the Visage module is not active, so her appearance was not changed.",
+      "WarnNoToken": "Eladrin Wild Magic: {actor} has no token on the current scene, so her appearance was not changed.",
+      "WarnNoFace": "Eladrin Wild Magic: {actor} has no Visage face named \"{label}\". Her appearance was not changed.",
+      "WarnVisageFailed": "Eladrin Wild Magic: switching the Visage face failed. See the console.",
+      "WarnNoTable": "Eladrin Wild Magic: roll table \"{name}\" was not found.",
+      "WarnNoSurgeToReroll": "There is no surge to reroll.",
+      "Settings": {
+        "chaPenalty": {
+          "name": "Ring: Charisma penalty (OPEN DECISION)",
+          "hint": "Default 0 = not implemented. Reduces the Charisma score while the ring is on or drained (2 gives DC 12 / +4 at CHA 17; the design document assumes CHA 18 with 2)."
+        },
+        "tickMode": {
+          "name": "Containment ticks per (OPEN DECISION)",
+          "hint": "Default: per spell (recommended, penalises Quickened double casts). Not yet confirmed.",
+          "spell": "Spell",
+          "turn": "Turn"
+        },
+        "floor": {
+          "name": "Containment floor (OPEN DECISION)",
+          "hint": "Default 11 (50%). Containment never sinks below this by casting. Not yet confirmed."
+        },
+        "ringCost": {
+          "name": "Putting the ring on costs (OPEN DECISION)",
+          "hint": "Default: Action. Shown in the chat message only; the action is not spent automatically. Not yet confirmed."
+        },
+        "spellPointsItem": {
+          "name": "Spell Points item name",
+          "hint": "Fallback name of the Spell Points feature used to detect spell point spending."
+        },
+        "face_winter": {
+          "name": "Visage face: Winter",
+          "hint": "Label of the Visage face used for Winter."
+        },
+        "face_spring": {
+          "name": "Visage face: Spring",
+          "hint": "Label of the Visage face used for Spring."
+        },
+        "face_summer": {
+          "name": "Visage face: Summer",
+          "hint": "Label of the Visage face used for Summer."
+        },
+        "face_autumn": {
+          "name": "Visage face: Autumn",
+          "hint": "Label of the Visage face used for Autumn."
+        }
+      }
     }
   }
 }

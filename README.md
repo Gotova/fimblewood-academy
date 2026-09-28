@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.19.0
+- **Current version:** 0.20.0
 
 ## Installation
 
@@ -140,6 +140,24 @@ Requires [Midi QoL](https://foundryvtt.com/packages/midi-qol) for full automatio
 - **Absorb Magic / Occult Shroud** — Counterspell and Nondetection are granted as always-prepared spells automatically. Absorb Magic's bonus Sorcery Points (on a target's failed save against your Counterspell) are rolled and applied automatically via Midi QoL. Occult Shroud's first free Nondetection cast each day is tracked and waives the Resonance cost automatically.
 - **Redirect Magic** — detects nearby spellcasting, validates the Resonance cost and that the spell isn't Range: Self, and prompts you. Actually choosing new targets/origin is resolved manually with your GM — Foundry has no safe generic way to re-target an already-cast spell.
 - **Unblooded Magic (level 18)** — the module creates its own tracking effect when you activate Innate Sorcery (core dnd5e's version doesn't leave a trackable effect on its own). While it's active: Mana Surge grants bonus Resonance (able to exceed your normal max) at the start of each of your turns, automatically clamped back down when Innate Sorcery ends; Resonant Sundering applies Disadvantage to Constitution saves against your spells/features via a Midi QoL flag, toggled live as Innate Sorcery starts and ends.
+
+---
+
+**Sorcerer — Eladrin Wild Magic** (compendium: *Fimblewood Academy Subclasses*)
+
+A house-rule Wild Magic Sorcery for an eladrin whose magic is damped by a ring. The level 3 feature is split: **Wild Magic Surge** (the risk half) arrives at level 1, **Tides of Chaos** (the reward half) at level 3. Content is granted by the subclass advancement: *Wild Magic Surge*, *Containment Ring*, *Surge Reroll*, *Fey Step (Season Rider)* and the text-only *Prestidigitation on Autopilot* at level 1, *Tides of Chaos* at level 3. The German d100 table *Lilians Wild Magic (d100)* is in the *Fimblewood Academy Roll Tables* compendium.
+
+Requires the [Advanced Magic (dnd5e-spellpoints)](https://foundryvtt.com/packages/dnd5e-spellpoints) module for spell points, and [Visage](https://foundryvtt.com/packages/visage) for the season faces. Automation only ever runs for actors that own this subclass.
+
+#### What's automated
+
+- **Ring state** (on / off / drained) with one-click switching from the Containment bar or the token HUD; the three linked effects follow. *Drained* ends at the next short rest.
+- **Containment** (20 max): shown as a bar under the Spell Points bar (the GM can click it to edit), as a ring around the token that empties as it drops, and as a chat line on every change. With the ring off it drops by 1 per spell; it recovers 1 per round while the ring is on (in combat) and resets on a long rest. It never drops while the ring is on, and never recovers while drained.
+- **Surge**: after a level 1+ spell paid for with spell points (cantrips never trigger), the module rolls a d20 against Containment; on a hit it rolls the d100 table, stores the season and switches the Visage face named Winter / Spring / Summer / Autumn (a 97–00 result changes nothing). With the ring on the roll is offered once per turn; otherwise it is forced.
+- **Surge Reroll**: once per short rest after a surge, rerolls the d100 and drains the ring.
+- **Fey Step (Season Rider)**: posts a chat card with the current season's rider (only Winter is defined). Marked as a proposal.
+
+**Open decisions** are world settings with a marked default: the Charisma penalty (0 = not implemented), Containment ticking per spell or per turn, the Containment floor (11) and the action cost of putting the ring on (Action, chat note only). Face labels are settings too; a missing face gives a warning instead of failing silently.
 
 Further classes, subclasses, and other content will be added incrementally as compendium packs under `packs/`.
 

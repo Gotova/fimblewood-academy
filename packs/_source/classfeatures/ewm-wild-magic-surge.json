@@ -1,0 +1,32 @@
+{
+  "_id": "KUQ8fMDEB22hHqJK",
+  "name": "Wild Magic Surge (Eladrin)",
+  "type": "feat",
+  "img": "icons/magic/control/energy-stream-link-large-teal.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>House rule: the risk half of Wild Magic Sorcery, available from level 1.</strong> Whenever you spend spell points on a spell of 1st level or higher, a surge may follow. Cantrips never trigger anything.</p>\n<table><thead><tr><th></th><th>Ring on</th><th>Ring off</th><th>Ring drained</th></tr></thead><tbody>\n<tr><td>Surge roll</td><td>Once per turn, your choice</td><td>Forced after every qualifying spell</td><td>Forced</td></tr>\n<tr><td>Containment</td><td>Never drops; recovers</td><td>Drops by 1 per spell</td><td>Drops, never recovers</td></tr></tbody></table>\n<p>Roll a d20. If the result is <strong>equal to or higher than your current Containment</strong>, roll on the <em>Lilians Wild Magic (d100)</em> table. The result also sets your visible season until your next Long Rest. A result of 97–00 (The Pact) leaves your appearance unchanged.</p>\n<p>Containment starts at 20. With the ring off it drops by 1 for each qualifying spell, after that spell's roll. With the ring on it recovers 1 per round, up to 20. See <em>Containment Ring</em>.</p><p><em>Automated: the module watches your Spell Points item, rolls the d20 against your Containment, rolls the d100 table, posts the result, stores your season and switches your Visage appearance.</em></p>",
+      "chat": ""
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Sorcerer 1, Eladrin Wild Magic",
+    "source": {
+      "custom": "Fimblewood Academy homebrew (Eladrin Wild Magic)."
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isEwmSurge": true
+    }
+  },
+  "_key": "!items!KUQ8fMDEB22hHqJK"
+}

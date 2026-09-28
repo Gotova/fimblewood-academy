@@ -237,6 +237,84 @@
         "reroll": "Alle NPCs neu wuerfeln",
         "clear": "Alle NPCs entfernen"
       }
+    },
+    "EladrinWildMagic": {
+      "Containment": "Containment",
+      "Ring": "Ring",
+      "Ring_on": "Ring an",
+      "Ring_off": "Ring ab",
+      "Ring_drained": "Ring geleert",
+      "CostAction": "kostet eine Aktion",
+      "CostBonus": "kostet eine Bonusaktion",
+      "CostFree": "kostenlos",
+      "Season_winter": "Winter",
+      "Season_spring": "Frühling",
+      "Season_summer": "Sommer",
+      "Season_autumn": "Herbst",
+      "Season_pact": "Der Pakt",
+      "ReasonSpell": "Zauber",
+      "ReasonRound": "neue Runde",
+      "ReasonLongRest": "lange Rast",
+      "ReasonManual": "von der SL gesetzt",
+      "SurgeCheck": "Wild-Magic-Surge-Wurf nach {spell}: d20 gegen Containment {c}",
+      "SurgeYes": "SURGE",
+      "SurgeNo": "kein Surge",
+      "VolunteerTitle": "Wild Magic Surge",
+      "VolunteerText": "Du hast Zauberpunkte für {spell} ausgegeben. Auf einen Wild Magic Surge würfeln? (d20 gegen Containment {c}; der Ring verhindert, dass Containment sinkt.)",
+      "Reroll": "Surge-Reroll — der Ring ist bis zur nächsten kurzen Rast geleert",
+      "Tooltip": "Containment: Ein Surge tritt ein, wenn der d20 gleich dieser Zahl oder höher ist.",
+      "TooltipGM": "Containment: Ein Surge tritt ein, wenn der d20 gleich dieser Zahl oder höher ist. Klicken zum Bearbeiten.",
+      "FeyStepRider": "Fey-Step-Zusatzeffekt",
+      "FeyProposal": "Hausregel-Vorschlag, noch nicht mit dem Spieler abgestimmt.",
+      "FeyWinter": "Eine Kreatur innerhalb von 5 ft macht einen WIS-Rettungswurf (SG {dc}) oder hat bis zum Ende ihres nächsten Zuges Nachteil auf Angriffswürfe.",
+      "FeyOther": "Aktuelle Jahreszeit: {season}. Bisher ist nur der Winter-Effekt definiert; nutze den normalen Eladrin-Effekt dieser Jahreszeit.",
+      "WarnDrainedLocked": "Der Ring ist bis zur nächsten kurzen Rast geleert. Nur die SL kann ihn ändern.",
+      "WarnNoVisage": "Eladrin Wild Magic: Das Modul Visage ist nicht aktiv, ihr Aussehen wurde nicht geändert.",
+      "WarnNoToken": "Eladrin Wild Magic: {actor} hat keinen Token in der aktuellen Szene, das Aussehen wurde nicht geändert.",
+      "WarnNoFace": "Eladrin Wild Magic: {actor} hat kein Visage-Gesicht namens \"{label}\". Das Aussehen wurde nicht geändert.",
+      "WarnVisageFailed": "Eladrin Wild Magic: Der Visage-Wechsel ist fehlgeschlagen. Siehe Konsole.",
+      "WarnNoTable": "Eladrin Wild Magic: Rolltabelle \"{name}\" nicht gefunden.",
+      "WarnNoSurgeToReroll": "Es gibt keinen Surge zum Neuwürfeln.",
+      "Settings": {
+        "chaPenalty": {
+          "name": "Ring: Charisma-Malus (OFFENE ENTSCHEIDUNG)",
+          "hint": "Standard 0 = nicht umgesetzt. Senkt den Charisma-Wert, solange der Ring an oder geleert ist."
+        },
+        "tickMode": {
+          "name": "Containment sinkt pro (OFFENE ENTSCHEIDUNG)",
+          "hint": "Standard: pro Zauber (empfohlen). Noch nicht bestätigt.",
+          "spell": "Zauber",
+          "turn": "Zug"
+        },
+        "floor": {
+          "name": "Containment-Untergrenze (OFFENE ENTSCHEIDUNG)",
+          "hint": "Standard 11 (50 %). Noch nicht bestätigt."
+        },
+        "ringCost": {
+          "name": "Ring anlegen kostet (OFFENE ENTSCHEIDUNG)",
+          "hint": "Standard: Aktion. Wird nur im Chat angezeigt. Noch nicht bestätigt."
+        },
+        "spellPointsItem": {
+          "name": "Name des Zauberpunkte-Items",
+          "hint": "Ausweichname des Zauberpunkte-Features zur Erkennung von Zauberpunkt-Ausgaben."
+        },
+        "face_winter": {
+          "name": "Visage-Gesicht: Winter",
+          "hint": "Name des Visage-Gesichts für den Winter."
+        },
+        "face_spring": {
+          "name": "Visage-Gesicht: Frühling",
+          "hint": "Name des Visage-Gesichts für den Frühling."
+        },
+        "face_summer": {
+          "name": "Visage-Gesicht: Sommer",
+          "hint": "Name des Visage-Gesichts für den Sommer."
+        },
+        "face_autumn": {
+          "name": "Visage-Gesicht: Herbst",
+          "hint": "Name des Visage-Gesichts für den Herbst."
+        }
+      }
     }
   }
 }
