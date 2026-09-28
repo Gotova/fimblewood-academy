@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.21.1] - 2026-09-29
+
+### Fixed
+
+- **Eladrin Wild Magic**: a drained ring now behaves like a ring that is off for her appearance: she shows the season face of her last surge, not her Default form. Only a worn ring keeps her Default. The Fey Step rider and the ring's item text follow the same rule.
+
 ## [0.21.0] - 2026-09-29
 
 ### Changed

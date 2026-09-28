@@ -8,7 +8,7 @@
  * State lives in one actor flag, `flags.fimblewood-academy.ewm`:
  *   ring        "on" | "off" | "drained"   (drained lasts until the next short rest)
  *   containment 0..20                      (the sinking counter; shown on the sheet, the token and in chat)
- *   season      "winter"|"spring"|"summer"|"autumn"|"pact"  (ring on/drained: winter; a surge sets it)
+ *   season      "winter"|"spring"|"summer"|"autumn"|"pact"  (ring on: winter; a surge sets it)
  *   lastSurge   { roll, season } | null    (what a Surge Reroll replaces)
  *
  * Spell-point spending is detected by watching the Spell Points item of the `dnd5e-spellpoints`
@@ -140,7 +140,7 @@ export async function setRingState(actor, state, { keepSeason = false, silent = 
     const costKey = state === "on" ? { action: "CostAction", bonus: "CostBonus", free: "CostFree" }[setting("ringCost")] : null;
     await post(actor, `<strong>${i18n("Ring")}:</strong> ${i18n(`Ring_${from}`)} → <strong>${i18n(`Ring_${state}`)}</strong>${costKey ? ` <em>(${i18n(costKey)})</em>` : ""}`);
   }
-  if (state !== "off" && !keepSeason) await patchState(actor, { season: "winter" });
+  if (state === "on" && !keepSeason) await patchState(actor, { season: "winter" });
   await syncFace(actor);
 }
 
@@ -186,14 +186,14 @@ async function switchVisage(actor, key) {
 }
 
 /**
- * Bring her face in line with the state: with the ring on or drained she always shows her Default
- * form. With the ring off she shows the season of her last surge (until the next long rest), or
+ * Bring her face in line with the state: with the ring on she always shows her Default form. With
+ * the ring off or drained (its magic no longer shields her from the chaos) she shows the season of her last surge (until the next long rest), or
  * Default if she has not surged. The Pact has no face and leaves the current one alone.
  */
 export async function syncFace(actor) {
   const s = getState(actor);
   let key = "default";
-  if (s.ring === "off" && s.lastSurge?.season) {
+  if (s.ring !== "on" && s.lastSurge?.season) {
     if (s.lastSurge.season === "pact") return;
     key = s.lastSurge.season;
   }
@@ -560,7 +560,7 @@ export function registerEladrinWildMagic() {
 async function postFeyStepRider(actor) {
   if (!getFeature(actor, "isEwmFeyRider")) return;
   const s = getState(actor);
-  const season = s.ring === "off" ? s.season : "winter"; // with the ring worn it is always Winter
+  const season = s.ring === "on" ? "winter" : s.season; // with the ring worn it is always Winter
   const dc = actor.system.attributes?.spell?.dc ?? "?";
   const body = season === "winter"
     ? i18n("FeyWinter", { dc })

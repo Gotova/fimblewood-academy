@@ -5,7 +5,7 @@
   "img": "icons/magic/unholy/strike-body-life-soul-purple.webp",
   "system": {
     "description": {
-      "value": "<p>Once per Short Rest, after a surge, you can reroll the d100 result. Doing so drains the ring until your next Short Rest: it stays Winter-fixed, your Containment keeps sinking and never recovers.</p><p><em>Automated: rerolls the d100, replaces the current season and sets the ring to Drained.</em></p>",
+      "value": "<p>Once per Short Rest, after a surge, you can reroll the d100 result. Doing so drains the ring until your next Short Rest: your Containment keeps sinking and never recovers.</p><p><em>Automated: rerolls the d100, replaces the current season and sets the ring to Drained.</em></p>",
       "chat": ""
     },
     "type": {
