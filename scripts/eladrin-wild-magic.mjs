@@ -78,22 +78,28 @@ function seasonForRoll(total) {
 /* -------------------------------------------- */
 
 /** Set Containment, clamped to 0..20, and post `Containment 20 → 19` when it changed. */
-export async function setContainment(actor, value, reason = "") {
+const containmentLine = (from, to, reason = "") =>
+  `<strong>${i18n("Containment")}</strong> ${from} → ${to}${reason ? ` <em>(${reason})</em>` : ""}`;
+
+/** With `silent`, the caller puts the change into its own chat message. */
+export async function setContainment(actor, value, reason = "", { silent = false } = {}) {
   const from = getState(actor).containment;
   const to = Math.clamp(Math.round(value), 0, MAX_CONTAINMENT);
   if (to === from) return from;
   await patchState(actor, { containment: to });
-  await post(actor, `<strong>${i18n("Containment")}</strong> ${from} → ${to}${reason ? ` <em>(${reason})</em>` : ""}`);
+  if (!silent) await post(actor, containmentLine(from, to, reason));
   return to;
 }
 
+/** Sink Containment for one spell. Returns the chat line for the change, or "" if nothing changed. */
 async function tickContainment(actor) {
   const s = getState(actor);
   const key = turnKey();
-  if (setting("tickMode") === "turn" && key && s.tickTurn === key) return;
+  if (setting("tickMode") === "turn" && key && s.tickTurn === key) return "";
   const floor = Math.clamp(setting("floor"), 0, MAX_CONTAINMENT);
-  await setContainment(actor, Math.max(floor, s.containment - 1), i18n("ReasonSpell"));
+  const to = await setContainment(actor, Math.max(floor, s.containment - 1), "", { silent: true });
   if (key) await patchState(actor, { tickTurn: key });
+  return to === s.containment ? "" : containmentLine(s.containment, to);
 }
 
 /* -------------------------------------------- */
@@ -196,31 +202,41 @@ async function getTable() {
   return (entry ? await pack.getDocument(entry._id) : null) ?? game.tables.getName(TABLE_NAME);
 }
 
-/** Roll the d100 table, post it, and set the season. Returns the d100 total. */
-async function drawSurge(actor) {
+/**
+ * Roll the d100 table and set the season. Posts one compact message: the roll, the effect text and,
+ * if given, the Containment change line. Returns the d100 total.
+ */
+async function drawSurge(actor, extraLine = "") {
   const table = await getTable();
   if (!table) {
     warn(i18n("WarnNoTable", { name: TABLE_NAME }));
     return null;
   }
-  const { roll } = await table.draw({ displayChat: true });
+  const { roll, results } = await table.draw({ displayChat: false });
   const total = roll.total;
+  const effect = results[0]?.description ?? results[0]?.text ?? "";
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<div class="fw-ewm-chat"><h4>${i18n("SurgeResult", { roll: total })}</h4><p>${effect}</p>${extraLine ? `<p>${extraLine}</p>` : ""}</div>`,
+    rolls: [roll],
+    sound: CONFIG.sounds.dice
+  });
   const season = seasonForRoll(total);
   await patchState(actor, { lastSurge: { roll: total, season } });
   await applySeason(actor, season);
   return total;
 }
 
-async function rollSurge(actor, spellName) {
-  const c = getState(actor).containment;
+/** `c` is the Containment the roll is made against; `change` is the chat line of a Containment tick, if any. */
+async function rollSurge(actor, spellName, c, change = "") {
   const d20 = await new Roll("1d20").evaluate();
   const surge = d20.total >= c;
   await d20.toMessage({
     speaker: ChatMessage.getSpeaker({ actor }),
-    flavor: `${i18n("SurgeCheck", { spell: spellName, c })} — <strong>${surge ? i18n("SurgeYes") : i18n("SurgeNo")}</strong>`
+    flavor: `${i18n("SurgeCheck", { spell: spellName, c })} — <strong>${surge ? i18n("SurgeYes") : i18n("SurgeNo")}</strong>${!surge && change ? `<br>${change}` : ""}`
   });
   if (!surge) return;
-  await drawSurge(actor);
+  await drawSurge(actor, change);
   // A surge restores Tides of Chaos.
   const tides = getFeature(actor, "isEwmTides");
   if (tides?.system.uses?.spent) await tides.update({ "system.uses.spent": 0 });
@@ -238,11 +254,11 @@ async function onQualifyingSpell(actor, spellName) {
     });
     if (!yes) return;
     if (key) await patchState(actor, { voluntaryTurn: key });
-    await rollSurge(actor, spellName); // the ring soaks the cost: Containment stays put
+    await rollSurge(actor, spellName, s.containment); // the ring soaks the cost: Containment stays put
     return;
   }
-  await rollSurge(actor, spellName);
-  await tickContainment(actor);
+  const change = await tickContainment(actor); // rolled against the value before this spell's tick
+  await rollSurge(actor, spellName, s.containment, change);
 }
 
 /** Surge Reroll: drains the ring and replaces the last d100 result. */
@@ -373,14 +389,10 @@ function refreshGauge(token) {
   const cx = w / 2;
   const cy = h / 2;
   // Sits well outside the token art (the token's corners included), so the token stays fully visible.
-  const r = Math.hypot(w, h) / 2 + stroke / 2 + canvas.grid.size * 0.06;
+  const r = (Math.min(w, h) + Math.hypot(w, h)) / 4 + stroke / 2 + canvas.grid.size * 0.03;
   const frac = 1 - Math.clamp(c / MAX_CONTAINMENT, 0, 1); // empty at 20, fills as Containment drops
 
   g.clear();
-  g.lineStyle({ width: stroke + 3, color: 0x000000, alpha: 0.3 });
-  g.drawCircle(cx, cy, r);
-  g.lineStyle({ width: stroke, color: 0x2b2b33, alpha: 0.35 });
-  g.drawCircle(cx, cy, r);
   if (frac > 0) {
     g.lineStyle({ width: stroke, color: containmentColors(c).solid, alpha: 0.6, cap: PIXI.LINE_CAP.ROUND });
     const start = -Math.PI / 2; // from the top, clockwise; the arc's end advances clockwise as Containment drops

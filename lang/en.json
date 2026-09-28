@@ -256,12 +256,8 @@
       "ReasonRound": "new round",
       "ReasonLongRest": "long rest",
       "ReasonManual": "set by GM",
-      "SurgeCheck": "Wild Magic Surge check after {spell}: d20 vs Containment {c}",
-      "SurgeYes": "SURGE",
-      "SurgeNo": "no surge",
       "VolunteerTitle": "Wild Magic Surge",
       "VolunteerText": "You spent spell points on {spell}. Roll for a Wild Magic Surge? (d20 against Containment {c}; the ring keeps Containment from dropping.)",
-      "Reroll": "Surge Reroll — the ring is drained until the next short rest",
       "Tooltip": "Containment: a surge happens when the d20 is equal to or higher than this number.",
       "TooltipGM": "Containment: a surge happens when the d20 is equal to or higher than this number. Click to edit.",
       "FeyStepRider": "Fey Step rider",
@@ -314,7 +310,11 @@
           "name": "Visage face: Autumn",
           "hint": "Label of the Visage face used for Autumn."
         }
-      }
+      },
+      "SurgeHeader": "Wild Magic Surge",
+      "RerollHeader": "Surge Reroll",
+      "NoSurge": "No surge (d20 {d20} vs Containment {c}).",
+      "SurgeResult": "Wild Magic Surge — d100: {roll}"
     },
     "SubclassDrop": {
       "NoClass": "No {class} class was found in the dnd5e compendiums. Add the class to the actor first, then drop the subclass."

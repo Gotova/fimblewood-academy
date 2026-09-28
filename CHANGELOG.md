@@ -4,6 +4,13 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.20.2] - 2026-09-28
+
+### Changed
+
+- **Eladrin Wild Magic**: the token ring is a bit smaller, and its empty part is fully transparent, so nothing is visible around the token while Containment is full.
+- **Eladrin Wild Magic**: a surge now posts one compact chat message with the d100 result and the effect text instead of the whole table card. With the ring off or drained, the Containment change is part of the same message (or of the d20 message when there is no surge).
+
 ## [0.20.1] - 2026-09-28
 
 ### Fixed
