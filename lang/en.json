@@ -318,7 +318,9 @@
       "SurgeHeader": "Wild Magic Surge",
       "RerollHeader": "Surge Reroll",
       "NoSurge": "No surge (d20 {d20} vs Containment {c}).",
-      "SurgeResult": "Wild Magic Surge — d100: {roll}"
+      "SurgeResult": "Wild Magic Surge — d100: {roll}",
+      "GaugeHide": "Hide the token ring",
+      "GaugeShow": "Show the token ring"
     },
     "SubclassDrop": {
       "NoClass": "No {class} class was found in the dnd5e compendiums. Add the class to the actor first, then drop the subclass."

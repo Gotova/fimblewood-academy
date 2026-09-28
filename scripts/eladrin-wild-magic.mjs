@@ -10,6 +10,7 @@
  *   containment 0..20                      (the sinking counter; shown on the sheet, the token and in chat)
  *   season      "winter"|"spring"|"summer"|"autumn"|"pact"  (ring on: winter; a surge sets it)
  *   lastSurge   { roll, season } | null    (what a Surge Reroll replaces)
+ *   hideGauge   boolean                    (an owner can hide the token ring for the whole table)
  *
  * Spell-point spending is detected by watching the Spell Points item of the `dnd5e-spellpoints`
  * ("Advanced Magic") module: that module fires no hook after spending, but it always writes
@@ -26,7 +27,7 @@ const CAST_MARKER_MS = 20000;
 const SEASONS = ["winter", "spring", "summer", "autumn"];
 const RING_STATES = ["on", "off", "drained"];
 
-const DEFAULT_STATE = { ring: "on", containment: MAX_CONTAINMENT, season: "winter", voluntaryTurn: null, tickTurn: null, lastSurge: null };
+const DEFAULT_STATE = { ring: "on", containment: MAX_CONTAINMENT, season: "winter", voluntaryTurn: null, tickTurn: null, lastSurge: null, hideGauge: false };
 
 const i18n = (key, data) => data
   ? game.i18n.format(`FIMBLEWOOD.EladrinWildMagic.${key}`, data)
@@ -100,6 +101,11 @@ async function tickContainment(actor) {
   const to = await setContainment(actor, Math.max(floor, s.containment - 1), "", { silent: true });
   if (key) await patchState(actor, { tickTurn: key });
   return to === s.containment ? "" : containmentLine(s.containment, to);
+}
+
+/** Show or hide the token ring for everyone. Owners only; the state is an actor flag so it syncs. */
+export async function toggleGauge(actor) {
+  await patchState(actor, { hideGauge: !getState(actor).hideGauge });
 }
 
 /* -------------------------------------------- */
@@ -334,7 +340,8 @@ function injectBar(app, html) {
   const group = document.createElement("div");
   group.className = "meter-group fw-ewm-group";
   group.innerHTML = `
-    <div class="label roboto-condensed-upper"><span>${i18n("Containment")}</span></div>
+    <div class="label roboto-condensed-upper"><span>${i18n("Containment")}</span>${actor.isOwner ? `
+      <a class="fw-ewm-gauge-toggle" data-tooltip="${s.hideGauge ? i18n("GaugeShow") : i18n("GaugeHide")}"><i class="fa-solid ${s.hideGauge ? "fa-eye-slash" : "fa-eye"}"></i></a>` : ""}</div>
     <div class="meter fw-ewm-meter" data-tooltip="${canEdit ? i18n("TooltipGM") : i18n("Tooltip")}">
       <div class="progress" role="meter" aria-valuemin="0" aria-valuenow="${s.containment}" aria-valuemax="${MAX_CONTAINMENT}"
            style="--fw-pct: ${pct}%; --fw-left: ${left}; --fw-right: ${right}">
@@ -351,6 +358,7 @@ function injectBar(app, html) {
     if (sp && sp.nextElementSibling !== group) sp.insertAdjacentElement("afterend", group);
   }, 0);
 
+  group.querySelector(".fw-ewm-gauge-toggle")?.addEventListener("click", () => toggleGauge(actor));
   for (const btn of group.querySelectorAll(".fw-ewm-ring-btn")) {
     btn.addEventListener("click", () => requestRingState(actor, btn.dataset.ring));
   }
@@ -388,7 +396,7 @@ const GAUGE = "_fwEwmGauge";
 function refreshGauge(token) {
   const actor = token.actor;
   let g = token[GAUGE];
-  if (!actor || !hasEladrinWildMagic(actor)) {
+  if (!actor || !hasEladrinWildMagic(actor) || getState(actor).hideGauge) {
     if (g && !g.destroyed) g.destroy();
     token[GAUGE] = null;
     return;
@@ -474,6 +482,18 @@ export function registerEladrinWildMagic() {
       hud.render();
     });
     col.appendChild(btn);
+
+    const hidden = getState(actor).hideGauge;
+    const gaugeBtn = document.createElement("button");
+    gaugeBtn.type = "button";
+    gaugeBtn.className = `control-icon fw-ewm-hud-gauge ${hidden ? "" : "active"}`;
+    gaugeBtn.dataset.tooltip = hidden ? i18n("GaugeShow") : i18n("GaugeHide");
+    gaugeBtn.innerHTML = `<i class="fa-solid ${hidden ? "fa-eye-slash" : "fa-eye"}"></i>`;
+    gaugeBtn.addEventListener("click", async () => {
+      await toggleGauge(actor);
+      hud.render();
+    });
+    col.appendChild(gaugeBtn);
   });
 
   // Gauge: draw on token draw/refresh; redraw when the flag changes without touching the token.

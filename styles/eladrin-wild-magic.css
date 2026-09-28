@@ -76,3 +76,13 @@
 }
 
 .fw-ewm-chat strong { color: inherit; }
+
+.dnd5e2 .fw-ewm-group > .label {
+  display: flex;
+  align-items: center;
+}
+
+.dnd5e2 .fw-ewm-group .fw-ewm-gauge-toggle {
+  margin-inline-start: auto;
+  cursor: pointer;
+}

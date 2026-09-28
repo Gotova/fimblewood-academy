@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.22.0] - 2026-09-29
+
+### Added
+
+- **Eladrin Wild Magic**: the token ring can be hidden and shown again with an eye button in the Containment bar header or on the token HUD. Any owner of the actor (or the GM) can toggle it; it applies to everyone at the table.
+
 ## [0.21.2] - 2026-09-29
 
 ### Fixed
