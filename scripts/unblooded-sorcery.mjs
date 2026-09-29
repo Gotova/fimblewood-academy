@@ -1,4 +1,5 @@
 import { playSiphon } from "./siphon-fx.mjs";
+import { promptOwners, registerOwnerPromptHandler } from "./owner-prompt.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 const FLAG_RESONANCE = "resonance";
@@ -170,79 +171,57 @@ async function syncResonantSundering(actor, shouldBeActive) {
 /*  Active Siphon / Passive Siphon               */
 /* -------------------------------------------- */
 
-async function offerActiveSiphon(sorcererActor, spellLevel, casterName, casterToken, sorcererToken, school) {
+async function offerActiveSiphon(ask, sorcererActor, spellLevel, casterName, fx) {
   const siphonItem = getFeature(sorcererActor, "isManaSiphon");
   if (!siphonItem || (siphonItem.system.uses?.value ?? 0) <= 0) return;
 
   const gain = spellLevel; // Resonance = spell level (per campaign ruling)
-  const confirmed = await foundry.applications.api.DialogV2.confirm({
+  const confirmed = await ask("confirm", {
     window: { title: "Mana Siphon" },
     content: `<p><strong>${sorcererActor.name}:</strong> ${casterName} just cast a level ${spellLevel} spell within 60 ft.
       Use Active Siphon to gain ${gain} Resonance? (${siphonItem.system.uses.value} use${siphonItem.system.uses.value === 1 ? "" : "s"} remaining)</p>`,
     yes: { type: "button" },
-    no: { type: "button" },
-    rejectClose: false
+    no: { type: "button" }
   });
   if (!confirmed) return;
 
   await siphonItem.update({ "system.uses.spent": (siphonItem.system.uses.spent ?? 0) + 1 });
   await addResonance(sorcererActor, gain, { flavor: `${sorcererActor.name} siphons ${casterName}'s spell (Active Siphon)` });
 
-  if (casterToken && sorcererToken && !hidesSiphonFx(sorcererActor)) {
-    playSiphon({
-      sceneId: canvas.scene?.id,
-      fromTokenId: casterToken.id,
-      toTokenId: sorcererToken.id,
-      school,
-      motes: spellLevel,
-      variant: "active"
-    });
-  }
+  if (!hidesSiphonFx(sorcererActor)) playSiphon({ ...fx, motes: spellLevel, variant: "active" });
 }
 
-async function offerPassiveSiphon(sorcererActor, spellItem, reason) {
+async function offerPassiveSiphon(ask, sorcererActor, spellItem, reason, fx) {
   const key = `${SIPHONED_FLAG}.${spellItem.uuid ?? spellItem.id}`;
   if (sorcererActor.getFlag(MODULE_ID, key)) return;
 
-  const confirmed = await foundry.applications.api.DialogV2.confirm({
+  const confirmed = await ask("confirm", {
     window: { title: "Passive Siphon" },
     content: `<p><strong>${sorcererActor.name}:</strong> you ${reason} from <em>${spellItem.name}</em>.
       Use your Reaction to gain 1 Resonance?</p>`,
     yes: { type: "button" },
-    no: { type: "button" },
-    rejectClose: false
+    no: { type: "button" }
   });
   if (!confirmed) return;
 
   await sorcererActor.setFlag(MODULE_ID, key, true);
   await addResonance(sorcererActor, 1, { flavor: `${sorcererActor.name} siphons ${spellItem.name} (Passive Siphon)` });
 
-  const casterToken = tokenForActor(spellItem.actor);
-  const sorcererToken = tokenForActor(sorcererActor);
-  if (casterToken && sorcererToken && !hidesSiphonFx(sorcererActor)) {
-    playSiphon({
-      sceneId: canvas.scene?.id,
-      fromTokenId: casterToken.id,
-      toTokenId: sorcererToken.id,
-      school: spellItem.system.school,
-      motes: 1,
-      variant: "passive"
-    });
-  }
+  if (!hidesSiphonFx(sorcererActor)) playSiphon({ ...fx, motes: 1, variant: "passive" });
 }
 
 /* -------------------------------------------- */
 /*  Bend Magic / Redirect Magic prompts          */
 /* -------------------------------------------- */
 
-async function offerBendMagic(sorcererActor, spellItem, casterName) {
+async function offerBendMagic(ask, sorcererActor, spellItem, casterName) {
   const feature = getFeature(sorcererActor, "isBendMagic");
   if (!feature) return;
 
   const max = getResonanceValue(sorcererActor);
   if (max <= 0) return;
 
-  const choice = await foundry.applications.api.DialogV2.wait({
+  const choice = await ask("wait", {
     window: { title: "Bend Magic" },
     content: `<p><strong>${sorcererActor.name}:</strong> ${casterName} cast <em>${spellItem.name}</em> within 60 ft.
       Spend Resonance to bend it? (you have ${max})</p>
@@ -251,8 +230,7 @@ async function offerBendMagic(sorcererActor, spellItem, casterName) {
       { action: "skew", label: "Skew the Roll", type: "button", callback: (event, button) => ({ effect: "skew", amount: Number(button.form.elements.amount.value) }) },
       { action: "crook", label: "Crook the Strike", type: "button", callback: (event, button) => ({ effect: "crook", amount: Number(button.form.elements.amount.value) }) },
       { action: "cancel", label: "Cancel", type: "button", callback: () => false }
-    ],
-    rejectClose: false
+    ]
   });
   if (!choice) return;
 
@@ -273,7 +251,7 @@ async function offerBendMagic(sorcererActor, spellItem, casterName) {
   });
 }
 
-async function offerRedirectMagic(sorcererActor, spellItem, casterName, spellLevel) {
+async function offerRedirectMagic(ask, sorcererActor, spellItem, casterName, spellLevel) {
   const feature = getFeature(sorcererActor, "isRedirectMagic");
   if (!feature) return;
   if (spellItem.system.range?.units === "self") return; // cannot redirect
@@ -281,13 +259,12 @@ async function offerRedirectMagic(sorcererActor, spellItem, casterName, spellLev
   const value = getResonanceValue(sorcererActor);
   if (value < spellLevel) return;
 
-  const confirmed = await foundry.applications.api.DialogV2.confirm({
+  const confirmed = await ask("confirm", {
     window: { title: "Redirect Magic" },
     content: `<p><strong>${sorcererActor.name}:</strong> ${casterName} cast <em>${spellItem.name}</em> (level ${spellLevel}) within 60 ft.
       Spend ${spellLevel} Resonance to redirect it? Choosing new target(s)/origin is resolved manually with your GM.</p>`,
     yes: { type: "button" },
-    no: { type: "button" },
-    rejectClose: false
+    no: { type: "button" }
   });
   if (!confirmed) return;
   if (!(await spendResonance(sorcererActor, spellLevel))) return;
@@ -438,7 +415,28 @@ export async function cleanupStaleResonance() {
   }
 }
 
+/** Token/scene ids for the siphon animation, resolved on the casting client where the tokens are known. */
+function siphonFxData(casterToken, sorcererToken, school) {
+  return { sceneId: canvas.scene?.id, fromTokenId: casterToken?.id, toTokenId: sorcererToken?.id, school };
+}
+
 export function registerUnbloodedSorcery() {
+  registerOwnerPromptHandler("nearbyCast", async ({ sorcererUuid, itemUuid, fx }, ask) => {
+    const sorcerer = fromUuidSync(sorcererUuid);
+    const item = fromUuidSync(itemUuid);
+    if (!sorcerer || !item) return;
+    await offerActiveSiphon(ask, sorcerer, item.system.level, item.actor.name, fx);
+    await offerBendMagic(ask, sorcerer, item, item.actor.name);
+    await offerRedirectMagic(ask, sorcerer, item, item.actor.name, item.system.level);
+  });
+
+  registerOwnerPromptHandler("passiveSiphon", async ({ sorcererUuid, itemUuid, reason, fx }, ask) => {
+    const sorcerer = fromUuidSync(sorcererUuid);
+    const item = fromUuidSync(itemUuid);
+    if (!sorcerer || !item) return;
+    await offerPassiveSiphon(ask, sorcerer, item, reason, fx);
+  });
+
   Hooks.on("renderCharacterActorSheet", (app, html) => injectResonanceBar(app, html));
 
   Hooks.on("updateActor", (actor, changes) => {
@@ -507,9 +505,12 @@ export function registerUnbloodedSorcery() {
       const nearby = tokensWithinFeet(casterToken, 60).filter(t => t.actor !== item.actor && hasUnbloodedSorcery(t.actor));
       for (const t of nearby) {
         if (item.actor === t.actor) continue;
-        await offerActiveSiphon(t.actor, item.system.level, item.actor.name, casterToken, t, item.system.school);
-        await offerBendMagic(t.actor, item, item.actor.name);
-        await offerRedirectMagic(t.actor, item, item.actor.name, item.system.level);
+        // The reactions are the sorcerer's player's decision, not the caster's: ask on their client.
+        promptOwners(t.actor, "nearbyCast", {
+          sorcererUuid: t.actor.uuid,
+          itemUuid: item.uuid,
+          fx: siphonFxData(casterToken, t, item.system.school)
+        });
       }
     } catch (err) {
       console.error("fimblewood-academy | Error in Unblooded Sorcery postUseActivity hook:", err);
@@ -575,7 +576,12 @@ export function registerUnbloodedSorcery() {
       for (const actor of affectedActors) {
         const reason = Array.from(failedSaveTokens).some(t => t.actor === actor)
           ? "fail a save against a spell" : "take damage from a spell";
-        await offerPassiveSiphon(actor, item, reason);
+        promptOwners(actor, "passiveSiphon", {
+          sorcererUuid: actor.uuid,
+          itemUuid: item.uuid,
+          reason,
+          fx: siphonFxData(tokenForActor(item.actor), tokenForActor(actor), item.system.school)
+        });
       }
 
       // Absorb Magic: bonus sorcery points when a target fails the save against the sorcerer's Counterspell.

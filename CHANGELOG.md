@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.22.1] - 2026-09-29
+
+### Fixed
+
+- **Unblooded Sorcery**: the Mana Siphon, Passive Siphon, Bend Magic and Redirect Magic prompts now appear for the players who own the sorcerer, not for whoever cast the spell (usually the GM for NPCs). With several owners online, all of them see the prompt; the first answer counts and closes it for the others. The GM gets the prompt only when no owner is online.
+
 ## [0.22.0] - 2026-09-29
 
 ### Added

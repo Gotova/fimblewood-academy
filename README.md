@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.22.0
+- **Current version:** 0.22.1
 
 ## Installation
 
@@ -127,7 +127,7 @@ Requires [Midi QoL](https://foundryvtt.com/packages/midi-qol) for full automatio
 #### What's automated
 
 - **Spellcasting via Resonance** — Spell Slots are forced to 0 automatically. Casting a 1st-level-or-higher spell intercepts the normal cast flow, lets you pick an upcast level (up to your max, computed from the real Sorcerer Slot table — not from your zeroed slots), deducts the right amount of Resonance (including the Charged Focus discount, see below), and blocks the cast if you can't afford it.
-- **Active Siphon** — the module watches for any creature casting a spell within 60 ft and prompts you to spend a use to gain Resonance equal to the spell's level. Uses (= Proficiency Bonus) and their reset on a Short/Long Rest are tracked automatically.
+- **Active Siphon** — the module watches for any creature casting a spell within 60 ft and prompts you to spend a use to gain Resonance equal to the spell's level. The Mana Siphon, Passive Siphon, Bend Magic and Redirect Magic prompts appear for every player who owns the sorcerer (the first answer counts and closes the prompt for the others); only when none of them is online does the GM get them. Uses (= Proficiency Bonus) and their reset on a Short/Long Rest are tracked automatically.
 - **Passive Siphon** — detects when you take damage from a spell or fail a save against one (via Midi QoL) and offers you the Reaction, once per spell-casting.
 - **Resonant Reserve thresholds** — all six thresholds (2/4/6/8/10/12) automatically enable/disable as your Resonance crosses them:
   - *Mana Veil* (+2 AC) and *Surging Strike* (bonus damage on hit, equal to Proficiency Bonus) are fully automatic. **Surging Strike's "once per turn" limit isn't enforced** — track that yourself.

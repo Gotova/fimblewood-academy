@@ -10,12 +10,14 @@ import { registerTimetable, openTimetableViewer, openTimetableEditor } from "./t
 import { registerNpcSpawner, rerollScene, rerollRegion, addNpcs, removeNpcs, clearRegion } from "./npc-spawner.mjs";
 import { registerEladrinWildMagic, hasEladrinWildMagic, getState as getWildMagicState, setRingState, setContainment } from "./eladrin-wild-magic.mjs";
 import { registerSubclassDrop } from "./subclass-drop.mjs";
+import { registerOwnerPrompts } from "./owner-prompt.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 
 Hooks.once("init", () => {
   console.log(`${MODULE_ID} | Initializing Fimblewood Academy`);
 
+  registerOwnerPrompts();
   registerUnbloodedSorcery();
   registerSiphonFx();
   registerDrawPad();
