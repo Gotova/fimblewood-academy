@@ -67,10 +67,12 @@ function turnKey() {
 }
 
 function seasonForRoll(total) {
-  if (total <= 24) return "winter";
-  if (total <= 48) return "spring";
-  if (total <= 72) return "summer";
-  if (total <= 96) return "autumn";
+  // 01–02 and 99–00 are plot results (GM decides); they change nothing visible.
+  if (total <= 2) return "pact";
+  if (total <= 26) return "winter";
+  if (total <= 50) return "spring";
+  if (total <= 74) return "summer";
+  if (total <= 98) return "autumn";
   return "pact";
 }
 

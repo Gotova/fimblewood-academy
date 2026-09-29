@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.23.0] - 2026-09-29
+
+### Changed
+
+- **Eladrin Wild Magic**: *Lilians Wild Magic (d100)* is rewritten with far more combat impact, good and bad, loosely following the standard Wild Magic Surge table, while keeping the four seasons and some flavour entries. Combat values scale with sorcerer level or proficiency bonus. New split: 01–02 and 99–00 are plot results the GM decides (no appearance change), 03–26 Winter, 27–50 Spring, 51–74 Summer, 75–98 Autumn.
+
 ## [0.22.1] - 2026-09-29
 
 ### Fixed
