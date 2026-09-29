@@ -4,7 +4,7 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
-## [0.17.1] - 2026-09-29
+## [0.23.1] - 2026-09-29
 
 ### Fixed
 
