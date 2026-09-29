@@ -324,32 +324,6 @@ async function adoptPlaylistPlayback(playlist) {
   });
 }
 
-/**
- * Timestamp of the last genuine pointerdown Foundry's canvas reported directly
- * on a given token placeable, keyed by placeable instance (a fresh instance
- * per draw, so nothing here survives a scene reload or scene switch). Foundry
- * can `.control()` a token with no interaction at all — most notably its own
- * "auto-control the lone token a user owns" behavior while a scene is loading,
- * which is exactly what the record-player prop and record pickups become once
- * their actor's ownership is opened up to every player so they can be clicked.
- * A fixed post-load timing window was tried first (see CHANGELOG 0.12.3) but a
- * slow/cold-cache scene load can push that auto-control past any fixed window;
- * checking for an actual pointerdown on this exact token instead ties the
- * check to a real user gesture rather than to how long loading happens to
- * take, so it can't race.
- */
-const _recentTokenPointerdowns = new WeakMap();
-const CLICK_FRESHNESS_MS = 500;
-
-function markGenuineTokenClick(token) {
-  _recentTokenPointerdowns.set(token, Date.now());
-}
-
-function hasRecentGenuineClick(token) {
-  const at = _recentTokenPointerdowns.get(token);
-  return typeof at === "number" && (Date.now() - at) < CLICK_FRESHNESS_MS;
-}
-
 export async function playTrack(trackId) {
   const playlist = findJukeboxPlaylist();
   if (!playlist || !findPlaylistSound(trackId)) return;
@@ -486,38 +460,51 @@ async function reapplyJukeboxTokenOwnership() {
   }
 }
 
-async function onControlToken(token, controlled) {
-  if (!controlled) return;
-  const pickupTrackId = token.document.getFlag(MODULE_ID, "recordPickup");
-  const isRecordPlayer = token.document.getFlag(MODULE_ID, "recordPlayer");
-  if (!pickupTrackId && !isRecordPlayer) return;
-  // Foundry can control a token with no click at all — most notably its own
-  // "auto-control the lone token a user owns" behavior while a scene is still
-  // loading, which is exactly what this token becomes once its actor's
-  // ownership is opened up to every player. Both the pickup and record-player
-  // flags read "controlled" as a stand-in for a deliberate click, so anything
-  // without a pointerdown that just landed on this very token gets ignored
-  // rather than treated as one — see markGenuineTokenClick/hasRecentGenuineClick.
-  if (!hasRecentGenuineClick(token)) {
-    token.release();
-    return;
-  }
-  if (pickupTrackId) {
-    token.release();
-    // Collecting is switched off: leave the pickup sitting on the map untouched
-    // so it is still there once the GM opens collecting back up.
-    if (!isCollectionEnabled()) return;
-    if (await addCollectedTrack(pickupTrackId)) announceTrackCollected(pickupTrackId);
-    try {
-      await token.document.delete();
-    } catch (err) {
-      console.warn(`${MODULE_ID} | Couldn't delete collected record pickup token:`, err);
+/**
+ * Clicking a record pickup collects it; clicking the record player opens the
+ * jukebox. Hooked into Token#_onClickLeft, which core's MouseInteractionManager
+ * only calls for a real left click the user is allowed to make — never for
+ * Foundry controlling a token on its own (e.g. auto-controlling the lone token a
+ * player owns while a scene loads, which the prop and pickups become once every
+ * player owns their actor). That makes the click itself the trigger, instead of
+ * reading "the token got controlled" as a stand-in for one.
+ *
+ * Returns false (core's "refused") where the token should not end up selected
+ * or draggable: always for players, and for pickups. The GM's click on the
+ * record player still selects it as usual, so the prop stays movable.
+ */
+function patchTokenClick() {
+  const TokenCls = foundry.canvas.placeables.Token;
+  const original = TokenCls.prototype._onClickLeft;
+  TokenCls.prototype._onClickLeft = function (event) {
+    const flags = this.document.flags?.[MODULE_ID];
+    if (game.activeTool !== "target" && (flags?.recordPickup || flags?.recordPlayer)) {
+      if (flags.recordPickup && !game.user.isGM) {
+        event.stopPropagation();
+        collectPickup(this.document, flags.recordPickup);
+        return false;
+      }
+      if (flags.recordPlayer) {
+        openJukeboxWindow();
+        if (!game.user.isGM) {
+          event.stopPropagation();
+          return false;
+        }
+      }
     }
-    return;
-  }
-  if (isRecordPlayer) {
-    token.release();
-    openJukeboxWindow();
+    return original.call(this, event);
+  };
+}
+
+async function collectPickup(tokenDoc, trackId) {
+  // Collecting is switched off: leave the pickup sitting on the map untouched
+  // so it is still there once the GM opens collecting back up.
+  if (!isCollectionEnabled()) return;
+  if (await addCollectedTrack(trackId)) announceTrackCollected(trackId);
+  try {
+    await tokenDoc.delete();
+  } catch (err) {
+    console.warn(`${MODULE_ID} | Couldn't delete collected record pickup token:`, err);
   }
 }
 
@@ -1118,6 +1105,7 @@ export function openJukeboxManager() {
 /* -------------------------------------------- */
 
 export function registerJukebox() {
+  patchTokenClick();
   game.settings.register(MODULE_ID, REGISTRY_SETTING, {
     scope: "world", config: false, type: Object, default: {}
   });
@@ -1182,11 +1170,6 @@ export function registerJukebox() {
     if ("x" in changes || "y" in changes || "elevation" in changes) checkAmbientSoundProximity();
   });
   Hooks.on("createToken", (tokenDoc) => forceJukeboxTokenOwnership(tokenDoc));
-  // Records a real pointerdown against this exact placeable instance so
-  // onControlToken can tell a genuine click apart from Foundry controlling the
-  // token on its own — see hasRecentGenuineClick.
-  Hooks.on("drawToken", (token) => token.on("pointerdown", () => markGenuineTokenClick(token)));
-  Hooks.on("controlToken", onControlToken);
   Hooks.on("createItem", onCreateItem);
 
   // Slots the GM track manager into the Fimblewood control category created by

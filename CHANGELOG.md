@@ -4,6 +4,16 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.17.1] - 2026-09-29
+
+### Fixed
+
+- Clicking the record player no longer did anything (for the GM and players alike), and record pickups couldn't be collected by clicking. This had been broken since 0.14.2. Its "was this a real click?" check put a pointerdown listener on the token from the `drawToken` hook, but core calls `activateListeners()` right after that hook, which begins with `removeAllListeners()`. So the listener was always gone, and every click was treated as Foundry auto-controlling the token. Clicks are now caught in core's own left-click handler (`Token#_onClickLeft`), which Foundry only calls for a real click, never for auto-control. That makes the timing check unnecessary.
+
+### Changed
+
+- A GM clicking a record pickup now just selects it (to move or edit it) instead of collecting and deleting it. GM clients never collected through ambient sounds either. A GM clicking the record player opens the jukebox and still selects the prop, so it stays movable. For players, neither token becomes selected or draggable.
+
 ## [0.23.0] - 2026-09-29
 
 ### Changed
