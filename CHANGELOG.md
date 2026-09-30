@@ -4,6 +4,13 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.24.1] - 2026-09-30
+
+### Changed
+
+- **Unblooded Sorcery**: when Drain Magic ends a spell on a target who uses spell points, the target no longer picks a slot level. They always recover the points of the highest level allowed: level 2 (3 points by default), or level 3 (5 points) with Improved Drain Magic. Targets with spell slots still choose which slot to recover.
+- **Unblooded Sorcery**: the Bend Magic and Redirect Magic prompts are gone. Spend the Resonance on the sheet's Resonance bar and apply the effect by hand.
+
 ## [0.24.0] - 2026-09-30
 
 ### Changed

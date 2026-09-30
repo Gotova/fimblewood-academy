@@ -212,72 +212,6 @@ async function offerPassiveSiphon(ask, sorcererActor, spellItem, castingId, reas
 }
 
 /* -------------------------------------------- */
-/*  Bend Magic / Redirect Magic prompts          */
-/* -------------------------------------------- */
-
-async function offerBendMagic(ask, sorcererActor, spellItem, casterName) {
-  const feature = getFeature(sorcererActor, "isBendMagic");
-  if (!feature) return;
-
-  const max = getResonanceValue(sorcererActor);
-  if (max <= 0) return;
-
-  const choice = await ask("wait", {
-    window: { title: "Bend Magic" },
-    content: `<p><strong>${sorcererActor.name}:</strong> ${casterName} cast <em>${spellItem.name}</em> within 60 ft.
-      Spend Resonance to bend it? (you have ${max})</p>
-      <label>Resonance to spend (min 1): <input type="number" name="amount" value="1" min="1" max="${max}" style="width:4em"/></label>`,
-    buttons: [
-      { action: "skew", label: "Skew the Roll", type: "button", callback: (event, button) => ({ effect: "skew", amount: Number(button.form.elements.amount.value) }) },
-      { action: "crook", label: "Crook the Strike", type: "button", callback: (event, button) => ({ effect: "crook", amount: Number(button.form.elements.amount.value) }) },
-      { action: "cancel", label: "Cancel", type: "button", callback: () => false }
-    ]
-  });
-  if (!choice) return;
-
-  const amount = Math.clamp(Number.isFinite(choice.amount) ? choice.amount : 1, 1, max);
-  if (!(await spendResonance(sorcererActor, amount))) {
-    ui.notifications.warn(`${sorcererActor.name} couldn't spend Resonance for Bend Magic (insufficient Resonance or invalid amount).`);
-    return;
-  }
-
-  ChatMessage.create({
-    speaker: ChatMessage.getSpeaker({ actor: sorcererActor }),
-    content: `<p><strong>${sorcererActor.name}</strong> spends ${amount} Resonance to
-      ${choice.effect === "skew" ? "Skew the Roll" : "Crook the Strike"} on <em>${spellItem.name}</em>.
-      ${choice.effect === "skew"
-        ? `Choose Advantage/Disadvantage (your choice each) for the first save of up to ${amount} affected creature(s) against this spell.`
-        : `Set up to ${amount} damage dice from this spell's damage roll to their maximum or minimum (your choice each).`}
-      Apply this manually to the roll/targets &mdash; automatic per-die/per-target adjustment isn't wired up.</p>`
-  });
-}
-
-async function offerRedirectMagic(ask, sorcererActor, spellItem, casterName, spellLevel) {
-  const feature = getFeature(sorcererActor, "isRedirectMagic");
-  if (!feature) return;
-  if (spellItem.system.range?.units === "self") return; // cannot redirect
-
-  const value = getResonanceValue(sorcererActor);
-  if (value < spellLevel) return;
-
-  const confirmed = await ask("confirm", {
-    window: { title: "Redirect Magic" },
-    content: `<p><strong>${sorcererActor.name}:</strong> ${casterName} cast <em>${spellItem.name}</em> (level ${spellLevel}) within 60 ft.
-      Spend ${spellLevel} Resonance to redirect it? Choosing new target(s)/origin is resolved manually with your GM.</p>`,
-    yes: { type: "button" },
-    no: { type: "button" }
-  });
-  if (!confirmed) return;
-  if (!(await spendResonance(sorcererActor, spellLevel))) return;
-
-  ChatMessage.create({
-    speaker: ChatMessage.getSpeaker({ actor: sorcererActor }),
-    content: `<p><strong>${sorcererActor.name}</strong> spends ${spellLevel} Resonance to redirect <em>${spellItem.name}</em>.
-      Choose new target(s) or a new area origin within the spell's normal range from ${sorcererActor.name}'s position (GM adjudicates).</p>`
-  });
-}
-
-/* -------------------------------------------- */
 /*  Drain Magic / Improved Drain Magic           */
 /* -------------------------------------------- */
 
@@ -360,8 +294,9 @@ function registerDrainMagicHandlers() {
     if (!target || !effect || !sorcerer) return;
     const origin = effect.origin ? fromUuidSync(effect.origin) : null;
     await effect.delete();
-    const label = getSpellPointsItem(target) ? "Recover spell points worth a spell slot of level" : "Spell slot level to recover";
-    const level = await promptSlotLevel(ask, target, 1, maxLevel, label);
+    // With slots the target picks which expended slot to recover; spell points would always be taken
+    // at the highest level allowed, so there's nothing to choose.
+    const level = getSpellPointsItem(target) ? maxLevel : await promptSlotLevel(ask, target, 1, maxLevel, "Spell slot level to recover");
     if (!level) return;
     const recovered = await restoreSpellSlot(target, level);
     ChatMessage.create({
@@ -483,8 +418,6 @@ export function registerUnbloodedSorcery() {
     const item = fromUuidSync(itemUuid);
     if (!sorcerer || !item) return;
     await offerActiveSiphon(ask, sorcerer, item.system.level, item.actor.name, fx);
-    await offerBendMagic(ask, sorcerer, item, item.actor.name);
-    await offerRedirectMagic(ask, sorcerer, item, item.actor.name, item.system.level);
   });
 
   registerOwnerPromptHandler("passiveSiphon", async ({ sorcererUuid, itemUuid, castingId, reason, fx }, ask) => {
@@ -554,7 +487,7 @@ export function registerUnbloodedSorcery() {
     handleDrainMagic(item.actor, improved);
   });
 
-  // Detect nearby spellcasting for Active Siphon / Bend Magic / Redirect Magic.
+  // Detect nearby spellcasting for Active Siphon.
   Hooks.on("dnd5e.postUseActivity", async (activity) => {
     try {
       const item = activity.item;

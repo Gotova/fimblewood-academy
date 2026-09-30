@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.24.0
+- **Current version:** 0.24.1
 
 ## Installation
 
@@ -127,7 +127,7 @@ Requires [Midi QoL](https://foundryvtt.com/packages/midi-qol) for full automatio
 #### What's automated
 
 - **Spellcasting via Resonance** — Spell Slots are forced to 0 automatically. Casting a 1st-level-or-higher spell intercepts the normal cast flow, lets you pick an upcast level (up to your max, computed from the real Sorcerer Slot table — not from your zeroed slots), deducts the right amount of Resonance (including the Charged Focus discount, see below), and blocks the cast if you can't afford it.
-- **Active Siphon** — the module watches for any creature casting a spell within 60 ft and prompts you to spend a use to gain Resonance equal to the spell's level. The Mana Siphon, Passive Siphon, Bend Magic and Redirect Magic prompts appear for every player who owns the sorcerer (the first answer counts and closes the prompt for the others); only when none of them is online does the GM get them. Uses (= Proficiency Bonus) and their reset on a Short/Long Rest are tracked automatically.
+- **Active Siphon** — the module watches for any creature casting a spell within 60 ft and prompts you to spend a use to gain Resonance equal to the spell's level. The Mana Siphon and Passive Siphon prompts appear for every player who owns the sorcerer (the first answer counts and closes the prompt for the others); only when none of them is online does the GM get them. Uses (= Proficiency Bonus) and their reset on a Short/Long Rest are tracked automatically.
 - **Passive Siphon** — detects when you take damage from a spell or fail a save against one (via Midi QoL) and offers you the Reaction, once per spell-casting.
 - **Resonant Reserve thresholds** — all six thresholds (2/4/6/8/10/12) automatically enable/disable as your Resonance crosses them:
   - *Mana Veil* (+2 AC) and *Surging Strike* (bonus damage on hit, equal to Proficiency Bonus) are fully automatic. **Surging Strike's "once per turn" limit isn't enforced** — track that yourself.
@@ -135,10 +135,10 @@ Requires [Midi QoL](https://foundryvtt.com/packages/midi-qol) for full automatio
   - *Echo Ward* (temp HP at the start of your turn) is applied automatically in combat.
   - *Mana Resistance* (Advantage on saves vs. spells) applies via Midi QoL flags, covering all spell schools — non-spell magical effects aren't covered.
   - *Mana Free* (free Metamagic once per turn) is **not automated** — apply it and track the once-per-turn limit yourself.
-- **Bend Magic** — detects nearby spellcasting and offers the choice (Skew the Roll / Crook the Strike) with Resonance validated against what you have. Actually adjusting the roll/targets is manual — the chat card tells you exactly what to apply.
-- **Drain Magic / Improved Drain Magic** — target a creature (use Foundry's normal targeting); if they have a matching ongoing spell effect, it's removed and a slot of your choice is restored automatically. Otherwise you're offered the Resonance-cost alternative. A target who uses spell points (Advanced Magic) recovers the slot's worth of spell points instead (by default 2 / 3 / 5 for a level 1 / 2 / 3 slot, per the Advanced Magic cost table). The target's player gets the slot-level choice and the restore runs on their client, so it works on characters Aster doesn't own. The once-per-rest use and the Bonus Action upgrade (Improved) are both tracked.
+- **Bend Magic** — not automated, no prompt: spend the Resonance on the sheet's Resonance bar (right-click: -1) and apply the effect by hand.
+- **Drain Magic / Improved Drain Magic** — target a creature (use Foundry's normal targeting); if they have a matching ongoing spell effect, it's removed and a slot of the target's choice is restored automatically. Otherwise you're offered the Resonance-cost alternative. A target who uses spell points (Advanced Magic) recovers the slot's worth of spell points instead (by default 2 / 3 / 5 for a level 1 / 2 / 3 slot, per the Advanced Magic cost table). When a spell is ended, a spell-point target always gets the highest level allowed (level 2, or level 3 with Improved Drain Magic), while a target with slots picks the level. With the Resonance alternative the level equals the Resonance spent. The target's player gets the choice and the restore runs on their client, so it works on characters Aster doesn't own. The once-per-rest use and the Bonus Action upgrade (Improved) are both tracked.
 - **Absorb Magic / Occult Shroud** — Counterspell and Nondetection are granted as always-prepared spells automatically. Absorb Magic's bonus Sorcery Points (on a target's failed save against your Counterspell) are rolled and applied automatically via Midi QoL. Occult Shroud's first free Nondetection cast each day is tracked and waives the Resonance cost automatically.
-- **Redirect Magic** — detects nearby spellcasting, validates the Resonance cost and that the spell isn't Range: Self, and prompts you. Actually choosing new targets/origin is resolved manually with your GM — Foundry has no safe generic way to re-target an already-cast spell.
+- **Redirect Magic** — not automated, no prompt: spend the Resonance on the sheet's Resonance bar and resolve the new targets or origin with your GM.
 - **Unblooded Magic (level 18)** — the module creates its own tracking effect when you activate Innate Sorcery (core dnd5e's version doesn't leave a trackable effect on its own). While it's active: Mana Surge grants bonus Resonance (able to exceed your normal max) at the start of each of your turns, automatically clamped back down when Innate Sorcery ends; Resonant Sundering applies Disadvantage to Constitution saves against your spells/features via a Midi QoL flag, toggled live as Innate Sorcery starts and ends.
 
 ---
