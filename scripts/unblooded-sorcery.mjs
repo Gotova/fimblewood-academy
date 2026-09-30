@@ -191,8 +191,9 @@ async function offerActiveSiphon(ask, sorcererActor, spellLevel, casterName, fx)
   if (!hidesSiphonFx(sorcererActor)) playSiphon({ ...fx, motes: spellLevel, variant: "active" });
 }
 
-async function offerPassiveSiphon(ask, sorcererActor, spellItem, reason, fx) {
-  const key = `${SIPHONED_FLAG}.${spellItem.uuid ?? spellItem.id}`;
+/** `castingId` identifies this one casting: the limit is once per casting, not once per spell per day. */
+async function offerPassiveSiphon(ask, sorcererActor, spellItem, castingId, reason, fx) {
+  const key = `${SIPHONED_FLAG}.${castingId}`;
   if (sorcererActor.getFlag(MODULE_ID, key)) return;
 
   const confirmed = await ask("confirm", {
@@ -430,11 +431,14 @@ export function registerUnbloodedSorcery() {
     await offerRedirectMagic(ask, sorcerer, item, item.actor.name, item.system.level);
   });
 
-  registerOwnerPromptHandler("passiveSiphon", async ({ sorcererUuid, itemUuid, reason, fx }, ask) => {
+  registerOwnerPromptHandler("passiveSiphon", async ({ sorcererUuid, itemUuid, castingId, reason, fx }, ask) => {
     const sorcerer = fromUuidSync(sorcererUuid);
     const item = fromUuidSync(itemUuid);
-    if (!sorcerer || !item) return;
-    await offerPassiveSiphon(ask, sorcerer, item, reason, fx);
+    if (!sorcerer || !item) {
+      console.warn(`${MODULE_ID} | Passive Siphon: could not resolve`, { sorcererUuid, itemUuid });
+      return;
+    }
+    await offerPassiveSiphon(ask, sorcerer, item, castingId, reason, fx);
   });
 
   Hooks.on("renderCharacterActorSheet", (app, html) => injectResonanceBar(app, html));
@@ -566,7 +570,10 @@ export function registerUnbloodedSorcery() {
       if (!item || item.type !== "spell" || item.system.level < 1) return;
 
       const failedSaveTokens = workflow.failedSaves ?? new Set();
-      const damagedActors = (workflow.damageList ?? []).map(d => d.actorUuid ? fromUuidSync(d.actorUuid) : null).filter(Boolean);
+      // damageList has an entry for every target, including ones that took no damage (e.g. a save for none).
+      const damagedActors = (workflow.damageList ?? [])
+        .filter(d => !("hpDamage" in d) || d.hpDamage > 0 || d.tempDamage > 0)
+        .map(d => d.actorUuid ? fromUuidSync(d.actorUuid) : null).filter(Boolean);
 
       const affectedActors = new Set([
         ...Array.from(failedSaveTokens).map(t => t.actor),
@@ -576,9 +583,12 @@ export function registerUnbloodedSorcery() {
       for (const actor of affectedActors) {
         const reason = Array.from(failedSaveTokens).some(t => t.actor === actor)
           ? "fail a save against a spell" : "take damage from a spell";
+        console.log(`${MODULE_ID} | Passive Siphon: ${actor.name} ${reason === "fail a save against a spell" ? "failed a save against" : "took damage from"} ${item.name}`);
         promptOwners(actor, "passiveSiphon", {
           sorcererUuid: actor.uuid,
           itemUuid: item.uuid,
+          // Flag keys are dot paths, so strip the dots out of a uuid-shaped workflow id.
+          castingId: String(workflow.itemCardId ?? workflow.id).replaceAll(".", "_"),
           reason,
           fx: siphonFxData(tokenForActor(item.actor), tokenForActor(actor), item.system.school)
         });
