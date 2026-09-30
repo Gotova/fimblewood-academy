@@ -35,7 +35,10 @@ function resumeAfterFadeOut(sound) {
   _pendingResume.add(sound);
   sound.addEventListener("stop", () => {
     _pendingResume.delete(sound);
-    canvas.sounds?.refresh();
+    // Defer: "stop" fires while the sound is still STOPPING, and EventEmitter
+    // runs listeners added mid-dispatch, so a synchronous refresh would re-arm
+    // this listener and loop forever.
+    setTimeout(() => canvas.sounds?.refresh(), 0);
   }, { once: true });
 }
 

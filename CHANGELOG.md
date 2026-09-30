@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.24.2] - 2026-09-30
+
+### Fixed
+
+- **Ambient Sound Fade**: walking from one ambient sound into another no longer freezes or crashes the browser. When a sound finished fading out while your token was still in range, the module could restart the fade-in check endlessly. It now waits until the sound has fully stopped before checking again.
+
 ## [0.24.1] - 2026-09-30
 
 ### Changed
