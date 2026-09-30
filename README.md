@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.23.2
+- **Current version:** 0.24.0
 
 ## Installation
 
@@ -136,7 +136,7 @@ Requires [Midi QoL](https://foundryvtt.com/packages/midi-qol) for full automatio
   - *Mana Resistance* (Advantage on saves vs. spells) applies via Midi QoL flags, covering all spell schools — non-spell magical effects aren't covered.
   - *Mana Free* (free Metamagic once per turn) is **not automated** — apply it and track the once-per-turn limit yourself.
 - **Bend Magic** — detects nearby spellcasting and offers the choice (Skew the Roll / Crook the Strike) with Resonance validated against what you have. Actually adjusting the roll/targets is manual — the chat card tells you exactly what to apply.
-- **Drain Magic / Improved Drain Magic** — target a creature (use Foundry's normal targeting); if they have a matching ongoing spell effect, it's removed and a slot of your choice is restored automatically. Otherwise you're offered the Resonance-cost alternative. The once-per-rest use and the Bonus Action upgrade (Improved) are both tracked.
+- **Drain Magic / Improved Drain Magic** — target a creature (use Foundry's normal targeting); if they have a matching ongoing spell effect, it's removed and a slot of your choice is restored automatically. Otherwise you're offered the Resonance-cost alternative. A target who uses spell points (Advanced Magic) recovers the slot's worth of spell points instead (by default 2 / 3 / 5 for a level 1 / 2 / 3 slot, per the Advanced Magic cost table). The target's player gets the slot-level choice and the restore runs on their client, so it works on characters Aster doesn't own. The once-per-rest use and the Bonus Action upgrade (Improved) are both tracked.
 - **Absorb Magic / Occult Shroud** — Counterspell and Nondetection are granted as always-prepared spells automatically. Absorb Magic's bonus Sorcery Points (on a target's failed save against your Counterspell) are rolled and applied automatically via Midi QoL. Occult Shroud's first free Nondetection cast each day is tracked and waives the Resonance cost automatically.
 - **Redirect Magic** — detects nearby spellcasting, validates the Resonance cost and that the spell isn't Range: Self, and prompts you. Actually choosing new targets/origin is resolved manually with your GM — Foundry has no safe generic way to re-target an already-cast spell.
 - **Unblooded Magic (level 18)** — the module creates its own tracking effect when you activate Innate Sorcery (core dnd5e's version doesn't leave a trackable effect on its own). While it's active: Mana Surge grants bonus Resonance (able to exceed your normal max) at the start of each of your turns, automatically clamped back down when Innate Sorcery ends; Resonant Sundering applies Disadvantage to Constitution saves against your spells/features via a Midi QoL flag, toggled live as Innate Sorcery starts and ends.

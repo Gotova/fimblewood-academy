@@ -4,6 +4,17 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.24.0] - 2026-09-30
+
+### Changed
+
+- **Unblooded Sorcery**: Drain Magic works with spell points. A target who uses spell points (Advanced Magic module) recovers a spell slot's worth of points instead of a slot, taken from Advanced Magic's cost table: by default 2 points for 1 Resonance (level 1), 3 for 2 Resonance (level 2) and 5 for 3 Resonance (level 3, Improved Drain Magic). The same applies when Drain Magic ends an ongoing spell.
+- **Unblooded Sorcery**: Drain Magic's slot-level choice now goes to the target's player, as the feature says. Ending the target's spell and restoring their magic now runs on their client, so it also works on characters the sorcerer's player doesn't own; before, those updates were refused by Foundry.
+
+### Fixed
+
+- **Unblooded Sorcery**: Drain Magic no longer restores a spell slot above the target's maximum.
+
 ## [0.23.2] - 2026-09-30
 
 ### Fixed

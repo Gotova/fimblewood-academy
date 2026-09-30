@@ -281,6 +281,37 @@ async function offerRedirectMagic(ask, sorcererActor, spellItem, casterName, spe
 /*  Drain Magic / Improved Drain Magic           */
 /* -------------------------------------------- */
 
+/** The target's Spell Points item from the Advanced Magic (dnd5e-spellpoints) module, if they use spell points. */
+function getSpellPointsItem(actor) {
+  if (!game.modules.get("dnd5e-spellpoints")?.active) return null;
+  return globalThis.getSpellPointsItem?.(actor) || null;
+}
+
+/** What a spell slot of `level` costs in spell points, per the module's settings (or the item's own override). */
+async function spellPointCost(actor, spItem, level) {
+  let settings = game.settings.get("dnd5e-spellpoints", "settings") ?? {};
+  if (spItem.flags?.spellpoints?.override && spItem.flags.spellpoints.config) {
+    settings = foundry.utils.mergeObject(foundry.utils.deepClone(settings), spItem.flags.spellpoints.config);
+  }
+  const formula = settings.spellPointsCosts?.[level] ?? { 1: 2, 2: 3, 3: 5 }[level] ?? level;
+  const cost = Number.isFinite(Number(formula)) ? Number(formula)
+    : (await new Roll(String(formula), actor.getRollData()).evaluate()).total;
+  return Math.max(0, cost);
+}
+
+/** Gives the target back a level-`level` slot, or that slot's worth of spell points. Returns the chat wording. */
+async function restoreSpellSlot(target, level) {
+  const spItem = getSpellPointsItem(target);
+  if (spItem) {
+    const points = await spellPointCost(target, spItem, level);
+    await globalThis.alterSpellPoints(target, `+${points}`);
+    return `recovers ${points} spell points (a level ${level} spell slot's worth)`;
+  }
+  const slot = target.system.spells?.[`spell${level}`];
+  await target.update({ [`system.spells.spell${level}.value`]: Math.min((slot?.value ?? 0) + 1, slot?.max ?? Infinity) });
+  return `recovers a level ${level} spell slot`;
+}
+
 async function handleDrainMagic(sorcererActor, improved) {
   const targetToken = Array.from(game.user.targets)[0];
   if (!targetToken?.actor) {
@@ -290,24 +321,17 @@ async function handleDrainMagic(sorcererActor, improved) {
   const target = targetToken.actor;
   const maxDrainLevel = improved ? 3 : 2;
 
-  const spellEffects = target.effects.filter(e => {
+  const spellEffect = target.effects.find(e => {
     const origin = e.origin ? fromUuidSync(e.origin) : null;
     return origin?.type === "spell" && origin.system.level >= 1 && origin.system.level <= maxDrainLevel;
   });
 
-  if (spellEffects.length) {
-    const effect = spellEffects[0];
-    const origin = fromUuidSync(effect.origin);
-    await effect.delete();
-    const restoreLevel = await promptSlotLevel(target, 1, maxDrainLevel);
-    if (restoreLevel) {
-      await target.update({ [`system.spells.spell${restoreLevel}.value`]: (target.system.spells[`spell${restoreLevel}`]?.value ?? 0) + 1 });
-      ChatMessage.create({
-        speaker: ChatMessage.getSpeaker({ actor: sorcererActor }),
-        content: `<p><strong>${sorcererActor.name}</strong> uses Drain Magic to end <em>${origin?.name ?? "an ongoing spell"}</em> on ${target.name},
-          who recovers a level ${restoreLevel} spell slot.</p>`
-      });
-    }
+  // The target usually belongs to another player, so ending their spell and restoring their magic
+  // (the slot level is the target's choice) runs on their owner's client.
+  if (spellEffect) {
+    promptOwners(target, "drainMagicEndSpell", {
+      targetUuid: target.uuid, effectUuid: spellEffect.uuid, maxLevel: maxDrainLevel, sorcererUuid: sorcererActor.uuid
+    });
     return;
   }
 
@@ -317,28 +341,59 @@ async function handleDrainMagic(sorcererActor, improved) {
     ui.notifications.warn(`${target.name} has no ongoing spell to drain, and ${sorcererActor.name} has no Resonance to spend instead.`);
     return;
   }
-  const amount = await promptSlotLevel(sorcererActor, 1, available, "Resonance to spend");
+  const amount = await promptSlotLevel(localAsk, sorcererActor, 1, available, "Resonance to spend");
   if (!amount) return;
   if (!(await spendResonance(sorcererActor, amount))) return;
-  await target.update({ [`system.spells.spell${amount}.value`]: (target.system.spells[`spell${amount}`]?.value ?? 0) + 1 });
-  ChatMessage.create({
-    speaker: ChatMessage.getSpeaker({ actor: sorcererActor }),
-    content: `<p><strong>${sorcererActor.name}</strong> spends ${amount} Resonance (Drain Magic) so ${target.name} recovers a level ${amount} spell slot.</p>`
+  promptOwners(target, "drainMagicRestore", { targetUuid: target.uuid, level: amount, sorcererUuid: sorcererActor.uuid });
+}
+
+/** Stand-in for an owner prompt's `ask` when a dialog is only ever shown on this client. */
+function localAsk(method, config) {
+  return foundry.applications.api.DialogV2[method]({ ...config, rejectClose: false });
+}
+
+function registerDrainMagicHandlers() {
+  registerOwnerPromptHandler("drainMagicEndSpell", async ({ targetUuid, effectUuid, maxLevel, sorcererUuid }, ask) => {
+    const target = fromUuidSync(targetUuid);
+    const effect = fromUuidSync(effectUuid);
+    const sorcerer = fromUuidSync(sorcererUuid);
+    if (!target || !effect || !sorcerer) return;
+    const origin = effect.origin ? fromUuidSync(effect.origin) : null;
+    await effect.delete();
+    const label = getSpellPointsItem(target) ? "Recover spell points worth a spell slot of level" : "Spell slot level to recover";
+    const level = await promptSlotLevel(ask, target, 1, maxLevel, label);
+    if (!level) return;
+    const recovered = await restoreSpellSlot(target, level);
+    ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: sorcerer }),
+      content: `<p><strong>${sorcerer.name}</strong> uses Drain Magic to end <em>${origin?.name ?? "an ongoing spell"}</em> on ${target.name},
+        who ${recovered}.</p>`
+    });
+  });
+
+  registerOwnerPromptHandler("drainMagicRestore", async ({ targetUuid, level, sorcererUuid }) => {
+    const target = fromUuidSync(targetUuid);
+    const sorcerer = fromUuidSync(sorcererUuid);
+    if (!target || !sorcerer) return;
+    const recovered = await restoreSpellSlot(target, level);
+    ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: sorcerer }),
+      content: `<p><strong>${sorcerer.name}</strong> spends ${level} Resonance (Drain Magic) so ${target.name} ${recovered}.</p>`
+    });
   });
 }
 
-async function promptSlotLevel(actor, min, max, label = "Spell slot level") {
+async function promptSlotLevel(ask, actor, min, max, label = "Spell slot level") {
   if (min >= max) return max;
-  const result = await foundry.applications.api.DialogV2.wait({
+  const result = await ask("wait", {
     window: { title: "Drain Magic" },
     content: `<label>${label}: <input type="number" name="level" value="${min}" min="${min}" max="${max}" style="width:4em"/></label>`,
     buttons: [
       { action: "ok", label: "Confirm", default: true, type: "button", callback: (event, button) => Number(button.form.elements.level.value) },
       { action: "cancel", label: "Cancel", type: "button", callback: () => false }
-    ],
-    rejectClose: false
+    ]
   });
-  return Number.isFinite(result) ? Math.clamp(result, min, max) : null;
+  return Number.isFinite(result) && result ? Math.clamp(result, min, max) : null;
 }
 
 /* -------------------------------------------- */
@@ -422,6 +477,7 @@ function siphonFxData(casterToken, sorcererToken, school) {
 }
 
 export function registerUnbloodedSorcery() {
+  registerDrainMagicHandlers();
   registerOwnerPromptHandler("nearbyCast", async ({ sorcererUuid, itemUuid, fx }, ask) => {
     const sorcerer = fromUuidSync(sorcererUuid);
     const item = fromUuidSync(itemUuid);
