@@ -4,6 +4,14 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.23.2] - 2026-09-30
+
+### Fixed
+
+- **Unblooded Sorcery**: Passive Siphon was limited to once per spell per day instead of once per casting. After siphoning a spell once, the prompt never came back for that spell until the next long rest, even when the same caster cast it again. It is now limited to once per casting, and old blocks are gone after the update.
+- **Unblooded Sorcery**: Passive Siphon no longer offers itself as "took damage" when the sorcerer took no damage from the spell (for example after a successful save for no damage).
+- Passive Siphon triggers are now logged to the browser console (F12) of whoever cast the spell, to make missing prompts easier to track down.
+
 ## [0.23.1] - 2026-09-29
 
 ### Fixed
