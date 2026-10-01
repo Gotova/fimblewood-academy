@@ -220,6 +220,10 @@
           "label": "Maximum NPCs",
           "hint": "At most this many NPCs are placed. 0 = no limit."
         },
+        "uniqueActors": {
+          "label": "Each NPC Only Once",
+          "hint": "Place every actor from the folder at most once in this region. Then the folder size also limits how many NPCs can appear."
+        },
         "hidden": {
           "label": "Place Hidden",
           "hint": "Place the NPCs hidden from players."
@@ -228,7 +232,8 @@
       "Warn": {
         "NoActors": "Random NPCs (region \"{region}\"): the chosen folder contains no actors.",
         "Gridless": "Random NPCs (region \"{region}\"): gridless scenes are not supported.",
-        "NoSpace": "Random NPCs (region \"{region}\"): no free space left."
+        "NoSpace": "Random NPCs (region \"{region}\"): no free space left.",
+        "AllUsed": "Random NPCs (region \"{region}\"): every actor from the folder is already placed."
       },
       "Hud": {
         "count": "NPCs placed by this region",

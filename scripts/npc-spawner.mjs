@@ -45,6 +45,7 @@ class NpcSpawnerBehaviorType extends foundry.data.regionBehaviors.RegionBehavior
       baseChance: new fields.NumberField({ required: true, nullable: false, min: 0, max: 100, step: 0.5, initial: 5 }),
       neighborChance: new fields.NumberField({ required: true, nullable: false, min: 0, max: 100, step: 0.5, initial: 15 }),
       maxNpcs: new fields.NumberField({ required: true, nullable: false, integer: true, min: 0, initial: 0 }),
+      uniqueActors: new fields.BooleanField({ initial: false }),
       hidden: new fields.BooleanField({ initial: false })
     };
   }
@@ -98,14 +99,23 @@ function spawnContext(behavior) {
     ui.notifications.warn(i18n("Warn.Gridless", { region: region.name }));
     return null;
   }
-  const actors = collectActors(system.folder, system.includeSubfolders);
+  let actors = collectActors(system.folder, system.includeSubfolders);
   if (!actors.length) {
     ui.notifications.warn(i18n("Warn.NoActors", { region: region.name }));
     return null;
   }
+  const own = new Set(spawnedTokens(behavior));
+  // With unique actors, the ones already standing in the region are not drawn again.
+  if (system.uniqueActors) {
+    const used = new Set([...own].map(t => t.actorId));
+    actors = actors.filter(a => !used.has(a.id));
+    if (!actors.length) {
+      ui.notifications.info(i18n("Warn.AllUsed", { region: region.name }));
+      return null;
+    }
+  }
   const occupied = new Set();
   const placed = new Set();
-  const own = new Set(spawnedTokens(behavior));
   for (const token of scene.tokens) {
     for (const offset of token.getOccupiedGridSpaceOffsets()) {
       occupied.add(offsetKey(offset));
@@ -123,7 +133,8 @@ const hasPlacedNeighbor = (ctx, offset) => ctx.grid.getAdjacentOffsets(offset).s
  * @returns {Promise<boolean>} Whether a token was queued.
  */
 async function queueToken(ctx, offset) {
-  const actor = ctx.actors[Math.floor(Math.random() * ctx.actors.length)];
+  const index = Math.floor(Math.random() * ctx.actors.length);
+  const actor = ctx.actors[index];
   const { x, y } = ctx.grid.getTopLeftPoint(offset);
   const tokenDoc = await actor.getTokenDocument({ x, y, hidden: ctx.system.hidden }, { parent: ctx.scene });
   const covered = tokenDoc.getOccupiedGridSpaceOffsets().map(offsetKey);
@@ -135,6 +146,7 @@ async function queueToken(ctx, offset) {
   const data = tokenDoc.toObject();
   foundry.utils.setProperty(data, `flags.${MODULE_ID}.${SPAWN_FLAG}`, ctx.behavior.uuid);
   ctx.tokens.push(data);
+  if (ctx.system.uniqueActors) ctx.actors.splice(index, 1);
   return true;
 }
 
@@ -164,7 +176,7 @@ export async function rerollRegion(behavior) {
   if (!ctx) return;
   const limit = ctx.system.maxNpcs || Infinity;
   for (const offset of shuffle([...ctx.spaces.values()])) {
-    if (ctx.tokens.length >= limit) break;
+    if (ctx.tokens.length >= limit || !ctx.actors.length) break;
     if (ctx.occupied.has(offsetKey(offset))) continue;
     const chance = hasPlacedNeighbor(ctx, offset) ? ctx.system.neighborChance : ctx.system.baseChance;
     if (Math.random() * 100 < chance) await queueToken(ctx, offset);
@@ -186,7 +198,7 @@ export async function addNpcs(behavior, count = 1) {
   const candidates = [...ctx.spaces.values()];
   const base = Math.max(ctx.system.baseChance, 0.01);
   const neighbor = Math.max(ctx.system.neighborChance, 0.01);
-  while (ctx.tokens.length < count) {
+  while (ctx.tokens.length < count && ctx.actors.length) {
     const free = candidates.filter(o => !ctx.occupied.has(offsetKey(o)));
     if (!free.length) break;
     const weights = free.map(o => (hasPlacedNeighbor(ctx, o) ? neighbor : base));
@@ -196,7 +208,10 @@ export async function addNpcs(behavior, count = 1) {
     // A space too small for the chosen actor is dropped from the candidates.
     if (!(await queueToken(ctx, offset))) candidates.splice(candidates.indexOf(offset), 1);
   }
-  if (!(await flush(ctx))) ui.notifications.info(i18n("Warn.NoSpace", { region: behavior.region.name }));
+  if (!(await flush(ctx))) {
+    const reason = ctx.actors.length ? "Warn.NoSpace" : "Warn.AllUsed";
+    ui.notifications.info(i18n(reason, { region: behavior.region.name }));
+  }
 }
 
 /**

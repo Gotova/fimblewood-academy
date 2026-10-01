@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.20.0] - 2026-10-01
+
+### Added
+
+- **Random NPCs**: new region setting **Each NPC Only Once**. When ticked, every actor from the folder is placed at most once in that region, for the automatic roll on scene activation as well as the + and reroll buttons. Once all actors are in use, no more NPCs are placed. Off by default, so existing regions behave as before.
+
 ## [0.24.2] - 2026-09-30
 
 ### Fixed

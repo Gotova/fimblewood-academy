@@ -220,6 +220,10 @@
           "label": "Maximale Anzahl NPCs",
           "hint": "Hoechstens so viele NPCs werden platziert. 0 = unbegrenzt."
         },
+        "uniqueActors": {
+          "label": "Jeden NPC nur einmal",
+          "hint": "Jeden Akteur aus dem Ordner hoechstens einmal in dieser Region platzieren. Die Groesse des Ordners begrenzt dann auch, wie viele NPCs erscheinen koennen."
+        },
         "hidden": {
           "label": "Versteckt platzieren",
           "hint": "Die NPCs fuer Spieler versteckt platzieren."
@@ -228,7 +232,8 @@
       "Warn": {
         "NoActors": "Zufaellige NPCs (Region \"{region}\"): der gewaehlte Ordner enthaelt keine Akteure.",
         "Gridless": "Zufaellige NPCs (Region \"{region}\"): Szenen ohne Raster werden nicht unterstuetzt.",
-        "NoSpace": "Zufaellige NPCs (Region \"{region}\"): kein freies Feld mehr."
+        "NoSpace": "Zufaellige NPCs (Region \"{region}\"): kein freies Feld mehr.",
+        "AllUsed": "Zufaellige NPCs (Region \"{region}\"): alle Akteure aus dem Ordner sind bereits platziert."
       },
       "Hud": {
         "count": "Von dieser Region platzierte NPCs",
