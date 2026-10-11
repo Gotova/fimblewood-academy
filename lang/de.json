@@ -124,11 +124,10 @@
         "CollectingOff": "Sammeln deaktiviert",
         "CollectingEnableHint": "Der Gruppe das Sammeln wieder erlauben",
         "CollectingDisableHint": "Der Gruppe das Sammeln verbieten",
-        "CollectingOnHint": "Spieler koennen Schallplatten ueber Klaenge, Fundstuecke und Gegenstaende aufsammeln.",
+        "CollectingOnHint": "Spieler koennen Schallplatten ueber Szenen- und Regionsmusik, Fundstuecke und Gegenstaende aufsammeln.",
         "CollectingOffHint": "Spieler koennen keine Schallplatten sammeln; nur du kannst sie hier vergeben."
       },
       "SourceConfig": {
-        "TrackLabel": "Musikbox-Titel",
         "TrackNone": "— Keiner —",
         "TrackNew": "+ Neuen Titel erstellen…",
         "ItemGrantsTrack": "Schaltet einen Musikbox-Titel frei",
@@ -142,7 +141,7 @@
       },
       "Settings": {
         "CollectionEnabledName": "Musikbox-Sammeln aktiviert",
-        "CollectionEnabledHint": "Wenn deaktiviert, koennen Spieler keine Schallplatten ueber Klaenge, Fundstuecke oder Gegenstaende sammeln. Der Spielleiter kann sie weiterhin im Fenster \"Musiktitel\" vergeben.",
+        "CollectionEnabledHint": "Wenn deaktiviert, koennen Spieler keine Schallplatten ueber Szenen- oder Regionsmusik, Fundstuecke oder Gegenstaende sammeln. Der Spielleiter kann sie weiterhin im Fenster \"Musiktitel\" vergeben.",
         "RewardSoundName": "Musikbox-Belohnungston",
         "RewardSoundHint": "Ein kurzer Soundeffekt, der fuer alle abgespielt wird, sobald die Gruppe einen neuen Musikbox-Titel sammelt."
       }
@@ -196,6 +195,22 @@
       "NameRequired": "Der Kurs braucht einen Namen, bevor er gespeichert werden kann.",
       "UnknownActor": "Unbekannter Akteur",
       "DropAmbiguous": "In diesem Slot gibt es mehrere Kurse — den Akteur direkt auf den gewuenschten Kurs ziehen."
+    },
+    "SceneMusic": {
+      "Scene": {
+        "Legend": "Hauptmusik",
+        "TrackLabel": "Musikbox-Titel",
+        "TrackHint": "Alle, die diese Szene ansehen, hoeren diesen Titel, egal ob sie einen Token darauf haben. Eine Region mit \"Musik ersetzen\" hat Vorrang."
+      },
+      "Region": {
+        "Label": "Musik ersetzen",
+        "FIELDS": {
+          "track": {
+            "label": "Musikbox-Titel",
+            "hint": "Spielt statt der Hauptmusik der Szene (und der Musikbox), solange einer der Tokens eines Spielers in dieser Region steht."
+          }
+        }
+      }
     },
     "NpcSpawner": {
       "Label": "Zufaellige NPCs",

@@ -7,6 +7,7 @@ import { registerJukebox, openJukeboxWindow, openJukeboxManager, diagnoseJukebox
 import { registerDragonchess, openBoardForCurrentUser, getGameRecord, selftest as dragonchessSelftest } from "./dragonchess/index.mjs";
 import { registerAmbientSoundFade } from "./ambient-sound-fade.mjs";
 import { registerTimetable, openTimetableViewer, openTimetableEditor } from "./timetable/index.mjs";
+import { registerSceneMusic } from "./scene-music.mjs";
 import { registerNpcSpawner, rerollScene, rerollRegion, addNpcs, removeNpcs, clearRegion } from "./npc-spawner.mjs";
 import { registerEladrinWildMagic, hasEladrinWildMagic, getState as getWildMagicState, setRingState, setContainment } from "./eladrin-wild-magic.mjs";
 import { registerSubclassDrop } from "./subclass-drop.mjs";
@@ -22,6 +23,7 @@ Hooks.once("init", () => {
   registerSiphonFx();
   registerDrawPad();
   registerJukebox();
+  registerSceneMusic();
   registerAmbientSoundFade();
   registerDragonchess();
   registerTimetable();

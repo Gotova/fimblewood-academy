@@ -31,7 +31,8 @@
   ],
   "documentTypes": {
     "RegionBehavior": {
-      "npcSpawner": {}
+      "npcSpawner": {},
+      "replaceMusic": {}
     }
   },
   "styles": [

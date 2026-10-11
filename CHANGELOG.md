@@ -4,6 +4,16 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+### Added
+
+- **Scene Music**: pick a Jukebox track as a scene's **Main Music** (scene configuration, Ambience tab). Everyone viewing the scene hears it, with or without a token on it.
+- **Scene Music**: new region behavior **Replace Music**. While one of a player's tokens is inside the region, they hear its Jukebox track instead of the main music. Region music also wins over the record player.
+- **Jukebox**: hearing a track as scene or region music unlocks it for the party.
+
+### Removed
+
+- **Jukebox**: Ambient Sounds no longer carry a Jukebox track and no longer unlock tracks. Use scene or region music instead; you can delete the Ambient Sounds you used for music.
+
 ## [0.25.1] - 2026-10-11
 
 ### Fixed

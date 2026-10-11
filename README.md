@@ -43,32 +43,44 @@ This module and [FoundryDraw](https://github.com/Gotova/FoundryDraw) should not 
 
 ### Hideout Jukebox
 
-A party can **collect** music tracks the GM has set up as Ambient Sound themes, then play any collected track together — in sync, for everyone at the table — on a physical record-player prop placed somewhere in the world (e.g. a hideout).
+A party can **collect** music tracks by hearing them as scene or region music (see Scene Music below), then play any collected track together — in sync, for everyone at the table — on a physical record-player prop placed somewhere in the world (e.g. a hideout).
 
 **Setting it up (GM):**
 
-- **Tag an existing Ambient Sound** with a track: open its configuration, pick (or create) a track in the new "Jukebox Track" field at the bottom. The first time you tag a *new* track, a small dialog asks for a name and the audio file (cover art optional) — no separate setup screen needed.
+- **Use a track as scene or region music** (see Scene Music below). Every track picker has a "+ Create new track…" option: a small dialog asks for a name and the audio file (cover art optional) — no separate setup screen needed.
 - **Grant a track via an item**: open any item's sheet, tick "Grants a Jukebox track," and pick/create a track the same way. Dropping that item onto a player's character immediately unlocks the track for the whole party — the item stays in their inventory as a keepsake, it's never consumed.
 - **Place a collectible on the map**: drop any token, open its Token Configuration, and choose "Map pickup — grants track" (with a track picker) or "This is the Jukebox prop" (for the interactive record player itself). Either way, the token's ownership is automatically opened up so any player can click it — you never need to configure permissions by hand.
 
 **Playing it (players):**
 
-- Walking a character within earshot of a tagged Ambient Sound, receiving a tagged item, or clicking a map pickup token all unlock that track for the **whole party** (not just whoever triggered it) — collection is shared. Every collection announces itself to the whole table with a short reward sound and a "Record *\<name>* collected!" banner (the reward sound itself is a world setting the GM sets once, under Foundry's Configure Settings).
-- Clicking the record-player prop token opens the Jukebox window, listing every track the party has collected so far. Click a track's cover art to blow it up full size for the table (the GM can share that popout out to everyone). Hit Play on any of them — it plays looped, for every connected player, using Foundry's own synced Playlist system (no lag or "your client is playing something different" issues, and it's still correct for anyone who reconnects mid-song).
-- The music is **local to the hideout**: you only hear it while you're looking at the scene the record-player prop stands on. Leave the scene and it fades out for you; come back and you rejoin the song already in progress, while anyone still in the hideout hears it uninterrupted throughout. Playback itself stays shared and in sync — it's only *your* client that goes quiet, so one player wandering off doesn't stop the music for the rest of the table.
+- Hearing a track as scene or region music, receiving a tagged item, or clicking a map pickup token all unlock that track for the **whole party** (not just whoever triggered it) — collection is shared. Every collection announces itself to the whole table with a short reward sound and a "Record *\<name>* collected!" banner (the reward sound itself is a world setting the GM sets once, under Foundry's Configure Settings).
+- Clicking the record-player prop token opens the Jukebox window, listing every track the party has collected so far. Click a track's cover art to blow it up full size for the table (the GM can share that popout out to everyone). Hit Play on any of them — it plays looped and in sync for everyone, and is still correct for anyone who reconnects mid-song.
+- The music is **local to the record player**: you only hear it while one of your tokens is within the prop's hearing range (set in its Token Configuration; 0 = the whole scene). Walk away and it fades back to the scene's music for you; come back and you rejoin the song already in progress, while anyone still near it hears it uninterrupted throughout. Playback itself stays shared and in sync — it's only *your* client that goes quiet, so one player wandering off doesn't stop the music for the rest of the table.
 - The GM can rename or delete tracks from the same window; deleting a track just removes it from the Jukebox going forward — nobody who already collected it loses anything.
 
 **Managing it (GM):**
 
 Open **Music Tracks** from the Fimblewood Controls category in the scene controls (the same category as the Draw Pad). This GM-only window lists *every* record you've registered — collected or not — and is where you prepare and reset the whole system between test runs:
 
-- **Collecting enabled / disabled** — the switch at the top. While it's off, players can't collect anything at all: ambient sounds, map pickups and item grants all stop handing out records, and a clicked pickup token stays put on the map instead of being consumed. Turn it on when the party is ready. (It's also available as a normal world setting.)
+- **Collecting enabled / disabled** — the switch at the top. While it's off, players can't collect anything at all: scene and region music, map pickups and item grants all stop handing out records, and a clicked pickup token stays put on the map instead of being consumed. Turn it on when the party is ready. (It's also available as a normal world setting.)
 - **Collected / Uncollected** — the status pill on each row toggles that record's state for the whole party, so you can hand out a record directly or take one back after testing.
 - **Collect All / Reset All** — the same across every record at once.
 - **Add / edit / delete** — create records here without going through a sound, item or token first, and change a record's name, audio file or cover art at any time.
 - **Play / Stop** — audition any record, collected or not.
 
 For players there's no sidebar shortcut to the Jukebox by design — the only way in is the physical prop, to keep it grounded in the fiction. The Music Tracks window is the GM's side of it, and is never shown to players.
+
+### Scene Music
+
+Background music per map, played from the Jukebox tracks. It replaces Foundry's Ambient Sounds for music, which could leave players in silence.
+
+- **Main music:** open a scene's configuration, **Ambience** tab, and pick a Jukebox track under **Main Music**. Everyone viewing the scene hears it, whether or not they have a token on it.
+- **Replace Music:** draw a **Region**, open its **Behaviors** tab and add **Replace Music** with a Jukebox track. While one of a player's tokens stands inside, they hear that track instead (controlled tokens count; a player with none selected counts all their tokens). Disable the behavior to switch it off.
+- What a player hears, in order: a Replace Music region, the record player (if in hearing range), the scene's main music.
+- All of it is in sync for everyone. Walking between a region and the rest of the scene crossfades (the fade length is the **Ambient Sound Fade** setting); if both play the same track, it just carries on.
+- Hearing a track this way unlocks it for the party's Jukebox, if no one has it yet (and collecting is enabled).
+- Volume is the track's volume in the "Fimblewood Hideout Jukebox" playlist, times each player's music volume.
+- Troubleshooting: run `game.modules.get("fimblewood-academy").api.jukebox.diagnoseJukebox()` in the console to see what this client hears and why.
 
 ### Random NPCs
 

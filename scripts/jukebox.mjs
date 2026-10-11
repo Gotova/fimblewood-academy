@@ -1,14 +1,17 @@
 /**
  * Fimblewood Academy — Hideout Jukebox
  *
- * Players collect music tracks (Ambient Sound proximity, GM-given items, or map
- * pickups) and play any collected track on a physical record-player prop. The song
- * is shared and in sync for the whole table, but each client only plays it locally
- * while one of its tokens is within the prop's hearing range (see Local playback).
+ * Players collect music tracks (hearing them as scene or region music, GM-given
+ * items, or map pickups) and play any collected track on a physical record-player
+ * prop. The song is shared and in sync for the whole table, but each client only
+ * plays it locally while one of its tokens is within the prop's hearing range.
+ * The same local player also plays scene and region music (see Local playback
+ * and scene-music.mjs).
  */
 
 import { CONTROL_GROUP } from "./draw.mjs";
 import { getAmbientFadeMs } from "./ambient-sound-fade.mjs";
+import { getRegionTrackId, getSceneTrackId } from "./scene-music.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 const REGISTRY_SETTING = "jukeboxRegistry";
@@ -27,7 +30,7 @@ function esc(value) {
 /*  Track registry (GM-authored, world-shared)   */
 /* -------------------------------------------- */
 
-function getRegistry() {
+export function getRegistry() {
   return foundry.utils.deepClone(game.settings.get(MODULE_ID, REGISTRY_SETTING));
 }
 
@@ -56,7 +59,7 @@ async function removeTrackFromRegistry(trackId) {
 
 /**
  * Master switch for in-world collecting. While off, none of the player-facing
- * sources (ambient-sound proximity, map pickups, item grants) hand out records —
+ * sources (scene/region music, map pickups, item grants) hand out records —
  * only the GM's manual toggles in the manager can change collection state.
  */
 function isCollectionEnabled() {
@@ -231,7 +234,7 @@ function getListenerPoints() {
       if (token.actor?.isOwner && token.isVisible && !isJukeboxPropToken(token.document)) candidates.push(token);
     }
   }
-  return candidates.map(t => t.center);
+  return candidates.map(t => ({ ...t.center, elevation: t.document.elevation }));
 }
 
 /**
@@ -240,7 +243,7 @@ function getListenerPoints() {
  * range. Volume is the same everywhere inside the range, and walls are ignored.
  * A range of 0 covers the whole scene, with no token needed.
  */
-function isInJukeboxRange() {
+function isInJukeboxRange(points = getListenerPoints()) {
   if (!canvas.ready) return false;
   const prop = canvas.tokens.placeables.find(t => t.document.getFlag(MODULE_ID, "recordPlayer"));
   if (!prop) return false;
@@ -248,10 +251,10 @@ function isInJukeboxRange() {
   if (!(range > 0)) return true;
   const rangePx = range * canvas.grid.size;
   const { x, y } = prop.center;
-  return getListenerPoints().some(p => Math.hypot(p.x - x, p.y - y) <= rangePx);
+  return points.some(p => Math.hypot(p.x - x, p.y - y) <= rangePx);
 }
 
-/** The Sound this client is playing for the record player, if any. */
+/** The Sound this client is playing (record player, region or scene music), if any. */
 let _local = null; // { trackId, startedAt, sound }
 
 function stopLocalJukebox() {
@@ -285,18 +288,38 @@ async function startLocalJukebox(nowPlaying) {
   await sound.play({ loop: true, offset, volume: playlistSound.volume ?? 1, fade: getAmbientFadeMs() });
 }
 
-/** Brings this client's local playback in line with the shared state and its position. */
-function refreshLocalJukebox() {
+/**
+ * What this client should hear right now, by priority: a "Replace Music" region
+ * one of its listener tokens stands in, the record player if in hearing range,
+ * then the scene's main music. Scene and region music use startedAt 0, so they
+ * are in sync for everyone, and the same track carries on without a restart
+ * when walking between a region and the rest of the scene.
+ */
+function resolveDesiredMusic() {
+  if (!canvas.ready) return null;
+  const registry = getRegistry();
+  const points = getListenerPoints();
+  const regionTrackId = getRegionTrackId(canvas.scene, points);
+  if (regionTrackId && registry[regionTrackId]) return { trackId: regionTrackId, startedAt: 0, source: "region" };
   const nowPlaying = getNowPlaying();
-  const shouldPlay = !!nowPlaying && isInJukeboxRange();
-  const isCurrent = !!_local && !!nowPlaying
-    && _local.trackId === nowPlaying.trackId && _local.startedAt === nowPlaying.startedAt;
-  if (shouldPlay && isCurrent) return;
-  stopLocalJukebox();
-  if (shouldPlay) startLocalJukebox(nowPlaying);
+  if (nowPlaying && isInJukeboxRange(points)) return { ...nowPlaying, source: "jukebox" };
+  const sceneTrackId = getSceneTrackId(canvas.scene);
+  if (sceneTrackId && registry[sceneTrackId]) return { trackId: sceneTrackId, startedAt: 0, source: "scene" };
+  return null;
 }
 
-const refreshLocalJukeboxThrottled = foundry.utils.throttle(refreshLocalJukebox, 150);
+/** Brings this client's local playback in line with the shared state and its position. */
+function refreshLocalJukebox() {
+  const desired = resolveDesiredMusic();
+  if (desired && desired.source !== "jukebox") collectHeardTrack(desired.trackId);
+  const isCurrent = !!_local && !!desired
+    && _local.trackId === desired.trackId && _local.startedAt === desired.startedAt;
+  if (isCurrent) return;
+  stopLocalJukebox();
+  if (desired) startLocalJukebox(desired);
+}
+
+export const refreshLocalJukeboxThrottled = foundry.utils.throttle(refreshLocalJukebox, 150);
 
 /** Follows a GM volume change on the track's PlaylistSound. */
 function onJukeboxSoundVolumeChange(playlistSound) {
@@ -337,54 +360,45 @@ export async function stopTrack(trackId) {
 }
 
 /* -------------------------------------------- */
-/*  Ambient Sound proximity → auto-collect       */
+/*  Scene / region music → auto-collect          */
 /* -------------------------------------------- */
 
 /**
- * Distance in grid units between a token and an ambient sound. Measured from the
- * token *document's* position rather than the placeable's, so a check that runs
- * from the updateToken hook sees where the token just landed and not where its
- * animation currently is.
+ * Tracks this client is collecting right now. Refreshes run every few hundred ms
+ * while a token moves, so without it one track could be announced several times
+ * before the user flag lands.
  */
-function distanceToSound(tokenDoc, sound) {
-  const gridSize = canvas.grid.size;
-  const center = {
-    x: tokenDoc.x + (tokenDoc.width * gridSize) / 2,
-    y: tokenDoc.y + (tokenDoc.height * gridSize) / 2
-  };
-  return canvas.grid.measurePath([center, { x: sound.x, y: sound.y }]).distance;
-}
+const _collecting = new Set();
 
-async function checkAmbientSoundProximity() {
-  if (game.user.isGM || !canvas.ready || !isCollectionEnabled()) return;
-  const ownedTokens = canvas.tokens.placeables.filter(t => t.actor?.isOwner);
-  if (!ownedTokens.length) return;
-  for (const sound of canvas.scene.sounds) {
-    const trackId = sound.getFlag(MODULE_ID, "trackId");
-    if (!trackId) continue;
-    const inRange = ownedTokens.some(t => {
-      try {
-        return distanceToSound(t.document, sound) <= sound.radius;
-      } catch (err) {
-        // Swallowing this silently would leave proximity collection permanently
-        // dead with no clue as to why, so it gets logged every time.
-        console.error(`${MODULE_ID} | Jukebox proximity measurement failed:`, err);
-        return false;
-      }
-    });
-    if (inRange && await addCollectedTrack(trackId)) announceTrackCollected(trackId);
+/**
+ * Hearing a track as scene or region music collects it for the party, if no one
+ * has it yet. GM clients never collect.
+ */
+async function collectHeardTrack(trackId) {
+  if (game.user.isGM || !isCollectionEnabled() || _collecting.has(trackId)) return;
+  if (getPartyCollectedTrackIds().has(trackId)) return;
+  _collecting.add(trackId);
+  try {
+    // Every player loads an activated scene at the same moment. A short random
+    // wait lets the first one's flag reach the others, so the track is announced
+    // once instead of once per player.
+    await new Promise(resolve => setTimeout(resolve, Math.random() * 2000));
+    if (getPartyCollectedTrackIds().has(trackId)) return;
+    if (await addCollectedTrack(trackId)) announceTrackCollected(trackId);
+  } finally {
+    _collecting.delete(trackId);
   }
 }
 
 /**
- * Reports, for the client it runs on, every reason proximity collection could be
- * failing: the master switch, whether this client owns a token on the canvas, and
- * for each tagged ambient sound its radius against the measured distance. Exposed
- * on the module API because the collection paths are deliberately silent — there
- * is otherwise nothing to look at when a record doesn't drop.
+ * Reports, for the client it runs on, what it is hearing and why, and what could
+ * keep a record from being collected. Exposed on the module API because the
+ * playback and collection paths are deliberately silent.
  */
 export function diagnoseJukebox() {
   const registry = getRegistry();
+  const desired = resolveDesiredMusic();
+  const sceneTrackId = canvas.ready ? getSceneTrackId(canvas.scene) : null;
   const report = {
     user: game.user.name,
     isGM: game.user.isGM,
@@ -395,34 +409,12 @@ export function diagnoseJukebox() {
     viewingJukeboxScene: canvas.ready ? isJukeboxScene(canvas.scene) : "canvas not ready",
     nowPlaying: registry[getNowPlaying()?.trackId]?.name ?? null,
     inHearingRange: isInJukeboxRange(),
+    sceneMusic: sceneTrackId ? (registry[sceneTrackId]?.name ?? `${sceneTrackId} (NOT IN REGISTRY)`) : null,
+    listenerPoints: canvas.ready ? getListenerPoints() : "canvas not ready",
+    hearing: desired ? { source: desired.source, track: registry[desired.trackId]?.name ?? desired.trackId } : null,
     playingLocally: !!_local?.sound?.playing,
-    myCollectedTracks: getCollectedTracks().map(id => registry[id]?.name ?? `${id} (not in registry)`),
-    ownedTokensOnCanvas: canvas.ready
-      ? canvas.tokens.placeables.filter(t => t.actor?.isOwner).map(t => t.name)
-      : "canvas not ready",
-    taggedSounds: []
+    myCollectedTracks: getCollectedTracks().map(id => registry[id]?.name ?? `${id} (not in registry)`)
   };
-
-  if (canvas.ready) {
-    const ownedTokens = canvas.tokens.placeables.filter(t => t.actor?.isOwner);
-    for (const sound of canvas.scene.sounds) {
-      const trackId = sound.getFlag(MODULE_ID, "trackId");
-      if (!trackId) continue;
-      report.taggedSounds.push({
-        track: registry[trackId]?.name ?? `${trackId} (NOT IN REGISTRY)`,
-        radius: sound.radius,
-        alreadyCollected: getCollectedTracks().includes(trackId),
-        distances: ownedTokens.map(t => {
-          try {
-            return `${t.name}: ${distanceToSound(t.document, sound).toFixed(1)}`;
-          } catch (err) {
-            return `${t.name}: MEASUREMENT FAILED (${err.message})`;
-          }
-        })
-      });
-    }
-  }
-
   console.log(`${MODULE_ID} | Jukebox diagnostics`, report);
   return report;
 }
@@ -575,7 +567,7 @@ async function resolveOrCreateTrackId(selectedValue) {
 /*  Config-sheet injections                      */
 /* -------------------------------------------- */
 
-function buildTrackPickerHtml(selectedTrackId, { includeNone = true } = {}) {
+export function buildTrackPickerHtml(selectedTrackId, { includeNone = true } = {}) {
   const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.${k}`);
   const registry = getRegistry();
   const options = Object.entries(registry)
@@ -587,7 +579,7 @@ function buildTrackPickerHtml(selectedTrackId, { includeNone = true } = {}) {
   return `<select class="fw-jukebox-track-picker">${noneOption}${options}<option value="__new__">${i18n("SourceConfig.TrackNew")}</option></select>`;
 }
 
-async function handleTrackPickerChange(select, onResolved) {
+export async function handleTrackPickerChange(select, onResolved) {
   const value = select.value;
   if (value === "__new__") {
     const trackId = await resolveOrCreateTrackId("__new__");
@@ -596,26 +588,6 @@ async function handleTrackPickerChange(select, onResolved) {
   } else {
     await onResolved(value || null);
   }
-}
-
-function injectAmbientSoundTrackPicker(app, html) {
-  if (!game.user.isGM) return;
-  const root = html instanceof HTMLElement ? html : html[0];
-  if (!root || root.querySelector(".fimblewood-jukebox-source-field")) return; // guard against AppV2 partial re-renders
-
-  const currentTrackId = app.document.getFlag(MODULE_ID, "trackId") ?? "";
-  const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.${k}`);
-  const wrap = document.createElement("fieldset");
-  wrap.className = "fimblewood-jukebox-source-field";
-  wrap.innerHTML = `<legend>${i18n("SourceConfig.TrackLabel")}</legend>${buildTrackPickerHtml(currentTrackId)}`;
-  root.querySelector("form")?.appendChild(wrap) ?? root.appendChild(wrap);
-
-  wrap.querySelector("select").addEventListener("change", (event) => {
-    handleTrackPickerChange(event.currentTarget, async (trackId) => {
-      if (trackId) await app.document.setFlag(MODULE_ID, "trackId", trackId);
-      else await app.document.unsetFlag(MODULE_ID, "trackId");
-    });
-  });
 }
 
 function injectItemTrackPicker(app, html) {
@@ -1115,9 +1087,9 @@ export function registerJukebox() {
     hint: "FIMBLEWOOD.Jukebox.Settings.CollectionEnabledHint",
     onChange: (enabled) => {
       if (_jukeboxManagerInstance?.rendered) _jukeboxManagerInstance.render();
-      // Re-open collecting and a character already parked inside a tagged sound's
-      // radius should get its record now, without having to walk out and back in.
-      if (enabled) checkAmbientSoundProximity();
+      // Re-open collecting and the music already playing is collected right away,
+      // without having to leave and come back.
+      if (enabled) refreshLocalJukebox();
     }
   });
   game.settings.register(MODULE_ID, REWARD_SOUND_SETTING, {
@@ -1142,10 +1114,7 @@ export function registerJukebox() {
 
   // Local jukebox playback: re-evaluated whenever the record, the scene, or where
   // this client's tokens stand could have changed.
-  Hooks.on("canvasReady", () => {
-    checkAmbientSoundProximity();
-    refreshLocalJukebox();
-  });
+  Hooks.on("canvasReady", () => refreshLocalJukebox());
   Hooks.on("canvasTearDown", () => stopLocalJukebox());
   Hooks.on("refreshToken", () => refreshLocalJukeboxThrottled());
   Hooks.on("controlToken", () => refreshLocalJukeboxThrottled());
@@ -1167,9 +1136,12 @@ export function registerJukebox() {
       // The prop may have just been placed, cleared, or had its range changed.
       refreshLocalJukeboxThrottled();
     }
-    if ("x" in changes || "y" in changes || "elevation" in changes) checkAmbientSoundProximity();
   });
   Hooks.on("createToken", (tokenDoc) => forceJukeboxTokenOwnership(tokenDoc));
+  // A track used as scene or region music may have just been deleted.
+  Hooks.on("updateSetting", (setting) => {
+    if (setting.key === `${MODULE_ID}.${REGISTRY_SETTING}`) refreshLocalJukeboxThrottled();
+  });
   Hooks.on("createItem", onCreateItem);
 
   // Slots the GM track manager into the Fimblewood control category created by
@@ -1193,7 +1165,6 @@ export function registerJukebox() {
     };
   });
 
-  Hooks.on("renderAmbientSoundConfig", injectAmbientSoundTrackPicker);
   Hooks.on("renderItemSheet5e", injectItemTrackPicker);
   Hooks.on("renderTokenConfig", injectTokenTrackPicker);
 }

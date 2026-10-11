@@ -124,11 +124,10 @@
         "CollectingOff": "Collecting disabled",
         "CollectingEnableHint": "Allow the party to collect records again",
         "CollectingDisableHint": "Stop the party from collecting records",
-        "CollectingOnHint": "Players can pick up records from sounds, pickups and items.",
+        "CollectingOnHint": "Players can pick up records from scene and region music, pickups and items.",
         "CollectingOffHint": "Players cannot collect any records; only you can grant them here."
       },
       "SourceConfig": {
-        "TrackLabel": "Jukebox Track",
         "TrackNone": "— None —",
         "TrackNew": "+ Create new track…",
         "ItemGrantsTrack": "Grants a Jukebox track",
@@ -142,7 +141,7 @@
       },
       "Settings": {
         "CollectionEnabledName": "Jukebox Collecting Enabled",
-        "CollectionEnabledHint": "When off, players cannot collect any records from ambient sounds, map pickups or items. The GM can still grant records from the Music Tracks window.",
+        "CollectionEnabledHint": "When off, players cannot collect any records from scene or region music, map pickups or items. The GM can still grant records from the Music Tracks window.",
         "RewardSoundName": "Jukebox Reward Sound",
         "RewardSoundHint": "A short sound effect played for everyone whenever the party collects a new Jukebox track."
       }
@@ -196,6 +195,22 @@
       "NameRequired": "The course needs a name before it can be saved.",
       "UnknownActor": "Unknown actor",
       "DropAmbiguous": "This slot has more than one course — drop the actor directly onto the course you want."
+    },
+    "SceneMusic": {
+      "Scene": {
+        "Legend": "Main Music",
+        "TrackLabel": "Jukebox Track",
+        "TrackHint": "Everyone viewing this scene hears this track, with or without a token on it. A \"Replace Music\" region overrides it."
+      },
+      "Region": {
+        "Label": "Replace Music",
+        "FIELDS": {
+          "track": {
+            "label": "Jukebox Track",
+            "hint": "Plays instead of the scene's main music (and the record player) while one of a player's tokens is inside this region."
+          }
+        }
+      }
     },
     "NpcSpawner": {
       "Label": "Random NPCs",
