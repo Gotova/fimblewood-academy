@@ -2822,7 +2822,10 @@ export function registerDrawPad() {
           name:     "none",
           title:    "FIMBLEWOOD.ControlGroupTitle",
           icon:     "fas fa-house",
-          visible:  false,
+          // Must stay visible: Foundry deletes invisible tools before the first
+          // render, leaving activeTool dangling and breaking the next control switch
+          // (the first click away from this category threw). Hidden via CSS instead.
+          visible:  true,
           onChange: () => {},
         },
         drawpad: {

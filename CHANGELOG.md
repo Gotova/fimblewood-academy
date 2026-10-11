@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.25.1] - 2026-10-11
+
+### Fixed
+
+- **Fimblewood Controls**: switching to another scene-control category (e.g. Token Controls) now works on the first click instead of needing several tries. The hidden placeholder tool was being removed by Foundry; it is now kept and hidden via CSS.
+
 ## [0.25.0] - 2026-10-01
 
 ### Added

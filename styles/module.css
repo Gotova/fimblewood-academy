@@ -56,3 +56,9 @@
 .dnd5e2 .fimblewood-siphon-hide-toggle input {
   margin: 0;
 }
+
+/* Placeholder tool of the Fimblewood control group (see draw.mjs) */
+#scene-controls-tools button[data-tool="none"],
+#scene-controls-tools li:has(> button[data-tool="none"]) {
+  display: none;
+}
