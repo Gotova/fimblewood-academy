@@ -4,6 +4,8 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.26.0] - 2026-10-12
+
 ### Added
 
 - **Scene Music**: pick a Jukebox track as a scene's **Main Music** (scene configuration, Ambience tab). Everyone viewing the scene hears it, with or without a token on it.
