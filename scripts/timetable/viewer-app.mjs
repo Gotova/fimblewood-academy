@@ -22,7 +22,7 @@
 import { getWeekdays, currentDateDisplay, timestampForColumn, shortDateForTimestamp, currentWeekdayIndex, dayNumberForTimestamp } from "./calendar.mjs";
 import { getSchedule, getCourses, currentBufferKey, nextBufferKey, currentPeriod, TIMESLOTS_PER_DAY, TIMESLOTS, LUNCH_BREAK_AFTER_SLOT } from "./data.mjs";
 import {
-  AFTERNOON_SLOTS, currentAfternoonSlot, getAppointments, getAppointment, appointmentsFor, plannableActors,
+  AFTERNOON_SLOT_COUNT, getAppointments, getAppointment, appointmentsFor, plannableActors,
   canEdit, canPlanFor, requestAfternoonChange
 } from "./afternoon.mjs";
 
@@ -148,26 +148,23 @@ export class TimetableViewerApp extends foundry.applications.api.ApplicationV2 {
   /** A separator plus one row per afternoon slot, showing the selected character's appointments. */
   #afternoonRows(weekdays, weeksAhead, todayIdx) {
     const appointments = getAppointments();
-    const liveSlot = weeksAhead === 0 ? currentAfternoonSlot() : null;
     const mayPlan = !!this.actorId && canPlanFor(this.actorId);
     const days = weekdays.map((_, idx) => dayNumberForTimestamp(timestampForColumn(idx, weeksAhead, weekdays)));
 
     const rows = [`<tr class="fw-tt-afternoon-sep"><td colspan="${weekdays.length + 1}">${game.i18n.localize("FIMBLEWOOD.Timetable.Afternoon.Separator")}</td></tr>`];
-    AFTERNOON_SLOTS.forEach((slotDef, slot) => {
+    for (let slot = 0; slot < AFTERNOON_SLOT_COUNT; slot++) {
       const cells = weekdays.map((_, idx) => {
         const isToday = weeksAhead === 0 && idx === todayIdx;
-        const isNow = isToday && liveSlot === slot;
         const day = days[idx];
         const here = (this.actorId && day != null) ? appointmentsFor(this.actorId, day, slot, appointments) : [];
         const cards = here.map((a) => this.#appointmentCard(a, here.length > 1)).join("");
         const add = (mayPlan && day != null && !here.length)
           ? `<button type="button" class="fw-tt-add-btn" data-action="addAppointment" data-day="${day}" data-slot="${slot}" data-col="${idx}"><i class="fas fa-plus"></i> ${game.i18n.localize("FIMBLEWOOD.Timetable.Afternoon.Add")}</button>`
           : "";
-        return `<td class="fw-tt-cell ${isToday ? "is-today" : ""} ${isNow ? "is-current-slot" : ""}">${cards}${add}</td>`;
+        return `<td class="fw-tt-cell ${isToday ? "is-today" : ""}">${cards}${add}</td>`;
       });
-      const label = `<div class="fw-tt-slot-number">${game.i18n.localize(`FIMBLEWOOD.Timetable.Afternoon.${slotDef.key}`)}</div><div class="fw-tt-slot-time">${slotDef.start}–${slotDef.end}</div>`;
-      rows.push(`<tr class="fw-tt-afternoon-row"><th class="fw-tt-slot-label">${label}</th>${cells.join("")}</tr>`);
-    });
+      rows.push(`<tr class="fw-tt-afternoon-row"><th class="fw-tt-slot-label"></th>${cells.join("")}</tr>`);
+    }
     return rows;
   }
 

@@ -117,7 +117,7 @@ Dragonchess's text is deliberately German throughout, regardless of the world's 
 
 The Academy's weekly class schedule (requires Simple Calendar Reborn). The GM fills in two alternating weeks in the **Timetable Editor**; everyone opens **Timetable** in the Fimblewood Controls to see this week or next week.
 
-**After classes**, two more rows hold each character's **afternoon** (17:00–19:00) and **evening** (19:30–21:30) plans, such as clubs or jobs:
+**After classes**, two more rows per day hold each character's plans, such as clubs or jobs. They have no fixed times, since club hours vary:
 
 - Pick the character under **Plan for**. Players see their own characters; the GM sees every player character and can plan on their behalf.
 - Click **Plan** in an empty slot to add an appointment with a title and a description, and invite other player characters. It then shows up in their timetables too, and their players get a notification.

@@ -20,7 +20,7 @@
  * timetable's character pickers.
  */
 
-import { currentTimeOfDay, currentTimestamp, dayNumberForTimestamp } from "./calendar.mjs";
+import { currentTimestamp, dayNumberForTimestamp } from "./calendar.mjs";
 import { RelevantCharactersApp } from "./relevant-characters-app.mjs";
 
 const MODULE_ID = "fimblewood-academy";
@@ -28,30 +28,13 @@ const CHANNEL = `module.${MODULE_ID}`;
 export const AFTERNOON_SETTING = "timetableAfternoon";
 const EXCLUDED_SETTING = "timetableExcludedActors";
 
-/** The two free slots after classes. */
-export const AFTERNOON_SLOTS = [
-  { key: "Afternoon", start: "17:00", end: "19:00" },
-  { key: "Evening", start: "19:30", end: "21:30" }
-];
+/** Free slots per day after classes. Deliberately without names or times: club and job hours vary. */
+export const AFTERNOON_SLOT_COUNT = 2;
 
 /** Appointments older than this many days are dropped on the next write. */
 const KEEP_PAST_DAYS = 14;
 const MAX_TITLE = 100;
 const MAX_DESCRIPTION = 2000;
-
-function timeToMinutes(str) {
-  const [h, m] = str.split(":").map(Number);
-  return h * 60 + m;
-}
-
-/** Index of the afternoon slot we're in right now by Simple Calendar's clock, or null. */
-export function currentAfternoonSlot() {
-  const t = currentTimeOfDay();
-  if (!t) return null;
-  const nowMin = t.hour * 60 + t.minute;
-  const index = AFTERNOON_SLOTS.findIndex((s) => nowMin >= timeToMinutes(s.start) && nowMin < timeToMinutes(s.end));
-  return index === -1 ? null : index;
-}
 
 /* -------------------------------------------- */
 /*  Reading                                      */
@@ -148,7 +131,7 @@ function sanitize(raw) {
 }
 
 function isValid(a) {
-  return a.title && Number.isInteger(a.day) && Number.isInteger(a.slot) && a.slot >= 0 && a.slot < AFTERNOON_SLOTS.length && game.actors.has(a.ownerId);
+  return a.title && Number.isInteger(a.day) && Number.isInteger(a.slot) && a.slot >= 0 && a.slot < AFTERNOON_SLOT_COUNT && game.actors.has(a.ownerId);
 }
 
 function prune(appointments) {

@@ -8,7 +8,7 @@
  * the active GM does the actual write.
  */
 
-import { AFTERNOON_SLOTS, getAppointment, conflictingParticipants, plannableActors, requestAfternoonChange } from "./afternoon.mjs";
+import { getAppointment, conflictingParticipants, plannableActors, requestAfternoonChange } from "./afternoon.mjs";
 
 function esc(value) {
   return String(value ?? "").replace(/[&<>"']/g, (c) => ({
@@ -55,13 +55,10 @@ export class AppointmentEditApp extends foundry.applications.api.ApplicationV2 {
       .filter((a) => a.id !== this.draft.ownerId && !this.draft.invitees.includes(a.id))
       .map((a) => `<option value="${a.id}">${esc(a.name)}</option>`).join("");
 
-    const slot = AFTERNOON_SLOTS[this.draft.slot];
-    const slotName = slot ? game.i18n.localize(`FIMBLEWOOD.Timetable.Afternoon.${slot.key}`) : "?";
-
     return `
       <div class="fw-tt-course-edit-body">
         <p class="fw-tt-slot-summary">
-          ${game.i18n.format("FIMBLEWOOD.Timetable.Afternoon.SlotSummary", { date: esc(this.dateLabel), slot: esc(slotName), actor: esc(owner?.name ?? "?") })}
+          ${game.i18n.format("FIMBLEWOOD.Timetable.Afternoon.SlotSummary", { date: esc(this.dateLabel || "?"), actor: esc(owner?.name ?? "?") })}
           ${conflictMark(this.draft.ownerId)}
         </p>
         <label>${game.i18n.localize("FIMBLEWOOD.Timetable.Afternoon.Title")}
