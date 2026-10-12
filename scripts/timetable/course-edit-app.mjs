@@ -11,7 +11,7 @@
 
 import { getWeekdays } from "./calendar.mjs";
 import { getCourse, conflictingAttendees, upsertCourse } from "./data.mjs";
-import { excludedActorIds } from "./afternoon.mjs";
+import { plannableActors } from "./afternoon.mjs";
 
 function esc(value) {
   return String(value ?? "").replace(/[&<>"']/g, (c) => ({
@@ -62,10 +62,8 @@ export class CourseEditApp extends foundry.applications.api.ApplicationV2 {
         </li>`;
     }).join("");
 
-    const excluded = excludedActorIds(); // utility/test characters the GM marked as not relevant
-    const availableActors = game.actors.contents
-      .filter((a) => !this.draft.attendees.includes(a.id) && !excluded.has(a.id))
-      .sort((a, b) => a.name.localeCompare(b.name));
+    // Only the player characters marked relevant in the Timetable Characters menu (already sorted by name).
+    const availableActors = plannableActors().filter((a) => !this.draft.attendees.includes(a.id));
     const options = availableActors.map((a) => `<option value="${a.id}">${esc(a.name)}</option>`).join("");
 
     return `

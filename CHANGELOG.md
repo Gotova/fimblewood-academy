@@ -4,6 +4,10 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+### Changed
+
+- **Timetable**: the course editor's attendee dropdown lists only the player characters ticked in **Timetable Characters**, no NPCs or other actors.
+
 ## [0.30.1] - 2026-10-12
 
 ### Changed
