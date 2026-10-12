@@ -23,7 +23,7 @@ import { getWeekdays, currentDateDisplay, timestampForColumn, shortDateForTimest
 import { getSchedule, getCourses, currentBufferKey, nextBufferKey, currentPeriod, TIMESLOTS_PER_DAY, TIMESLOTS, LUNCH_BREAK_AFTER_SLOT } from "./data.mjs";
 import {
   AFTERNOON_SLOT_COUNT, getAppointments, getAppointment, appointmentsFor, plannableActors,
-  canEdit, canPlanFor, requestAfternoonChange
+  canEdit, canPlanFor, requestAfternoonChange, organiserName, DM_ORGANISER
 } from "./afternoon.mjs";
 
 function esc(value) {
@@ -171,9 +171,9 @@ export class TimetableViewerApp extends foundry.applications.api.ApplicationV2 {
   #appointmentCard(appointment, clashes) {
     const invited = appointment.ownerId !== this.actorId;
     const invitedBy = invited
-      ? `<div class="fw-tt-course-professor">${game.i18n.format("FIMBLEWOOD.Timetable.Afternoon.InvitedBy", { name: esc(game.actors.get(appointment.ownerId)?.name ?? "?") })}</div>`
+      ? `<div class="fw-tt-course-professor">${game.i18n.format("FIMBLEWOOD.Timetable.Afternoon.InvitedBy", { name: esc(organiserName(appointment.ownerId)) })}</div>`
       : "";
-    const others = [appointment.ownerId, ...appointment.invitees].filter((id) => id !== this.actorId).length;
+    const others = [appointment.ownerId, ...appointment.invitees].filter((id) => id && id !== this.actorId).length;
     const group = others
       ? `<span class="fw-tt-note-indicator" title="${game.i18n.format("FIMBLEWOOD.Timetable.Afternoon.WithOthers", { count: others })}"><i class="fas fa-user-group"></i></span>`
       : "";
@@ -274,8 +274,11 @@ export class TimetableViewerApp extends foundry.applications.api.ApplicationV2 {
   async _onAddAppointment(event, target) {
     if (!this.actorId) return;
     const { AppointmentEditApp } = await import("./appointment-edit-app.mjs");
+    // The GM organises as the DM by default, with the shown PC taking part; players plan for their PC.
+    const asDM = game.user.isGM;
     new AppointmentEditApp({
-      ownerId: this.actorId,
+      ownerId: asDM ? DM_ORGANISER : this.actorId,
+      invitees: asDM ? [this.actorId] : [],
       day: Number(target.dataset.day),
       slot: Number(target.dataset.slot),
       dateLabel: this.#columnLabel(Number(target.dataset.col))
@@ -289,7 +292,7 @@ export class TimetableViewerApp extends foundry.applications.api.ApplicationV2 {
     const name = (id) => esc(game.actors.get(id)?.name ?? game.i18n.localize("FIMBLEWOOD.Timetable.UnknownActor"));
 
     const content = `
-      <p><strong>${i18n("Organiser")}:</strong> ${name(appointment.ownerId)}</p>
+      <p><strong>${i18n("Organiser")}:</strong> ${esc(organiserName(appointment.ownerId))}</p>
       <p><strong>${i18n("Invitees")}:</strong> ${appointment.invitees.length ? appointment.invitees.map(name).join(", ") : `<em>${i18n("NoInvitees")}</em>`}</p>
       <p><strong>${i18n("Description")}:</strong><br>${
         appointment.description ? esc(appointment.description).replace(/\n/g, "<br>") : `<em>${i18n("NoDescription")}</em>`

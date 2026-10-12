@@ -8,7 +8,7 @@
  * the active GM does the actual write.
  */
 
-import { getAppointment, conflictingParticipants, plannableActors, requestAfternoonChange } from "./afternoon.mjs";
+import { DM_ORGANISER, organiserName, getAppointment, conflictingParticipants, plannableActors, requestAfternoonChange } from "./afternoon.mjs";
 
 function esc(value) {
   return String(value ?? "").replace(/[&<>"']/g, (c) => ({
@@ -28,11 +28,11 @@ export class AppointmentEditApp extends foundry.applications.api.ApplicationV2 {
   static #ACTIONS = { addInvitee: "_onAddInvitee", removeInvitee: "_onRemoveInvitee", save: "_onSave", cancel: "_onCancel" };
 
   /** `dateLabel` is display-only ("Monday, 12th June"); `day`/`slot` are what's stored. */
-  constructor({ ownerId, day, slot, dateLabel = "", appointmentId = null }) {
+  constructor({ ownerId, day, slot, invitees = [], dateLabel = "", appointmentId = null }) {
     super({});
     this.dateLabel = dateLabel;
     const existing = appointmentId ? getAppointment(appointmentId) : null;
-    this.draft = existing ?? { id: foundry.utils.randomID(), day, slot, ownerId, title: "", description: "", invitees: [] };
+    this.draft = existing ?? { id: foundry.utils.randomID(), day, slot, ownerId, title: "", description: "", invitees: [...invitees] };
   }
 
   async _renderHTML() {
@@ -41,7 +41,6 @@ export class AppointmentEditApp extends foundry.applications.api.ApplicationV2 {
       ? `<span class="fw-tt-conflict" title="${game.i18n.format("FIMBLEWOOD.Timetable.Afternoon.ConflictWith", { titles: esc(conflicts.get(actorId).join(", ")) })}"><i class="fas fa-triangle-exclamation"></i></span>`
       : "";
 
-    const owner = game.actors.get(this.draft.ownerId);
     const inviteeRows = this.draft.invitees.map((actorId) => {
       const name = game.actors.get(actorId)?.name ?? game.i18n.localize("FIMBLEWOOD.Timetable.UnknownActor");
       return `
@@ -58,9 +57,9 @@ export class AppointmentEditApp extends foundry.applications.api.ApplicationV2 {
     return `
       <div class="fw-tt-course-edit-body">
         <p class="fw-tt-slot-summary">
-          ${game.i18n.format("FIMBLEWOOD.Timetable.Afternoon.SlotSummary", { date: esc(this.dateLabel || "?"), actor: esc(owner?.name ?? "?") })}
-          ${conflictMark(this.draft.ownerId)}
+          ${esc(this.dateLabel || "?")}
         </p>
+        ${this.#organiserField(conflictMark)}
         <label>${game.i18n.localize("FIMBLEWOOD.Timetable.Afternoon.Title")}
           <input type="text" name="title" maxlength="100" value="${esc(this.draft.title)}" placeholder="${game.i18n.localize("FIMBLEWOOD.Timetable.Afternoon.TitlePlaceholder")}">
         </label>
@@ -82,6 +81,21 @@ export class AppointmentEditApp extends foundry.applications.api.ApplicationV2 {
       </div>`;
   }
 
+  /** The GM picks the organiser: the DM, or a relevant PC to plan in a player's name. Players always organise as their PC. */
+  #organiserField(conflictMark) {
+    const label = game.i18n.localize("FIMBLEWOOD.Timetable.Afternoon.Organiser");
+    if (!game.user.isGM) {
+      return `<p><strong>${label}:</strong> ${esc(organiserName(this.draft.ownerId))} ${conflictMark(this.draft.ownerId)}</p>`;
+    }
+    const choices = [{ id: DM_ORGANISER, name: organiserName(DM_ORGANISER) }, ...plannableActors()];
+    if (!choices.some((c) => c.id === this.draft.ownerId)) choices.push({ id: this.draft.ownerId, name: organiserName(this.draft.ownerId) });
+    const options = choices.map((c) => `<option value="${c.id}" ${c.id === this.draft.ownerId ? "selected" : ""}>${esc(c.name)}</option>`).join("");
+    return `
+      <label>${label} ${conflictMark(this.draft.ownerId)}
+        <select name="organiser">${options}</select>
+      </label>`;
+  }
+
   async _replaceHTML(result, content) {
     content.innerHTML = result;
     if (!content.dataset.fwTtWired) {
@@ -92,6 +106,9 @@ export class AppointmentEditApp extends foundry.applications.api.ApplicationV2 {
         const handlerName = AppointmentEditApp.#ACTIONS[target.dataset.action];
         if (handlerName) this[handlerName](event, target);
       });
+      content.addEventListener("change", (event) => {
+        if (event.target.name === "organiser") this.#changeOrganiser(event.target.value);
+      });
     }
     return content;
   }
@@ -100,6 +117,16 @@ export class AppointmentEditApp extends foundry.applications.api.ApplicationV2 {
     const root = this.element;
     this.draft.title = root.querySelector('[name="title"]')?.value.trim() ?? this.draft.title;
     this.draft.description = root.querySelector('[name="description"]')?.value.trim() ?? this.draft.description;
+  }
+
+  /** A PC handing over the organiser role stays in as an invitee; the new organiser leaves the invitee list. */
+  #changeOrganiser(ownerId) {
+    this.#readFormFields();
+    const previous = this.draft.ownerId;
+    this.draft.invitees = this.draft.invitees.filter((id) => id !== ownerId);
+    if (previous !== DM_ORGANISER && previous !== ownerId) this.draft.invitees.unshift(previous);
+    this.draft.ownerId = ownerId;
+    this.render();
   }
 
   _onAddInvitee() {
@@ -126,6 +153,10 @@ export class AppointmentEditApp extends foundry.applications.api.ApplicationV2 {
     this.#readFormFields();
     if (!this.draft.title) {
       ui.notifications.warn(game.i18n.localize("FIMBLEWOOD.Timetable.Afternoon.TitleRequired"));
+      return;
+    }
+    if (this.draft.ownerId === DM_ORGANISER && !this.draft.invitees.length) {
+      ui.notifications.warn(game.i18n.localize("FIMBLEWOOD.Timetable.Afternoon.ParticipantRequired"));
       return;
     }
     if (await requestAfternoonChange({ op: "upsert", appointment: this.draft })) this.close();

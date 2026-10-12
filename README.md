@@ -119,7 +119,8 @@ The Academy's weekly class schedule (requires Simple Calendar Reborn). The GM fi
 
 **After classes**, two more rows per day hold each character's plans, such as clubs or jobs. They have no fixed times, since club hours vary:
 
-- Pick the character under **Plan for**. Players see their own characters; the GM sees every player character and can plan on their behalf.
+- Pick the character under **Plan for**. Players see their own characters; the GM sees every player character.
+- As the GM, a new appointment is organised by **the DM**, with the shown character taking part. Pick a character under **Organised by** to plan in a player's name instead.
 - Click **Plan** in an empty slot to add an appointment with a title and a description, and invite other player characters. It then shows up in their timetables too, and their players get a notification.
 - Click an appointment for its details. Its organiser can edit or delete it; an invited character can decline.
 - Utility or test characters can be hidden from all of the Timetable's character lists: **Configure Settings → Fimblewood Academy → Timetable Characters**. New characters are shown by default.

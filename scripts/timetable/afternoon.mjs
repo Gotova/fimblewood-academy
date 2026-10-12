@@ -7,7 +7,8 @@
  * day (`day`, see calendar.mjs's dayNumberForTimestamp) and is created by
  * the players themselves for their own character (`ownerId`), who can
  * invite other PCs (`invitees`) — the appointment then shows up in their
- * timetable too.
+ * timetable too. The GM can also organise an appointment as the DM: then
+ * `ownerId` is empty (DM_ORGANISER) and every PC taking part is an invitee.
  *
  * Players can't write world settings, so every change goes through
  * requestAfternoonChange(): the active GM applies it directly, everyone
@@ -48,6 +49,15 @@ export function getAppointment(id, appointments = getAppointments()) {
   return appointments.find((a) => a.id === id) ?? null;
 }
 
+/** `ownerId` of appointments the GM organises as the DM rather than in a PC's name. */
+export const DM_ORGANISER = "";
+
+/** Display name of whoever organises an appointment: the PC's name, or "the DM". */
+export function organiserName(ownerId) {
+  if (ownerId === DM_ORGANISER) return game.i18n.localize("FIMBLEWOOD.Timetable.Afternoon.DM");
+  return game.actors.get(ownerId)?.name ?? game.i18n.localize("FIMBLEWOOD.Timetable.UnknownActor");
+}
+
 export function involves(appointment, actorId) {
   return appointment.ownerId === actorId || appointment.invitees.includes(actorId);
 }
@@ -64,7 +74,7 @@ export function appointmentsFor(actorId, day, slot, appointments = getAppointmen
 export function conflictingParticipants(appointment, appointments = getAppointments()) {
   const siblings = appointments.filter((a) => a.id !== appointment.id && a.day === appointment.day && a.slot === appointment.slot);
   const conflicts = new Map();
-  for (const actorId of [appointment.ownerId, ...appointment.invitees]) {
+  for (const actorId of [appointment.ownerId, ...appointment.invitees].filter(Boolean)) {
     const clashing = siblings.filter((a) => involves(a, actorId));
     if (clashing.length) conflicts.set(actorId, clashing.map((a) => a.title));
   }
@@ -98,15 +108,16 @@ export function plannableActors() {
 
 function ownsActor(user, actorId) {
   if (user.isGM) return true;
+  if (actorId === DM_ORGANISER) return false;
   return game.actors.get(actorId)?.testUserPermission(user, "OWNER") ?? false;
 }
 
-/** The organiser's owners (and the GM) may edit or delete an appointment. */
+/** The organiser's owners (and the GM) may edit or delete an appointment; DM-organised ones only the GM. */
 export function canEdit(appointment, user = game.user) {
   return ownsActor(user, appointment.ownerId);
 }
 
-/** Only owners of the character (and the GM) may plan in its name. */
+/** Only owners of the character (and the GM) may plan in its name; only the GM as the DM. */
 export function canPlanFor(actorId, user = game.user) {
   return ownsActor(user, actorId);
 }
@@ -131,7 +142,8 @@ function sanitize(raw) {
 }
 
 function isValid(a) {
-  return a.title && Number.isInteger(a.day) && Number.isInteger(a.slot) && a.slot >= 0 && a.slot < AFTERNOON_SLOT_COUNT && game.actors.has(a.ownerId);
+  return a.title && Number.isInteger(a.day) && Number.isInteger(a.slot) && a.slot >= 0 && a.slot < AFTERNOON_SLOT_COUNT
+    && (a.ownerId === DM_ORGANISER ? a.invitees.length > 0 : game.actors.has(a.ownerId));
 }
 
 function prune(appointments) {
@@ -167,6 +179,8 @@ async function applyChange(user, { op, appointment, id, actorId }) {
     const existing = getAppointment(id, list);
     if (!existing || !existing.invitees.includes(actorId) || !ownsActor(user, actorId)) return false;
     existing.invitees = existing.invitees.filter((i) => i !== actorId);
+    // A DM appointment nobody takes part in anymore would sit invisible in the data.
+    if (existing.ownerId === DM_ORGANISER && !existing.invitees.length) list = list.filter((a) => a.id !== id);
   } else {
     return false;
   }
@@ -201,7 +215,7 @@ function notifyInvited({ actorIds, title, ownerId, userId }) {
   if (game.user.isGM || game.user.id === userId) return;
   const mine = actorIds.map((id) => game.actors.get(id)).filter((a) => a?.isOwner);
   if (!mine.length) return;
-  const organiser = game.actors.get(ownerId)?.name ?? "?";
+  const organiser = organiserName(ownerId);
   for (const actor of mine) {
     ui.notifications.info(game.i18n.format("FIMBLEWOOD.Timetable.Afternoon.InvitedNotice", { actor: actor.name, organiser, title }));
   }
