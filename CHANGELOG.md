@@ -4,6 +4,8 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.31.0] - 2026-10-12
+
 ### Added
 
 - **Timetable**: the GM organises after-class appointments as **the DM** by default, instead of in the shown character's name. A new **Organised by** field switches to a character to plan in a player's name.
