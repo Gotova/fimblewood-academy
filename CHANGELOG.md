@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.28.0] - 2026-10-12
+
+### Added
+
+- **Scene Music**: optional **Night Track** for a scene's Main Music and for each Replace Music region. It plays instead while the scene is dark, e.g. after Foundry's "Transition to Darkness", and switches back at daylight.
+
 ## [0.27.0] - 2026-10-12
 
 ### Added
