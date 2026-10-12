@@ -4,6 +4,8 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.29.0] - 2026-10-12
+
 ### Added
 
 - **Timetable**: afternoon and evening slots after classes. Players plan appointments (title, description) for their characters, the GM can plan on their behalf, and invited characters see the appointment in their own timetable.
