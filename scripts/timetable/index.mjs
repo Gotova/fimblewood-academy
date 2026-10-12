@@ -7,6 +7,9 @@
  * draw.mjs's CONTROL_GROUP): a "Timetable" tool for everyone, plus a
  * GM-only "Timetable Editor" tool.
  *
+ * Below the classes, the viewer also holds each PC's afternoon/evening
+ * appointments, which players plan themselves (see afternoon.mjs).
+ *
  * Hard-requires Simple Calendar Reborn: which of the two week buffers
  * counts as "this week" is derived from its current in-game date (see
  * calendar.mjs), so without it there's no way to know which week is which.
@@ -15,6 +18,7 @@
 import { CONTROL_GROUP } from "../draw.mjs";
 import { isCalendarAvailable, onDateChange } from "./calendar.mjs";
 import { registerTimetableData, onScheduleChange } from "./data.mjs";
+import { registerAfternoonData } from "./afternoon.mjs";
 
 let _viewer = null;
 let _editor = null;
@@ -54,6 +58,7 @@ function rerenderOpenWindows() {
 export function registerTimetable() {
   registerTimetableData();
   onScheduleChange(rerenderOpenWindows);
+  registerAfternoonData(rerenderOpenWindows);
 
   Hooks.on("getSceneControlButtons", (controls) => {
     const group = controls[CONTROL_GROUP];

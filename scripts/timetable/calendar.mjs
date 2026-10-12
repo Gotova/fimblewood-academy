@@ -91,6 +91,17 @@ function absoluteDay(timestamp) {
   return Math.floor(ts / secondsPerDay());
 }
 
+/** Day number (days since the calendar's epoch) for a timestamp, or null if unavailable — the key afternoon appointments are stored under. */
+export function dayNumberForTimestamp(timestamp) {
+  if (!isCalendarAvailable() || timestamp == null) return null;
+  try {
+    return absoluteDay(timestamp);
+  } catch (err) {
+    console.error("fimblewood-academy | Timetable: failed to compute a day number", err);
+    return null;
+  }
+}
+
 /** Index of `weekdayId` within `weekdays` (array order = column order in the grid), or -1 if not found. */
 export function weekdayIndex(weekdayId, weekdays = getWeekdays()) {
   return weekdays.findIndex((d) => d.id === weekdayId);

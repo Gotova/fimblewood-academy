@@ -264,3 +264,41 @@
   gap: 8px;
   margin-top: 10px;
 }
+
+/* Afternoon appointments */
+
+.fw-tt-plan-for {
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+.fw-tt-plan-for label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+}
+.fw-tt-plan-for select {
+  width: auto;
+  min-width: 160px;
+  font-weight: normal;
+}
+
+.fw-tt-afternoon-sep td {
+  text-align: center;
+  font-weight: bold;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  padding: 4px;
+  background: rgba(150, 110, 200, 0.15);
+}
+
+.fw-tt-appointment.is-mine {
+  background: rgba(150, 110, 200, 0.28);
+  box-shadow: inset 0 0 0 1px rgba(170, 130, 230, 0.6);
+}
+.fw-tt-appointment.is-invited {
+  background: rgba(150, 110, 200, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(170, 130, 230, 0.35);
+}

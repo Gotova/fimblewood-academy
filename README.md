@@ -113,6 +113,17 @@ Either way, accepting triggers Schere/Stein/Papier for who picks a colour first 
 
 Dragonchess's text is deliberately German throughout, regardless of the world's configured Foundry language — the source rulebook, the club fiction, and the world piece names (Drache, Bastion, Magus, Greif, Knappe, König) are German, so following an English world language for everything else around them would just produce a mixed-language mess.
 
+### Timetable
+
+The Academy's weekly class schedule (requires Simple Calendar Reborn). The GM fills in two alternating weeks in the **Timetable Editor**; everyone opens **Timetable** in the Fimblewood Controls to see this week or next week.
+
+**After classes**, two more rows hold each character's **afternoon** (17:00–19:00) and **evening** (19:30–21:30) plans, such as clubs or jobs:
+
+- Pick the character under **Plan for**. Players see their own characters; the GM sees every player character and can plan on their behalf.
+- Click **Plan** in an empty slot to add an appointment with a title and a description, and invite other player characters. It then shows up in their timetables too, and their players get a notification.
+- Click an appointment for its details. Its organiser can edit or delete it; an invited character can decline.
+- Appointments belong to a date, not to the A/B week rotation. A GM has to be online to save changes. Appointments older than two weeks are cleaned up.
+
 ### Content
 
 **Druid — Circle of Wild Magic** (compendium: *Fimblewood Academy Subclasses*)
