@@ -4,6 +4,8 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.27.0] - 2026-10-12
+
 ### Added
 
 - **Random NPCs**: new world setting **Reshuffle on Scene Activation**. Turn it off to keep a scene's NPCs when the scene is activated again; the region buttons still reroll manually.
