@@ -4,6 +4,10 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+### Fixed
+
+- **Timetable**: adding an attendee in the course editor could add several extra characters at once after the window had re-rendered.
+
 ## [0.30.2] - 2026-10-12
 
 ### Changed

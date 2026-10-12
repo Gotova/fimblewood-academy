@@ -98,14 +98,19 @@ export class CourseEditApp extends foundry.applications.api.ApplicationV2 {
 
   async _replaceHTML(result, content) {
     content.innerHTML = result;
-    content.addEventListener("click", (event) => {
-      const target = event.target.closest("[data-action]");
-      if (!target) return;
-      const handlerName = CourseEditApp.#ACTIONS[target.dataset.action];
-      if (handlerName) this[handlerName](event, target);
-    });
-    content.addEventListener("dragover", (event) => event.preventDefault());
-    content.addEventListener("drop", (event) => this.#onDrop(event));
+    // `content` survives re-renders, so wire it only once: a second click listener
+    // would run after the first one's re-render and add whatever the dropdown shows next.
+    if (!content.dataset.fwTtWired) {
+      content.dataset.fwTtWired = "1";
+      content.addEventListener("click", (event) => {
+        const target = event.target.closest("[data-action]");
+        if (!target) return;
+        const handlerName = CourseEditApp.#ACTIONS[target.dataset.action];
+        if (handlerName) this[handlerName](event, target);
+      });
+      content.addEventListener("dragover", (event) => event.preventDefault());
+      content.addEventListener("drop", (event) => this.#onDrop(event));
+    }
     return content;
   }
 
