@@ -3,7 +3,8 @@
  *
  * A Region Behavior type ("Random NPCs") that fills its region with tokens of
  * random actors from a chosen Actor folder. Every time the scene is activated,
- * the tokens it placed last time are removed and the region is rolled anew.
+ * the tokens it placed last time are removed and the region is rolled anew
+ * (unless the world setting turns that off; the region buttons still reroll).
  *
  * Each free grid space inside the region gets a base chance of receiving an
  * NPC, and a higher chance when an adjacent space already holds one, so that
@@ -14,6 +15,7 @@
 const MODULE_ID = "fimblewood-academy";
 const BEHAVIOR_TYPE = `${MODULE_ID}.npcSpawner`;
 const SPAWN_FLAG = "npcSpawner";
+const REROLL_ON_ACTIVATE_SETTING = "npcSpawnerRerollOnActivate";
 
 const i18n = (key, data) => data
   ? game.i18n.format(`FIMBLEWOOD.NpcSpawner.${key}`, data)
@@ -326,9 +328,16 @@ export function registerNpcSpawner() {
   CONFIG.RegionBehavior.typeLabels[BEHAVIOR_TYPE] = "FIMBLEWOOD.NpcSpawner.Label";
   CONFIG.RegionBehavior.typeIcons[BEHAVIOR_TYPE] = "fa-solid fa-people-group";
 
+  game.settings.register(MODULE_ID, REROLL_ON_ACTIVATE_SETTING, {
+    scope: "world", config: true, type: Boolean, default: true,
+    name: "FIMBLEWOOD.NpcSpawner.Settings.RerollOnActivateName",
+    hint: "FIMBLEWOOD.NpcSpawner.Settings.RerollOnActivateHint"
+  });
+
   // Only the client that activated the scene rolls, so it happens exactly once.
   Hooks.on("updateScene", (scene, changes, options, userId) => {
     if (changes.active !== true || userId !== game.user.id) return;
+    if (!game.settings.get(MODULE_ID, REROLL_ON_ACTIVATE_SETTING)) return;
     rerollScene(scene).catch(err => console.error(`${MODULE_ID} | NPC spawner failed`, err));
   });
 

@@ -214,6 +214,10 @@
     },
     "NpcSpawner": {
       "Label": "Random NPCs",
+      "Settings": {
+        "RerollOnActivateName": "Random NPCs: Reshuffle on Scene Activation",
+        "RerollOnActivateHint": "When a scene is activated, remove the NPCs its Random NPCs regions placed and roll them anew. Turn off to keep the current NPCs; you can still reroll manually from the region buttons."
+      },
       "FIELDS": {
         "folder": {
           "label": "Actor Folder",

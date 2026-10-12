@@ -214,6 +214,10 @@
     },
     "NpcSpawner": {
       "Label": "Zufaellige NPCs",
+      "Settings": {
+        "RerollOnActivateName": "Zufaellige NPCs: Bei Szenenaktivierung neu wuerfeln",
+        "RerollOnActivateHint": "Beim Aktivieren einer Szene werden die NPCs ihrer Zufaellige-NPCs-Regionen entfernt und neu ausgewuerfelt. Ausschalten, um die aktuellen NPCs zu behalten; ueber die Regions-Buttons kann weiterhin manuell neu gewuerfelt werden."
+      },
       "FIELDS": {
         "folder": {
           "label": "Akteur-Ordner",
