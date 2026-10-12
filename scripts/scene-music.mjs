@@ -4,7 +4,8 @@
  * Every scene can name a Jukebox track as its main music, heard by everyone
  * viewing the scene whether or not they have a token on it. A "Replace Music"
  * Region Behavior swaps that for another Jukebox track while one of a client's
- * listener tokens stands inside the region. The playback itself is the
+ * listener tokens stands inside the region. Both can name a night variant that
+ * plays instead while the scene is dark. The playback itself is the
  * Jukebox's local player (see refreshLocalJukebox in jukebox.mjs), which decides
  * between region, record player and scene music.
  */
@@ -14,6 +15,8 @@ import { buildTrackPickerHtml, getRegistry, handleTrackPickerChange, refreshLoca
 const MODULE_ID = "fimblewood-academy";
 const BEHAVIOR_TYPE = `${MODULE_ID}.replaceMusic`;
 const SCENE_TRACK_FLAG = "musicTrackId";
+const SCENE_NIGHT_TRACK_FLAG = "nightMusicTrackId";
+const NIGHT_THRESHOLD = 0.5;
 
 const i18n = (key) => game.i18n.localize(`FIMBLEWOOD.SceneMusic.${key}`);
 
@@ -29,28 +32,42 @@ class ReplaceMusicBehaviorType extends foundry.data.regionBehaviors.RegionBehavi
   static defineSchema() {
     const fields = foundry.data.fields;
     return {
-      track: new fields.StringField({ required: true, blank: true, choices: trackChoices })
+      track: new fields.StringField({ required: true, blank: true, choices: trackChoices }),
+      nightTrack: new fields.StringField({ required: true, blank: true, choices: trackChoices })
     };
   }
 }
 
 /* -------------------------------------------- */
 
-/** The Jukebox track a scene plays as its main music, if any. */
+/**
+ * Whether a scene counts as night, e.g. after core's "Transition to Darkness".
+ * The document's darkness level jumps to its target as the transition starts.
+ */
+export function isSceneNight(scene) {
+  return (scene?.environment?.darknessLevel ?? 0) >= NIGHT_THRESHOLD;
+}
+
+/** The Jukebox track a scene plays as its main music, if any; its night track while dark. */
 export function getSceneTrackId(scene) {
-  return scene?.getFlag(MODULE_ID, SCENE_TRACK_FLAG) || null;
+  const nightTrackId = isSceneNight(scene) && scene.getFlag(MODULE_ID, SCENE_NIGHT_TRACK_FLAG);
+  return nightTrackId || scene?.getFlag(MODULE_ID, SCENE_TRACK_FLAG) || null;
 }
 
 /**
  * The track of the first enabled "Replace Music" behavior whose region contains
- * one of the given points ({x, y, elevation}), if any.
+ * one of the given points ({x, y, elevation}), if any. While the scene is dark a
+ * behavior's night track takes precedence over its normal one.
  */
 export function getRegionTrackId(scene, points) {
   if (!scene || !points.length) return null;
+  const night = isSceneNight(scene);
   for (const region of scene.regions) {
     for (const behavior of region.behaviors) {
-      if (behavior.type !== BEHAVIOR_TYPE || behavior.disabled || !behavior.system.track) continue;
-      if (points.some(p => region.testPoint(p))) return behavior.system.track;
+      if (behavior.type !== BEHAVIOR_TYPE || behavior.disabled) continue;
+      const trackId = (night && behavior.system.nightTrack) || behavior.system.track;
+      if (!trackId) continue;
+      if (points.some(p => region.testPoint(p))) return trackId;
     }
   }
   return null;
@@ -74,16 +91,24 @@ function injectSceneMusicPicker(app, html) {
       <label>${i18n("Scene.TrackLabel")}</label>
       <div class="form-fields">${buildTrackPickerHtml(getSceneTrackId(scene) ?? "")}</div>
       <p class="hint">${i18n("Scene.TrackHint")}</p>
+    </div>
+    <div class="form-group">
+      <label>${i18n("Scene.NightTrackLabel")}</label>
+      <div class="form-fields">${buildTrackPickerHtml(scene.getFlag(MODULE_ID, SCENE_NIGHT_TRACK_FLAG) ?? "")}</div>
+      <p class="hint">${i18n("Scene.NightTrackHint")}</p>
     </div>`;
   tab.appendChild(wrap);
 
-  // No name attribute, so core's own form submit ignores it; saved as a flag here.
-  wrap.querySelector("select").addEventListener("change", (event) => {
-    handleTrackPickerChange(event.currentTarget, async (trackId) => {
-      if (trackId) await scene.setFlag(MODULE_ID, SCENE_TRACK_FLAG, trackId);
-      else await scene.unsetFlag(MODULE_ID, SCENE_TRACK_FLAG);
+  // No name attribute, so core's own form submit ignores them; saved as flags here.
+  const [daySelect, nightSelect] = wrap.querySelectorAll("select");
+  for (const [select, flag] of [[daySelect, SCENE_TRACK_FLAG], [nightSelect, SCENE_NIGHT_TRACK_FLAG]]) {
+    select.addEventListener("change", (event) => {
+      handleTrackPickerChange(event.currentTarget, async (trackId) => {
+        if (trackId) await scene.setFlag(MODULE_ID, flag, trackId);
+        else await scene.unsetFlag(MODULE_ID, flag);
+      });
     });
-  });
+  }
 }
 
 /* -------------------------------------------- */
@@ -97,7 +122,9 @@ export function registerSceneMusic() {
 
   // Re-decide what this client hears whenever the music it could hear changes.
   Hooks.on("updateScene", (scene, changes) => {
-    if (scene === canvas.scene && foundry.utils.hasProperty(changes, `flags.${MODULE_ID}`)) refreshLocalJukeboxThrottled();
+    if (scene !== canvas.scene) return;
+    if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}`)
+      || foundry.utils.hasProperty(changes, "environment.darknessLevel")) refreshLocalJukeboxThrottled();
   });
   for (const hook of ["createRegion", "updateRegion", "deleteRegion",
     "createRegionBehavior", "updateRegionBehavior", "deleteRegionBehavior"]) {

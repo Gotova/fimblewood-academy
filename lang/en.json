@@ -200,7 +200,9 @@
       "Scene": {
         "Legend": "Main Music",
         "TrackLabel": "Jukebox Track",
-        "TrackHint": "Everyone viewing this scene hears this track, with or without a token on it. A \"Replace Music\" region overrides it."
+        "TrackHint": "Everyone viewing this scene hears this track, with or without a token on it. A \"Replace Music\" region overrides it.",
+        "NightTrackLabel": "Night Track",
+        "NightTrackHint": "Plays instead of the main music while the scene is dark, e.g. after \"Transition to Darkness\". Leave empty to keep the main music at night."
       },
       "Region": {
         "Label": "Replace Music",
@@ -208,6 +210,10 @@
           "track": {
             "label": "Jukebox Track",
             "hint": "Plays instead of the scene's main music (and the record player) while one of a player's tokens is inside this region."
+          },
+          "nightTrack": {
+            "label": "Night Track",
+            "hint": "Plays instead of the track above while the scene is dark, e.g. after \"Transition to Darkness\". Leave empty to keep the same track at night; with only a night track the region replaces music only at night."
           }
         }
       }

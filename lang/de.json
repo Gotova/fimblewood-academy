@@ -200,7 +200,9 @@
       "Scene": {
         "Legend": "Hauptmusik",
         "TrackLabel": "Musikbox-Titel",
-        "TrackHint": "Alle, die diese Szene ansehen, hoeren diesen Titel, egal ob sie einen Token darauf haben. Eine Region mit \"Musik ersetzen\" hat Vorrang."
+        "TrackHint": "Alle, die diese Szene ansehen, hoeren diesen Titel, egal ob sie einen Token darauf haben. Eine Region mit \"Musik ersetzen\" hat Vorrang.",
+        "NightTrackLabel": "Nacht-Titel",
+        "NightTrackHint": "Spielt statt der Hauptmusik, solange die Szene dunkel ist, z. B. nach \"Uebergang zur Dunkelheit\". Leer lassen, um nachts die Hauptmusik zu behalten."
       },
       "Region": {
         "Label": "Musik ersetzen",
@@ -208,6 +210,10 @@
           "track": {
             "label": "Musikbox-Titel",
             "hint": "Spielt statt der Hauptmusik der Szene (und der Musikbox), solange einer der Tokens eines Spielers in dieser Region steht."
+          },
+          "nightTrack": {
+            "label": "Nacht-Titel",
+            "hint": "Spielt statt des Titels oben, solange die Szene dunkel ist, z. B. nach \"Uebergang zur Dunkelheit\". Leer lassen, um nachts denselben Titel zu behalten; nur mit Nacht-Titel ersetzt die Region die Musik nur nachts."
           }
         }
       }

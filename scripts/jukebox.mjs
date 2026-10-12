@@ -11,7 +11,7 @@
 
 import { CONTROL_GROUP } from "./draw.mjs";
 import { getAmbientFadeMs } from "./ambient-sound-fade.mjs";
-import { getRegionTrackId, getSceneTrackId } from "./scene-music.mjs";
+import { getRegionTrackId, getSceneTrackId, isSceneNight } from "./scene-music.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 const REGISTRY_SETTING = "jukeboxRegistry";
@@ -409,6 +409,7 @@ export function diagnoseJukebox() {
     viewingJukeboxScene: canvas.ready ? isJukeboxScene(canvas.scene) : "canvas not ready",
     nowPlaying: registry[getNowPlaying()?.trackId]?.name ?? null,
     inHearingRange: isInJukeboxRange(),
+    sceneIsNight: canvas.ready ? isSceneNight(canvas.scene) : "canvas not ready",
     sceneMusic: sceneTrackId ? (registry[sceneTrackId]?.name ?? `${sceneTrackId} (NOT IN REGISTRY)`) : null,
     listenerPoints: canvas.ready ? getListenerPoints() : "canvas not ready",
     hearing: desired ? { source: desired.source, track: registry[desired.trackId]?.name ?? desired.trackId } : null,

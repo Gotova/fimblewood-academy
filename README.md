@@ -76,6 +76,7 @@ Background music per map, played from the Jukebox tracks. It replaces Foundry's 
 
 - **Main music:** open a scene's configuration, **Ambience** tab, and pick a Jukebox track under **Main Music**. Everyone viewing the scene hears it, whether or not they have a token on it.
 - **Replace Music:** draw a **Region**, open its **Behaviors** tab and add **Replace Music** with a Jukebox track. While one of a player's tokens stands inside, they hear that track instead (controlled tokens count; a player with none selected counts all their tokens). Disable the behavior to switch it off.
+- **Night music:** both the scene's Main Music and each Replace Music behavior have an optional **Night Track**. While the scene is dark (darkness level at least 0.5, e.g. after Foundry's "Transition to Darkness" in the Lighting controls) it plays instead; "Transition to Daylight" switches back. Leave it empty to keep the same music at night. A Replace Music behavior with only a Night Track replaces music only at night.
 - What a player hears, in order: a Replace Music region, the record player (if in hearing range), the scene's main music.
 - All of it is in sync for everyone. Walking between a region and the rest of the scene crossfades (the fade length is the **Ambient Sound Fade** setting); if both play the same track, it just carries on.
 - Hearing a track this way unlocks it for the party's Jukebox, if no one has it yet (and collecting is enabled).
