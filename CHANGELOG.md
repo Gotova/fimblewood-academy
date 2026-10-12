@@ -4,6 +4,8 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.30.1] - 2026-10-12
+
 ### Changed
 
 - **Timetable**: the two after-class slots no longer show "Afternoon"/"Evening" or fixed times, since club and job hours vary.
