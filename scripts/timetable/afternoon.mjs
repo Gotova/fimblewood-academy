@@ -14,13 +14,19 @@
  * else sends it over the module socket to the active GM, who checks the
  * sender owns the character(s) involved before writing. The setting's
  * onChange then re-renders every open Timetable window, same as courses.
+ *
+ * The GM can mark utility/test characters as not relevant in the module
+ * settings (see relevant-characters-app.mjs); those never show up in the
+ * timetable's character pickers.
  */
 
 import { currentTimeOfDay, currentTimestamp, dayNumberForTimestamp } from "./calendar.mjs";
+import { RelevantCharactersApp } from "./relevant-characters-app.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 const CHANNEL = `module.${MODULE_ID}`;
 export const AFTERNOON_SETTING = "timetableAfternoon";
+const EXCLUDED_SETTING = "timetableExcludedActors";
 
 /** The two free slots after classes. */
 export const AFTERNOON_SLOTS = [
@@ -82,10 +88,25 @@ export function conflictingParticipants(appointment, appointments = getAppointme
   return conflicts;
 }
 
-/** Player characters that can take part in appointments: characters owned by at least one player. */
-export function plannableActors() {
+/** Every player character (owned by at least one player), relevant or not — the candidates for the Characters menu. */
+export function playerCharacters() {
   return game.actors.filter((a) => a.type === "character" && a.hasPlayerOwner)
     .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/** Actor ids the GM marked as not relevant (utility/test characters) in the Characters menu. */
+export function excludedActorIds() {
+  return new Set(game.settings.get(MODULE_ID, EXCLUDED_SETTING) ?? []);
+}
+
+export async function setExcludedActorIds(ids) {
+  await game.settings.set(MODULE_ID, EXCLUDED_SETTING, [...ids]);
+}
+
+/** Player characters that can take part in appointments: player-owned characters the GM hasn't excluded. */
+export function plannableActors() {
+  const excluded = excludedActorIds();
+  return playerCharacters().filter((a) => !excluded.has(a.id));
 }
 
 /* -------------------------------------------- */
@@ -211,6 +232,18 @@ export function registerAfternoonData(onChange) {
   game.settings.register(MODULE_ID, AFTERNOON_SETTING, {
     scope: "world", config: false, type: Object, default: { appointments: [] },
     onChange: () => onChange()
+  });
+  game.settings.register(MODULE_ID, EXCLUDED_SETTING, {
+    scope: "world", config: false, type: Array, default: [],
+    onChange: () => onChange()
+  });
+  game.settings.registerMenu(MODULE_ID, "timetableCharacters", {
+    name: "FIMBLEWOOD.Timetable.Characters.MenuName",
+    label: "FIMBLEWOOD.Timetable.Characters.MenuLabel",
+    hint: "FIMBLEWOOD.Timetable.Characters.MenuHint",
+    icon: "fas fa-user-check",
+    type: RelevantCharactersApp,
+    restricted: true
   });
 
   Hooks.once("ready", () => {

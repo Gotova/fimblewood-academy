@@ -195,6 +195,13 @@
       "NameRequired": "The course needs a name before it can be saved.",
       "UnknownActor": "Unknown actor",
       "DropAmbiguous": "This slot has more than one course — drop the actor directly onto the course you want.",
+      "Characters": {
+        "MenuName": "Timetable Characters",
+        "MenuLabel": "Choose Characters",
+        "MenuHint": "Which player characters show up in the Timetable's character lists. Untick utility or test characters.",
+        "Title": "Timetable Characters",
+        "Hint": "Ticked characters appear in the Timetable (Plan for, invitations, course attendees). New characters are ticked automatically."
+      },
       "Afternoon": {
         "Separator": "After Classes",
         "Afternoon": "Afternoon",

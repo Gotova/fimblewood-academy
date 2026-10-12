@@ -4,6 +4,10 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+### Added
+
+- **Timetable**: settings menu **Timetable Characters** to hide utility or test characters from the Timetable's character lists (Plan for, invitations, course attendees).
+
 ## [0.29.0] - 2026-10-12
 
 ### Added

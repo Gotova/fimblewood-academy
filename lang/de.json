@@ -195,6 +195,13 @@
       "NameRequired": "Der Kurs braucht einen Namen, bevor er gespeichert werden kann.",
       "UnknownActor": "Unbekannter Akteur",
       "DropAmbiguous": "In diesem Slot gibt es mehrere Kurse — den Akteur direkt auf den gewuenschten Kurs ziehen.",
+      "Characters": {
+        "MenuName": "Stundenplan-Charaktere",
+        "MenuLabel": "Charaktere auswaehlen",
+        "MenuHint": "Welche Spielercharaktere in den Auswahllisten des Stundenplans erscheinen. Hilfs- oder Testcharaktere abwaehlen.",
+        "Title": "Stundenplan-Charaktere",
+        "Hint": "Angehakte Charaktere erscheinen im Stundenplan (Planen fuer, Einladungen, Kursteilnehmer). Neue Charaktere sind automatisch angehakt."
+      },
       "Afternoon": {
         "Separator": "Nach dem Unterricht",
         "Afternoon": "Nachmittag",
