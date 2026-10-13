@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.32.1] - 2026-10-13
+
+### Fixed
+
+- **Jukebox**: some tracks (e.g. Neon Pursuit, Concrete Rain) played a continuous beep instead of looping back to the start. This works around a Chromium bug in looping audio buffers.
+
 ## [0.32.0] - 2026-10-13
 
 ### Added
