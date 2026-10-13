@@ -303,8 +303,14 @@ async function startLocalJukebox(nowPlaying) {
   // Everyone in range hears the same spot in the song: it keeps "playing" from
   // startedAt even while nobody is in range to hear it.
   const elapsed = Math.max(0, (game.time.serverTime - nowPlaying.startedAt) / 1000);
-  const offset = Number.isFinite(sound.duration) && sound.duration > 0 ? elapsed % sound.duration : 0;
-  await sound.play({ loop: true, offset, volume: playlistSound.volume ?? 1, fade: getAmbientFadeMs() });
+  // Chromium's native buffer loop breaks on some buffer lengths: at the wrap it
+  // repeats one 128-frame block forever, heard as a steady beep. Ending the loop
+  // one sample early avoids it. Long tracks stream instead and ignore this.
+  const { buffer } = sound;
+  const loopWindow = buffer ? { loopStart: 0, loopEnd: (buffer.length - 1) / buffer.sampleRate } : {};
+  const duration = buffer ? loopWindow.loopEnd : sound.duration;
+  const offset = Number.isFinite(duration) && duration > 0 ? elapsed % duration : 0;
+  await sound.play({ loop: true, offset, ...loopWindow, volume: playlistSound.volume ?? 1, fade: getAmbientFadeMs() });
 }
 
 /**
