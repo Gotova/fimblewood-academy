@@ -46,6 +46,25 @@ async function ensureTrackRegistered(trackId, { name, path, img }) {
   await setRegistry(registry);
 }
 
+/**
+ * A broken record stays in the party's collection but can't be played on the
+ * record player until the GM repairs it — handed out early so a later quest can
+ * fix it. Scene and region music using the track are unaffected.
+ */
+function isTrackBroken(trackId) {
+  return !!getRegistry()[trackId]?.broken;
+}
+
+async function setTrackBroken(trackId, broken) {
+  if (!game.user.isGM) return;
+  const registry = getRegistry();
+  if (!registry[trackId]) return;
+  registry[trackId] = { ...registry[trackId], broken };
+  await setRegistry(registry);
+  // Breaking the record that is spinning right now takes it off the player.
+  if (broken) await stopTrack(trackId);
+}
+
 async function removeTrackFromRegistry(trackId) {
   if (!game.user.isGM) return;
   const registry = getRegistry();
@@ -350,6 +369,7 @@ async function adoptPlaylistPlayback(playlist) {
 export async function playTrack(trackId) {
   const playlist = findJukeboxPlaylist();
   if (!playlist || !findPlaylistSound(trackId)) return;
+  if (!game.user.isGM && isTrackBroken(trackId)) return;
   await playlist.setFlag(MODULE_ID, NOW_PLAYING_FLAG, { trackId, startedAt: game.time.serverTime });
 }
 
@@ -733,6 +753,7 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
       rows = trackIds.map(id => {
         const track = registry[id];
         const isPlaying = getNowPlaying()?.trackId === id;
+        const isBroken = !!track.broken;
         // Only real cover art is clickable — the fallback vinyl icon has nothing
         // worth blowing up to full size.
         const art = track.img
@@ -742,12 +763,14 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
           <button type="button" class="fw-jukebox-icon-btn" data-action="rename" data-track-id="${id}" title="${i18n("GM.Rename")}"><i class="fas fa-i-cursor"></i></button>
           <button type="button" class="fw-jukebox-icon-btn" data-action="delete" data-track-id="${id}" title="${i18n("GM.Delete")}"><i class="fas fa-trash"></i></button>` : "";
         return `
-          <div class="fw-jukebox-track-row" data-track-id="${id}">
+          <div class="fw-jukebox-track-row ${isBroken ? "is-broken" : ""}" data-track-id="${id}">
             ${art}
             <span class="fw-jukebox-track-name">${track.name}</span>
-            <button type="button" class="fw-jukebox-icon-btn" data-action="${isPlaying ? "stop" : "play"}" data-track-id="${id}" title="${isPlaying ? i18n("TrackList.Stop") : i18n("TrackList.Play")}">
+            ${isBroken && !isPlaying
+              ? `<span class="fw-jukebox-broken-tag" title="${i18n("TrackList.BrokenHint")}"><i class="fas fa-heart-crack"></i> ${i18n("TrackList.Broken")}</span>`
+              : `<button type="button" class="fw-jukebox-icon-btn" data-action="${isPlaying ? "stop" : "play"}" data-track-id="${id}" title="${isPlaying ? i18n("TrackList.Stop") : i18n("TrackList.Play")}">
               <i class="fas fa-${isPlaying ? "stop" : "play"}"></i>
-            </button>
+            </button>`}
             <div class="fw-jukebox-gm-actions">${gmActions}</div>
           </div>`;
       }).join("");
@@ -791,11 +814,17 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
       if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.collectedTracks`)) this.render();
     };
     Hooks.on("updateUser", this._userUpdateHandler);
+    // The registry (names, art, broken state) is a world setting.
+    this._settingUpdateHandler = (setting) => {
+      if (setting.key === `${MODULE_ID}.${REGISTRY_SETTING}`) this.render();
+    };
+    Hooks.on("updateSetting", this._settingUpdateHandler);
   }
 
   async close(options) {
     if (this._soundUpdateHandler) Hooks.off("updatePlaylist", this._soundUpdateHandler);
     if (this._userUpdateHandler) Hooks.off("updateUser", this._userUpdateHandler);
+    if (this._settingUpdateHandler) Hooks.off("updateSetting", this._settingUpdateHandler);
     this._hooksWired = false;
     return super.close(options);
   }
@@ -891,7 +920,7 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
   static #ACTIONS = {
     add: "_onAdd", collectAll: "_onCollectAll", resetAll: "_onResetAll",
     toggleCollecting: "_onToggleCollecting",
-    toggleCollected: "_onToggleCollected", play: "_onPlay", stop: "_onStop",
+    toggleCollected: "_onToggleCollected", toggleBroken: "_onToggleBroken", play: "_onPlay", stop: "_onStop",
     edit: "_onEdit", delete: "_onDelete"
   };
 
@@ -907,6 +936,7 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
     const rows = entries.length
       ? entries.map(([id, track]) => {
         const isCollected = collectedIds.has(id);
+        const isBroken = !!track.broken;
         const isPlaying = getNowPlaying()?.trackId === id;
         const art = track.img
           ? `<img class="fw-jukebox-track-art" src="${esc(track.img)}" alt="">`
@@ -923,6 +953,12 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
                     title="${i18n(isCollected ? "Manager.MarkUncollected" : "Manager.MarkCollected")}">
               <i class="fas fa-${isCollected ? "check" : "lock"}"></i>
               ${i18n(isCollected ? "Manager.Collected" : "Manager.Uncollected")}
+            </button>
+            <button type="button" class="fw-jukebox-status-pill ${isBroken ? "is-broken" : "is-intact"}"
+                    data-action="toggleBroken" data-track-id="${id}"
+                    title="${i18n(isBroken ? "Manager.MarkRepaired" : "Manager.MarkBroken")}">
+              <i class="fas fa-${isBroken ? "heart-crack" : "wrench"}"></i>
+              ${i18n(isBroken ? "Manager.Broken" : "Manager.Intact")}
             </button>
             <div class="fw-jukebox-gm-actions">
               <button type="button" class="fw-jukebox-icon-btn" data-action="${isPlaying ? "stop" : "play"}" data-track-id="${id}"
@@ -1020,6 +1056,12 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
   async _onToggleCollected(event, target) {
     const trackId = target.dataset.trackId;
     await setTrackCollectedForParty(trackId, !getPartyCollectedTrackIds().has(trackId));
+    this.render();
+  }
+
+  async _onToggleBroken(event, target) {
+    const trackId = target.dataset.trackId;
+    await setTrackBroken(trackId, !isTrackBroken(trackId));
     this.render();
   }
 

@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.31.0
+- **Current version:** 0.32.0
 
 ## Installation
 
@@ -64,6 +64,7 @@ Open **Music Tracks** from the Fimblewood Controls category in the scene control
 
 - **Collecting enabled / disabled** — the switch at the top. While it's off, players can't collect anything at all: scene and region music, map pickups and item grants all stop handing out records, and a clicked pickup token stays put on the map instead of being consumed. Turn it on when the party is ready. (It's also available as a normal world setting.)
 - **Collected / Uncollected** — the status pill on each row toggles that record's state for the whole party, so you can hand out a record directly or take one back after testing.
+- **Broken / Intact** — the second pill marks a record as broken. The party keeps it in the Jukebox, but it's greyed out and can't be played until you repair it with the same pill (e.g. after a quest). Breaking the record that is playing stops it. Scene and region music aren't affected.
 - **Collect All / Reset All** — the same across every record at once.
 - **Add / edit / delete** — create records here without going through a sound, item or token first, and change a record's name, audio file or cover art at any time.
 - **Play / Stop** — audition any record, collected or not.

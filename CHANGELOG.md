@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.32.0] - 2026-10-13
+
+### Added
+
+- **Jukebox**: records can be marked **Broken** in the Music Tracks window. Players keep a broken record in the Jukebox but can't play it until the GM repairs it, so a record can be handed out early and fixed by a later quest.
+
 ## [0.31.0] - 2026-10-12
 
 ### Added

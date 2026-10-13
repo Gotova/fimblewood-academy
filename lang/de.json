@@ -82,7 +82,9 @@
         "Empty": "Noch keine Titel gesammelt.",
         "ShowArt": "Cover ansehen",
         "Play": "Abspielen",
-        "Stop": "Stopp"
+        "Stop": "Stopp",
+        "Broken": "Kaputt",
+        "BrokenHint": "Diese Schallplatte ist kaputt und laesst sich erst nach einer Reparatur abspielen."
       },
       "GM": {
         "Rename": "Titel umbenennen",
@@ -125,7 +127,11 @@
         "CollectingEnableHint": "Der Gruppe das Sammeln wieder erlauben",
         "CollectingDisableHint": "Der Gruppe das Sammeln verbieten",
         "CollectingOnHint": "Spieler koennen Schallplatten ueber Szenen- und Regionsmusik, Fundstuecke und Gegenstaende aufsammeln.",
-        "CollectingOffHint": "Spieler koennen keine Schallplatten sammeln; nur du kannst sie hier vergeben."
+        "CollectingOffHint": "Spieler koennen keine Schallplatten sammeln; nur du kannst sie hier vergeben.",
+        "Broken": "Kaputt",
+        "Intact": "Intakt",
+        "MarkBroken": "Als kaputt markieren: Spieler behalten sie, koennen sie aber nicht abspielen",
+        "MarkRepaired": "Reparieren: Spieler koennen sie wieder abspielen"
       },
       "SourceConfig": {
         "TrackNone": "— Keiner —",

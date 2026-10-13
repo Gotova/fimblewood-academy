@@ -236,3 +236,32 @@ img.fw-jukebox-track-art {
 .fw-jukebox-track-picker {
   width: 100%;
 }
+
+/* ── Broken records ── */
+.fw-jukebox-status-pill.is-broken {
+  background: #3a1616;
+  border: 1px solid #8a3030;
+  color: #e08a7a;
+}
+
+.fw-jukebox-status-pill.is-intact {
+  background: #1a150e;
+  border: 1px solid #5a4020;
+  color: #a08668;
+}
+
+.fw-jukebox-track-row.is-broken .fw-jukebox-track-art,
+.fw-jukebox-track-row.is-broken .fw-jukebox-track-name {
+  opacity: 0.55;
+  filter: grayscale(0.7);
+}
+
+.fw-jukebox-broken-tag {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #e08a7a;
+  white-space: nowrap;
+}

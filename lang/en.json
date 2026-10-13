@@ -82,7 +82,9 @@
         "Empty": "No tracks collected yet.",
         "ShowArt": "View cover art",
         "Play": "Play",
-        "Stop": "Stop"
+        "Stop": "Stop",
+        "Broken": "Broken",
+        "BrokenHint": "This record is broken and can't be played until it is repaired."
       },
       "GM": {
         "Rename": "Rename Track",
@@ -125,7 +127,11 @@
         "CollectingEnableHint": "Allow the party to collect records again",
         "CollectingDisableHint": "Stop the party from collecting records",
         "CollectingOnHint": "Players can pick up records from scene and region music, pickups and items.",
-        "CollectingOffHint": "Players cannot collect any records; only you can grant them here."
+        "CollectingOffHint": "Players cannot collect any records; only you can grant them here.",
+        "Broken": "Broken",
+        "Intact": "Intact",
+        "MarkBroken": "Mark as broken: players keep it but can't play it",
+        "MarkRepaired": "Repair: players can play it again"
       },
       "SourceConfig": {
         "TrackNone": "— None —",
