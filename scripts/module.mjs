@@ -12,6 +12,7 @@ import { registerNpcSpawner, rerollScene, rerollRegion, addNpcs, removeNpcs, cle
 import { registerEladrinWildMagic, hasEladrinWildMagic, getState as getWildMagicState, setRingState, setContainment } from "./eladrin-wild-magic.mjs";
 import { registerSubclassDrop } from "./subclass-drop.mjs";
 import { registerOwnerPrompts } from "./owner-prompt.mjs";
+import { registerSimplerQuestsCompat } from "./simpler-quests-compat.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 
@@ -30,6 +31,7 @@ Hooks.once("init", () => {
   registerNpcSpawner();
   registerEladrinWildMagic();
   registerSubclassDrop();
+  registerSimplerQuestsCompat();
 
   game.modules.get(MODULE_ID).api = {
     id: MODULE_ID,
