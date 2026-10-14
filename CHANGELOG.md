@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.33.1] - 2026-10-14
+
+### Fixed
+
+- **Simpler Quests compatibility**: players couldn't see the Simpler Quests tracker. That module defaults each browser to a "sidebar" style it no longer supports, so the tracker failed to load for anyone who never changed the setting. Those browsers now switch to the docked tracker automatically. A style someone picked (docked or floating) is kept.
+
 ## [0.33.0] - 2026-10-14
 
 ### Added
