@@ -4,6 +4,8 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.33.0] - 2026-10-14
+
 ### Added
 
 - **Jukebox**: a **reward track**. The GM sets a maximum and milestones with reward descriptions in the Music Tracks window. Players see them on a vertical number line beside the Jukebox, with a marker at the number of intact records the party has collected, and can click a milestone to read its reward.
