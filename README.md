@@ -68,6 +68,7 @@ Open **Music Tracks** from the Fimblewood Controls category in the scene control
 - **Collect All / Reset All** — the same across every record at once.
 - **Add / edit / delete** — create records here without going through a sound, item or token first, and change a record's name, audio file or cover art at any time.
 - **Play / Stop** — audition any record, collected or not.
+- **Reward track** — set a **Max** and add milestones (a record count plus a description of the reward, e.g. a passive hideout effect). Players see a vertical number line from 0 to Max on the left of the Jukebox, with the milestones on it and a marker at the number of *intact* records the party has collected. Clicking a milestone shows its description. The line stays hidden until Max is set.
 
 For players there's no sidebar shortcut to the Jukebox by design — the only way in is the physical prop, to keep it grounded in the fiction. The Music Tracks window is the GM's side of it, and is never shown to players.
 

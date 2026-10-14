@@ -17,6 +17,7 @@ const MODULE_ID = "fimblewood-academy";
 const REGISTRY_SETTING = "jukeboxRegistry";
 const REWARD_SOUND_SETTING = "jukeboxRewardSound";
 const COLLECTION_ENABLED_SETTING = "jukeboxCollectionEnabled";
+const MILESTONES_SETTING = "jukeboxMilestones";
 const JUKEBOX_PLAYLIST_NAME = "Fimblewood Hideout Jukebox";
 
 /** Escapes a value for interpolation into the hand-built HTML strings below. */
@@ -70,6 +71,67 @@ async function removeTrackFromRegistry(trackId) {
   const registry = getRegistry();
   delete registry[trackId];
   await setRegistry(registry);
+}
+
+/* -------------------------------------------- */
+/*  Reward track (GM-authored milestones)        */
+/* -------------------------------------------- */
+
+/**
+ * The number line beside the player jukebox: `{ max, milestones: [{ id, value,
+ * description }] }`. Milestones mark passive hideout rewards the party unlocks by
+ * owning enough intact records. A max of 0 means the GM hasn't set it up yet.
+ */
+function getMilestoneConfig() {
+  const cfg = foundry.utils.deepClone(game.settings.get(MODULE_ID, MILESTONES_SETTING) ?? {});
+  const max = Math.max(0, Math.floor(Number(cfg.max) || 0));
+  const milestones = (Array.isArray(cfg.milestones) ? cfg.milestones : [])
+    .filter(m => m?.id)
+    .sort((a, b) => a.value - b.value);
+  return { max, milestones };
+}
+
+async function setMilestoneConfig(cfg) {
+  if (!game.user.isGM) return;
+  const milestones = [...cfg.milestones].sort((a, b) => a.value - b.value);
+  await game.settings.set(MODULE_ID, MILESTONES_SETTING, { max: cfg.max, milestones });
+}
+
+/** Records counting toward the reward track: collected, still registered, not broken. */
+function getRewardProgress() {
+  const registry = getRegistry();
+  return [...getPartyCollectedTrackIds()].filter(id => registry[id] && !registry[id].broken).length;
+}
+
+/** Prompts for a milestone's value and description; null when cancelled. */
+async function promptMilestone(milestone = null) {
+  const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.Rewards.${k}`);
+  const result = await foundry.applications.api.DialogV2.wait({
+    window: { title: i18n(milestone ? "EditMilestone" : "AddMilestone") },
+    content: `
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <label>${i18n("ValueLabel")}
+          <input type="number" name="value" min="1" step="1" value="${esc(milestone?.value ?? 1)}" required>
+        </label>
+        <label>${i18n("DescriptionLabel")}
+          <textarea name="description" rows="5">${esc(milestone?.description ?? "")}</textarea>
+        </label>
+      </div>`,
+    buttons: [
+      {
+        action: "ok", label: i18n("Save"), default: true, type: "button",
+        callback: (event, button) => {
+          const form = button.form;
+          const value = Math.floor(Number(form.elements.value.value));
+          if (!(value >= 1)) return false;
+          return { value, description: form.elements.description.value?.trim() ?? "" };
+        }
+      },
+      { action: "cancel", label: i18n("Cancel"), type: "button", callback: () => false }
+    ],
+    rejectClose: false
+  });
+  return result || null;
 }
 
 /* -------------------------------------------- */
@@ -739,13 +801,16 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
     id: "fimblewood-jukebox",
     tag: "div",
     window: { title: "FIMBLEWOOD.Jukebox.WindowTitle", icon: "fas fa-record-vinyl" },
-    position: { width: 480, height: 560 },
-    classes: ["fimblewood-jukebox-app"]
+    position: { width: 540, height: 560 },
+    classes: ["fimblewood-jukebox-app", "fimblewood-jukebox-player-app"]
   };
 
   // action name -> instance method. Dispatched manually (see _replaceHTML) rather
   // than via DEFAULT_OPTIONS.actions/data-action, which did not reliably fire.
-  static #ACTIONS = { play: "_onPlay", stop: "_onStop", art: "_onShowArt", rename: "_onRename", delete: "_onDelete" };
+  static #ACTIONS = {
+    play: "_onPlay", stop: "_onStop", art: "_onShowArt", rename: "_onRename", delete: "_onDelete",
+    milestone: "_onMilestone"
+  };
 
   async _renderHTML() {
     const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.${k}`);
@@ -782,7 +847,60 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
       }).join("");
     }
 
-    return `<div class="fw-jukebox-track-list">${rows}</div>`;
+    return `<div class="fw-jukebox-layout">${this.#renderRail()}<div class="fw-jukebox-track-list">${rows}</div></div>`;
+  }
+
+  /** Milestone whose description popover is open, kept across re-renders. */
+  _openMilestoneId = null;
+
+  /**
+   * The reward number line: 0 at the top, the GM's max at the bottom, milestones
+   * placed proportionally in between and a marker at the party's intact-record
+   * count. Left out entirely until the GM sets a max.
+   */
+  #renderRail() {
+    const { max, milestones } = getMilestoneConfig();
+    if (!max) return "";
+    const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.Rewards.${k}`);
+    const progress = getRewardProgress();
+    const pct = (v) => (Math.min(Math.max(v, 0), max) / max) * 100;
+
+    const ticks = [`<span class="fw-jukebox-rail-label" style="top:0%">0</span>`];
+    if (!milestones.some(m => m.value === max)) {
+      ticks.push(`<span class="fw-jukebox-rail-label" style="top:100%">${max}</span>`);
+    }
+    let popover = "";
+    for (const m of milestones) {
+      const reached = progress >= m.value;
+      const isOpen = m.id === this._openMilestoneId;
+      ticks.push(`
+        <span class="fw-jukebox-rail-dot ${reached ? "is-reached" : ""}" style="top:${pct(m.value)}%"></span>
+        <button type="button" class="fw-jukebox-milestone ${reached ? "is-reached" : ""} ${isOpen ? "is-open" : ""}"
+                style="top:${pct(m.value)}%" data-action="milestone" data-milestone-id="${esc(m.id)}">${m.value}</button>`);
+      if (isOpen) {
+        const p = pct(m.value);
+        const shift = p < 15 ? "0%" : p > 85 ? "-100%" : "-50%";
+        popover = `
+          <div class="fw-jukebox-popover ${reached ? "is-reached" : ""}" style="top:${p}%;transform:translateY(${shift})">
+            <div class="fw-jukebox-popover-head">
+              <strong>${m.value}</strong>
+              <span><i class="fas fa-${reached ? "unlock" : "lock"}"></i> ${i18n(reached ? "Reached" : "NotReached")}</span>
+            </div>
+            <div class="fw-jukebox-popover-body">${esc(m.description || i18n("NoDescription"))}</div>
+          </div>`;
+      }
+    }
+    const tooltip = game.i18n.format("FIMBLEWOOD.Jukebox.Rewards.ProgressTooltip", { count: progress, max });
+    return `
+      <div class="fw-jukebox-rail">
+        <div class="fw-jukebox-rail-scale">
+          <div class="fw-jukebox-rail-line"></div>
+          <div class="fw-jukebox-rail-fill" style="height:${pct(progress)}%"></div>
+          ${ticks.join("")}
+          <div class="fw-jukebox-rail-marker" style="top:${pct(progress)}%" title="${esc(tooltip)}">${progress}</div>
+          ${popover}
+        </div>
+      </div>`;
   }
 
   async _replaceHTML(result, content) {
@@ -795,7 +913,14 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
       content.dataset.fwJukeboxWired = "1";
       content.addEventListener("click", (event) => {
         const target = event.target.closest("[data-action]");
-        if (!target) return;
+        if (!target) {
+          // Clicking anywhere else (except the popover itself) closes the popover.
+          if (this._openMilestoneId && !event.target.closest(".fw-jukebox-popover")) {
+            this._openMilestoneId = null;
+            this.render();
+          }
+          return;
+        }
         const handlerName = JukeboxApp.#ACTIONS[target.dataset.action];
         if (handlerName) this[handlerName](event, target);
       });
@@ -821,8 +946,9 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
     };
     Hooks.on("updateUser", this._userUpdateHandler);
     // The registry (names, art, broken state) is a world setting.
+    // The reward track's milestones are one too.
     this._settingUpdateHandler = (setting) => {
-      if (setting.key === `${MODULE_ID}.${REGISTRY_SETTING}`) this.render();
+      if ([REGISTRY_SETTING, MILESTONES_SETTING].some(k => setting.key === `${MODULE_ID}.${k}`)) this.render();
     };
     Hooks.on("updateSetting", this._settingUpdateHandler);
   }
@@ -842,6 +968,12 @@ class JukeboxApp extends foundry.applications.api.ApplicationV2 {
 
   async _onStop(event, target) {
     await stopTrack(target.dataset.trackId);
+    this.render();
+  }
+
+  _onMilestone(event, target) {
+    const id = target.dataset.milestoneId;
+    this._openMilestoneId = this._openMilestoneId === id ? null : id;
     this.render();
   }
 
@@ -918,7 +1050,7 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
     id: "fimblewood-jukebox-manager",
     tag: "div",
     window: { title: "FIMBLEWOOD.Jukebox.Manager.WindowTitle", icon: "fas fa-compact-disc" },
-    position: { width: 620, height: 620 },
+    position: { width: 620, height: 720 },
     classes: ["fimblewood-jukebox-app", "fimblewood-jukebox-manager-app"]
   };
 
@@ -927,7 +1059,8 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
     add: "_onAdd", collectAll: "_onCollectAll", resetAll: "_onResetAll",
     toggleCollecting: "_onToggleCollecting",
     toggleCollected: "_onToggleCollected", toggleBroken: "_onToggleBroken", play: "_onPlay", stop: "_onStop",
-    edit: "_onEdit", delete: "_onDelete"
+    edit: "_onEdit", delete: "_onDelete",
+    addMilestone: "_onAddMilestone", editMilestone: "_onEditMilestone", deleteMilestone: "_onDeleteMilestone"
   };
 
   async _renderHTML() {
@@ -988,6 +1121,7 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
         </button>
         <span class="fw-jukebox-manager-hint">${i18n(collecting ? "Manager.CollectingOnHint" : "Manager.CollectingOffHint")}</span>
       </div>
+      ${this.#renderRewards()}
       <div class="fw-jukebox-manager-toolbar">
         <button type="button" class="fw-jukebox-text-btn" data-action="add"><i class="fas fa-plus"></i> ${i18n("Manager.AddTrack")}</button>
         <button type="button" class="fw-jukebox-text-btn" data-action="collectAll"><i class="fas fa-check-double"></i> ${i18n("Manager.CollectAll")}</button>
@@ -997,8 +1131,48 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
       <div class="fw-jukebox-track-list">${rows}</div>`;
   }
 
+  /** The reward track editor: max of the number line and its milestones. */
+  #renderRewards() {
+    const i18n = (k) => game.i18n.localize(`FIMBLEWOOD.Jukebox.Rewards.${k}`);
+    const { max, milestones } = getMilestoneConfig();
+    const progress = getRewardProgress();
+    const rows = milestones.length
+      ? milestones.map(m => `
+        <div class="fw-jukebox-reward-row ${progress >= m.value ? "is-reached" : ""}">
+          <span class="fw-jukebox-reward-value">${m.value}</span>
+          <span class="fw-jukebox-reward-desc" title="${esc(m.description)}">${esc(m.description || i18n("NoDescription"))}</span>
+          <div class="fw-jukebox-gm-actions">
+            <button type="button" class="fw-jukebox-icon-btn" data-action="editMilestone" data-milestone-id="${esc(m.id)}"
+                    title="${i18n("EditMilestone")}"><i class="fas fa-pen-to-square"></i></button>
+            <button type="button" class="fw-jukebox-icon-btn" data-action="deleteMilestone" data-milestone-id="${esc(m.id)}"
+                    title="${i18n("DeleteMilestone")}"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>`).join("")
+      : `<p class="fw-jukebox-manager-hint">${i18n("Empty")}</p>`;
+    return `
+      <fieldset class="fw-jukebox-rewards">
+        <legend><i class="fas fa-trophy"></i> ${i18n("Title")}</legend>
+        <div class="fw-jukebox-rewards-head">
+          <label>${i18n("MaxLabel")}
+            <input type="number" class="fw-jukebox-rewards-max" min="0" step="1" value="${max || ""}">
+          </label>
+          <span class="fw-jukebox-manager-count">${game.i18n.format("FIMBLEWOOD.Jukebox.Rewards.Progress", { count: progress, max: max || "—" })}</span>
+          <button type="button" class="fw-jukebox-text-btn" data-action="addMilestone"><i class="fas fa-plus"></i> ${i18n("AddMilestone")}</button>
+        </div>
+        <span class="fw-jukebox-manager-hint">${i18n("Hint")}</span>
+        <div class="fw-jukebox-reward-list">${rows}</div>
+      </fieldset>`;
+  }
+
   async _replaceHTML(result, content) {
     content.innerHTML = result;
+    // The input is recreated on every render, so it is bound fresh each time.
+    content.querySelector(".fw-jukebox-rewards-max")?.addEventListener("change", async (event) => {
+      const cfg = getMilestoneConfig();
+      cfg.max = Math.max(0, Math.floor(Number(event.currentTarget.value) || 0));
+      await setMilestoneConfig(cfg);
+      this.render();
+    });
     if (!content.dataset.fwJukeboxWired) {
       content.dataset.fwJukeboxWired = "1";
       content.addEventListener("click", (event) => {
@@ -1018,6 +1192,10 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
     this._refresh = () => this.render();
     Hooks.on("updatePlaylist", this._refresh);
     Hooks.on("updateUser", this._refresh);
+    this._settingRefresh = (setting) => {
+      if ([REGISTRY_SETTING, MILESTONES_SETTING].some(k => setting.key === `${MODULE_ID}.${k}`)) this.render();
+    };
+    Hooks.on("updateSetting", this._settingRefresh);
   }
 
   async close(options) {
@@ -1025,6 +1203,7 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
       Hooks.off("updatePlaylist", this._refresh);
       Hooks.off("updateUser", this._refresh);
     }
+    if (this._settingRefresh) Hooks.off("updateSetting", this._settingRefresh);
     this._hooksWired = false;
     return super.close(options);
   }
@@ -1034,6 +1213,44 @@ class JukeboxManagerApp extends foundry.applications.api.ApplicationV2 {
     if (!data) return;
     await ensureTrackRegistered(foundry.utils.randomID(), data);
     await syncPlaylistWithRegistry();
+    this.render();
+  }
+
+  async _onAddMilestone() {
+    const data = await promptMilestone();
+    if (!data) return;
+    const cfg = getMilestoneConfig();
+    cfg.milestones.push({ id: foundry.utils.randomID(), ...data });
+    // A milestone past the end stretches the line instead of falling off it.
+    cfg.max = Math.max(cfg.max, data.value);
+    await setMilestoneConfig(cfg);
+    this.render();
+  }
+
+  async _onEditMilestone(event, target) {
+    const cfg = getMilestoneConfig();
+    const milestone = cfg.milestones.find(m => m.id === target.dataset.milestoneId);
+    if (!milestone) return;
+    const data = await promptMilestone(milestone);
+    if (!data) return;
+    Object.assign(milestone, data);
+    cfg.max = Math.max(cfg.max, data.value);
+    await setMilestoneConfig(cfg);
+    this.render();
+  }
+
+  async _onDeleteMilestone(event, target) {
+    const cfg = getMilestoneConfig();
+    const milestone = cfg.milestones.find(m => m.id === target.dataset.milestoneId);
+    if (!milestone) return;
+    const confirmed = await foundry.applications.api.DialogV2.confirm({
+      window: { title: game.i18n.localize("FIMBLEWOOD.Jukebox.Rewards.DeleteMilestone") },
+      content: `<p>${game.i18n.format("FIMBLEWOOD.Jukebox.Rewards.DeleteConfirmBody", { value: milestone.value })}</p>`,
+      rejectClose: false
+    });
+    if (!confirmed) return;
+    cfg.milestones = cfg.milestones.filter(m => m.id !== milestone.id);
+    await setMilestoneConfig(cfg);
     this.render();
   }
 
@@ -1129,6 +1346,9 @@ export function registerJukebox() {
   patchTokenClick();
   game.settings.register(MODULE_ID, REGISTRY_SETTING, {
     scope: "world", config: false, type: Object, default: {}
+  });
+  game.settings.register(MODULE_ID, MILESTONES_SETTING, {
+    scope: "world", config: false, type: Object, default: { max: 0, milestones: [] }
   });
   game.settings.register(MODULE_ID, COLLECTION_ENABLED_SETTING, {
     scope: "world", config: true, type: Boolean, default: true,

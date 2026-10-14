@@ -133,6 +133,25 @@
         "MarkBroken": "Als kaputt markieren: Spieler behalten sie, koennen sie aber nicht abspielen",
         "MarkRepaired": "Reparieren: Spieler koennen sie wieder abspielen"
       },
+      "Rewards": {
+        "Title": "Belohnungsleiste",
+        "Hint": "Meilensteine auf dem Zahlenstrahl neben der Unterschlupf-Musikbox. Es zaehlen nur intakte gesammelte Schallplatten.",
+        "MaxLabel": "Maximum",
+        "Progress": "Fortschritt: {count} / {max} intakte Schallplatten",
+        "ProgressTooltip": "{count} / {max} Schallplatten",
+        "AddMilestone": "Meilenstein",
+        "EditMilestone": "Meilenstein bearbeiten",
+        "DeleteMilestone": "Meilenstein loeschen",
+        "DeleteConfirmBody": "Den Meilenstein bei {value} loeschen?",
+        "ValueLabel": "Benoetigte Schallplatten",
+        "DescriptionLabel": "Beschreibung (Belohnung)",
+        "Save": "Speichern",
+        "Cancel": "Abbrechen",
+        "Empty": "Noch keine Meilensteine.",
+        "Reached": "Freigeschaltet",
+        "NotReached": "Noch nicht freigeschaltet",
+        "NoDescription": "Keine Beschreibung."
+      },
       "SourceConfig": {
         "TrackNone": "— Keiner —",
         "TrackNew": "+ Neuen Titel erstellen…",

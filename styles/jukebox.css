@@ -265,3 +265,264 @@ img.fw-jukebox-track-art {
   color: #e08a7a;
   white-space: nowrap;
 }
+
+/* ── Reward track (player window) ── */
+.fimblewood-jukebox-player-app .window-content {
+  display: flex;
+  overflow: hidden;
+}
+
+.fw-jukebox-layout {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 8px;
+}
+
+.fw-jukebox-layout .fw-jukebox-track-list {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+.fw-jukebox-rail {
+  flex: 0 0 76px;
+  padding: 14px 0;
+  border-right: 1px solid #3d2e14;
+}
+
+.fw-jukebox-rail-scale {
+  position: relative;
+  height: 100%;
+}
+
+.fw-jukebox-rail-line,
+.fw-jukebox-rail-fill {
+  position: absolute;
+  left: 44px;
+  top: 0;
+  width: 4px;
+  margin-left: -2px;
+  border-radius: 2px;
+}
+
+.fw-jukebox-rail-line {
+  bottom: 0;
+  background: #3d2e14;
+}
+
+.fw-jukebox-rail-fill {
+  background: linear-gradient(#8b6914, #c8962a);
+  box-shadow: 0 0 6px rgba(200, 150, 42, 0.5);
+  transition: height 0.4s;
+}
+
+.fw-jukebox-rail-label,
+.fw-jukebox-milestone {
+  position: absolute;
+  left: 0;
+  width: 36px;
+  transform: translateY(-50%);
+  text-align: right;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.fw-jukebox-rail-label {
+  color: #8a7850;
+}
+
+.fw-jukebox-milestone {
+  height: auto;
+  padding: 0 4px;
+  background: #1a150e;
+  border: 1px solid #5a4020;
+  border-radius: 9px;
+  color: #a08668;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.fw-jukebox-milestone:hover,
+.fw-jukebox-milestone.is-open {
+  border-color: #c8962a;
+  color: #e8d5a3;
+}
+
+.fw-jukebox-milestone.is-reached {
+  background: #3d2e14;
+  border-color: #c8962a;
+  color: #f0d890;
+  box-shadow: 0 0 6px rgba(200, 150, 42, 0.45);
+}
+
+.fw-jukebox-rail-dot {
+  position: absolute;
+  left: 44px;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #2c2416;
+  border: 2px solid #5a4020;
+}
+
+.fw-jukebox-rail-dot.is-reached {
+  background: #c8962a;
+  border-color: #f0d890;
+}
+
+.fw-jukebox-rail-marker {
+  position: absolute;
+  left: 54px;
+  transform: translateY(-50%);
+  min-width: 20px;
+  padding: 1px 4px 1px 2px;
+  background: #c8962a;
+  color: #1a150e;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 14px;
+  text-align: center;
+  border-radius: 0 4px 4px 0;
+  transition: top 0.4s;
+  z-index: 2;
+}
+
+/* Arrow pointing at the line. */
+.fw-jukebox-rail-marker::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 0;
+  border: 8px solid transparent;
+  border-right: 6px solid #c8962a;
+  border-left: 0;
+}
+
+.fw-jukebox-popover {
+  position: absolute;
+  left: 82px;
+  width: 240px;
+  padding: 8px 10px;
+  background: #1a150e;
+  border: 1px solid #c8962a;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  z-index: 5;
+}
+
+.fw-jukebox-popover-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  color: #a08668;
+  font-size: 11px;
+}
+
+.fw-jukebox-popover-head strong {
+  color: #e8d5a3;
+  font-size: 16px;
+}
+
+.fw-jukebox-popover.is-reached .fw-jukebox-popover-head span {
+  color: #8fd18f;
+}
+
+.fw-jukebox-popover-body {
+  color: #e8d5a3;
+  font-size: 13px;
+  white-space: pre-wrap;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+/* ── Reward track (GM manager) ── */
+.fw-jukebox-rewards {
+  margin: 0;
+  padding: 6px 8px 8px;
+  border: 1px solid #5a4020;
+  border-radius: 4px;
+  background: #1a150e;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fw-jukebox-rewards legend {
+  color: #d4b06a;
+  font-weight: 600;
+  padding: 0 4px;
+}
+
+.fw-jukebox-rewards-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fw-jukebox-rewards-head label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #d4b06a;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.fw-jukebox-rewards-max {
+  width: 60px;
+}
+
+.fw-jukebox-rewards-head .fw-jukebox-manager-count {
+  margin-left: 0;
+  flex: 1;
+}
+
+.fw-jukebox-reward-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.fw-jukebox-reward-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 6px;
+  border: 1px solid #3d2e14;
+  border-radius: 4px;
+}
+
+.fw-jukebox-reward-value {
+  flex: 0 0 auto;
+  min-width: 28px;
+  text-align: center;
+  padding: 1px 6px;
+  border: 1px solid #5a4020;
+  border-radius: 9px;
+  color: #a08668;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.fw-jukebox-reward-row.is-reached .fw-jukebox-reward-value {
+  border-color: #c8962a;
+  color: #f0d890;
+  background: #3d2e14;
+}
+
+.fw-jukebox-reward-desc {
+  flex: 1;
+  min-width: 0;
+  color: #e8d5a3;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

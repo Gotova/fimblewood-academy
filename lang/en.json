@@ -133,6 +133,25 @@
         "MarkBroken": "Mark as broken: players keep it but can't play it",
         "MarkRepaired": "Repair: players can play it again"
       },
+      "Rewards": {
+        "Title": "Reward track",
+        "Hint": "Milestones on the number line beside the Hideout Jukebox. Only intact collected records count.",
+        "MaxLabel": "Max",
+        "Progress": "Progress: {count} / {max} intact records",
+        "ProgressTooltip": "{count} / {max} records",
+        "AddMilestone": "Milestone",
+        "EditMilestone": "Edit milestone",
+        "DeleteMilestone": "Delete milestone",
+        "DeleteConfirmBody": "Delete the milestone at {value}?",
+        "ValueLabel": "Records needed",
+        "DescriptionLabel": "Description (reward)",
+        "Save": "Save",
+        "Cancel": "Cancel",
+        "Empty": "No milestones yet.",
+        "Reached": "Unlocked",
+        "NotReached": "Not unlocked yet",
+        "NoDescription": "No description."
+      },
       "SourceConfig": {
         "TrackNone": "— None —",
         "TrackNew": "+ Create new track…",
