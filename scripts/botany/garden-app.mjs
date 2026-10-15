@@ -319,15 +319,8 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
     const a = this.applying;
     if (!a) return;
     const state = plantState(getGarden(this.actorId).slots[slot]);
-    if (a.kind === "potion" && a.harm) {
-      if (!state) return ui.notifications.warn(t("Notice.NeedsPlant"));
-      const ok = await foundry.applications.api.DialogV2.confirm({
-        window: { title: t("ConfirmHarmTitle") },
-        content: `<p>${t("ConfirmHarm", { potion: esc(a.label), plant: esc(state.plant.name) })}</p>`,
-        rejectClose: false
-      });
-      if (!ok) return;
-    }
+    // A harmful potion needs a plant; no confirmation, players are meant to experiment.
+    if (a.kind === "potion" && a.harm && !state) return ui.notifications.warn(t("Notice.NeedsPlant"));
     const base = { actorId: this.actorId, slot };
     if (a.kind === "potion") requestGardenOp({ ...base, type: "usePotion", itemId: a.itemId });
     else if (a.kind === "fertilizer") requestGardenOp({ ...base, type: "useFertilizer", itemId: a.itemId });

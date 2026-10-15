@@ -525,8 +525,6 @@
         "Growth": "Wachstum ×{factor}",
         "Harm": "vernichtet die Pflanze"
       },
-      "ConfirmHarmTitle": "Trank einsetzen",
-      "ConfirmHarm": "<strong>{potion}</strong> auf <strong>{plant}</strong> einsetzen? Die Pflanze geht sofort ein.",
       "ModTitle": "Beet-Modifier",
       "ModHint": "Gelten für ein Beet, bis dort die nächste Pflanze geerntet wird. Ein neuer Wachstumsfaktor ersetzt den alten. Leer lassen = unverändert, 1 = Faktor entfernen.",
       "ModGrowth": "Wachstum ×",

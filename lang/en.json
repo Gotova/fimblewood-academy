@@ -525,8 +525,6 @@
         "Growth": "growth ×{factor}",
         "Harm": "destroys the plant"
       },
-      "ConfirmHarmTitle": "Use potion",
-      "ConfirmHarm": "Use <strong>{potion}</strong> on <strong>{plant}</strong>? The plant withers at once.",
       "ModTitle": "Bed modifiers",
       "ModHint": "They belong to a bed until the next plant on it is harvested. A new growth factor replaces the old one. Leave blank = unchanged, 1 = remove the factor.",
       "ModGrowth": "Growth ×",

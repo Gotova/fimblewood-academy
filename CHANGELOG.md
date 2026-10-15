@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.37.1] - 2026-10-15
+
+### Changed
+
+- **Mein Garten**: using a harmful potion on a plant no longer asks for confirmation, so players can experiment.
+
 ## [0.37.0] - 2026-10-15
 
 ### Added
