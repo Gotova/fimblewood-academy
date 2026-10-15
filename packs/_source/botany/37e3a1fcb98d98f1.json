@@ -1,0 +1,42 @@
+{
+  "_id": "37e3a1fcb98d98f1",
+  "name": "Rose",
+  "type": "loot",
+  "img": "icons/commodities/flowers/rosaecia-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rose</strong> — Zierpflanze, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 9400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "rose",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!37e3a1fcb98d98f1"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "662f6f545f230750",
+  "name": "Kartoffel",
+  "type": "loot",
+  "img": "icons/consumables/vegetable/root-brown-orange.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Kartoffel</strong> — Nahrung, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "cp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "kartoffel",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!662f6f545f230750"
+}

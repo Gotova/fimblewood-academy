@@ -1,0 +1,42 @@
+{
+  "_id": "f12b42e2cab22bac",
+  "name": "Karotte",
+  "type": "loot",
+  "img": "icons/consumables/vegetable/root-carrot-orange.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Karotte</strong> — Nahrung, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "karotte",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!f12b42e2cab22bac"
+}

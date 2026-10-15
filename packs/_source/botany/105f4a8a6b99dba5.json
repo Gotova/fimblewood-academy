@@ -1,0 +1,42 @@
+{
+  "_id": "105f4a8a6b99dba5",
+  "name": "Schattenpfifferling",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/helm-purple-shiny.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Schattenpfifferling</strong> — Trankpilz, Selten. <em>(Vorbild: Shadow Chanterelle)</em></p><p>Verwendung in Tränken: Mana, Magische Sicht, Nekromantie.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "schattenpfifferling",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!105f4a8a6b99dba5"
+}

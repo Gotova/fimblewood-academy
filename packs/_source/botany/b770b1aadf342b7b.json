@@ -1,0 +1,42 @@
+{
+  "_id": "b770b1aadf342b7b",
+  "name": "Zauberblüte",
+  "type": "loot",
+  "img": "icons/consumables/plants/leaf-elm-glowing-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Zauberblüte</strong> — Trankkraut, Sehr selten. <em>(Vorbild: Spellbloom)</em></p><p>Verwendung in Tränken: Antimagie.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "veryRare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "zauberbluete",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!b770b1aadf342b7b"
+}

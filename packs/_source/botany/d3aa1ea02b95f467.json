@@ -1,0 +1,42 @@
+{
+  "_id": "d3aa1ea02b95f467",
+  "name": "Tomate",
+  "type": "loot",
+  "img": "icons/consumables/fruit/chili-fresno-pepper-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Tomate</strong> — Nahrung, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "tomate",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!d3aa1ea02b95f467"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "c8f70e84e5f8508b",
+  "name": "Magmamorchel",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/conical-bell-orange-white.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Magmamorchel</strong> — Trankpilz, Selten. <em>(Vorbild: Magma Morel)</em></p><p>Verwendung in Tränken: Vergrößerung.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 35,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "magmamorchel",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!c8f70e84e5f8508b"
+}

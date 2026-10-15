@@ -1,0 +1,42 @@
+{
+  "_id": "5800b3929758578e",
+  "name": "Sonnenblume",
+  "type": "loot",
+  "img": "icons/commodities/flowers/cornflower-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Sonnenblume</strong> — Zierpflanze, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 9800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "sonnenblume",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!5800b3929758578e"
+}

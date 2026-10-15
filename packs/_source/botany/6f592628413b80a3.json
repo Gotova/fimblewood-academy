@@ -1,0 +1,42 @@
+{
+  "_id": "6f592628413b80a3",
+  "name": "Basilikum",
+  "type": "loot",
+  "img": "icons/consumables/plants/basil-herb-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Basilikum</strong> — Nahrung, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 9000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "basilikum",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!6f592628413b80a3"
+}

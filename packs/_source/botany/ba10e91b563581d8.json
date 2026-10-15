@@ -1,0 +1,42 @@
+{
+  "_id": "ba10e91b563581d8",
+  "name": "Lavendel",
+  "type": "loot",
+  "img": "icons/commodities/flowers/blooms-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Lavendel</strong> — Zierpflanze, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "lavendel",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!ba10e91b563581d8"
+}

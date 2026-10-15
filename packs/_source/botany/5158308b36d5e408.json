@@ -1,0 +1,42 @@
+{
+  "_id": "5158308b36d5e408",
+  "name": "Wahnpilz",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/mushroom-spotted-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Wahnpilz</strong> — Trankpilz, Gewöhnlich. <em>(Vorbild: Mad Mushroom)</em></p><p>Verwendung in Tränken: Explosion, Raserei, Charme, Levitation.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "wahnpilz",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!5158308b36d5e408"
+}

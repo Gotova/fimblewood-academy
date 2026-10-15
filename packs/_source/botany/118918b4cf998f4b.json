@@ -1,0 +1,42 @@
+{
+  "_id": "118918b4cf998f4b",
+  "name": "Kürbis",
+  "type": "loot",
+  "img": "icons/consumables/fruit/fruit-watermelon-whole-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Kürbis</strong> — Nahrung, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "kuerbis",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!118918b4cf998f4b"
+}

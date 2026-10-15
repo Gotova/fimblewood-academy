@@ -1,0 +1,42 @@
+{
+  "_id": "de4528457238936d",
+  "name": "Vergissmeinnicht",
+  "type": "loot",
+  "img": "icons/commodities/flowers/cornflower-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Vergissmeinnicht</strong> — Zierpflanze, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "vergissmeinnicht",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!de4528457238936d"
+}

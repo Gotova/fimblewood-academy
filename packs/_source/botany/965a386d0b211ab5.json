@@ -1,0 +1,42 @@
+{
+  "_id": "965a386d0b211ab5",
+  "name": "Druidenrosmarin",
+  "type": "loot",
+  "img": "icons/consumables/plants/dill-herb-bundle-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Druidenrosmarin</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Druid&#39;s Rosemary)</em></p><p>Verwendung in Tränken: Verlangsamung, Fluch.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "druidenrosmarin",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!965a386d0b211ab5"
+}

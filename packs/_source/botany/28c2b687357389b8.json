@@ -1,0 +1,42 @@
+{
+  "_id": "28c2b687357389b8",
+  "name": "Schlammpilz",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/crimini-button-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Schlammpilz</strong> — Trankpilz, Ungewöhnlich. <em>(Vorbild: Mudshroom)</em></p><p>Verwendung in Tränken: Verlangsamung, Fluch, Blitzschutz.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 8,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "schlammpilz",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!28c2b687357389b8"
+}

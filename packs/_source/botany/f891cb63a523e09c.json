@@ -1,0 +1,42 @@
+{
+  "_id": "f891cb63a523e09c",
+  "name": "Stinkpilz",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/convex-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Stinkpilz</strong> — Trankpilz, Gewöhnlich. <em>(Vorbild: Stink Mushroom)</em></p><p>Verwendung in Tränken: Verlangsamung, Steinhaut, Säure, Fluch.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "stinkpilz",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!f891cb63a523e09c"
+}

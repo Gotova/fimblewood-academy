@@ -4,6 +4,16 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.34.0] - 2026-10-15
+
+### Added
+
+- **Botany Club — "Mein Garten"**: a new tool in the Fimblewood Controls for the members of the Botany Club, chosen by the GM in the module settings (**Manage the Botany Club**), together with the garden size of each member: 2x2, 3x2, 3x3, 3x4 or 4x4 beds. Members plant seeds from their inventory, watch maturity and HP, and harvest ripe plants. Maturity grows with each day change in Simple Calendar Reborn; the GM edits maturity and HP, and alone judges how well a plant is cared for.
+- A new loot type **Seed**, and a plant picker on seed item sheets (GM only).
+- Two compendiums: **Botanikclub: Samen & Zutaten** (a seed and a harvest item for 54 plants, plus 7 crystals) and **Botanikclub: Kräuterkunde** (plants and potion recipes), modelled on Potion Craft.
+- Groundwork for a later alchemy workshop: a shared ingredient and effect catalogue in `scripts/alchemy/`. `npm run generate:botany` rebuilds the compendium sources from it.
+- Prompts for the five garden background pictures in `assets/garden/PROMPTS.md`. Until the pictures exist the garden shows a plain lawn.
+
 ## [0.33.1] - 2026-10-14
 
 ### Fixed

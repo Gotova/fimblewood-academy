@@ -1,0 +1,42 @@
+{
+  "_id": "4c745c07301ed029",
+  "name": "Tulpe",
+  "type": "loot",
+  "img": "icons/commodities/flowers/blooms-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Tulpe</strong> — Zierpflanze, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 9600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "tulpe",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!4c745c07301ed029"
+}

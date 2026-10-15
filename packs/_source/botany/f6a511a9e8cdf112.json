@@ -1,0 +1,42 @@
+{
+  "_id": "f6a511a9e8cdf112",
+  "name": "Arkankristall",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-rough-cushion-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Arkankristall</strong> — crystal, Sehr selten. <em>(Vorbild: Arcane Crystal)</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "veryRare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "arkankristall",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!f6a511a9e8cdf112"
+}

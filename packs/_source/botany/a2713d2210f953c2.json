@@ -1,0 +1,42 @@
+{
+  "_id": "a2713d2210f953c2",
+  "name": "Wolkenkristall",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-rough-cushion-white.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Wolkenkristall</strong> — crystal, Selten. <em>(Vorbild: Cloud Crystal)</em></p><p>Verwendung in Tränken: Levitation.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 70,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "wolkenkristall",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!a2713d2210f953c2"
+}

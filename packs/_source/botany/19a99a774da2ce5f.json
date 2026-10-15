@@ -1,0 +1,42 @@
+{
+  "_id": "19a99a774da2ce5f",
+  "name": "Regenbogenkappe",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/alien-spotted-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Regenbogenkappe</strong> — Trankpilz, Sehr selten. <em>(Vorbild: Rainbow Cap)</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "veryRare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "regenbogenkappe",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!19a99a774da2ce5f"
+}

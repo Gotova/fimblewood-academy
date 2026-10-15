@@ -1,0 +1,42 @@
+{
+  "_id": "1e2928a32fd070ab",
+  "name": "Kälteblatt-Samen",
+  "type": "loot",
+  "img": "icons/consumables/plants/sprout-seed-yellow-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Samen: <strong>Kälteblatt</strong> (Trankkraut).</p>\n<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Reift in <strong>3 Tagen</strong> und bringt bei der Ernte 2–4 Stück.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "seed",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "plantId": "kaelteblatt",
+      "role": "seed"
+    }
+  },
+  "_key": "!items!1e2928a32fd070ab"
+}

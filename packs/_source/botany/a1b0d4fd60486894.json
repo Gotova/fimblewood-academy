@@ -1,0 +1,42 @@
+{
+  "_id": "a1b0d4fd60486894",
+  "name": "Lebensblatt",
+  "type": "loot",
+  "img": "icons/consumables/plants/leaf-veins-glowing-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Lebensblatt</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Lifeleaf)</em></p><p>Verwendung in Tränken: Schlaf, Verlangsamung.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 6,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "lebensblatt",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!a1b0d4fd60486894"
+}

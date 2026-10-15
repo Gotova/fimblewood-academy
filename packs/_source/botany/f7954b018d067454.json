@@ -1,0 +1,42 @@
+{
+  "_id": "f7954b018d067454",
+  "name": "Federblüte",
+  "type": "loot",
+  "img": "icons/consumables/plants/leaf-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Federblüte</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Featherbloom)</em></p><p>Verwendung in Tränken: Charme, Antimagie.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 6,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "federbluete",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!f7954b018d067454"
+}

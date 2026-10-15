@@ -416,6 +416,74 @@
     },
     "SubclassDrop": {
       "NoClass": "Im dnd5e-Kompendium wurde keine Klasse {class} gefunden. Füge zuerst die Klasse hinzu und ziehe dann die Unterklasse auf den Actor."
+    },
+    "Botany": {
+      "ButtonTitle": "Mein Garten",
+      "GmButtonTitle": "Botanikclub-Gärten",
+      "WindowTitle": "Mein Garten",
+      "LootType": {
+        "Seed": "Samen"
+      },
+      "SeedField": {
+        "Legend": "Wächst zu einer Pflanze",
+        "None": "— keine Pflanze —"
+      },
+      "NoMembers": "Der Botanikclub hat noch keine Mitglieder. Trage sie in den Moduleinstellungen ein.",
+      "NotMember": "Du bist kein Mitglied des Botanikclubs.",
+      "Plant": "Pflanzen",
+      "PlantTitle": "Was möchtest du pflanzen?",
+      "NoSeeds": "Du hast keine Samen im Inventar.",
+      "SeedUnassigned": "(wächst zu nichts)",
+      "Advance": "+1 Tag",
+      "AdvanceHint": "Lässt alle Pflanzen einen Tag wachsen",
+      "Day": "Tag {day}",
+      "StatusDead": "Eingegangen",
+      "StatusRipe": "Erntereif",
+      "StatusGrowing": "Wächst",
+      "Maturity": "Reife",
+      "Hp": "HP",
+      "Remove": "Entfernen",
+      "Close": "Schließen",
+      "Harvest": "Ernten",
+      "HarvestTitle": "Pflanze ernten",
+      "ConfirmUnripe": "<strong>{plant}</strong> ist noch nicht reif. Wenn du sie jetzt erntest, erhältst du nichts und das Beet wird frei.",
+      "ConfirmDead": "<strong>{plant}</strong> ist eingegangen. Du kannst sie entfernen, bekommst aber nichts.",
+      "Members": {
+        "Title": "Botanikclub verwalten",
+        "MenuName": "Botanikclub",
+        "MenuLabel": "Botanikclub verwalten",
+        "MenuHint": "Wähle die Spieler im Botanikclub und die Größe ihres Gartens.",
+        "Hint": "Mitglieder bekommen „Mein Garten“ in der Fimblewood-Steuerung. Verkleinerst du einen Garten, bleiben die Pflanzen in den ausgeblendeten Beeten gespeichert.",
+        "Size": "Gartengröße (Spalten × Reihen)",
+        "NoPlayers": "Es gibt keine Spieler.",
+        "Save": "Speichern",
+        "Cancel": "Abbrechen"
+      },
+      "Settings": {
+        "AutoGrow": {
+          "name": "Botanikclub: Pflanzen wachsen automatisch",
+          "hint": "Jeder Tageswechsel in Simple Calendar Reborn lässt die Pflanzen reifen. Ausgeschaltet reifen sie nur, wenn du Reife oder Tage selbst setzt."
+        }
+      },
+      "Notice": {
+        "Refused": "Das ist nicht erlaubt.",
+        "NotMember": "Das ist kein Mitglied des Botanikclubs.",
+        "SlotTaken": "Dieses Beet ist schon bepflanzt.",
+        "NoSeed": "Dieser Samen ist nicht mehr in deinem Inventar.",
+        "NoPlant": "Aus diesem Samen wächst keine Pflanze. Frag die Spielleitung.",
+        "SlotEmpty": "In diesem Beet wächst nichts.",
+        "NoCharacter": "Du brauchst einen zugewiesenen Charakter.",
+        "PackMissing": "Das Erntegut wurde im Kompendium nicht gefunden.",
+        "Planted": "{plant} gepflanzt.",
+        "Harvested": "{qty}× {plant} geerntet.",
+        "NothingGained": "{plant} war noch nicht reif. Du bekommst nichts.",
+        "RemovedDead": "{plant} entfernt.",
+        "Advanced": "{days} Tag(e) vergangen. Die Pflanzen sind gewachsen.",
+        "NeedsGM": "Es ist keine Spielleitung online, die das ausführen kann."
+      },
+      "Chat": {
+        "Harvested": "{actor} erntet {qty}× {plant}."
+      }
     }
   }
 }

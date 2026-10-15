@@ -1,0 +1,42 @@
+{
+  "_id": "a66278dd8d268edb",
+  "name": "Wirrkraut",
+  "type": "loot",
+  "img": "icons/consumables/plants/dried-stem-vine-root-bramble-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Wirrkraut</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Tangleweed)</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "wirrkraut",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!a66278dd8d268edb"
+}

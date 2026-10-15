@@ -1,0 +1,42 @@
+{
+  "_id": "b56a408c4c31ed9c",
+  "name": "Traumrübe",
+  "type": "loot",
+  "img": "icons/consumables/vegetable/root-beet-bulb-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Traumrübe</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Dream Beet)</em></p><p>Verwendung in Tränken: Antimagie.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 7,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "traumruebe",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!b56a408c4c31ed9c"
+}

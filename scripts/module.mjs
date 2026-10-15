@@ -7,6 +7,7 @@ import { registerJukebox, openJukeboxWindow, openJukeboxManager, diagnoseJukebox
 import { registerDragonchess, openBoardForCurrentUser, getGameRecord, selftest as dragonchessSelftest } from "./dragonchess/index.mjs";
 import { registerAmbientSoundFade } from "./ambient-sound-fade.mjs";
 import { registerTimetable, openTimetableViewer, openTimetableEditor } from "./timetable/index.mjs";
+import { registerBotany, openGarden } from "./botany/index.mjs";
 import { registerSceneMusic } from "./scene-music.mjs";
 import { registerNpcSpawner, rerollScene, rerollRegion, addNpcs, removeNpcs, clearRegion } from "./npc-spawner.mjs";
 import { registerEladrinWildMagic, hasEladrinWildMagic, getState as getWildMagicState, setRingState, setContainment } from "./eladrin-wild-magic.mjs";
@@ -28,6 +29,7 @@ Hooks.once("init", () => {
   registerAmbientSoundFade();
   registerDragonchess();
   registerTimetable();
+  registerBotany();
   registerNpcSpawner();
   registerEladrinWildMagic();
   registerSubclassDrop();
@@ -40,6 +42,7 @@ Hooks.once("init", () => {
     draw: { openDrawApp, openGallery },
     jukebox: { openJukeboxWindow, openJukeboxManager, diagnoseJukebox, playTrack, stopTrack },
     dragonchess: { openBoard: openBoardForCurrentUser, getGameRecord, selftest: dragonchessSelftest },
+    botany: { openGarden },
     timetable: { openViewer: openTimetableViewer, openEditor: openTimetableEditor },
     eladrinWildMagic: { hasEladrinWildMagic, getState: getWildMagicState, setRingState, setContainment },
     npcSpawner: { rerollScene, rerollRegion, addNpcs, removeNpcs, clearRegion }

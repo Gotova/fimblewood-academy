@@ -1,0 +1,42 @@
+{
+  "_id": "2ec1811a4d3e2000",
+  "name": "Windblüte",
+  "type": "loot",
+  "img": "icons/commodities/flowers/dandelion-pod-white.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Windblüte</strong> — Trankkraut, Gewöhnlich. <em>(Vorbild: Windbloom)</em></p><p>Verwendung in Tränken: Feuer, Schnelligkeit, Geschick, Licht, Blitz, Mana, Wildes Wachstum, Explosion, Raserei, Unsichtbarkeit, Levitation, Halluzination.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "windbluete",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!2ec1811a4d3e2000"
+}

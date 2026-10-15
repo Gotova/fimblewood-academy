@@ -1,0 +1,42 @@
+{
+  "_id": "b24a309e3ba18856",
+  "name": "Donnerdistel",
+  "type": "loot",
+  "img": "icons/consumables/plants/milkweed-stem-serrated-leaves-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Donnerdistel</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Thunder Thistle)</em></p><p>Verwendung in Tränken: Blitz.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 6,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "donnerdistel",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!b24a309e3ba18856"
+}

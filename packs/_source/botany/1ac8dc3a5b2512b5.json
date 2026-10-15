@@ -1,0 +1,42 @@
+{
+  "_id": "1ac8dc3a5b2512b5",
+  "name": "Heilerheide",
+  "type": "loot",
+  "img": "icons/consumables/plants/sprout-leaf-herb-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Heilerheide</strong> — Trankkraut, Gewöhnlich. <em>(Vorbild: Healer&#39;s Heather)</em></p><p>Verwendung in Tränken: Säureschutz.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "heilerheide",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!1ac8dc3a5b2512b5"
+}

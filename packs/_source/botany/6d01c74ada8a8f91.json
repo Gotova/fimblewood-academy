@@ -1,0 +1,42 @@
+{
+  "_id": "6d01c74ada8a8f91",
+  "name": "Greifwurzel",
+  "type": "loot",
+  "img": "icons/consumables/vegetable/root-alien-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Greifwurzel</strong> — Trankkraut, Selten. <em>(Vorbild: Grasping Root)</em></p><p>Verwendung in Tränken: Furcht.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "greifwurzel",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!6d01c74ada8a8f91"
+}

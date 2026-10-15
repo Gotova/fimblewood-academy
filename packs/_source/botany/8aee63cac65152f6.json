@@ -1,0 +1,42 @@
+{
+  "_id": "8aee63cac65152f6",
+  "name": "Feuercitrin",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-rough-cushion-orange-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Feuercitrin</strong> — crystal, Selten. <em>(Vorbild: Fire Citrine)</em></p><p>Verwendung in Tränken: Licht.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 60,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "feuercitrin",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!8aee63cac65152f6"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "2f21efde77430dac",
+  "name": "Grabtrüffel",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/cluster-red-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Grabtrüffel</strong> — Trankpilz, Selten. <em>(Vorbild: Grave Truffle)</em></p><p>Verwendung in Tränken: Nekromantie, Furcht.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 30,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "grabtruffel",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!2f21efde77430dac"
+}

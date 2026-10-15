@@ -1,0 +1,42 @@
+{
+  "_id": "0359a64fe1d68d60",
+  "name": "Lebenskristall",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-rough-cushion-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Lebenskristall</strong> — crystal, Sehr selten. <em>(Vorbild: Life Crystal)</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "veryRare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "lebenskristall",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!0359a64fe1d68d60"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "e76d0d84977f6da3",
+  "name": "Lilie",
+  "type": "loot",
+  "img": "icons/commodities/flowers/lily-white.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Lilie</strong> — Zierpflanze, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "lilie",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!e76d0d84977f6da3"
+}

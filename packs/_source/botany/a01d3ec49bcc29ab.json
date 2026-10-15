@@ -1,0 +1,42 @@
+{
+  "_id": "a01d3ec49bcc29ab",
+  "name": "Erdwurz",
+  "type": "loot",
+  "img": "icons/consumables/plants/leaf-herb-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Erdwurz</strong> — Trankkraut, Gewöhnlich. <em>(Vorbild: Terraria)</em></p><p>Verwendung in Tränken: Heilung, Gift, Frost, Stärke, Wildes Wachstum, Steinhaut, Begierde, Säureschutz, Blitzschutz.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "erdwurz",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!a01d3ec49bcc29ab"
+}

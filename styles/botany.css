@@ -1,0 +1,259 @@
+/* Fimblewood Academy — Botany Club ("Mein Garten") */
+
+.fimblewood-garden-app .window-content {
+  padding: 8px;
+  gap: 8px;
+}
+
+.fw-garden-empty {
+  text-align: center;
+  padding: 32px 16px;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.fw-garden-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fw-garden-toolbar select {
+  flex: 1;
+}
+.fw-garden-day {
+  font-size: 12px;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+/* The picture, with the beds laid over it. Falls back to a lawn colour if the picture is missing. */
+.fw-garden-board {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  overflow: hidden;
+  background-image: var(--bg), linear-gradient(135deg, #4d7a3a, #6b9a4a 55%, #46702f);
+  background-size: 100% 100%, cover;
+  background-repeat: no-repeat;
+}
+
+.fw-garden-grid {
+  position: absolute;
+  top: var(--top);
+  right: var(--right);
+  bottom: var(--bottom);
+  left: var(--left);
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  gap: var(--gap);
+}
+
+.fw-garden-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+  border: 2px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  background: rgba(40, 24, 10, 0.25);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.fw-garden-slot:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+.fw-garden-slot.is-selected {
+  border-style: solid;
+  border-color: #ffd86b;
+}
+.fw-garden-slot.is-ripe {
+  border-style: solid;
+  border-color: #8be28b;
+  box-shadow: 0 0 8px rgba(139, 226, 139, 0.8);
+}
+
+.fw-garden-plus {
+  font-size: 28px;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 3px #000;
+}
+
+.fw-garden-slot img {
+  width: calc(35% + 55% * var(--m, 0));
+  max-height: 85%;
+  object-fit: contain;
+  border: none;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.7));
+  transition: width 0.3s;
+}
+.fw-garden-slot.is-dead img {
+  filter: grayscale(1) brightness(0.6);
+}
+
+.fw-garden-pct {
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+  padding: 0 4px;
+  border-radius: 3px;
+  font-size: 10px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* The small window with a plant's data */
+.fw-garden-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  max-width: 280px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #f2ead8;
+  background: rgba(24, 18, 12, 0.94);
+  border: 1px solid #c9a35a;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 2;
+}
+.fw-garden-card h3 {
+  margin: 0;
+  padding-right: 20px;
+  border: none;
+  color: #ffd86b;
+}
+.fw-garden-close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-size: 16px;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+.fw-garden-status {
+  font-size: 12px;
+  font-style: italic;
+  opacity: 0.85;
+}
+.fw-garden-stat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.fw-garden-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+.fw-garden-bar span {
+  display: block;
+  height: 100%;
+  background: #6cc36c;
+}
+.fw-garden-bar.is-hp span {
+  background: #d9574a;
+}
+.fw-garden-card .fw-garden-primary {
+  margin-top: 4px;
+}
+.fw-garden-gm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 12px;
+}
+.fw-garden-gm input {
+  width: 52px;
+}
+
+/* Seed picker dialog */
+.fw-garden-seed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.fw-garden-seed {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.fw-garden-seed:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.fw-garden-seed.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.fw-garden-seed img {
+  width: 28px;
+  height: 28px;
+  border: none;
+}
+
+/* Members menu */
+.fw-garden-hint {
+  margin: 0 0 6px;
+  font-size: 12px;
+  opacity: 0.85;
+}
+.fw-garden-member-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fw-garden-member-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+}
+.fw-garden-member-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.fw-garden-member-row select {
+  width: 80px;
+}
+.fw-garden-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+.fw-garden-primary {
+  font-weight: bold;
+}
+
+/* The Seed field on item sheets reuses the Jukebox fieldset look */
+.fw-botany-seed-picker {
+  width: 100%;
+}

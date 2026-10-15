@@ -1,0 +1,42 @@
+{
+  "_id": "4a52fccaebb13667",
+  "name": "Blutdorn",
+  "type": "loot",
+  "img": "icons/consumables/plants/thorned-dried-stem-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Blutdorn</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Bloodthorn)</em></p><p>Verwendung in Tränken: Furcht, Vergrößerung.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 7,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "blutdorn",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!4a52fccaebb13667"
+}

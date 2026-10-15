@@ -1,0 +1,42 @@
+{
+  "_id": "08e376d9ebc728c7",
+  "name": "Haarbanane",
+  "type": "loot",
+  "img": "icons/consumables/fruit/banana-ripe-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Haarbanane</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Hairy Banana)</em></p><p>Verwendung in Tränken: Bindung, Giftschutz.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 6,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "haarbanane",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!08e376d9ebc728c7"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "ad61b24af0f85cab",
+  "name": "Nebelschirmling",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/campanulate-bell-shiny-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Nebelschirmling</strong> — Trankpilz, Ungewöhnlich. <em>(Vorbild: Foggy Parasol)</em></p><p>Verwendung in Tränken: Levitation.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 8,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "nebelschirmling",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!ad61b24af0f85cab"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "419ad42d1cfea502",
+  "name": "Blutrubin",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-rough-cushion-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Blutrubin</strong> — crystal, Sehr selten. <em>(Vorbild: Blood Ruby)</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "veryRare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "blutrubin",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!419ad42d1cfea502"
+}

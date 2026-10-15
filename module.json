@@ -2,7 +2,7 @@
   "id": "fimblewood-academy",
   "title": "Fimblewood Academy",
   "description": "Homebrew classes, subclasses, and content for the Fimblewood Academy campaign, built for the dnd5e system.",
-  "version": "0.33.1",
+  "version": "0.34.0",
   "compatibility": {
     "minimum": "13",
     "verified": "13.351",
@@ -42,7 +42,8 @@
     "styles/dragonchess.css",
     "styles/timetable.css",
     "styles/npc-spawner.css",
-    "styles/eladrin-wild-magic.css"
+    "styles/eladrin-wild-magic.css",
+    "styles/botany.css"
   ],
   "languages": [
     {
@@ -89,6 +90,27 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       }
+    },
+    {
+      "name": "botany",
+      "label": "Botanikclub: Samen & Zutaten",
+      "path": "packs/botany",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "botany-journal",
+      "label": "Botanikclub: Kräuterkunde",
+      "path": "packs/botany-journal",
+      "type": "JournalEntry",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "packFolders": [
@@ -99,13 +121,15 @@
       "packs": [
         "subclasses",
         "classfeatures",
-        "rolltables"
+        "rolltables",
+        "botany",
+        "botany-journal"
       ]
     }
   ],
   "url": "https://github.com/Gotova/fimblewood-academy",
   "manifest": "https://github.com/Gotova/fimblewood-academy/releases/latest/download/module.json",
-  "download": "https://github.com/Gotova/fimblewood-academy/releases/download/v0.33.1/module.zip",
+  "download": "https://github.com/Gotova/fimblewood-academy/releases/download/v0.34.0/module.zip",
   "readme": "https://github.com/Gotova/fimblewood-academy/blob/main/README.md",
   "bugs": "https://github.com/Gotova/fimblewood-academy/issues",
   "changelog": "https://github.com/Gotova/fimblewood-academy/blob/main/CHANGELOG.md"

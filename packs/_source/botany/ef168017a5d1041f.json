@@ -1,0 +1,42 @@
+{
+  "_id": "ef168017a5d1041f",
+  "name": "Lustpilz",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/conical-shiny-magenta-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Lustpilz</strong> — Trankpilz, Ungewöhnlich. <em>(Vorbild: Lust Mushroom)</em></p><p>Verwendung in Tränken: Vergrößerung.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 8,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "lustpilz",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!ef168017a5d1041f"
+}

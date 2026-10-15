@@ -1,0 +1,42 @@
+{
+  "_id": "65fdb391d886dc80",
+  "name": "Kälteblatt",
+  "type": "loot",
+  "img": "icons/consumables/plants/leaf-broad-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Kälteblatt</strong> — Trankkraut, Gewöhnlich. <em>(Vorbild: Coldleaf)</em></p><p>Verwendung in Tränken: Säureschutz.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "kaelteblatt",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!65fdb391d886dc80"
+}

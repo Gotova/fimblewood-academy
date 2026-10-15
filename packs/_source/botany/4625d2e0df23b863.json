@@ -1,0 +1,42 @@
+{
+  "_id": "4625d2e0df23b863",
+  "name": "Gutbeere",
+  "type": "loot",
+  "img": "icons/consumables/fruit/berry-stem-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Gutbeere</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Goodberry)</em></p><p>Verwendung in Tränken: Bindung, Giftschutz.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 4,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "gutbeere",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!4625d2e0df23b863"
+}

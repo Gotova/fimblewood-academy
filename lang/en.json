@@ -416,6 +416,74 @@
     },
     "SubclassDrop": {
       "NoClass": "No {class} class was found in the dnd5e compendiums. Add the class to the actor first, then drop the subclass."
+    },
+    "Botany": {
+      "ButtonTitle": "My Garden",
+      "GmButtonTitle": "Botany Club gardens",
+      "WindowTitle": "My Garden",
+      "LootType": {
+        "Seed": "Seed"
+      },
+      "SeedField": {
+        "Legend": "Grows into a plant",
+        "None": "— no plant —"
+      },
+      "NoMembers": "The Botany Club has no members yet. Add them in the module settings.",
+      "NotMember": "You are not a member of the Botany Club.",
+      "Plant": "Plant",
+      "PlantTitle": "What do you want to plant?",
+      "NoSeeds": "You have no seeds in your inventory.",
+      "SeedUnassigned": "(grows nothing)",
+      "Advance": "+1 day",
+      "AdvanceHint": "Lets every plant grow for one day",
+      "Day": "Day {day}",
+      "StatusDead": "Withered",
+      "StatusRipe": "Ready to harvest",
+      "StatusGrowing": "Growing",
+      "Maturity": "Maturity",
+      "Hp": "HP",
+      "Remove": "Remove",
+      "Close": "Close",
+      "Harvest": "Harvest",
+      "HarvestTitle": "Harvest plant",
+      "ConfirmUnripe": "<strong>{plant}</strong> is not ripe yet. If you harvest it now you get nothing and the bed is freed.",
+      "ConfirmDead": "<strong>{plant}</strong> has withered. You can remove it, but you get nothing.",
+      "Members": {
+        "Title": "Manage the Botany Club",
+        "MenuName": "Botany Club",
+        "MenuLabel": "Manage the Botany Club",
+        "MenuHint": "Pick the players in the Botany Club and the size of their garden.",
+        "Hint": "Members get \"My Garden\" in the Fimblewood controls. If you shrink a garden, the plants in the hidden beds stay saved.",
+        "Size": "Garden size (columns × rows)",
+        "NoPlayers": "There are no players.",
+        "Save": "Save",
+        "Cancel": "Cancel"
+      },
+      "Settings": {
+        "AutoGrow": {
+          "name": "Botany Club: plants grow automatically",
+          "hint": "Every day change in Simple Calendar Reborn matures the plants. When off, they only grow when you set maturity or advance days yourself."
+        }
+      },
+      "Notice": {
+        "Refused": "That is not allowed.",
+        "NotMember": "That player is not in the Botany Club.",
+        "SlotTaken": "This bed is already planted.",
+        "NoSeed": "That seed is no longer in your inventory.",
+        "NoPlant": "This seed does not grow into a plant. Ask the GM.",
+        "SlotEmpty": "Nothing grows in this bed.",
+        "NoCharacter": "You need an assigned character.",
+        "PackMissing": "The harvested item was not found in the compendium.",
+        "Planted": "Planted {plant}.",
+        "Harvested": "Harvested {qty}× {plant}.",
+        "NothingGained": "{plant} was not ripe yet. You get nothing.",
+        "RemovedDead": "Removed {plant}.",
+        "Advanced": "{days} day(s) passed. The plants grew.",
+        "NeedsGM": "No GM is online to carry that out."
+      },
+      "Chat": {
+        "Harvested": "{actor} harvests {qty}× {plant}."
+      }
     }
   }
 }

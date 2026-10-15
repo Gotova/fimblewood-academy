@@ -1,0 +1,42 @@
+{
+  "_id": "f7dcd374f53880f8",
+  "name": "Stinkpilz-Samen",
+  "type": "loot",
+  "img": "icons/consumables/plants/sprout-seed-yellow-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Samen: <strong>Stinkpilz</strong> (Trankpilz).</p>\n<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Reift in <strong>3 Tagen</strong> und bringt bei der Ernte 2–4 Stück.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "seed",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "plantId": "stinkpilz",
+      "role": "seed"
+    }
+  },
+  "_key": "!items!f7dcd374f53880f8"
+}

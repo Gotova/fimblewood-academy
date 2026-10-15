@@ -1,0 +1,42 @@
+{
+  "_id": "88937d04ac90d1d0",
+  "name": "Dryadensattel",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/convex-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Dryadensattel</strong> — Trankpilz, Gewöhnlich. <em>(Vorbild: Dryad&#39;s Saddle)</em></p><p>Verwendung in Tränken: Säure, Giftschutz.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "dryadensattel",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!88937d04ac90d1d0"
+}

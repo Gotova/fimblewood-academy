@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.33.1
+- **Current version:** 0.34.0
 
 ## Installation
 
@@ -127,6 +127,16 @@ The Academy's weekly class schedule (requires Simple Calendar Reborn). The GM fi
 - Click an appointment for its details. Its organiser can edit or delete it; an invited character can decline.
 - Utility or test characters can be hidden from all of the Timetable's character lists: **Configure Settings → Fimblewood Academy → Timetable Characters**. New characters are shown by default.
 - Appointments belong to a date, not to the A/B week rotation. A GM has to be online to save changes. Appointments older than two weeks are cleaned up.
+
+### Botany Club — "Mein Garten"
+
+A garden for the members of the Botany Club. The GM picks the members and the size of each garden under **Configure Settings → Fimblewood Academy → Manage the Botany Club** (2x2, 3x2, 3x3, 3x4 or 4x4 beds). Members get **Mein Garten** in the Fimblewood Controls; the GM gets an overview of every member's garden there.
+
+- An empty bed has a plant button that lists the **Seed** items in the character's inventory. Seeds are loot items with the new loot type **Seed** (pick which plant a seed grows into on the item sheet, GM only). The compendium *Botanikclub: Samen & Zutaten* holds a seed and a harvest item for every one of the 54 plants.
+- A planted bed shows **maturity** and **HP**. Maturity rises with each day change of Simple Calendar Reborn (a setting turns that off; the GM can set maturity and HP directly, or advance a day). Care is judged by the GM alone, so only the GM changes HP. A plant at 0 HP has withered and stops growing.
+- Harvesting a ripe plant (100 %) adds its items to the character and frees the bed. An unripe or withered plant can still be removed, but yields nothing.
+- The plants and potion recipes follow Potion Craft: herbs, mushrooms, food and flowers. The compendium *Botanikclub: Kräuterkunde* is the recipe book. The shared ingredient and recipe catalogue (`scripts/alchemy/`) is groundwork for a later alchemy workshop.
+- Garden backgrounds go in `assets/garden/` — see the prompts in `assets/garden/PROMPTS.md`. Without them the garden shows a plain lawn.
 
 ### Content
 

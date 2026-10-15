@@ -1,0 +1,42 @@
+{
+  "_id": "71652471a3a55f57",
+  "name": "Basilikum-Samen",
+  "type": "loot",
+  "img": "icons/consumables/plants/sprout-seed-yellow-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Samen: <strong>Basilikum</strong> (Nahrung).</p>\n<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Reift in <strong>3 Tagen</strong> und bringt bei der Ernte 3–5 Stück.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "seed",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "plantId": "basilikum",
+      "role": "seed"
+    }
+  },
+  "_key": "!items!71652471a3a55f57"
+}

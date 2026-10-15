@@ -1,0 +1,42 @@
+{
+  "_id": "6fe56253495f8f1b",
+  "name": "Minze",
+  "type": "loot",
+  "img": "icons/consumables/plants/mint-dried-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Minze</strong> — Nahrung, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 9200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "minze",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!6fe56253495f8f1b"
+}

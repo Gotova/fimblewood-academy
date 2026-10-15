@@ -1,0 +1,42 @@
+{
+  "_id": "24748b167775339b",
+  "name": "Lavendel-Samen",
+  "type": "loot",
+  "img": "icons/consumables/plants/sprout-seed-yellow-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Samen: <strong>Lavendel</strong> (Zierpflanze).</p>\n<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Reift in <strong>3 Tagen</strong> und bringt bei der Ernte 2–4 Stück.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "cp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "seed",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 9900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "plantId": "lavendel",
+      "role": "seed"
+    }
+  },
+  "_key": "!items!24748b167775339b"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "49fd3423dc7ea459",
+  "name": "Flammenkraut",
+  "type": "loot",
+  "img": "icons/consumables/plants/flax-leaves-spiked-bundle-orange.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Flammenkraut</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Flameweed)</em></p><p>Verwendung in Tränken: Furcht, Vergrößerung.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 7,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "flammenkraut",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!49fd3423dc7ea459"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "e4a179636a29f7f1",
+  "name": "Schwefelporling-Samen",
+  "type": "loot",
+  "img": "icons/consumables/plants/sprout-seed-yellow-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Samen: <strong>Schwefelporling</strong> (Trankpilz).</p>\n<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Reift in <strong>5 Tagen</strong> und bringt bei der Ernte 2–4 Stück.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2.5,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "seed",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "plantId": "schwefelporling",
+      "role": "seed"
+    }
+  },
+  "_key": "!items!e4a179636a29f7f1"
+}

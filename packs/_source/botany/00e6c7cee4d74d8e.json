@@ -1,0 +1,42 @@
+{
+  "_id": "00e6c7cee4d74d8e",
+  "name": "Zwiebel",
+  "type": "loot",
+  "img": "icons/consumables/vegetable/onion-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Zwiebel</strong> — Nahrung, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "zwiebel",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!00e6c7cee4d74d8e"
+}

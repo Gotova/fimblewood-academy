@@ -1,0 +1,42 @@
+{
+  "_id": "56cb5245413b4e70",
+  "name": "Dornstock",
+  "type": "loot",
+  "img": "icons/consumables/plants/thorned-stem-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Dornstock</strong> — Trankkraut, Gewöhnlich. <em>(Vorbild: Thornstick)</em></p><p>Verwendung in Tränken: Feuerschutz.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "dornstock",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!56cb5245413b4e70"
+}

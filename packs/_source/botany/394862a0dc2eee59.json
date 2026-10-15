@@ -1,0 +1,42 @@
+{
+  "_id": "394862a0dc2eee59",
+  "name": "Schwefelporling",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/conical-bell-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Schwefelporling</strong> — Trankpilz, Ungewöhnlich. <em>(Vorbild: Sulphur Shelf)</em></p><p>Verwendung in Tränken: Charme.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "schwefelporling",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!394862a0dc2eee59"
+}

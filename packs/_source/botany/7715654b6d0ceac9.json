@@ -1,0 +1,42 @@
+{
+  "_id": "7715654b6d0ceac9",
+  "name": "Sumpfling",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/umbontae-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Sumpfling</strong> — Trankpilz, Ungewöhnlich. <em>(Vorbild: Marshroom)</em></p><p>Verwendung in Tränken: Heilung, Bindung.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 6,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "sumpfling",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!7715654b6d0ceac9"
+}

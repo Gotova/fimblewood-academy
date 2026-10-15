@@ -1,0 +1,42 @@
+{
+  "_id": "1d8b1f66cf07b194",
+  "name": "Salat",
+  "type": "loot",
+  "img": "icons/consumables/vegetable/lettuce-romaine-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Salat</strong> — Nahrung, Gewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "salat",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!1d8b1f66cf07b194"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "0852d8460b4caf20",
+  "name": "Feuerglocke",
+  "type": "loot",
+  "img": "icons/consumables/plants/thorned-dried-stem-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Feuerglocke</strong> — Trankkraut, Gewöhnlich. <em>(Vorbild: Firebell)</em></p><p>Verwendung in Tränken: Gift, Feuer, Licht, Steinhaut, Explosion, Raserei, Charme, Begierde, Säure, Blitzschutz.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "feuerglocke",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!0852d8460b4caf20"
+}
