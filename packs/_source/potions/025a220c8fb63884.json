@@ -1,0 +1,154 @@
+{
+  "_id": "025a220c8fb63884",
+  "name": "Trank: Fluch",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-conical-corked-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Fluch</strong>: Das Ziel ist verflucht: −1W4 auf Attributswürfe und Rettungswürfe für 1 Stunde.</p>\n<p>Rettungswurf Weisheit gegen SG 12. Bei Misserfolg gilt der Effekt für 1 Std..</p>\n<p><strong>Im Botanikclub-Garten:</strong> auf ein Beet angewendet, vernichtet der Trank die Pflanze dort sofort (HP auf 0).</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "f086e8ae455ca2d3": {
+        "_id": "f086e8ae455ca2d3",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [
+          {
+            "_id": "531420f1b51c3cab",
+            "onSave": false
+          }
+        ],
+        "sort": 0,
+        "type": "save",
+        "save": {
+          "ability": [
+            "wis"
+          ],
+          "dc": {
+            "calculation": "",
+            "formula": "12"
+          },
+          "visible": true
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "range": {
+          "value": "30",
+          "units": "ft"
+        },
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": true
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [
+    {
+      "_id": "531420f1b51c3cab",
+      "name": "Verflucht",
+      "img": "icons/consumables/potions/bottle-conical-corked-purple.webp",
+      "type": "base",
+      "changes": [
+        {
+          "key": "system.bonuses.abilities.check",
+          "mode": 2,
+          "value": "-1d4",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.abilities.save",
+          "mode": 2,
+          "value": "-1d4",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "seconds": 3600
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!025a220c8fb63884.531420f1b51c3cab"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "fluch",
+      "potionTier": 1,
+      "role": "potion"
+    }
+  },
+  "sort": 7300,
+  "_key": "!items!025a220c8fb63884"
+}

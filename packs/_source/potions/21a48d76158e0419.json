@@ -1,0 +1,112 @@
+{
+  "_id": "21a48d76158e0419",
+  "name": "Trank: Heilung (Stufe II)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-corked-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Heilung</strong> (Stufe II): Heilt Trefferpunkte.</p>\n<p>Heilung: 4W4+4 Trefferpunkte.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 150,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "825083181f831e14": {
+        "_id": "825083181f831e14",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [],
+        "sort": 0,
+        "type": "heal",
+        "healing": {
+          "number": 4,
+          "denomination": 4,
+          "bonus": "4",
+          "types": [
+            "healing"
+          ],
+          "custom": {
+            "enabled": false,
+            "formula": ""
+          },
+          "scaling": {
+            "mode": "",
+            "number": 1
+          }
+        },
+        "range": {
+          "units": "touch"
+        },
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "heilung",
+      "potionTier": 2,
+      "role": "potion"
+    }
+  },
+  "sort": 200,
+  "_key": "!items!21a48d76158e0419"
+}

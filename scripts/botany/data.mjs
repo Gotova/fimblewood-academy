@@ -245,13 +245,14 @@ async function applyOp(user, op = {}) {
 
   if (op.type === "usePotion") {
     const item = actor.items.get(op.itemId);
-    const effect = potionInfo(item)?.effect;
+    const info = potionInfo(item);
+    const effect = info?.effect;
     if (!effect) return fail(i18n("Notice.NotUsable"));
     if (effect.kind === "growth") {
-      setFactor(garden.mods, key, "growth", effect.factor);
+      setFactor(garden.mods, key, "growth", info.factor);
       await writeGardens(gardens);
       await consumeOne(item);
-      return done(i18n("Notice.Fertilized", { factor: effect.factor }));
+      return done(i18n("Notice.Fertilized", { factor: info.factor }));
     }
     const target = plantState(garden.slots[key]);
     if (!target) return fail(i18n("Notice.NeedsPlant"));

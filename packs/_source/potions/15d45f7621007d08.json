@@ -1,0 +1,95 @@
+{
+  "_id": "15d45f7621007d08",
+  "name": "Trank: Wildes Wachstum (Stufe II)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-round-corked-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Wildes Wachstum</strong> (Stufe II): Ein Trank, der Wachstum kräftig anregt: Samen und Ranken treiben sichtbar voran.</p>\n<p><strong>Im Botanikclub-Garten:</strong> auf ein Beet angewendet, wachsen die Pflanzen dort mit Faktor ×1,75, bis auf dem Beet geerntet wird.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 150,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "149eb2d5ec334337": {
+        "_id": "149eb2d5ec334337",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [],
+        "sort": 0,
+        "type": "utility",
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "affects": {
+            "type": "self"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": false
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "wildes-wachstum",
+      "potionTier": 2,
+      "role": "potion"
+    }
+  },
+  "sort": 3800,
+  "_key": "!items!15d45f7621007d08"
+}

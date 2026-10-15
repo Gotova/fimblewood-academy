@@ -1,0 +1,128 @@
+{
+  "_id": "b5825a8b1b11967f",
+  "name": "Trank: Blitz (Stufe III)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/flask-corked-blue-glow.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Blitz</strong> (Stufe III): Ein knisterndes Fläschchen, das beim Aufprall entlädt.</p>\n<p>Rettungswurf Geschicklichkeit gegen SG 16. Bei Misserfolg 6W8 Blitzschaden, bei Erfolg die Hälfte.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 500,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "002c35db091a1c48": {
+        "_id": "002c35db091a1c48",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [],
+        "sort": 0,
+        "type": "save",
+        "save": {
+          "ability": [
+            "dex"
+          ],
+          "dc": {
+            "calculation": "",
+            "formula": "16"
+          },
+          "visible": true
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": [
+            {
+              "number": 6,
+              "denomination": 8,
+              "bonus": "",
+              "types": [
+                "lightning"
+              ],
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "scaling": {
+                "mode": "",
+                "number": 1
+              }
+            }
+          ]
+        },
+        "range": {
+          "value": "30",
+          "units": "ft"
+        },
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "blitz",
+      "potionTier": 3,
+      "role": "potion"
+    }
+  },
+  "sort": 2700,
+  "_key": "!items!b5825a8b1b11967f"
+}

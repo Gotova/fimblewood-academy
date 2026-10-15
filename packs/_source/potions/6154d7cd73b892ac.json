@@ -1,0 +1,131 @@
+{
+  "_id": "6154d7cd73b892ac",
+  "name": "Trank: Giftschutz (Stufe III)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-corked-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Giftschutz</strong> (Stufe III): Immunität gegen Giftschaden für 1 Stunde.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 500,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "b1fbb379183320e6": {
+        "_id": "b1fbb379183320e6",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [
+          {
+            "_id": "8592272a3f08b09f"
+          }
+        ],
+        "sort": 0,
+        "type": "utility",
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "affects": {
+            "type": "self"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": false
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [
+    {
+      "_id": "8592272a3f08b09f",
+      "name": "Giftschutz",
+      "img": "icons/consumables/potions/bottle-corked-green.webp",
+      "type": "base",
+      "changes": [
+        {
+          "key": "system.traits.di.value",
+          "mode": 2,
+          "value": "poison",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "seconds": 3600
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!6154d7cd73b892ac.8592272a3f08b09f"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "giftschutz",
+      "potionTier": 3,
+      "role": "potion"
+    }
+  },
+  "sort": 8900,
+  "_key": "!items!6154d7cd73b892ac"
+}

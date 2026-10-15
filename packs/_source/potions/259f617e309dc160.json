@@ -1,0 +1,154 @@
+{
+  "_id": "259f617e309dc160",
+  "name": "Trank: Verlangsamung (Stufe III)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-round-corked-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Verlangsamung</strong> (Stufe III): Das Ziel bewegt sich halb so schnell und erhält −2 auf die Rüstungsklasse.</p>\n<p>Rettungswurf Konstitution gegen SG 16. Bei Misserfolg gilt der Effekt für 10 Min..</p>\n<p><strong>Im Botanikclub-Garten:</strong> auf ein Beet angewendet, wachsen die Pflanzen dort mit Faktor ×0,5, bis auf dem Beet geerntet wird.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 500,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "7cf3a9428c764405": {
+        "_id": "7cf3a9428c764405",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [
+          {
+            "_id": "cd19d22976975aec",
+            "onSave": false
+          }
+        ],
+        "sort": 0,
+        "type": "save",
+        "save": {
+          "ability": [
+            "con"
+          ],
+          "dc": {
+            "calculation": "",
+            "formula": "16"
+          },
+          "visible": true
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "range": {
+          "value": "30",
+          "units": "ft"
+        },
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": true
+        },
+        "duration": {
+          "value": "10",
+          "units": "minute",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [
+    {
+      "_id": "cd19d22976975aec",
+      "name": "Verlangsamt",
+      "img": "icons/consumables/potions/bottle-round-corked-blue.webp",
+      "type": "base",
+      "changes": [
+        {
+          "key": "system.attributes.movement.walk",
+          "mode": 1,
+          "value": "0.5",
+          "priority": null
+        },
+        {
+          "key": "system.attributes.ac.bonus",
+          "mode": 2,
+          "value": "-2",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "seconds": 600
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!259f617e309dc160.cd19d22976975aec"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "verlangsamung",
+      "potionTier": 3,
+      "role": "potion"
+    }
+  },
+  "sort": 3600,
+  "_key": "!items!259f617e309dc160"
+}

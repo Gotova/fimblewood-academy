@@ -1,0 +1,131 @@
+{
+  "_id": "3ddd5c267aa9aa75",
+  "name": "Trank: Levitation (Stufe I)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-conical-bubbling-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Levitation</strong> (Stufe I): Du schwebst: Flugbewegungsrate 10 Fuß für 10 Minuten.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "e1c93d3567948cd4": {
+        "_id": "e1c93d3567948cd4",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [
+          {
+            "_id": "5b5e0024eb8fd448"
+          }
+        ],
+        "sort": 0,
+        "type": "utility",
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "affects": {
+            "type": "self"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": false
+        },
+        "duration": {
+          "value": "10",
+          "units": "minute",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [
+    {
+      "_id": "5b5e0024eb8fd448",
+      "name": "Schwebend",
+      "img": "icons/consumables/potions/bottle-conical-bubbling-blue.webp",
+      "type": "base",
+      "changes": [
+        {
+          "key": "system.attributes.movement.fly",
+          "mode": 4,
+          "value": "10",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "seconds": 600
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!3ddd5c267aa9aa75.5b5e0024eb8fd448"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "levitation",
+      "potionTier": 1,
+      "role": "potion"
+    }
+  },
+  "sort": 6100,
+  "_key": "!items!3ddd5c267aa9aa75"
+}

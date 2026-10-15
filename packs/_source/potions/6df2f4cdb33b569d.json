@@ -1,0 +1,95 @@
+{
+  "_id": "6df2f4cdb33b569d",
+  "name": "Trank: Antimagie (Stufe I)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-metal-yellow-gray.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Antimagie</strong> (Stufe I): Vorteil auf Rettungswürfe gegen Zauber für 10 Minuten.</p>\n<p><em>Nicht automatisiert: der Vorteil wird am Tisch angewendet.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "7e89db6aa09f4e42": {
+        "_id": "7e89db6aa09f4e42",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [],
+        "sort": 0,
+        "type": "utility",
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "affects": {
+            "type": "self"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": false
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "antimagie",
+      "potionTier": 1,
+      "role": "potion"
+    }
+  },
+  "sort": 8100,
+  "_key": "!items!6df2f4cdb33b569d"
+}

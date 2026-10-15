@@ -1,0 +1,95 @@
+{
+  "_id": "1429fdfe15680707",
+  "name": "Trank: Mana (Stufe I)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-conical-corked-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Mana</strong> (Stufe I): Du erhältst einen verbrauchten Zauberplatz der Stufe 1 zurück.</p>\n<p><em>Nicht automatisiert: stelle den Zauberplatz auf dem Charakterbogen selbst wieder her.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "4d1d557b3ee1fb73": {
+        "_id": "4d1d557b3ee1fb73",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [],
+        "sort": 0,
+        "type": "utility",
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "affects": {
+            "type": "self"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": false
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "mana",
+      "potionTier": 1,
+      "role": "potion"
+    }
+  },
+  "sort": 2800,
+  "_key": "!items!1429fdfe15680707"
+}

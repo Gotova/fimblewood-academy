@@ -536,11 +536,16 @@
         "Legend": "Effect in the garden",
         "Auto": "— automatic, by name —",
         "None": "— no effect —",
-        "Harm": "destroys the plant"
+        "Harm": "destroys the plant",
+        "Tier": "Tier"
       },
       "FertilizerField": {
         "Legend": "Fertilizer",
         "Label": "Growth factor (blank = not a fertilizer)"
+      },
+      "Potion": {
+        "Grown": "{actor} grows to size \"{size}\".",
+        "GrownEffect": "Wild Growth: larger"
       }
     }
   }

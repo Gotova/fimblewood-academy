@@ -1,0 +1,126 @@
+{
+  "_id": "d6916db0ba44ecfb",
+  "name": "Trank: Säure (Stufe III)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-conical-fumes-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Säure</strong> (Stufe III): Ein ätzendes Fläschchen, das sich durch Stoff und Haut frisst.</p>\n<p>Rettungswurf Geschicklichkeit gegen SG 16. Bei Misserfolg 6W6 Säureschaden, bei Erfolg die Hälfte.</p>\n<p><strong>Im Botanikclub-Garten:</strong> auf ein Beet angewendet, vernichtet der Trank die Pflanze dort sofort (HP auf 0).</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 500,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [],
+    "activities": {
+      "96a7954e3b79b063": {
+        "_id": "96a7954e3b79b063",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [],
+        "sort": 0,
+        "type": "save",
+        "save": {
+          "ability": [
+            "dex"
+          ],
+          "dc": {
+            "calculation": "",
+            "formula": "16"
+          },
+          "visible": true
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": [
+            {
+              "number": 6,
+              "denomination": 6,
+              "bonus": "",
+              "types": [
+                "acid"
+              ],
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "scaling": {
+                "mode": "",
+                "number": 1
+              }
+            }
+          ]
+        },
+        "range": {
+          "value": "30",
+          "units": "ft"
+        },
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "saeure",
+      "potionTier": 3,
+      "role": "potion"
+    }
+  },
+  "sort": 5700,
+  "_key": "!items!d6916db0ba44ecfb"
+}

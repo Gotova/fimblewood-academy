@@ -1,0 +1,116 @@
+{
+  "_id": "5b0d75c7e59dc052",
+  "name": "Trank: Halluzination (Stufe III)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-round-corked-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Halluzination</strong> (Stufe III): Das Ziel sieht Dinge, die nicht da sind. Bei Misserfolg bestimmt die Spielleitung, was es wahrnimmt. Nicht automatisiert.</p>\n<p>Rettungswurf Weisheit gegen SG 16.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 500,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "eea2fcfe1a1c54d8": {
+        "_id": "eea2fcfe1a1c54d8",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [],
+        "sort": 0,
+        "type": "save",
+        "save": {
+          "ability": [
+            "wis"
+          ],
+          "dc": {
+            "calculation": "",
+            "formula": "16"
+          },
+          "visible": true
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "range": {
+          "value": "30",
+          "units": "ft"
+        },
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": true
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "halluzination",
+      "potionTier": 3,
+      "role": "potion"
+    }
+  },
+  "sort": 6600,
+  "_key": "!items!5b0d75c7e59dc052"
+}

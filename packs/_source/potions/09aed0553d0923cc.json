@@ -1,0 +1,131 @@
+{
+  "_id": "09aed0553d0923cc",
+  "name": "Trank: Blitzschutz (Stufe I)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-corked-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Blitzschutz</strong> (Stufe I): Resistenz gegen Blitzschaden für 1 Stunde.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "4d25628d6f89b080": {
+        "_id": "4d25628d6f89b080",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [
+          {
+            "_id": "a8d5b8360cfc0320"
+          }
+        ],
+        "sort": 0,
+        "type": "utility",
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "affects": {
+            "type": "self"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": false
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [
+    {
+      "_id": "a8d5b8360cfc0320",
+      "name": "Blitzschutz",
+      "img": "icons/consumables/potions/bottle-corked-blue.webp",
+      "type": "base",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "lightning",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "seconds": 3600
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!09aed0553d0923cc.a8d5b8360cfc0320"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "blitzschutz",
+      "potionTier": 1,
+      "role": "potion"
+    }
+  },
+  "sort": 9300,
+  "_key": "!items!09aed0553d0923cc"
+}

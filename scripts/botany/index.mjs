@@ -14,6 +14,7 @@ import { MODULE_ID, PLANTS, PLANT_BY_ID } from "./plants.mjs";
 import { registerBotanyData, isMember } from "./data.mjs";
 import { BotanyMembersApp } from "./members-app.mjs";
 import { GrowthApp } from "./growth-app.mjs";
+import { registerPotionEffects } from "../alchemy/potion-effects.mjs";
 import { GARDEN_EFFECTS, effectName, cleanFactor, FACTOR_MIN, FACTOR_MAX } from "./modifiers.mjs";
 
 let _garden = null;
@@ -74,10 +75,15 @@ function injectGardenFields(app, html) {
       <option value="" ${current === "" ? "selected" : ""}>${i18n("PotionField.Auto")}</option>
       <option value="none" ${current === "none" ? "selected" : ""}>${i18n("PotionField.None")}</option>
       ${Object.entries(GARDEN_EFFECTS).map(([id, e]) => {
-        const note = e.kind === "growth" ? `×${e.factor}` : i18n("PotionField.Harm");
+        const note = e.kind === "growth" ? `×${e.factors.join(" / ×")}` : i18n("PotionField.Harm");
         return `<option value="${id}" ${id === current ? "selected" : ""}>${esc(effectName(id))} (${note})</option>`;
       }).join("")}
-    </select>`;
+    </select>
+    <label>${i18n("PotionField.Tier")}
+      <select class="fw-botany-tier-picker">
+        ${[1, 2, 3].map((n) => `<option value="${n}" ${n === (Number(item.getFlag(MODULE_ID, "potionTier")) || 1) ? "selected" : ""}>${n}</option>`).join("")}
+      </select>
+    </label>`;
     onChange = async (value) => {
       if (value) await item.setFlag(MODULE_ID, "potionEffect", value);
       else await item.unsetFlag(MODULE_ID, "potionEffect");
@@ -101,10 +107,16 @@ function injectGardenFields(app, html) {
   wrap.innerHTML = `<legend>${legend}</legend>${control}`;
   (root.querySelector("form") ?? root).appendChild(wrap);
   wrap.querySelector(".fw-botany-seed-picker").addEventListener("change", (event) => onChange(event.currentTarget.value));
+  wrap.querySelector(".fw-botany-tier-picker")?.addEventListener("change", async (event) => {
+    const tier = Number(event.currentTarget.value);
+    if (tier > 1) await item.setFlag(MODULE_ID, "potionTier", tier);
+    else await item.unsetFlag(MODULE_ID, "potionTier");
+  });
 }
 
 export function registerBotany() {
   registerBotanyData(refresh, BotanyMembersApp, GrowthApp);
+  registerPotionEffects();
 
   // The "Seed" entry of the loot item's type dropdown. i18nInit, so the label is
   // already translatable and still early enough for the sheets.

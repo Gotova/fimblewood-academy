@@ -1,0 +1,165 @@
+{
+  "_id": "bc01a3deebba22a9",
+  "name": "Trank: Frost (Stufe II)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-conical-corked-cyan.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Frost</strong> (Stufe II): Eisige Kälte, die das Ziel verlangsamt.</p>\n<p>Rettungswurf Konstitution gegen SG 14. Bei Misserfolg 4W6 Kälteschaden, bei Erfolg die Hälfte. Bei Misserfolg gilt der Effekt für 1 Min..</p>\n<p><strong>Im Botanikclub-Garten:</strong> auf ein Beet angewendet, vernichtet der Trank die Pflanze dort sofort (HP auf 0).</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 150,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "d2e015bd45d7980e": {
+        "_id": "d2e015bd45d7980e",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [
+          {
+            "_id": "dc4a26287ed88acc",
+            "onSave": false
+          }
+        ],
+        "sort": 0,
+        "type": "save",
+        "save": {
+          "ability": [
+            "con"
+          ],
+          "dc": {
+            "calculation": "",
+            "formula": "14"
+          },
+          "visible": true
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": [
+            {
+              "number": 4,
+              "denomination": 6,
+              "bonus": "",
+              "types": [
+                "cold"
+              ],
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "scaling": {
+                "mode": "",
+                "number": 1
+              }
+            }
+          ]
+        },
+        "range": {
+          "value": "30",
+          "units": "ft"
+        },
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": true
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [
+    {
+      "_id": "dc4a26287ed88acc",
+      "name": "Eingefroren: Bewegungsrate halbiert",
+      "img": "icons/consumables/potions/bottle-conical-corked-cyan.webp",
+      "type": "base",
+      "changes": [
+        {
+          "key": "system.attributes.movement.walk",
+          "mode": 1,
+          "value": "0.5",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "seconds": 60
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!bc01a3deebba22a9.dc4a26287ed88acc"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "frost",
+      "potionTier": 2,
+      "role": "potion"
+    }
+  },
+  "sort": 1100,
+  "_key": "!items!bc01a3deebba22a9"
+}

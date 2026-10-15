@@ -1,0 +1,137 @@
+{
+  "_id": "b11a5e5e9a362107",
+  "name": "Trank: Geschick (Stufe I)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-pear-corked-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Geschick</strong> (Stufe I): +1 auf Geschicklichkeitswürfe und -Rettungswürfe für 1 Stunde.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "f772939b5e721ee8": {
+        "_id": "f772939b5e721ee8",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [
+          {
+            "_id": "4c33123c1b88414c"
+          }
+        ],
+        "sort": 0,
+        "type": "utility",
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "affects": {
+            "type": "self"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": false
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [
+    {
+      "_id": "4c33123c1b88414c",
+      "name": "Flink",
+      "img": "icons/consumables/potions/bottle-pear-corked-pink.webp",
+      "type": "base",
+      "changes": [
+        {
+          "key": "system.abilities.dex.bonuses.check",
+          "mode": 2,
+          "value": "+1",
+          "priority": null
+        },
+        {
+          "key": "system.abilities.dex.bonuses.save",
+          "mode": 2,
+          "value": "+1",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "seconds": 3600
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!b11a5e5e9a362107.4c33123c1b88414c"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "geschick",
+      "potionTier": 1,
+      "role": "potion"
+    }
+  },
+  "sort": 1900,
+  "_key": "!items!b11a5e5e9a362107"
+}

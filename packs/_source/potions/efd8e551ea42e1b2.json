@@ -1,0 +1,143 @@
+{
+  "_id": "efd8e551ea42e1b2",
+  "name": "Trank: Charme (Stufe I)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-pear-corked-labeled-ornamental-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Charme</strong> (Stufe I): Das Ziel sieht dich als guten Freund an. Es weiß nach Ablauf, dass es bezaubert wurde.</p>\n<p>Rettungswurf Weisheit gegen SG 12. Bei Misserfolg: Bezaubert für 10 Min..</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "3763f48fff34691e": {
+        "_id": "3763f48fff34691e",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [
+          {
+            "_id": "d18d8bbc9bdad7c8",
+            "onSave": false
+          }
+        ],
+        "sort": 0,
+        "type": "save",
+        "save": {
+          "ability": [
+            "wis"
+          ],
+          "dc": {
+            "calculation": "",
+            "formula": "12"
+          },
+          "visible": true
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "range": {
+          "value": "30",
+          "units": "ft"
+        },
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": true
+        },
+        "duration": {
+          "value": "10",
+          "units": "minute",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [
+    {
+      "_id": "d18d8bbc9bdad7c8",
+      "name": "Bezaubert",
+      "img": "icons/consumables/potions/bottle-pear-corked-labeled-ornamental-purple.webp",
+      "type": "base",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "seconds": 600
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [
+        "charmed"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!efd8e551ea42e1b2.d18d8bbc9bdad7c8"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "charme",
+      "potionTier": 1,
+      "role": "potion"
+    }
+  },
+  "sort": 4900,
+  "_key": "!items!efd8e551ea42e1b2"
+}

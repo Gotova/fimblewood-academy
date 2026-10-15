@@ -1,0 +1,131 @@
+{
+  "_id": "5b029d220ca36c6c",
+  "name": "Trank: Raserei (Stufe III)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-round-label-cork-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Raserei</strong> (Stufe III): Wut packt dich: +4 Schaden mit Nahkampfangriffen für 10 Minuten.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 500,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "7db12701d6e37d45": {
+        "_id": "7db12701d6e37d45",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [
+          {
+            "_id": "a7dc4eebf16d9bb3"
+          }
+        ],
+        "sort": 0,
+        "type": "utility",
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "affects": {
+            "type": "self"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": false
+        },
+        "duration": {
+          "value": "10",
+          "units": "minute",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [
+    {
+      "_id": "a7dc4eebf16d9bb3",
+      "name": "In Raserei",
+      "img": "icons/consumables/potions/bottle-round-label-cork-red.webp",
+      "type": "base",
+      "changes": [
+        {
+          "key": "system.bonuses.mwak.damage",
+          "mode": 2,
+          "value": "+4",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "seconds": 600
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!5b029d220ca36c6c.a7dc4eebf16d9bb3"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "raserei",
+      "potionTier": 3,
+      "role": "potion"
+    }
+  },
+  "sort": 4800,
+  "_key": "!items!5b029d220ca36c6c"
+}

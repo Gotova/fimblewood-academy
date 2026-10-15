@@ -1,0 +1,95 @@
+{
+  "_id": "ebd9cb6ff3619da0",
+  "name": "Trank: Wildes Wachstum (Stufe III)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-round-corked-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Wildes Wachstum</strong> (Stufe III): Ein Trank, der Wachstum kräftig anregt: Samen und Ranken treiben sichtbar voran.</p>\n<p>Wer ihn trinkt, wächst für 1 Stunde um eine Größenkategorie (zum Beispiel Mittelgroß → Groß).</p>\n<p><strong>Im Botanikclub-Garten:</strong> auf ein Beet angewendet, wachsen die Pflanzen dort mit Faktor ×2, bis auf dem Beet geerntet wird.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 500,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "2fcc44f9bbe8b74d": {
+        "_id": "2fcc44f9bbe8b74d",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [],
+        "sort": 0,
+        "type": "utility",
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "affects": {
+            "type": "self"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": false
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "wildes-wachstum",
+      "potionTier": 3,
+      "role": "potion"
+    }
+  },
+  "sort": 3900,
+  "_key": "!items!ebd9cb6ff3619da0"
+}

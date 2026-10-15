@@ -16,7 +16,6 @@ import { fileURLToPath } from "node:url";
 import { INGREDIENTS, INGREDIENT_BY_ID, KIND_LABELS } from "../scripts/alchemy/ingredients.mjs";
 import { EFFECTS, tierRecipe, MANA_INGREDIENT } from "../scripts/alchemy/effects.mjs";
 import { PLANTS } from "../scripts/botany/plants.mjs";
-import { GARDEN_EFFECTS } from "../scripts/botany/modifiers.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -127,35 +126,7 @@ for (const ing of INGREDIENTS.filter((i) => !i.growable)) {
   writeJson(ITEM_DIR, harvestItem(ing, (sort += 100)));
   count += 1;
 }
-/* Potions with a garden effect, and fertilizer: stand-ins until the alchemy workshop brews them. */
-const POTIONS = [
-  ["wildes-wachstum", "Trank des Wilden Wachstums", "bottle-round-corked-green", 50, "uncommon", "Auf ein Beet in „Mein Garten“ geträufelt, wachsen die Pflanzen dort 50 % schneller (Wachstum ×1,5), bis auf dem Beet geerntet wird."],
-  ["verlangsamung", "Trank der Verlangsamung", "bottle-round-corked-blue", 25, "uncommon", "Auf ein Beet in „Mein Garten“ geträufelt, wachsen die Pflanzen dort nur halb so schnell (Wachstum ×0,5), bis auf dem Beet geerntet wird."],
-  ["gift", "Gifttrank", "bottle-conical-corked-labeled-skull-poison-green", 50, "uncommon", "Ein schädlicher Trank. Auf einem Beet in „Mein Garten“ eingesetzt, vernichtet er die Pflanze dort sofort (HP auf 0)."],
-  ["saeure", "Säuretrank", "bottle-conical-fumes-green", 50, "uncommon", "Ein schädlicher Trank. Auf einem Beet in „Mein Garten“ eingesetzt, vernichtet er die Pflanze dort sofort (HP auf 0)."],
-  ["explosion", "Explosionstrank", "bottle-round-corked-red", 75, "uncommon", "Ein schädlicher Trank. Auf einem Beet in „Mein Garten“ eingesetzt, vernichtet er die Pflanze dort sofort (HP auf 0)."],
-  ["feuer", "Feuertrank", "bottle-bulb-corked-glowing-red", 75, "uncommon", "Ein schädlicher Trank. Auf einem Beet in „Mein Garten“ eingesetzt, vernichtet er die Pflanze dort sofort (HP auf 0)."],
-  ["frost", "Frosttrank", "bottle-conical-corked-cyan", 75, "uncommon", "Ein schädlicher Trank. Auf einem Beet in „Mein Garten“ eingesetzt, vernichtet er die Pflanze dort sofort (HP auf 0)."],
-  ["nekromantie", "Nekromantie-Trank", "bottle-bulb-corked-purple", 150, "rare", "Ein schädlicher Trank. Auf einem Beet in „Mein Garten“ eingesetzt, vernichtet er die Pflanze dort sofort (HP auf 0)."],
-  ["fluch", "Fluchtrank", "bottle-conical-corked-purple", 100, "uncommon", "Ein schädlicher Trank. Auf einem Beet in „Mein Garten“ eingesetzt, vernichtet er die Pflanze dort sofort (HP auf 0)."]
-];
-for (const [effectId, name, icon, gp, rarity, text] of POTIONS) {
-  if (!GARDEN_EFFECTS[effectId]) throw new Error(`not a garden effect: ${effectId}`);
-  writeJson(ITEM_DIR, item({
-    id: stableId(`potion:${effectId}`),
-    name,
-    img: `icons/consumables/potions/${icon}.webp`,
-    description: `<p>${esc(text)}</p>`,
-    gp,
-    rarity,
-    lootType: "potion",
-    docType: "consumable",
-    flags: { potionEffect: effectId, role: "potion" },
-    sort: (sort += 100)
-  }));
-  count += 1;
-}
-
+/* Fertilizer. The potions have their own pack (tools/generate-potion-pack.mjs). */
 const FERTILIZERS = [
   ["einfach", "Einfacher Dünger", 1.2, 10, "common", "sprout-glowing-roots-green"],
   ["gut", "Guter Dünger", 1.4, 25, "uncommon", "kelp-fern-glowing-green"],

@@ -261,7 +261,7 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
     if (!potions.length) return ui.notifications.info(t("NoPotions"));
     const rows = potions.map(({ item, info }) => {
       const effect = info.effect;
-      const note = !effect ? t("Note.None") : effect.kind === "growth" ? t("Note.Growth", { factor: effect.factor }) : t("Note.Harm");
+      const note = !effect ? t("Note.None") : effect.kind === "growth" ? t("Note.Growth", { factor: info.factor }) : t("Note.Harm");
       return { item, usable: !!effect, note };
     });
     const itemId = await this.#chooseItem(t("PotionTitle"), "fas fa-flask", rows);

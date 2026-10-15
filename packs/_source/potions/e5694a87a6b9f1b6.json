@@ -1,0 +1,143 @@
+{
+  "_id": "e5694a87a6b9f1b6",
+  "name": "Trank: Bindung",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-circular-corked-labeled-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Bindung</strong>: Eine klebrige Masse hält das Ziel fest, bis es sich befreit oder die Wirkung nachlässt.</p>\n<p>Rettungswurf Stärke gegen SG 12. Bei Misserfolg: Festgesetzt für 1 Min..</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "e9f2c5091dfcf121": {
+        "_id": "e9f2c5091dfcf121",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [
+          {
+            "_id": "1af9eef020eabc1d",
+            "onSave": false
+          }
+        ],
+        "sort": 0,
+        "type": "save",
+        "save": {
+          "ability": [
+            "str"
+          ],
+          "dc": {
+            "calculation": "",
+            "formula": "12"
+          },
+          "visible": true
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "range": {
+          "value": "30",
+          "units": "ft"
+        },
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": true
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [
+    {
+      "_id": "1af9eef020eabc1d",
+      "name": "Festgesetzt",
+      "img": "icons/consumables/potions/bottle-circular-corked-labeled-green.webp",
+      "type": "base",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "seconds": 60
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [
+        "restrained"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!e5694a87a6b9f1b6.1af9eef020eabc1d"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "bindung",
+      "potionTier": 1,
+      "role": "potion"
+    }
+  },
+  "sort": 8000,
+  "_key": "!items!e5694a87a6b9f1b6"
+}

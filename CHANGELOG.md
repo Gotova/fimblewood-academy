@@ -4,6 +4,18 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.38.0] - 2026-10-15
+
+### Added
+
+- A new compendium **Botanikclub: Tränke** with a potion for every effect and tier (95 items), each with its dnd5e activity and Active Effect where the effect lasts.
+- **Wildes Wachstum** now has tiers: it speeds up a garden bed by ×1.5, ×1.75 and ×2. A tier III potion also makes the drinker one size category larger for an hour.
+- The tier of a potion is a field on the item sheet (GM), next to its garden effect.
+
+### Changed
+
+- The nine garden potions moved from *Botanikclub: Samen & Zutaten* to the new potion compendium, now in all tiers. Potions already imported into a world keep working as tier I.
+
 ## [0.37.1] - 2026-10-15
 
 ### Changed

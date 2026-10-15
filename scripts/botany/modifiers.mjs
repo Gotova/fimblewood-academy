@@ -22,8 +22,9 @@ export const FACTOR_MAX = 10;
 
 /** The potion effects that do something to a plant. Everything else stays unusable in the garden. */
 export const GARDEN_EFFECTS = {
-  "wildes-wachstum": { kind: "growth", factor: 1.5 },
-  verlangsamung: { kind: "growth", factor: 0.5 },
+  // `factors` is per potion tier (I, II, III).
+  "wildes-wachstum": { kind: "growth", factors: [1.5, 1.75, 2] },
+  verlangsamung: { kind: "growth", factors: [0.5, 0.5, 0.5] },
   // Harmful: the plant's HP drop to 0.
   gift: { kind: "harm" },
   saeure: { kind: "harm" },
@@ -55,9 +56,10 @@ export function effectName(effectId) {
 
 /**
  * What a potion item does in the garden, or null if the item is no potion.
- * `effect` is the garden effect (`{kind, factor?}`) or null when the potion
- * has no use on plants. The item flag `potionEffect` wins over the name;
- * the flag value "none" switches the garden use off.
+ * `effect` is the garden effect (`{kind, factors?}`) or null when the potion
+ * has no use on plants; `tier` (1-3, from the flag `potionTier`, default 1)
+ * picks the `factor` of a growth potion. The item flag `potionEffect` wins
+ * over the name; the flag value "none" switches the garden use off.
  */
 export function potionInfo(item) {
   if (item?.type !== "consumable" || item.system.type?.value !== "potion") return null;
@@ -69,7 +71,10 @@ export function potionInfo(item) {
     const name = item.name ?? "";
     effectId = Object.keys(GARDEN_EFFECTS).find((id) => NAME_ALIASES[id].some((term) => wholeWord(term).test(name))) ?? null;
   }
-  return { effectId, effect: GARDEN_EFFECTS[effectId] ?? null };
+  const effect = GARDEN_EFFECTS[effectId] ?? null;
+  const tier = Math.max(1, Math.min(3, Math.round(Number(item.getFlag(MODULE_ID, "potionTier"))) || 1));
+  const factor = effect?.factors ? effect.factors[tier - 1] : null;
+  return { effectId, effect, tier, factor };
 }
 
 export function potionsOf(actor) {

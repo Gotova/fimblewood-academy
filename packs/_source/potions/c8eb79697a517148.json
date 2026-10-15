@@ -1,0 +1,143 @@
+{
+  "_id": "c8eb79697a517148",
+  "name": "Trank: Schlaf (Stufe I)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-pear-corked-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Schlaf</strong> (Stufe I): Das Ziel versinkt in tiefen Schlaf. Es wacht auf, wenn es Schaden erleidet oder jemand es mit einer Aktion weckt.</p>\n<p>Rettungswurf Konstitution gegen SG 12. Bei Misserfolg: Bewusstlos für 1 Min..</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "7cd72c1cbf2edb2f": {
+        "_id": "7cd72c1cbf2edb2f",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [
+          {
+            "_id": "1bd51fd311116313",
+            "onSave": false
+          }
+        ],
+        "sort": 0,
+        "type": "save",
+        "save": {
+          "ability": [
+            "con"
+          ],
+          "dc": {
+            "calculation": "",
+            "formula": "12"
+          },
+          "visible": true
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "range": {
+          "value": "30",
+          "units": "ft"
+        },
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": true
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [
+    {
+      "_id": "1bd51fd311116313",
+      "name": "Bewusstlos",
+      "img": "icons/consumables/potions/bottle-pear-corked-blue.webp",
+      "type": "base",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "seconds": 60
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [
+        "unconscious"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!c8eb79697a517148.1bd51fd311116313"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "schlaf",
+      "potionTier": 1,
+      "role": "potion"
+    }
+  },
+  "sort": 3100,
+  "_key": "!items!c8eb79697a517148"
+}

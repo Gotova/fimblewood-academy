@@ -536,11 +536,16 @@
         "Legend": "Wirkung im Garten",
         "Auto": "— automatisch nach dem Namen —",
         "None": "— keine Wirkung —",
-        "Harm": "vernichtet die Pflanze"
+        "Harm": "vernichtet die Pflanze",
+        "Tier": "Stufe"
       },
       "FertilizerField": {
         "Legend": "Dünger",
         "Label": "Wachstumsfaktor (leer = kein Dünger)"
+      },
+      "Potion": {
+        "Grown": "{actor} wächst auf Größe „{size}“.",
+        "GrownEffect": "Wildes Wachstum: größer"
       }
     }
   }

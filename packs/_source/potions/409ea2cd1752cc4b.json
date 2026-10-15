@@ -1,0 +1,95 @@
+{
+  "_id": "409ea2cd1752cc4b",
+  "name": "Trank: Magische Sicht (Stufe I)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-bulb-corked-labeled-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Magische Sicht</strong> (Stufe I): Du siehst Magie in 30 Fuß Umkreis (wie Magie entdecken) für 10 Minuten.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "1b5ee7f6fa4405d9": {
+        "_id": "1b5ee7f6fa4405d9",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [],
+        "sort": 0,
+        "type": "utility",
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "affects": {
+            "type": "self"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": false
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "magische-sicht",
+      "potionTier": 1,
+      "role": "potion"
+    }
+  },
+  "sort": 6700,
+  "_key": "!items!409ea2cd1752cc4b"
+}

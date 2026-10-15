@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.37.1
+- **Current version:** 0.38.0
 
 ## Installation
 
@@ -143,6 +143,9 @@ A garden for the characters of the Botany Club. The GM picks the characters and 
   - Three **fertilizers** (growth ×1.2, ×1.4, ×1.6) are in the compendium *Botanikclub: Samen & Zutaten*, with prices, ready for a shop.
   - The GM sets any factor (growth and yield, 0.1 to 10) with the **Modifiers** tool on the left, then picks the bed.
   - A potion's garden effect comes from its name, or from the field **Effect in the garden** on the potion's item sheet (GM). The fertilizer factor is a field on loot items.
+- **Potions**: the compendium *Botanikclub: Tränke* holds a potion for every effect and tier (95 items, tiers I to III as common, uncommon and rare). Each has an activity (heal, saving throw or utility) and, where the effect lasts, an Active Effect: a status, a bonus or a resistance. Light, mana, magical sight, anti-magic and hallucination only carry an activity and a description. It is a rough D&D reading of the effect names, not balanced.
+  - *Wildes Wachstum* speeds up a garden bed by ×1.5, ×1.75 and ×2 for tiers I, II and III. A tier III potion also makes the **drinker** one size category larger for an hour (Medium becomes Large). *Verlangsamung* slows a bed to ×0.5 at every tier.
+  - A potion's tier is a field next to its garden effect on the item sheet (GM).
 - Garden backgrounds go in `assets/garden/` — see the prompts in `assets/garden/PROMPTS.md`. Without them the garden shows a plain lawn.
 
 ### Content

@@ -1,0 +1,143 @@
+{
+  "_id": "1e3b02a7a3025d45",
+  "name": "Trank: Begierde (Stufe I)",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-round-label-cork-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Begierde</strong> (Stufe I): Das Ziel wird von leidenschaftlicher Begierde ergriffen.</p>\n<p>Rettungswurf Weisheit gegen SG 12. Bei Misserfolg: Bezaubert für 10 Min..</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "uses": {
+      "spent": 0,
+      "max": "1",
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "activities": {
+      "d40d2f84a323918d": {
+        "_id": "d40d2f84a323918d",
+        "name": "",
+        "activation": {
+          "type": "action",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "effects": [
+          {
+            "_id": "12baa23fb3d3b994",
+            "onSave": false
+          }
+        ],
+        "sort": 0,
+        "type": "save",
+        "save": {
+          "ability": [
+            "wis"
+          ],
+          "dc": {
+            "calculation": "",
+            "formula": "12"
+          },
+          "visible": true
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "range": {
+          "value": "30",
+          "units": "ft"
+        },
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": true
+        },
+        "duration": {
+          "value": "10",
+          "units": "minute",
+          "override": true
+        }
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [
+    {
+      "_id": "12baa23fb3d3b994",
+      "name": "Bezaubert",
+      "img": "icons/consumables/potions/bottle-round-label-cork-purple.webp",
+      "type": "base",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "seconds": 600
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [
+        "charmed"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!1e3b02a7a3025d45.12baa23fb3d3b994"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "begierde",
+      "potionTier": 1,
+      "role": "potion"
+    }
+  },
+  "sort": 5200,
+  "_key": "!items!1e3b02a7a3025d45"
+}
