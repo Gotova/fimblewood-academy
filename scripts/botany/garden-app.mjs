@@ -14,15 +14,15 @@
 
 import { INGREDIENT_BY_ID } from "../alchemy/ingredients.mjs";
 import { MODULE_ID, PLANTS, GARDEN_SIZES, slotCount } from "./plants.mjs";
-import { getMembers, getGarden, plantState, seedsOf, requestGardenOp, today } from "./data.mjs";
+import { getMembers, getGarden, plantState, seedsOf, requestGardenOp, today, ownedCharacter } from "./data.mjs";
 
-/** Where the beds sit on each background picture, as % of the board: inset from every edge, and the gap between beds. */
+/** Where the beds sit on each background picture, as % of the board width: the margin on every side, and the gap between beds. The beds are square. */
 const BOARD_LAYOUT = {
-  "2x2": { top: 14, right: 14, bottom: 14, left: 14, gap: 6 },
-  "3x2": { top: 14, right: 12, bottom: 14, left: 12, gap: 5 },
-  "3x3": { top: 12, right: 12, bottom: 12, left: 12, gap: 4 },
-  "3x4": { top: 11, right: 12, bottom: 11, left: 12, gap: 4 },
-  "4x4": { top: 10, right: 10, bottom: 10, left: 10, gap: 3 }
+  "2x2": { pad: 18, gap: 6 },
+  "3x2": { pad: 14, gap: 5 },
+  "3x3": { pad: 12, gap: 4 },
+  "3x4": { pad: 10, gap: 4 },
+  "4x4": { pad: 10, gap: 3 }
 };
 
 const t = (key, data) => (data ? game.i18n.format(`FIMBLEWOOD.Botany.${key}`, data) : game.i18n.localize(`FIMBLEWOOD.Botany.${key}`));
@@ -73,13 +73,13 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
     for (let i = 0; i < total; i++) {
       const state = plantState(garden.slots[i]);
       if (!state) {
-        beds += `<button type="button" class="fw-garden-slot is-empty" data-action="slot" data-slot="${i}" title="${esc(t("Plant"))}"><span class="fw-garden-plus">+</span></button>`;
+        beds += `<button type="button" class="fw-garden-slot is-empty" data-action="fwSlot" data-slot="${i}" title="${esc(t("Plant"))}"><span class="fw-garden-plus">+</span></button>`;
         continue;
       }
       const img = INGREDIENT_BY_ID.get(state.plant.ingredientId)?.img;
       const cls = state.dead ? "is-dead" : state.ripe ? "is-ripe" : "";
       beds += `
-        <button type="button" class="fw-garden-slot ${cls} ${this.selected === i ? "is-selected" : ""}" data-action="slot" data-slot="${i}"
+        <button type="button" class="fw-garden-slot ${cls} ${this.selected === i ? "is-selected" : ""}" data-action="fwSlot" data-slot="${i}"
                 style="--m:${state.maturity / 100}" title="${esc(state.plant.name)}">
           <img src="${esc(img)}" alt="">
           <span class="fw-garden-pct">${Math.floor(state.maturity)} %</span>
@@ -87,7 +87,7 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
     }
 
     const board = `
-      <div class="fw-garden-board" style="--cols:${cols};--rows:${rows};--top:${layout.top}%;--right:${layout.right}%;--bottom:${layout.bottom}%;--left:${layout.left}%;--gap:${layout.gap}%;
+      <div class="fw-garden-board" style="--cols:${cols};--rows:${rows};--pad:${layout.pad}cqw;--gap:${layout.gap}cqw;
            --bg:url('modules/${MODULE_ID}/assets/garden/garden-${size}.webp')">
         <div class="fw-garden-grid">${beds}</div>
         ${this.#card(garden)}
@@ -105,8 +105,8 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
     const day = today();
     return `
       <div class="fw-garden-toolbar">
-        <select data-action="owner">${options}</select>
-        <button type="button" data-action="advance" title="${esc(t("AdvanceHint"))}">${t("Advance")}</button>
+        <select data-action="fwOwner">${options}</select>
+        <button type="button" data-action="fwAdvance" title="${esc(t("AdvanceHint"))}">${t("Advance")}</button>
         ${day != null ? `<span class="fw-garden-day">${t("Day", { day })}</span>` : ""}
       </div>`;
   }
@@ -122,18 +122,18 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
       <div class="fw-garden-gm">
         <label>${t("Maturity")} <input type="number" data-gm="maturity" min="0" max="100" step="1" value="${Math.round(maturity)}"></label>
         <label>${t("Hp")} <input type="number" data-gm="hp" min="0" max="${plant.maxHp}" step="1" value="${hp}"></label>
-        <button type="button" data-action="remove">${t("Remove")}</button>
+        <button type="button" data-action="fwRemove">${t("Remove")}</button>
       </div>` : "";
     return `
       <div class="fw-garden-card">
-        <button type="button" class="fw-garden-close" data-action="close" title="${esc(t("Close"))}">×</button>
+        <button type="button" class="fw-garden-close" data-action="fwCardClose" title="${esc(t("Close"))}">×</button>
         <h3>${esc(plant.name)}</h3>
         <div class="fw-garden-status">${status}</div>
         <div class="fw-garden-stat"><span>${t("Maturity")}</span><span>${Math.floor(maturity)} %</span></div>
         <div class="fw-garden-bar is-maturity"><span style="width:${maturity}%"></span></div>
         <div class="fw-garden-stat"><span>${t("Hp")}</span><span>${hp} / ${plant.maxHp}</span></div>
         <div class="fw-garden-bar is-hp"><span style="width:${(hp / plant.maxHp) * 100}%"></span></div>
-        <button type="button" class="fw-garden-primary" data-action="harvest">${t("Harvest")}</button>
+        <button type="button" class="fw-garden-primary" data-action="fwHarvest">${t("Harvest")}</button>
         ${gmFields}
       </div>`;
   }
@@ -149,7 +149,7 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
       });
       content.addEventListener("change", (event) => {
         const el = event.target;
-        if (el.matches('select[data-action="owner"]')) {
+        if (el.matches('select[data-action="fwOwner"]')) {
           this.ownerId = el.value;
           this.selected = null;
           this.render();
@@ -164,7 +164,7 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
   async #onAction(action, el) {
     const slot = Number(el.dataset.slot);
     switch (action) {
-      case "slot": {
+      case "fwSlot": {
         const garden = getGarden(this.ownerId);
         if (garden.slots[slot]) {
           this.selected = this.selected === slot ? null : slot;
@@ -175,18 +175,18 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
         }
         break;
       }
-      case "close":
+      case "fwCardClose":
         this.selected = null;
         this.render();
         break;
-      case "harvest":
+      case "fwHarvest":
         this.#harvest();
         break;
-      case "remove":
+      case "fwRemove":
         requestGardenOp({ type: "gmRemove", ownerId: this.ownerId, slot: this.selected });
         this.selected = null;
         break;
-      case "advance":
+      case "fwAdvance":
         requestGardenOp({ type: "advance", days: 1 });
         break;
     }
@@ -201,7 +201,7 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
         `<label class="fw-garden-seed"><input type="radio" name="seed" value="${p.id}"><img src="${esc(INGREDIENT_BY_ID.get(p.ingredientId)?.img)}" alt=""><span>${esc(p.name)}</span></label>`
       ).join("");
     } else {
-      const actor = game.user.character;
+      const actor = ownedCharacter(game.user);
       if (!actor) return ui.notifications.warn(t("Notice.NoCharacter"));
       const seeds = seedsOf(actor);
       if (!seeds.length) return ui.notifications.info(t("NoSeeds"));

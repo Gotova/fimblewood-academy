@@ -472,7 +472,7 @@
         "NoSeed": "Dieser Samen ist nicht mehr in deinem Inventar.",
         "NoPlant": "Aus diesem Samen wächst keine Pflanze. Frag die Spielleitung.",
         "SlotEmpty": "In diesem Beet wächst nichts.",
-        "NoCharacter": "Du brauchst einen zugewiesenen Charakter.",
+        "NoCharacter": "Dir gehört kein Charakter.",
         "PackMissing": "Das Erntegut wurde im Kompendium nicht gefunden.",
         "Planted": "{plant} gepflanzt.",
         "Harvested": "{qty}× {plant} geerntet.",

@@ -4,6 +4,14 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.34.1] - 2026-10-15
+
+### Fixed
+
+- **Mein Garten**: the beds are now square, with the same margin on all sides, and the plant picture grows with the bed.
+- **Mein Garten**: players without an assigned character can plant and harvest with the character they own.
+- **Mein Garten**: closing a plant's card with its × no longer closes the whole garden window.
+
 ## [0.34.0] - 2026-10-15
 
 ### Added

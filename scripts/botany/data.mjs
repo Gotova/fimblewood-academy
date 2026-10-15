@@ -73,6 +73,13 @@ export function plantState(slot) {
   return { plant, maturity, hp, dead: hp <= 0, ripe: maturity >= 100 && hp > 0 };
 }
 
+/** The character a user plays: their assigned one, else the first character actor they own. */
+export function ownedCharacter(user) {
+  return user?.character
+    ?? game.actors.find((a) => a.type === "character" && a.testUserPermission(user, "OWNER"))
+    ?? null;
+}
+
 /** The seed items of an actor, with the plant each one grows (null if the GM never assigned one). */
 export function seedsOf(actor) {
   return (actor?.items ?? [])
@@ -169,7 +176,7 @@ async function applyOp(user, op = {}) {
     if (op.type === "gmPlant") {
       plant = PLANT_BY_ID.get(op.plantId);
     } else {
-      seed = owner?.character?.items.get(op.itemId);
+      seed = ownedCharacter(owner)?.items.get(op.itemId);
       plant = PLANT_BY_ID.get(seed?.getFlag(MODULE_ID, "plantId"));
       if (!seed || seed.type !== "loot" || seed.system.type?.value !== "seed") return fail(i18n("Notice.NoSeed"));
     }
@@ -208,7 +215,7 @@ async function applyOp(user, op = {}) {
   }
 
   if (op.type === "harvest") {
-    const actor = owner?.character;
+    const actor = ownedCharacter(owner);
     if (state.ripe && !actor) return fail(i18n("Notice.NoCharacter"));
     delete garden.slots[key];
     await writeGardens(gardens);

@@ -472,7 +472,7 @@
         "NoSeed": "That seed is no longer in your inventory.",
         "NoPlant": "This seed does not grow into a plant. Ask the GM.",
         "SlotEmpty": "Nothing grows in this bed.",
-        "NoCharacter": "You need an assigned character.",
+        "NoCharacter": "You do not own a character.",
         "PackMissing": "The harvested item was not found in the compendium.",
         "Planted": "Planted {plant}.",
         "Harvested": "Harvested {qty}× {plant}.",
