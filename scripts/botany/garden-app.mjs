@@ -14,7 +14,7 @@
 
 import { INGREDIENT_BY_ID } from "../alchemy/ingredients.mjs";
 import { MODULE_ID, PLANTS, GARDEN_SIZES, slotCount } from "./plants.mjs";
-import { getMembers, getGarden, plantState, seedsOf, requestGardenOp, today, ownedCharacter } from "./data.mjs";
+import { getMembers, getGarden, plantState, seedsOf, requestGardenOp, today, memberActors } from "./data.mjs";
 
 /** Where the beds sit on each background picture, as % of the board width: the margin on every side, and the gap between beds. The beds are square. */
 const BOARD_LAYOUT = {
@@ -43,29 +43,27 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
     classes: ["fimblewood-garden-app"]
   };
 
-  /** GM: the member whose garden is shown. */
-  ownerId = null;
+  /** The character whose garden is shown. */
+  actorId = null;
 
   /** Index of the bed whose card is open. */
   selected = null;
 
-  #viewedOwner() {
-    const members = getMembers();
-    if (!game.user.isGM) return members[game.user.id] ? game.user.id : null;
-    const ids = Object.keys(members);
-    return ids.includes(this.ownerId) ? this.ownerId : (ids[0] ?? null);
+  #viewedActor() {
+    const ids = memberActors().map((a) => a.id);
+    return ids.includes(this.actorId) ? this.actorId : (ids[0] ?? null);
   }
 
   async _renderHTML() {
-    const ownerId = this.#viewedOwner();
-    const member = ownerId ? getMembers()[ownerId] : null;
+    const actorId = this.#viewedActor();
+    const member = actorId ? getMembers()[actorId] : null;
     if (!member) return `<p class="fw-garden-empty">${t(game.user.isGM ? "NoMembers" : "NotMember")}</p>`;
 
-    this.ownerId = ownerId;
+    this.actorId = actorId;
     const size = member.size;
     const [cols, rows] = GARDEN_SIZES[size];
     const layout = BOARD_LAYOUT[size];
-    const garden = getGarden(ownerId);
+    const garden = getGarden(actorId);
     const total = slotCount(size);
     if (this.selected != null && (this.selected >= total || !garden.slots[this.selected])) this.selected = null;
 
@@ -93,21 +91,24 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
         ${this.#card(garden)}
       </div>`;
 
-    return `${this.#toolbar(ownerId, size)}${board}`;
+    return `${this.#toolbar(actorId)}${board}`;
   }
 
-  #toolbar(ownerId, size) {
-    if (!game.user.isGM) return "";
+  #toolbar(actorId) {
+    const isGM = game.user.isGM;
+    const actors = memberActors();
+    if (!isGM && actors.length < 2) return "";
     const members = getMembers();
-    const options = Object.keys(members).map((id) =>
-      `<option value="${id}" ${id === ownerId ? "selected" : ""}>${esc(game.users.get(id)?.name)} (${members[id].size})</option>`
+    const options = actors.map((a) =>
+      `<option value="${a.id}" ${a.id === actorId ? "selected" : ""}>${esc(a.name)} (${members[a.id].size})</option>`
     ).join("");
     const day = today();
+    const gmTools = isGM ? `
+        <button type="button" data-action="fwAdvance" title="${esc(t("AdvanceHint"))}">${t("Advance")}</button>
+        ${day != null ? `<span class="fw-garden-day">${t("Day", { day })}</span>` : ""}` : "";
     return `
       <div class="fw-garden-toolbar">
-        <select data-action="fwOwner">${options}</select>
-        <button type="button" data-action="fwAdvance" title="${esc(t("AdvanceHint"))}">${t("Advance")}</button>
-        ${day != null ? `<span class="fw-garden-day">${t("Day", { day })}</span>` : ""}
+        <select data-action="fwOwner">${options}</select>${gmTools}
       </div>`;
   }
 
@@ -150,11 +151,11 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
       content.addEventListener("change", (event) => {
         const el = event.target;
         if (el.matches('select[data-action="fwOwner"]')) {
-          this.ownerId = el.value;
+          this.actorId = el.value;
           this.selected = null;
           this.render();
         } else if (el.matches("[data-gm]")) {
-          requestGardenOp({ type: "gmSet", ownerId: this.ownerId, slot: this.selected, [el.dataset.gm]: Number(el.value) });
+          requestGardenOp({ type: "gmSet", actorId: this.actorId, slot: this.selected, [el.dataset.gm]: Number(el.value) });
         }
       });
     }
@@ -165,7 +166,7 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
     const slot = Number(el.dataset.slot);
     switch (action) {
       case "fwSlot": {
-        const garden = getGarden(this.ownerId);
+        const garden = getGarden(this.actorId);
         if (garden.slots[slot]) {
           this.selected = this.selected === slot ? null : slot;
           this.render();
@@ -183,7 +184,7 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
         this.#harvest();
         break;
       case "fwRemove":
-        requestGardenOp({ type: "gmRemove", ownerId: this.ownerId, slot: this.selected });
+        requestGardenOp({ type: "gmRemove", actorId: this.actorId, slot: this.selected });
         this.selected = null;
         break;
       case "fwAdvance":
@@ -201,7 +202,7 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
         `<label class="fw-garden-seed"><input type="radio" name="seed" value="${p.id}"><img src="${esc(INGREDIENT_BY_ID.get(p.ingredientId)?.img)}" alt=""><span>${esc(p.name)}</span></label>`
       ).join("");
     } else {
-      const actor = ownedCharacter(game.user);
+      const actor = game.actors.get(this.actorId);
       if (!actor) return ui.notifications.warn(t("Notice.NoCharacter"));
       const seeds = seedsOf(actor);
       if (!seeds.length) return ui.notifications.info(t("NoSeeds"));
@@ -224,13 +225,13 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
       position: { width: 360 }
     });
     if (!choice) return;
-    if (isGM) requestGardenOp({ type: "gmPlant", ownerId: this.ownerId, slot, plantId: choice });
-    else requestGardenOp({ type: "plant", slot, itemId: choice });
+    if (isGM) requestGardenOp({ type: "gmPlant", actorId: this.actorId, slot, plantId: choice });
+    else requestGardenOp({ type: "plant", actorId: this.actorId, slot, itemId: choice });
   }
 
   async #harvest() {
     const slot = this.selected;
-    const state = plantState(getGarden(this.ownerId).slots[slot]);
+    const state = plantState(getGarden(this.actorId).slots[slot]);
     if (!state) return;
     if (!state.ripe) {
       const ok = await foundry.applications.api.DialogV2.confirm({
@@ -241,7 +242,7 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
       if (!ok) return;
     }
     this.selected = null;
-    requestGardenOp({ type: "harvest", ownerId: this.ownerId, slot });
+    requestGardenOp({ type: "harvest", actorId: this.actorId, slot });
   }
 }
 

@@ -429,7 +429,7 @@
         "None": "— keine Pflanze —"
       },
       "NoMembers": "Der Botanikclub hat noch keine Mitglieder. Trage sie in den Moduleinstellungen ein.",
-      "NotMember": "Du bist kein Mitglied des Botanikclubs.",
+      "NotMember": "Keiner deiner Charaktere ist im Botanikclub.",
       "Plant": "Pflanzen",
       "PlantTitle": "Was möchtest du pflanzen?",
       "NoSeeds": "Du hast keine Samen im Inventar.",
@@ -452,10 +452,10 @@
         "Title": "Botanikclub verwalten",
         "MenuName": "Botanikclub",
         "MenuLabel": "Botanikclub verwalten",
-        "MenuHint": "Wähle die Spieler im Botanikclub und die Größe ihres Gartens.",
-        "Hint": "Mitglieder bekommen „Mein Garten“ in der Fimblewood-Steuerung. Verkleinerst du einen Garten, bleiben die Pflanzen in den ausgeblendeten Beeten gespeichert.",
+        "MenuHint": "Wähle die Charaktere im Botanikclub und die Größe ihres Gartens.",
+        "Hint": "Die Spieler dieser Charaktere bekommen „Mein Garten“ in der Fimblewood-Steuerung. Verkleinerst du einen Garten, bleiben die Pflanzen in den ausgeblendeten Beeten gespeichert.",
         "Size": "Gartengröße (Spalten × Reihen)",
-        "NoPlayers": "Es gibt keine Spieler.",
+        "NoPlayers": "Es gibt keine Spielercharaktere.",
         "Save": "Speichern",
         "Cancel": "Abbrechen"
       },
@@ -467,7 +467,7 @@
       },
       "Notice": {
         "Refused": "Das ist nicht erlaubt.",
-        "NotMember": "Das ist kein Mitglied des Botanikclubs.",
+        "NotMember": "Dieser Charakter ist kein Mitglied des Botanikclubs.",
         "SlotTaken": "Dieses Beet ist schon bepflanzt.",
         "NoSeed": "Dieser Samen ist nicht mehr in deinem Inventar.",
         "NoPlant": "Aus diesem Samen wächst keine Pflanze. Frag die Spielleitung.",

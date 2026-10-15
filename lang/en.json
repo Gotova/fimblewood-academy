@@ -429,7 +429,7 @@
         "None": "— no plant —"
       },
       "NoMembers": "The Botany Club has no members yet. Add them in the module settings.",
-      "NotMember": "You are not a member of the Botany Club.",
+      "NotMember": "None of your characters is in the Botany Club.",
       "Plant": "Plant",
       "PlantTitle": "What do you want to plant?",
       "NoSeeds": "You have no seeds in your inventory.",
@@ -452,10 +452,10 @@
         "Title": "Manage the Botany Club",
         "MenuName": "Botany Club",
         "MenuLabel": "Manage the Botany Club",
-        "MenuHint": "Pick the players in the Botany Club and the size of their garden.",
-        "Hint": "Members get \"My Garden\" in the Fimblewood controls. If you shrink a garden, the plants in the hidden beds stay saved.",
+        "MenuHint": "Pick the characters in the Botany Club and the size of their garden.",
+        "Hint": "The players of these characters get \"My Garden\" in the Fimblewood controls. If you shrink a garden, the plants in the hidden beds stay saved.",
         "Size": "Garden size (columns × rows)",
-        "NoPlayers": "There are no players.",
+        "NoPlayers": "There are no player characters.",
         "Save": "Save",
         "Cancel": "Cancel"
       },
@@ -467,7 +467,7 @@
       },
       "Notice": {
         "Refused": "That is not allowed.",
-        "NotMember": "That player is not in the Botany Club.",
+        "NotMember": "That character is not in the Botany Club.",
         "SlotTaken": "This bed is already planted.",
         "NoSeed": "That seed is no longer in your inventory.",
         "NoPlant": "This seed does not grow into a plant. Ask the GM.",

@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.35.0] - 2026-10-15
+
+### Changed
+
+- **Mein Garten**: club members are now **characters**, not players. The GM picks characters (like in the Timetable), every character has its own garden, and a player who owns several members can switch between them. Seeds are taken from, and the harvest goes to, that character. Members saved in 0.34.x were stored per player and have to be picked again.
+
 ## [0.34.2] - 2026-10-15
 
 ### Fixed

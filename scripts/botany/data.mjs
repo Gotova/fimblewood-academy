@@ -3,8 +3,8 @@
  *
  * World settings hold everything, so the GM (the only writer) can adjust it:
  *
- *   botanyMembers  { [userId]: { size } }                       who is in the club, and the garden size
- *   botanyGardens  { [userId]: { slots: { [index]: plant }, lastDay } }
+ *   botanyMembers  { [actorId]: { size } }                      which characters are in the club, and the garden size
+ *   botanyGardens  { [actorId]: { slots: { [index]: plant }, lastDay } }
  *   plant          { plantId, maturity (0-100), hp, plantedDay }
  *
  * Players never write settings themselves: they send a request (see
@@ -37,13 +37,21 @@ export function getMembers() {
   const raw = game.settings.get(MODULE_ID, MEMBERS_SETTING) ?? {};
   const members = {};
   for (const [id, value] of Object.entries(raw)) {
-    if (game.users.has(id)) members[id] = { size: GARDEN_SIZES[value?.size] ? value.size : DEFAULT_SIZE };
+    if (game.actors.has(id)) members[id] = { size: GARDEN_SIZES[value?.size] ? value.size : DEFAULT_SIZE };
   }
   return members;
 }
 
+/** The club's characters that `user` may garden for: all of them for the GM, else the ones they own. */
+export function memberActors(user = game.user) {
+  return Object.keys(getMembers())
+    .map((id) => game.actors.get(id))
+    .filter((a) => a && (user.isGM || a.testUserPermission(user, "OWNER")))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
 export function isMember(user = game.user) {
-  return !!getMembers()[user.id];
+  return memberActors(user).length > 0;
 }
 
 export function getGardens() {
@@ -51,8 +59,8 @@ export function getGardens() {
 }
 
 /** A member's garden with a guaranteed `slots` object. */
-export function getGarden(userId) {
-  const garden = getGardens()[userId] ?? {};
+export function getGarden(actorId) {
+  const garden = getGardens()[actorId] ?? {};
   return { slots: garden.slots ?? {}, lastDay: garden.lastDay ?? null };
 }
 
@@ -71,13 +79,6 @@ export function plantState(slot) {
   const maturity = Math.max(0, Math.min(100, Number(slot.maturity) || 0));
   const hp = Math.max(0, Math.min(plant.maxHp, Number(slot.hp) || 0));
   return { plant, maturity, hp, dead: hp <= 0, ripe: maturity >= 100 && hp > 0 };
-}
-
-/** The character a user plays: their assigned one, else the first character actor they own. */
-export function ownedCharacter(user) {
-  return user?.character
-    ?? game.actors.find((a) => a.type === "character" && a.testUserPermission(user, "OWNER"))
-    ?? null;
 }
 
 /** The seed items of an actor, with the plant each one grows (null if the GM never assigned one). */
@@ -140,9 +141,9 @@ async function rollYield(plant) {
 
 /**
  * Applies one operation on the active GM's client, on behalf of `user`.
- * Players: `plant {slot, itemId}`, `harvest {slot}` (own garden only).
- * GM: additionally `gmPlant {ownerId, slot, plantId}`, `gmSet {ownerId, slot, maturity, hp}`,
- * `gmRemove {ownerId, slot}` and `advance {days}`.
+ * Everyone (for characters they own): `plant {actorId, slot, itemId}`, `harvest {actorId, slot}`.
+ * GM: additionally `gmPlant {actorId, slot, plantId}`, `gmSet {actorId, slot, maturity, hp}`,
+ * `gmRemove {actorId, slot}` and `advance {days}`.
  */
 async function applyOp(user, op = {}) {
   const gmOnly = ["gmPlant", "gmSet", "gmRemove", "advance"];
@@ -157,17 +158,18 @@ async function applyOp(user, op = {}) {
     return done(i18n("Notice.Advanced", { days }));
   }
 
-  const ownerId = user.isGM && op.ownerId ? String(op.ownerId) : user.id;
-  const member = getMembers()[ownerId];
-  if (!member) return fail(i18n("Notice.NotMember"));
+  const actorId = String(op.actorId ?? "");
+  const actor = game.actors.get(actorId);
+  const member = getMembers()[actorId];
+  if (!actor || !member) return fail(i18n("Notice.NotMember"));
+  if (!user.isGM && !actor.testUserPermission(user, "OWNER")) return fail(i18n("Notice.Refused"));
   const slotIndex = Number(op.slot);
   if (!Number.isInteger(slotIndex) || slotIndex < 0 || slotIndex >= slotCount(member.size)) return fail(i18n("Notice.Refused"));
 
   const gardens = foundry.utils.deepClone(getGardens());
-  const garden = (gardens[ownerId] ??= { slots: {}, lastDay: today() });
+  const garden = (gardens[actorId] ??= { slots: {}, lastDay: today() });
   garden.slots ??= {};
   const key = String(slotIndex);
-  const owner = game.users.get(ownerId);
 
   if (op.type === "plant" || op.type === "gmPlant") {
     if (garden.slots[key]) return fail(i18n("Notice.SlotTaken"));
@@ -176,7 +178,7 @@ async function applyOp(user, op = {}) {
     if (op.type === "gmPlant") {
       plant = PLANT_BY_ID.get(op.plantId);
     } else {
-      seed = ownedCharacter(owner)?.items.get(op.itemId);
+      seed = actor.items.get(op.itemId);
       plant = PLANT_BY_ID.get(seed?.getFlag(MODULE_ID, "plantId"));
       if (!seed || seed.type !== "loot" || seed.system.type?.value !== "seed") return fail(i18n("Notice.NoSeed"));
     }
@@ -215,8 +217,6 @@ async function applyOp(user, op = {}) {
   }
 
   if (op.type === "harvest") {
-    const actor = ownedCharacter(owner);
-    if (state.ripe && !actor) return fail(i18n("Notice.NoCharacter"));
     delete garden.slots[key];
     await writeGardens(gardens);
     if (!state.ripe) return done(i18n(state.dead ? "Notice.RemovedDead" : "Notice.NothingGained", { plant: state.plant.name }));
@@ -268,10 +268,10 @@ export async function syncGrowth() {
   const gardens = foundry.utils.deepClone(getGardens());
   const auto = game.settings.get(MODULE_ID, AUTOGROW_SETTING);
   let changed = false;
-  for (const [userId, garden] of Object.entries(gardens)) {
-    if (!game.users.has(userId)) continue;
+  for (const [actorId, garden] of Object.entries(gardens)) {
+    if (!game.actors.has(actorId)) continue;
     const delta = garden.lastDay == null ? 0 : now - garden.lastDay;
-    if (delta > 0 && auto) grow({ [userId]: garden }, delta);
+    if (delta > 0 && auto) grow({ [actorId]: garden }, delta);
     if (garden.lastDay !== now) {
       garden.lastDay = now;
       changed = true;
