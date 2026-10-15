@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.39.0] - 2026-10-15
+
+### Added
+
+- **Potion prices** are now editable: a menu with one table (**Edit potion prices**) shows every potion with its tiers side by side. A custom price applies when a potion is created from the compendium, and the menu can also update potions that already exist in the world and in inventories.
+
 ## [0.38.0] - 2026-10-15
 
 ### Added

@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.38.0
+- **Current version:** 0.39.0
 
 ## Installation
 
@@ -146,6 +146,7 @@ A garden for the characters of the Botany Club. The GM picks the characters and 
 - **Potions**: the compendium *Botanikclub: Tränke* holds a potion for every effect and tier (95 items, tiers I to III as common, uncommon and rare). Each has an activity (heal, saving throw or utility) and, where the effect lasts, an Active Effect: a status, a bonus or a resistance. Light, mana, magical sight, anti-magic and hallucination only carry an activity and a description. It is a rough D&D reading of the effect names, not balanced.
   - *Wildes Wachstum* speeds up a garden bed by ×1.5, ×1.75 and ×2 for tiers I, II and III. A tier III potion also makes the **drinker** one size category larger for an hour (Medium becomes Large). *Verlangsamung* slows a bed to ×0.5 at every tier.
   - A potion's tier is a field next to its garden effect on the item sheet (GM).
+  - **Prices**: the GM edits the price of every potion in one table, with the three tiers side by side, under **Configure Settings → Fimblewood Academy → Edit potion prices**. The compendium keeps its default prices (50 / 150 / 500 gp); a custom price applies when a potion is created from the compendium, and optionally to potions that already exist.
 - Garden backgrounds go in `assets/garden/` — see the prompts in `assets/garden/PROMPTS.md`. Without them the garden shows a plain lawn.
 
 ### Content

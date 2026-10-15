@@ -15,6 +15,7 @@ import { registerBotanyData, isMember } from "./data.mjs";
 import { BotanyMembersApp } from "./members-app.mjs";
 import { GrowthApp } from "./growth-app.mjs";
 import { registerPotionEffects } from "../alchemy/potion-effects.mjs";
+import { registerPotionPrices } from "../alchemy/potion-prices.mjs";
 import { GARDEN_EFFECTS, effectName, cleanFactor, FACTOR_MIN, FACTOR_MAX } from "./modifiers.mjs";
 
 let _garden = null;
@@ -117,6 +118,7 @@ function injectGardenFields(app, html) {
 export function registerBotany() {
   registerBotanyData(refresh, BotanyMembersApp, GrowthApp);
   registerPotionEffects();
+  registerPotionPrices();
 
   // The "Seed" entry of the loot item's type dropdown. i18nInit, so the label is
   // already translatable and still early enough for the sheets.

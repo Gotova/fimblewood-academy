@@ -402,3 +402,38 @@
 .fw-garden-seed small {
   opacity: 0.7;
 }
+
+/* Potion prices table */
+.fw-garden-price-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.fw-garden-price-table th,
+.fw-garden-price-table td {
+  padding: 2px 6px;
+  text-align: center;
+}
+.fw-garden-price-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--color-cool-5, #1b1b1f);
+  z-index: 1;
+}
+.fw-garden-price-table tbody th {
+  text-align: left;
+  font-weight: normal;
+}
+.fw-garden-price-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+.fw-garden-price-table input {
+  width: 76px;
+  text-align: right;
+}
+.fw-garden-price-apply {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 12px;
+}

@@ -20,7 +20,8 @@ import { GARDEN_EFFECTS } from "../botany/modifiers.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 const MODE = { MULTIPLY: 1, ADD: 2, UPGRADE: 4 };
-const TIER_PRICE = [50, 150, 500];
+/** Default price in gp of a potion by tier (the GM can change it, see potion-prices.mjs). */
+export const TIER_PRICE = [50, 150, 500];
 const TIER_LABEL = ["I", "II", "III"];
 const RARITY_LABEL = { common: "Gewöhnlich", uncommon: "Ungewöhnlich", rare: "Selten" };
 const ABILITY_LABEL = { str: "Stärke", dex: "Geschicklichkeit", con: "Konstitution", wis: "Weisheit" };

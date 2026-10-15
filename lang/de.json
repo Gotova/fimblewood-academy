@@ -546,6 +546,25 @@
       "Potion": {
         "Grown": "{actor} wächst auf Größe „{size}“.",
         "GrownEffect": "Wildes Wachstum: größer"
+      },
+      "Prices": {
+        "Title": "Trankpreise",
+        "MenuName": "Trankpreise",
+        "MenuLabel": "Trankpreise bearbeiten",
+        "MenuHint": "Lege den Preis jedes Tranks und jeder Stufe fest, mit allen Stufen nebeneinander.",
+        "Hint": "Preise in Goldmünzen. Standard: Stufe I {a}, Stufe II {b}, Stufe III {c}. Im Kompendium bleiben die Standardpreise stehen. Dein Preis gilt, sobald ein Trank aus dem Kompendium in die Welt kommt oder auf einen Charakter gezogen wird.",
+        "Potion": "Trank",
+        "Tier": "Stufe",
+        "Rarity": {
+          "Common": "gewöhnlich",
+          "Uncommon": "ungewöhnlich",
+          "Rare": "selten"
+        },
+        "ApplyExisting": "Auch auf bereits vorhandene Tränke anwenden (in der Welt und in Inventaren)",
+        "Applied": "{count} Tränke aktualisiert.",
+        "Save": "Speichern",
+        "Reset": "Alle auf Standard",
+        "Cancel": "Abbrechen"
       }
     }
   }

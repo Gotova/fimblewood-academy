@@ -546,6 +546,25 @@
       "Potion": {
         "Grown": "{actor} grows to size \"{size}\".",
         "GrownEffect": "Wild Growth: larger"
+      },
+      "Prices": {
+        "Title": "Potion prices",
+        "MenuName": "Potion prices",
+        "MenuLabel": "Edit potion prices",
+        "MenuHint": "Set the price of every potion and tier, with all tiers side by side.",
+        "Hint": "Prices in gold pieces. Default: tier I {a}, tier II {b}, tier III {c}. The compendium keeps the default prices. Your price applies once a potion comes from the compendium into the world or onto a character.",
+        "Potion": "Potion",
+        "Tier": "Tier",
+        "Rarity": {
+          "Common": "common",
+          "Uncommon": "uncommon",
+          "Rare": "rare"
+        },
+        "ApplyExisting": "Also apply to potions that already exist (in the world and in inventories)",
+        "Applied": "{count} potions updated.",
+        "Save": "Save",
+        "Reset": "All to default",
+        "Cancel": "Cancel"
       }
     }
   }
