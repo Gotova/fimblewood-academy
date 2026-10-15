@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.34.2] - 2026-10-15
+
+### Fixed
+
+- **Mein Garten**: the beds were far too large after 0.34.1. Their size is now worked out from the picture, so the garden scales correctly with the window.
+
 ## [0.34.1] - 2026-10-15
 
 ### Fixed

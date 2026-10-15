@@ -31,6 +31,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
+  container-type: size;
   border-radius: 6px;
   overflow: hidden;
   background-image: var(--bg), linear-gradient(135deg, #4d7a3a, #6b9a4a 55%, #46702f);
@@ -42,13 +43,12 @@
 .fw-garden-grid {
   position: absolute;
   inset: var(--pad);
-  container-type: size;
   display: grid;
   justify-content: center;
   align-content: center;
   --cell: min(
-    (100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols),
-    (100cqh - (var(--rows) - 1) * var(--gap)) / var(--rows)
+    (100cqw - 2 * var(--pad) - (var(--cols) - 1) * var(--gap)) / var(--cols),
+    (100cqh - 2 * var(--pad) - (var(--rows) - 1) * var(--gap)) / var(--rows)
   );
   grid-template-columns: repeat(var(--cols), var(--cell));
   grid-template-rows: repeat(var(--rows), var(--cell));
