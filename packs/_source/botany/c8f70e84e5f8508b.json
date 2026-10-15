@@ -5,7 +5,7 @@
   "img": "icons/consumables/mushrooms/conical-bell-orange-white.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Magmamorchel</strong> — Trankpilz, Selten. <em>(Vorbild: Magma Morel)</em></p><p>Verwendung in Tränken: Vergrößerung.</p>",
+      "value": "<p><strong>Magmamorchel</strong> — Trankpilz, Selten.</p>",
       "chat": ""
     },
     "quantity": 1,

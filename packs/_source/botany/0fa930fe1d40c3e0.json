@@ -5,7 +5,7 @@
   "img": "icons/consumables/fruit/berry-shiny-leaf-blue-teal.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Eisfrucht</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Icefruit)</em></p>",
+      "value": "<p><strong>Eisfrucht</strong> — Trankkraut, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

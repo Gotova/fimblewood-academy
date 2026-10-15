@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/milkweed-stem-serrated-leaves-green.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Donnerdistel</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Thunder Thistle)</em></p><p>Verwendung in Tränken: Blitz.</p>",
+      "value": "<p><strong>Donnerdistel</strong> — Trankkraut, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

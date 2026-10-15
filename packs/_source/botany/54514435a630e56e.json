@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/sprout-seed-yellow-green.webp",
   "system": {
     "description": {
-      "value": "<p>Samen: <strong>Seltsampilz</strong> (Trankpilz).</p>\n<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Reift in <strong>5 Tagen</strong> und bringt bei der Ernte 2–4 Stück.</p>",
+      "value": "<p>Samen: <strong>Seltsampilz</strong> (Trankpilz).</p>\n<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Wie lange sie braucht, bis sie reif ist, weiß die Spielleitung. Bei der Ernte bringt sie 2–4 Stück.</p>",
       "chat": ""
     },
     "quantity": 1,

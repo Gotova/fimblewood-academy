@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/dill-herb-bundle-green.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Druidenrosmarin</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Druid&#39;s Rosemary)</em></p><p>Verwendung in Tränken: Verlangsamung, Fluch.</p>",
+      "value": "<p><strong>Druidenrosmarin</strong> — Trankkraut, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

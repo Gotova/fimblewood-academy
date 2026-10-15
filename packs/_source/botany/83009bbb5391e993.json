@@ -5,7 +5,7 @@
   "img": "icons/consumables/mushrooms/ovate-blue.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Seltsampilz</strong> — Trankpilz, Ungewöhnlich. <em>(Vorbild: Weirdshroom)</em></p><p>Verwendung in Tränken: Fluch.</p>",
+      "value": "<p><strong>Seltsampilz</strong> — Trankpilz, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

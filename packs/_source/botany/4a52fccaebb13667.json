@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/thorned-dried-stem-red.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Blutdorn</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Bloodthorn)</em></p><p>Verwendung in Tränken: Furcht, Vergrößerung.</p>",
+      "value": "<p><strong>Blutdorn</strong> — Trankkraut, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

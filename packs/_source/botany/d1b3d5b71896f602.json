@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/sprout-seed-yellow-green.webp",
   "system": {
     "description": {
-      "value": "<p>Samen: <strong>Flauschblüte</strong> (Trankkraut).</p>\n<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Reift in <strong>7 Tagen</strong> und bringt bei der Ernte 1–3 Stück.</p>",
+      "value": "<p>Samen: <strong>Flauschblüte</strong> (Trankkraut).</p>\n<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Wie lange sie braucht, bis sie reif ist, weiß die Spielleitung. Bei der Ernte bringt sie 1–3 Stück.</p>",
       "chat": ""
     },
     "quantity": 1,

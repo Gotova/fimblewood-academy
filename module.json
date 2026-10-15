@@ -2,7 +2,7 @@
   "id": "fimblewood-academy",
   "title": "Fimblewood Academy",
   "description": "Homebrew classes, subclasses, and content for the Fimblewood Academy campaign, built for the dnd5e system.",
-  "version": "0.35.0",
+  "version": "0.36.0",
   "compatibility": {
     "minimum": "13",
     "verified": "13.351",
@@ -104,11 +104,11 @@
     },
     {
       "name": "botany-journal",
-      "label": "Botanikclub: Kräuterkunde",
+      "label": "Botanikclub: Rezepte (nur SL)",
       "path": "packs/botany-journal",
       "type": "JournalEntry",
       "ownership": {
-        "PLAYER": "OBSERVER",
+        "PLAYER": "NONE",
         "ASSISTANT": "OWNER"
       }
     }
@@ -129,7 +129,7 @@
   ],
   "url": "https://github.com/Gotova/fimblewood-academy",
   "manifest": "https://github.com/Gotova/fimblewood-academy/releases/latest/download/module.json",
-  "download": "https://github.com/Gotova/fimblewood-academy/releases/download/v0.35.0/module.zip",
+  "download": "https://github.com/Gotova/fimblewood-academy/releases/download/v0.36.0/module.zip",
   "readme": "https://github.com/Gotova/fimblewood-academy/blob/main/README.md",
   "bugs": "https://github.com/Gotova/fimblewood-academy/issues",
   "changelog": "https://github.com/Gotova/fimblewood-academy/blob/main/CHANGELOG.md"

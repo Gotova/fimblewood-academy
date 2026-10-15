@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/thorned-curled-vine-green.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Golddorn</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Goldthorn)</em></p><p>Verwendung in Tränken: Heilung, Bindung.</p>",
+      "value": "<p><strong>Golddorn</strong> — Trankkraut, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

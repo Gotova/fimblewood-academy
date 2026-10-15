@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/thorned-stem-brown.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Dornstock</strong> — Trankkraut, Gewöhnlich. <em>(Vorbild: Thornstick)</em></p><p>Verwendung in Tränken: Feuerschutz.</p>",
+      "value": "<p><strong>Dornstock</strong> — Trankkraut, Gewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

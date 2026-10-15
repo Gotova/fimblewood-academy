@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/dried-stem-vine-root-bramble-brown.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Wirrkraut</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Tangleweed)</em></p>",
+      "value": "<p><strong>Wirrkraut</strong> — Trankkraut, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

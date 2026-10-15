@@ -5,7 +5,7 @@
   "img": "icons/consumables/mushrooms/convex-green.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Stinkpilz</strong> — Trankpilz, Gewöhnlich. <em>(Vorbild: Stink Mushroom)</em></p><p>Verwendung in Tränken: Verlangsamung, Steinhaut, Säure, Fluch.</p>",
+      "value": "<p><strong>Stinkpilz</strong> — Trankpilz, Gewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

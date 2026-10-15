@@ -13,6 +13,7 @@ import { CONTROL_GROUP } from "../draw.mjs";
 import { MODULE_ID, PLANTS, PLANT_BY_ID } from "./plants.mjs";
 import { registerBotanyData, isMember } from "./data.mjs";
 import { BotanyMembersApp } from "./members-app.mjs";
+import { GrowthApp } from "./growth-app.mjs";
 
 let _garden = null;
 
@@ -71,7 +72,7 @@ function injectSeedPlantPicker(app, html) {
 }
 
 export function registerBotany() {
-  registerBotanyData(refresh, BotanyMembersApp);
+  registerBotanyData(refresh, BotanyMembersApp, GrowthApp);
 
   // The "Seed" entry of the loot item's type dropdown. i18nInit, so the label is
   // already translatable and still early enough for the sheets.

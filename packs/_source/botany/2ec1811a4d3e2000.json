@@ -5,7 +5,7 @@
   "img": "icons/commodities/flowers/dandelion-pod-white.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Windblüte</strong> — Trankkraut, Gewöhnlich. <em>(Vorbild: Windbloom)</em></p><p>Verwendung in Tränken: Feuer, Schnelligkeit, Geschick, Licht, Blitz, Mana, Wildes Wachstum, Explosion, Raserei, Unsichtbarkeit, Levitation, Halluzination.</p>",
+      "value": "<p><strong>Windblüte</strong> — Trankkraut, Gewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

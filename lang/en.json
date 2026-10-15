@@ -483,6 +483,23 @@
       },
       "Chat": {
         "Harvested": "{actor} harvests {qty}× {plant}."
+      },
+      "Growth": {
+        "Title": "Plant growth times",
+        "MenuName": "Growth times",
+        "MenuLabel": "Plant growth times",
+        "MenuHint": "Set how many days each plant needs to ripen. Default: 5 / 8 / 12 / 30 days by rarity.",
+        "Hint": "Days until ripe (100 %). The default depends on rarity: common 5, uncommon 8, rare 12, very rare 30. Plants already in the ground use the new time for their further growth right away.",
+        "Default": "default",
+        "Save": "Save",
+        "Reset": "All to default",
+        "Cancel": "Cancel"
+      },
+      "Rarity": {
+        "common": "common",
+        "uncommon": "uncommon",
+        "rare": "rare",
+        "veryRare": "very rare"
       }
     }
   }

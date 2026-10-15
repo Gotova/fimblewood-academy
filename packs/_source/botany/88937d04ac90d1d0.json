@@ -5,7 +5,7 @@
   "img": "icons/consumables/mushrooms/convex-tan.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Dryadensattel</strong> — Trankpilz, Gewöhnlich. <em>(Vorbild: Dryad&#39;s Saddle)</em></p><p>Verwendung in Tränken: Säure, Giftschutz.</p>",
+      "value": "<p><strong>Dryadensattel</strong> — Trankpilz, Gewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

@@ -5,7 +5,7 @@
   "img": "icons/consumables/mushrooms/campanulate-bell-shiny-blue.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Nebelschirmling</strong> — Trankpilz, Ungewöhnlich. <em>(Vorbild: Foggy Parasol)</em></p><p>Verwendung in Tränken: Levitation.</p>",
+      "value": "<p><strong>Nebelschirmling</strong> — Trankpilz, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

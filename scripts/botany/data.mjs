@@ -6,6 +6,7 @@
  *   botanyMembers  { [actorId]: { size } }                      which characters are in the club, and the garden size
  *   botanyGardens  { [actorId]: { slots: { [index]: plant }, lastDay } }
  *   plant          { plantId, maturity (0-100), hp, plantedDay }
+ *   botanyGrowthDays  { [plantId]: days }                       the GM's growth times; plants not listed use their default
  *
  * Players never write settings themselves: they send a request (see
  * requestGardenOp) which the active GM's client validates and applies, the
@@ -25,6 +26,7 @@ import {
 export const MEMBERS_SETTING = "botanyMembers";
 export const GARDENS_SETTING = "botanyGardens";
 export const AUTOGROW_SETTING = "botanyAutoGrow";
+export const GROWTH_SETTING = "botanyGrowthDays";
 const CHANNEL = `module.${MODULE_ID}`;
 
 const i18n = (key, data) => (data ? game.i18n.format(`FIMBLEWOOD.Botany.${key}`, data) : game.i18n.localize(`FIMBLEWOOD.Botany.${key}`));
@@ -62,6 +64,16 @@ export function getGardens() {
 export function getGarden(actorId) {
   const garden = getGardens()[actorId] ?? {};
   return { slots: garden.slots ?? {}, lastDay: garden.lastDay ?? null };
+}
+
+/** Days a plant needs to ripen: the GM's value if set, else the default for its rarity. */
+export function growthDays(plant) {
+  const custom = Number(game.settings.get(MODULE_ID, GROWTH_SETTING)?.[plant.id]);
+  return Number.isFinite(custom) && custom >= 1 ? custom : plant.defaultGrowthDays;
+}
+
+export async function saveGrowthDays(overrides) {
+  return game.settings.set(MODULE_ID, GROWTH_SETTING, overrides);
 }
 
 export async function saveMembers(members) {
@@ -110,7 +122,7 @@ function grow(gardens, days) {
     for (const slot of Object.values(garden.slots ?? {})) {
       const state = plantState(slot);
       if (!state || state.dead) continue;
-      slot.maturity = Math.min(100, round1(state.maturity + (days * 100) / state.plant.growthDays));
+      slot.maturity = Math.min(100, round1(state.maturity + (days * 100) / growthDays(state.plant)));
     }
   }
 }
@@ -284,10 +296,11 @@ export async function syncGrowth() {
 /*  Registration                                 */
 /* -------------------------------------------- */
 
-export function registerBotanyData(onChange, MembersApp) {
+export function registerBotanyData(onChange, MembersApp, GrowthApp) {
   const hidden = { scope: "world", config: false, type: Object, default: {}, onChange: () => onChange() };
   game.settings.register(MODULE_ID, MEMBERS_SETTING, hidden);
   game.settings.register(MODULE_ID, GARDENS_SETTING, hidden);
+  game.settings.register(MODULE_ID, GROWTH_SETTING, { ...hidden, onChange: () => onChange() });
   game.settings.register(MODULE_ID, AUTOGROW_SETTING, {
     name: "FIMBLEWOOD.Botany.Settings.AutoGrow.name",
     hint: "FIMBLEWOOD.Botany.Settings.AutoGrow.hint",
@@ -299,6 +312,14 @@ export function registerBotanyData(onChange, MembersApp) {
     hint: "FIMBLEWOOD.Botany.Members.MenuHint",
     icon: "fas fa-seedling",
     type: MembersApp,
+    restricted: true
+  });
+  game.settings.registerMenu(MODULE_ID, "botanyGrowthMenu", {
+    name: "FIMBLEWOOD.Botany.Growth.MenuName",
+    label: "FIMBLEWOOD.Botany.Growth.MenuLabel",
+    hint: "FIMBLEWOOD.Botany.Growth.MenuHint",
+    icon: "fas fa-hourglass-half",
+    type: GrowthApp,
     restricted: true
   });
 

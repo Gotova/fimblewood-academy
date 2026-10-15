@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/leaf-pink.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Federblüte</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Featherbloom)</em></p><p>Verwendung in Tränken: Charme, Antimagie.</p>",
+      "value": "<p><strong>Federblüte</strong> — Trankkraut, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

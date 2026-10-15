@@ -4,6 +4,15 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.36.0] - 2026-10-15
+
+### Changed
+
+- **Botany recipes**: the recipe journal is now **GM-only** (hidden from players in the compendium list), and the harvest items no longer list which potions they are used in, so players have to find the recipes out themselves.
+- **Recipes**: the water/oil base is gone. Recipes now give the cups ("Becher") of water and oil to add. The tier changes the recipe: tier II adds one rarer ingredient, tier III two, and each tier adds one cup of each liquid. Magical potions need **powdered mana crystals** (new ingredient): 1, 3 and 6 for tiers I to III. Poison, acid and explosion are non-magical.
+- **Growth times** are now chosen by the GM per plant (**Plant growth times** menu). New defaults: 5 days (common), 8 (uncommon), 12 (rare), 30 (very rare).
+- Seeds no longer state their growth time.
+
 ## [0.35.0] - 2026-10-15
 
 ### Changed

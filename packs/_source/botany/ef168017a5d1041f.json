@@ -5,7 +5,7 @@
   "img": "icons/consumables/mushrooms/conical-shiny-magenta-pink.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Lustpilz</strong> — Trankpilz, Ungewöhnlich. <em>(Vorbild: Lust Mushroom)</em></p><p>Verwendung in Tränken: Vergrößerung.</p>",
+      "value": "<p><strong>Lustpilz</strong> — Trankpilz, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

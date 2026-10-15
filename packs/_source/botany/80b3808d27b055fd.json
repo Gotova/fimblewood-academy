@@ -5,7 +5,7 @@
   "img": "icons/commodities/gems/gem-rough-cushion-blue.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Frostsaphir</strong> — crystal, Selten. <em>(Vorbild: Frost Sapphire)</em></p><p>Verwendung in Tränken: Feuerschutz.</p>",
+      "value": "<p><strong>Frostsaphir</strong> — Kristall, Selten.</p>",
       "chat": ""
     },
     "quantity": 1,

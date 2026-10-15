@@ -5,7 +5,7 @@
   "img": "icons/consumables/fruit/berry-stem-green.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Gutbeere</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Goodberry)</em></p><p>Verwendung in Tränken: Bindung, Giftschutz.</p>",
+      "value": "<p><strong>Gutbeere</strong> — Trankkraut, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

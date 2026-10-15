@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/leaf-veins-glowing-green.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Lebensblatt</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Lifeleaf)</em></p><p>Verwendung in Tränken: Schlaf, Verlangsamung.</p>",
+      "value": "<p><strong>Lebensblatt</strong> — Trankkraut, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

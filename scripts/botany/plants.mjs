@@ -13,8 +13,8 @@ import { INGREDIENTS } from "../alchemy/ingredients.mjs";
 export const MODULE_ID = "fimblewood-academy";
 export const BOTANY_PACK = "botany";
 
-/** Days of (in-game) time a plant needs to reach 100 % maturity, by rarity. */
-const GROWTH_DAYS = { common: 3, uncommon: 5, rare: 7, veryRare: 10 };
+/** Default days of (in-game) time a plant needs to reach 100 % maturity, by rarity. The GM can change it per plant (see growthDays in data.mjs). */
+const GROWTH_DAYS = { common: 5, uncommon: 8, rare: 12, veryRare: 30 };
 
 /** [min, max] items per harvest, by ingredient kind and rarity. */
 function yieldFor(kind, rarity) {
@@ -33,7 +33,7 @@ export const PLANTS = INGREDIENTS.filter((i) => i.growable).map((ing) => ({
   name: ing.name,
   kind: ing.kind,
   rarity: ing.rarity,
-  growthDays: GROWTH_DAYS[ing.rarity] ?? 5,
+  defaultGrowthDays: GROWTH_DAYS[ing.rarity] ?? 5,
   maxHp: MAX_HP,
   yield: yieldFor(ing.kind, ing.rarity),
   seedGp: Math.max(ing.gp / 2, 0.01)

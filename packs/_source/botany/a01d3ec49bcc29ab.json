@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/leaf-herb-green.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Erdwurz</strong> — Trankkraut, Gewöhnlich. <em>(Vorbild: Terraria)</em></p><p>Verwendung in Tränken: Heilung, Gift, Frost, Stärke, Wildes Wachstum, Steinhaut, Begierde, Säureschutz, Blitzschutz.</p>",
+      "value": "<p><strong>Erdwurz</strong> — Trankkraut, Gewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

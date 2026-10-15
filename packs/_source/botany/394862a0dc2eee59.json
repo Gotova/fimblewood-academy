@@ -5,7 +5,7 @@
   "img": "icons/consumables/mushrooms/conical-bell-yellow.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Schwefelporling</strong> — Trankpilz, Ungewöhnlich. <em>(Vorbild: Sulphur Shelf)</em></p><p>Verwendung in Tränken: Charme.</p>",
+      "value": "<p><strong>Schwefelporling</strong> — Trankpilz, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

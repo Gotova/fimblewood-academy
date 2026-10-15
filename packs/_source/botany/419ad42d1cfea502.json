@@ -5,7 +5,7 @@
   "img": "icons/commodities/gems/gem-rough-cushion-red.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Blutrubin</strong> — crystal, Sehr selten. <em>(Vorbild: Blood Ruby)</em></p>",
+      "value": "<p><strong>Blutrubin</strong> — Kristall, Sehr selten.</p>",
       "chat": ""
     },
     "quantity": 1,

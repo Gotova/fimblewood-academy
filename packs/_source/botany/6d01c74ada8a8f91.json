@@ -5,7 +5,7 @@
   "img": "icons/consumables/vegetable/root-alien-green.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Greifwurzel</strong> — Trankkraut, Selten. <em>(Vorbild: Grasping Root)</em></p><p>Verwendung in Tränken: Furcht.</p>",
+      "value": "<p><strong>Greifwurzel</strong> — Trankkraut, Selten.</p>",
       "chat": ""
     },
     "quantity": 1,

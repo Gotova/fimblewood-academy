@@ -14,7 +14,7 @@ import { mkdirSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { INGREDIENTS, INGREDIENT_BY_ID, KIND_LABELS } from "../scripts/alchemy/ingredients.mjs";
-import { EFFECTS } from "../scripts/alchemy/effects.mjs";
+import { EFFECTS, tierRecipe, MANA_INGREDIENT } from "../scripts/alchemy/effects.mjs";
 import { PLANTS } from "../scripts/botany/plants.mjs";
 
 const MODULE_ID = "fimblewood-academy";
@@ -25,7 +25,7 @@ const SEED_IMG = "icons/consumables/plants/sprout-seed-yellow-green.webp";
 
 const RARITY_LABEL = { common: "Gewöhnlich", uncommon: "Ungewöhnlich", rare: "Selten", veryRare: "Sehr selten" };
 const KIND_USE = {
-  herb: "Trankkraut", mushroom: "Trankpilz", food: "Nahrung", flower: "Zierpflanze"
+  herb: "Trankkraut", mushroom: "Trankpilz", food: "Nahrung", flower: "Zierpflanze", crystal: "Kristall"
 };
 
 function stableId(key) {
@@ -41,11 +41,6 @@ function price(gp) {
   const sp = Math.round(gp * 10 * 100) / 100;
   if (Number.isInteger(sp) && sp >= 1) return { value: sp, denomination: "sp" };
   return { value: Math.max(1, Math.round(gp * 100)), denomination: "cp" };
-}
-
-/** Effects (and the recipes) an ingredient shows up in. */
-function usedIn(ingredientId) {
-  return EFFECTS.filter((e) => e.recipes.some((r) => r.some((x) => x.ingredient === ingredientId)));
 }
 
 function item({ id, name, img, description, gp, rarity, lootType, flags, sort }) {
@@ -75,7 +70,7 @@ function item({ id, name, img, description, gp, rarity, lootType, flags, sort })
 function seedItem(plant, ing, sort) {
   const [min, max] = plant.yield;
   const desc = `<p>Samen: <strong>${esc(plant.name)}</strong> (${KIND_USE[ing.kind]}).</p>
-<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Reift in <strong>${plant.growthDays} Tagen</strong> und bringt bei der Ernte ${min}–${max} Stück.</p>`;
+<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Wie lange sie braucht, bis sie reif ist, weiß die Spielleitung. Bei der Ernte bringt sie ${min}–${max} Stück.</p>`;
   return item({
     id: stableId(`seed:${plant.id}`),
     name: `${plant.name}-Samen`,
@@ -90,12 +85,7 @@ function seedItem(plant, ing, sort) {
 }
 
 function harvestItem(ing, sort) {
-  const effects = usedIn(ing.id);
-  const pc = ing.pc ? ` <em>(Vorbild: ${esc(ing.pc)})</em>` : "";
-  const uses = effects.length
-    ? `<p>Verwendung in Tränken: ${effects.map((e) => esc(e.name)).join(", ")}.</p>`
-    : "";
-  const desc = `<p><strong>${esc(ing.name)}</strong> — ${KIND_USE[ing.kind] ?? ing.kind}, ${RARITY_LABEL[ing.rarity]}.${pc}</p>${uses}`;
+  const desc = `<p><strong>${esc(ing.name)}</strong> — ${KIND_USE[ing.kind] ?? ing.kind}, ${RARITY_LABEL[ing.rarity]}.</p>`;
   return item({
     id: stableId(`harvest:${ing.id}`),
     name: ing.name,
@@ -157,41 +147,49 @@ function page(key, name, content, sortValue) {
 
 function plantTable(kind) {
   const rows = PLANTS.filter((p) => p.kind === kind).map((p) =>
-    `<tr><td>${esc(p.name)}</td><td>${RARITY_LABEL[p.rarity]}</td><td>${p.growthDays} Tage</td><td>${p.yield[0]}–${p.yield[1]}</td></tr>`
+    `<tr><td>${esc(p.name)}</td><td>${RARITY_LABEL[p.rarity]}</td><td>${p.defaultGrowthDays} Tage</td><td>${p.yield[0]}–${p.yield[1]}</td></tr>`
   ).join("");
-  return `<table><thead><tr><th>Pflanze</th><th>Seltenheit</th><th>Reifezeit</th><th>Ertrag</th></tr></thead><tbody>${rows}</tbody></table>`;
+  return `<table><thead><tr><th>Pflanze</th><th>Seltenheit</th><th>Reifezeit (Standard)</th><th>Ertrag</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
 const overview = `
-<p>Willkommen im Botanikclub! In <strong>Mein Garten</strong> (Fimblewood-Steuerung, oben links) pflanzt du Samen aus deinem Inventar in dein Beet.</p>
+<p><strong>Nur für die Spielleitung.</strong> Die Spieler sollen die Rezepte selbst herausfinden. Dieses Journal ist deshalb für sie unsichtbar, und die Items im Kompendium verraten keine Rezepte.</p>
 <ul>
-<li><strong>Reife:</strong> steigt mit jedem Tag, der vergeht. Erst bei 100 % bringt die Ernte etwas.</li>
-<li><strong>HP:</strong> Wird eine Pflanze vernachlässigt, verliert sie HP. Bei 0 HP ist sie eingegangen und wächst nicht weiter. Wie gut du dich kümmerst, beurteilt die Spielleitung.</li>
-<li><strong>Ernte:</strong> Vor der Reife darfst du die Pflanze entfernen, bekommst dann aber nichts. Nach der Ernte ist das Beet wieder frei.</li>
-</ul>
-<p>Es gibt Trankkräuter und Pilze für die Alchemie, Nahrung und Zierpflanzen. Die Rezepte unten verraten, was sich aus den Zutaten brauen lässt. Die Mengen sind ungefähre Richtwerte.</p>`;
+<li><strong>Reifezeit:</strong> Standard sind 5 Tage (gewöhnlich), 8 (ungewöhnlich), 12 (selten) und 30 (sehr selten). Du änderst sie pro Pflanze unter Moduleinstellungen → Fimblewood Academy → „Reifezeiten der Pflanzen“.</li>
+<li><strong>Rezepte:</strong> Die Stufe verändert das Rezept. Stufe II braucht eine zusätzliche, seltenere Zutat, Stufe III zwei. Dazu kommen Becher Wasser und Öl (je Stufe einer mehr) und bei magischen Tränken pulverisierte Manakristalle: 1, 3 und 6 für Stufe I bis III.</li>
+<li><strong>Nicht magisch</strong> sind nur Gift, Säure und Explosion. Sie brauchen keinen Manastaub.</li>
+</ul>`;
 
-const pages = [page("overview", "Der Botanikclub", overview, 100)];
+const pages = [page("overview", "Hinweise für die Spielleitung", overview, 100)];
 let pageSort = 100;
 for (const kind of ["herb", "mushroom", "food", "flower"]) {
   pages.push(page(`plants:${kind}`, KIND_LABELS[kind], plantTable(kind), (pageSort += 100)));
 }
 
-const tierRow = (e) => e.rarities.map((r, i) => `${["I", "II", "III"][i]}: ${RARITY_LABEL[r]}`).join(", ");
-const recipeHtml = (e) => {
-  const recipes = e.recipes.map((r) =>
-    `<li>${r.map((x) => `${x.qty}× ${esc(INGREDIENT_BY_ID.get(x.ingredient).name)}`).join(" + ")}</li>`
-  ).join("");
-  return `<h3>${esc(e.name)} <small>(${e.base === "oil" ? "Öl-Basis" : "Wasser-Basis"})</small></h3>
-<p>Stufen — ${tierRow(e)}</p><ul>${recipes}</ul>`;
-};
+const ingName = (id) => esc(INGREDIENT_BY_ID.get(id)?.name ?? id);
+const cups = (n, label) => (n > 0 ? `${n} Becher ${label}` : "");
+function recipeHtml(e) {
+  const variants = e.variants.length > 1;
+  const items = [];
+  for (let tier = 1; tier <= e.maxTier; tier++) {
+    for (let v = 0; v < e.variants.length; v++) {
+      const r = tierRecipe(e, tier, v);
+      const parts = r.ingredients.map((x) => `${x.qty}× ${ingName(x.ingredient)}`);
+      if (r.mana) parts.push(`${r.mana}× ${ingName(MANA_INGREDIENT)}`);
+      const liquids = [cups(r.water, "Wasser"), cups(r.oil, "Öl")].filter(Boolean).join(", ");
+      const label = `Stufe ${["I", "II", "III"][tier - 1]} (${RARITY_LABEL[e.rarities[tier - 1]]})${variants ? `, Variante ${v + 1}` : ""}`;
+      items.push(`<li><strong>${label}:</strong> ${parts.join(" + ")}; ${liquids}</li>`);
+    }
+  }
+  return `<h3>${esc(e.name)}${e.magical ? "" : " <small>(nicht magisch)</small>"}</h3><ul>${items.join("")}</ul>`;
+}
 pages.push(page("recipes", "Trankrezepte",
-  `<p>Ungefähre Rezepte, abgeleitet vom Vorbild Potion Craft. Die genaue Zubereitung folgt mit der Alchemie-Werkstatt.</p>${EFFECTS.map(recipeHtml).join("")}`,
+  `<p>Alle Rezepte für die Spielleitung. Mengen in Bechern; die Werte sind Richtwerte und noch nicht ausbalanciert.</p>${EFFECTS.map(recipeHtml).join("")}`,
   (pageSort += 100)));
 
 const journal = {
   _id: stableId("journal:kraeuterkunde"),
-  name: "Kräuterkunde des Botanikclubs",
+  name: "Botanikclub: Rezepte (nur Spielleitung)",
   pages,
   folder: null,
   sort: 0,

@@ -1,0 +1,42 @@
+{
+  "_id": "20a9b92d66001d01",
+  "name": "Pulverisierter Manakristall",
+  "type": "loot",
+  "img": "icons/commodities/gems/powder-raw-white.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Pulverisierter Manakristall</strong> — Kristall, Ungewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "manastaub",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!20a9b92d66001d01"
+}

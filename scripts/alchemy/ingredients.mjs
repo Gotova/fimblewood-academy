@@ -78,7 +78,7 @@ const GROWN = [
   ["orchidee", "Orchidee", "", "flower", "uncommon", 5, `${F}lotus-violet.webp`, "air"]
 ];
 
-/** [id, name, pc, rarity, gp, img, element] — crystals: ingredients only, they cannot be planted. */
+/** [id, name, pc, rarity, gp, img, element] — crystals and powders: ingredients only, they cannot be planted. */
 const CRYSTALS = [
   ["erdpyrit", "Erdpyrit", "Earth Pyrite", "rare", 50, `${G}gem-rough-cushion-orange.webp`, "earth"],
   ["frostsaphir", "Frostsaphir", "Frost Sapphire", "rare", 60, `${G}gem-rough-cushion-blue.webp`, "water"],
@@ -86,7 +86,8 @@ const CRYSTALS = [
   ["wolkenkristall", "Wolkenkristall", "Cloud Crystal", "rare", 70, `${G}gem-rough-cushion-white.webp`, "air"],
   ["arkankristall", "Arkankristall", "Arcane Crystal", "veryRare", 100, `${G}gem-rough-cushion-purple.webp`, "mind"],
   ["blutrubin", "Blutrubin", "Blood Ruby", "veryRare", 100, `${G}gem-rough-cushion-red.webp`, "life"],
-  ["lebenskristall", "Lebenskristall", "Life Crystal", "veryRare", 100, `${G}gem-rough-cushion-green.webp`, "life"]
+  ["lebenskristall", "Lebenskristall", "Life Crystal", "veryRare", 100, `${G}gem-rough-cushion-green.webp`, "life"],
+  ["manastaub", "Pulverisierter Manakristall", "", "uncommon", 10, `${G}powder-raw-white.webp`, "mind"]
 ];
 
 const REACH = { common: 1, uncommon: 2, rare: 3, veryRare: 3 };

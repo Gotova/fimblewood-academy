@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/leaf-hastate-white-green.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Flauschblüte</strong> — Trankkraut, Selten. <em>(Vorbild: Fluffbloom)</em></p>",
+      "value": "<p><strong>Flauschblüte</strong> — Trankkraut, Selten.</p>",
       "chat": ""
     },
     "quantity": 1,

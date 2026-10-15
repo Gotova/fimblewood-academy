@@ -5,7 +5,7 @@
   "img": "icons/consumables/mushrooms/umbontae-bumpy-purple.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Hexenpilz</strong> — Trankpilz, Selten. <em>(Vorbild: Witch Mushroom)</em></p><p>Verwendung in Tränken: Unsichtbarkeit, Levitation, Magische Sicht, Antimagie.</p>",
+      "value": "<p><strong>Hexenpilz</strong> — Trankpilz, Selten.</p>",
       "chat": ""
     },
     "quantity": 1,

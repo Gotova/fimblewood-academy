@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/thorned-dried-stem-red.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Feuerglocke</strong> — Trankkraut, Gewöhnlich. <em>(Vorbild: Firebell)</em></p><p>Verwendung in Tränken: Gift, Feuer, Licht, Steinhaut, Explosion, Raserei, Charme, Begierde, Säure, Blitzschutz.</p>",
+      "value": "<p><strong>Feuerglocke</strong> — Trankkraut, Gewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

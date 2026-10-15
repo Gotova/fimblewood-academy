@@ -5,7 +5,7 @@
   "img": "icons/consumables/mushrooms/alien-spotted-blue.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Regenbogenkappe</strong> — Trankpilz, Sehr selten. <em>(Vorbild: Rainbow Cap)</em></p>",
+      "value": "<p><strong>Regenbogenkappe</strong> — Trankpilz, Sehr selten.</p>",
       "chat": ""
     },
     "quantity": 1,

@@ -5,7 +5,7 @@
   "img": "icons/commodities/gems/gem-rough-cushion-white.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Wolkenkristall</strong> — crystal, Selten. <em>(Vorbild: Cloud Crystal)</em></p><p>Verwendung in Tränken: Levitation.</p>",
+      "value": "<p><strong>Wolkenkristall</strong> — Kristall, Selten.</p>",
       "chat": ""
     },
     "quantity": 1,

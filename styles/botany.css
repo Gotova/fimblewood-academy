@@ -265,3 +265,32 @@
 .fw-botany-seed-picker {
   width: 100%;
 }
+
+/* Growth times menu */
+.fw-garden-growth-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.fw-garden-growth-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.fw-garden-group {
+  margin: 8px 0 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.fw-garden-growth-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.fw-garden-growth-field input {
+  width: 56px;
+  text-align: right;
+}
+.fw-garden-growth-field small {
+  width: 70px;
+  opacity: 0.7;
+}

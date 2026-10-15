@@ -5,7 +5,7 @@
   "img": "icons/consumables/fruit/banana-ripe-yellow.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Haarbanane</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Hairy Banana)</em></p><p>Verwendung in Tränken: Bindung, Giftschutz.</p>",
+      "value": "<p><strong>Haarbanane</strong> — Trankkraut, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

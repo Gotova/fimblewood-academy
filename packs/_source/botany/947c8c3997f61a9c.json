@@ -5,7 +5,7 @@
   "img": "icons/commodities/gems/gem-rough-cushion-orange.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Erdpyrit</strong> — crystal, Selten. <em>(Vorbild: Earth Pyrite)</em></p>",
+      "value": "<p><strong>Erdpyrit</strong> — Kristall, Selten.</p>",
       "chat": ""
     },
     "quantity": 1,

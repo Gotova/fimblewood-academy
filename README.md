@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.35.0
+- **Current version:** 0.36.0
 
 ## Installation
 
@@ -135,7 +135,9 @@ A garden for the characters of the Botany Club. The GM picks the characters and 
 - An empty bed has a plant button that lists the **Seed** items in the character's inventory. Seeds are loot items with the new loot type **Seed** (pick which plant a seed grows into on the item sheet, GM only). The compendium *Botanikclub: Samen & Zutaten* holds a seed and a harvest item for every one of the 54 plants.
 - A planted bed shows **maturity** and **HP**. Maturity rises with each day change of Simple Calendar Reborn (a setting turns that off; the GM can set maturity and HP directly, or advance a day). Care is judged by the GM alone, so only the GM changes HP. A plant at 0 HP has withered and stops growing.
 - Harvesting a ripe plant (100 %) adds its items to the character and frees the bed. An unripe or withered plant can still be removed, but yields nothing.
-- The plants and potion recipes follow Potion Craft: herbs, mushrooms, food and flowers. The compendium *Botanikclub: Kräuterkunde* is the recipe book. The shared ingredient and recipe catalogue (`scripts/alchemy/`) is groundwork for a later alchemy workshop.
+- The plants (herbs, mushrooms, food and flowers) and potion effects take their cue from Potion Craft. The players are meant to **find the recipes out themselves**, so the recipe journal *Botanikclub: Rezepte (nur SL)* is hidden from players and the items reveal nothing.
+- **Recipes**: every effect has up to three tiers. A higher tier needs one more, rarer ingredient per step (tier II: one, tier III: two), one more cup of each liquid it uses, and, for magical potions, powdered mana crystals: 1, 3 and 6 for tiers I to III. Water and oil are given in cups. Only poison, acid and explosion are non-magical. The shared catalogue (`scripts/alchemy/`) is groundwork for a later alchemy workshop.
+- **Growth times** are set per plant by the GM under **Configure Settings → Fimblewood Academy → Plant growth times**. The defaults are 5 days (common), 8 (uncommon), 12 (rare) and 30 (very rare).
 - Garden backgrounds go in `assets/garden/` — see the prompts in `assets/garden/PROMPTS.md`. Without them the garden shows a plain lawn.
 
 ### Content

@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/sprout-leaf-herb-green.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Heilerheide</strong> — Trankkraut, Gewöhnlich. <em>(Vorbild: Healer&#39;s Heather)</em></p><p>Verwendung in Tränken: Säureschutz.</p>",
+      "value": "<p><strong>Heilerheide</strong> — Trankkraut, Gewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

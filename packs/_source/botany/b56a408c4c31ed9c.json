@@ -5,7 +5,7 @@
   "img": "icons/consumables/vegetable/root-beet-bulb-purple.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Traumrübe</strong> — Trankkraut, Ungewöhnlich. <em>(Vorbild: Dream Beet)</em></p><p>Verwendung in Tränken: Antimagie.</p>",
+      "value": "<p><strong>Traumrübe</strong> — Trankkraut, Ungewöhnlich.</p>",
       "chat": ""
     },
     "quantity": 1,

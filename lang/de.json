@@ -483,6 +483,23 @@
       },
       "Chat": {
         "Harvested": "{actor} erntet {qty}× {plant}."
+      },
+      "Growth": {
+        "Title": "Reifezeiten der Pflanzen",
+        "MenuName": "Reifezeiten",
+        "MenuLabel": "Reifezeiten der Pflanzen",
+        "MenuHint": "Lege fest, wie viele Tage jede Pflanze zum Reifen braucht. Standard: 5 / 8 / 12 / 30 Tage je nach Seltenheit.",
+        "Hint": "Tage bis zur Reife (100 %). Der Standard hängt von der Seltenheit ab: gewöhnlich 5, ungewöhnlich 8, selten 12, sehr selten 30. Schon gepflanzte Pflanzen übernehmen die neue Zeit sofort für ihr weiteres Wachstum.",
+        "Default": "Standard",
+        "Save": "Speichern",
+        "Reset": "Alle auf Standard",
+        "Cancel": "Abbrechen"
+      },
+      "Rarity": {
+        "common": "gewöhnlich",
+        "uncommon": "ungewöhnlich",
+        "rare": "selten",
+        "veryRare": "sehr selten"
       }
     }
   }

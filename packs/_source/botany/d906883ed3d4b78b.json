@@ -5,7 +5,7 @@
   "img": "icons/consumables/plants/sprout-seed-yellow-green.webp",
   "system": {
     "description": {
-      "value": "<p>Samen: <strong>Karotte</strong> (Nahrung).</p>\n<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Reift in <strong>3 Tagen</strong> und bringt bei der Ernte 3–5 Stück.</p>",
+      "value": "<p>Samen: <strong>Karotte</strong> (Nahrung).</p>\n<p>Im Botanikclub-Garten („Mein Garten“) einpflanzen. Wie lange sie braucht, bis sie reif ist, weiß die Spielleitung. Bei der Ernte bringt sie 3–5 Stück.</p>",
       "chat": ""
     },
     "quantity": 1,
