@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.39.1] - 2026-10-15
+
+### Fixed
+
+- **Mein Garten**: choosing a potion or fertilizer did nothing, so no bed could be picked. The choice list used a form field name that collides with a built-in browser method, so the selection was never read.
+
 ## [0.39.0] - 2026-10-15
 
 ### Added

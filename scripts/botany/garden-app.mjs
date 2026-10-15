@@ -242,14 +242,14 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
   async #chooseItem(title, icon, rows) {
     const list = rows.map(({ item, usable, note }) => `
       <label class="fw-garden-seed ${usable ? "" : "is-disabled"}">
-        <input type="radio" name="item" value="${item.id}" ${usable ? "" : "disabled"}>
+        <input type="radio" name="choice" value="${item.id}" ${usable ? "" : "disabled"}>
         <img src="${esc(item.img)}" alt="">
         <span>${esc(item.name)} <em>×${item.system.quantity ?? 1}</em> <small>${esc(note)}</small></span>
       </label>`).join("");
     return foundry.applications.api.DialogV2.prompt({
       window: { title, icon },
       content: `<div class="fw-garden-seed-list">${list}</div>`,
-      ok: { label: t("Choose"), callback: (event, button) => button.form.elements.item?.value || null },
+      ok: { label: t("Choose"), callback: (event, button) => button.form.elements.choice?.value || null },
       rejectClose: false,
       position: { width: 380 }
     });
