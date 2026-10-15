@@ -14,7 +14,7 @@
 
 import { INGREDIENT_BY_ID } from "../alchemy/ingredients.mjs";
 import { MODULE_ID, PLANTS, GARDEN_SIZES, slotCount } from "./plants.mjs";
-import { potionsOf, fertilizersOf, modBadge } from "./modifiers.mjs";
+import { potionsOf, fertilizersOf, modBadge, modTitle } from "./modifiers.mjs";
 import { getMembers, getGarden, plantState, seedsOf, requestGardenOp, today, memberActors } from "./data.mjs";
 
 /** Where the beds sit on each background picture, as % of the board width: the margin on every side, and the gap between beds. The beds are square. */
@@ -75,15 +75,16 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
     const target = this.applying ? "is-target" : "";
     for (let i = 0; i < total; i++) {
       const state = plantState(garden.slots[i]);
+      const mt = modTitle(garden.mods[i]);
       if (!state) {
-        beds += `<button type="button" class="fw-garden-slot is-empty ${target}" data-action="fwSlot" data-slot="${i}" title="${esc(t("Plant"))}"><span class="fw-garden-plus">+</span>${modBadge(garden.mods[i])}</button>`;
+        beds += `<button type="button" class="fw-garden-slot is-empty ${target}" data-action="fwSlot" data-slot="${i}" title="${esc([t("Plant"), mt].filter(Boolean).join(" — "))}"><span class="fw-garden-plus">+</span>${modBadge(garden.mods[i])}</button>`;
         continue;
       }
       const img = INGREDIENT_BY_ID.get(state.plant.ingredientId)?.img;
       const cls = state.dead ? "is-dead" : state.ripe ? "is-ripe" : "";
       beds += `
         <button type="button" class="fw-garden-slot ${cls} ${target} ${this.selected === i ? "is-selected" : ""}" data-action="fwSlot" data-slot="${i}"
-                style="--m:${state.maturity / 100}" title="${esc(state.plant.name)}">
+                style="--m:${state.maturity / 100}" title="${esc([state.plant.name, mt].filter(Boolean).join(" — "))}">
           <img src="${esc(img)}" alt="">
           <span class="fw-garden-pct">${Math.floor(state.maturity)} %</span>${modBadge(garden.mods[i])}
         </button>`;

@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.40.0] - 2026-10-15
+
+### Changed
+
+- **Bed modifiers add up**: a bed can hold one potion and one fertilizer at the same time, and their growth effects are added (×1.5 potion + ×1.2 fertilizer = ×1.7). A new potion replaces the old potion, a new fertilizer the old fertilizer. The GM's own growth factor is added on top. The total shows above the bed; the tooltip lists the parts. Modifiers set in 0.37 to 0.39 count as the GM's factor.
+
 ## [0.39.1] - 2026-10-15
 
 ### Fixed

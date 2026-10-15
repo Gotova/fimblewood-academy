@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.39.1
+- **Current version:** 0.40.0
 
 ## Installation
 
@@ -138,7 +138,7 @@ A garden for the characters of the Botany Club. The GM picks the characters and 
 - The plants (herbs, mushrooms, food and flowers) and potion effects take their cue from Potion Craft. The players are meant to **find the recipes out themselves**, so the recipe journal *Botanikclub: Rezepte (nur SL)* is hidden from players and the items reveal nothing.
 - **Recipes**: every effect has up to three tiers. A higher tier needs one more, rarer ingredient per step (tier II: one, tier III: two), one more cup of each liquid it uses, and, for magical potions, powdered mana crystals: 1, 3 and 6 for tiers I to III. Water and oil are given in cups. Only poison, acid and explosion are non-magical. The shared catalogue (`scripts/alchemy/`) is groundwork for a later alchemy workshop.
 - **Growth times** are set per plant by the GM under **Configure Settings → Fimblewood Academy → Plant growth times**. The defaults are 5 days (common), 8 (uncommon), 12 (rare) and 30 (very rare).
-- **Bed modifiers**: a bed can have a growth factor and a yield factor. They belong to the bed and last until the next plant on it is harvested (any harvest or removal by the player ends them). A new growth factor replaces the old one. The factor is shown above the bed.
+- **Bed modifiers**: a bed can have a growth factor and a yield factor. They belong to the bed and last until the next plant on it is harvested (any harvest or removal by the player ends them). Growth effects **add up**: a bed holds at most one potion and one fertilizer, and each counts by how far it is from ×1 (a ×1.5 potion and a ×1.2 fertilizer give ×1.7). A new potion replaces the bed's potion, a new fertilizer its fertilizer; the GM's own growth factor is added on top. The total is shown above the bed, and the bed's tooltip lists the parts.
   - The **menu on the left** of the garden window lets players use **potions** and **fertilizer** from their character's inventory: pick the item, then the bed. Potions list all potions of the character, but only those with a garden effect can be used. *Wildes Wachstum* is growth ×1.5, *Verlangsamung* ×0.5. Harmful potions (Gift, Säure, Explosion, Feuer, Frost, Nekromantie, Fluch) bring the plant's HP to 0.
   - Three **fertilizers** (growth ×1.2, ×1.4, ×1.6) are in the compendium *Botanikclub: Samen & Zutaten*, with prices, ready for a shop.
   - The GM sets any factor (growth and yield, 0.1 to 10) with the **Modifiers** tool on the left, then picks the bed.

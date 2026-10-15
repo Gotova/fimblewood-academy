@@ -526,7 +526,7 @@
         "Harm": "vernichtet die Pflanze"
       },
       "ModTitle": "Beet-Modifier",
-      "ModHint": "Gelten für ein Beet, bis dort die nächste Pflanze geerntet wird. Ein neuer Wachstumsfaktor ersetzt den alten. Leer lassen = unverändert, 1 = Faktor entfernen.",
+      "ModHint": "Gelten für ein Beet, bis dort die nächste Pflanze geerntet wird. Dein Wachstumsfaktor addiert sich zu Trank und Dünger des Beets. Leer lassen = unverändert, 1 = Faktor entfernen.",
       "ModGrowth": "Wachstum ×",
       "ModYield": "Ertrag ×",
       "ModUnchanged": "unverändert",
@@ -565,6 +565,12 @@
         "Save": "Speichern",
         "Reset": "Alle auf Standard",
         "Cancel": "Abbrechen"
+      },
+      "Mod": {
+        "Potion": "Trank",
+        "Fertilizer": "Dünger",
+        "Gm": "SL",
+        "Yield": "Ertrag"
       }
     }
   }

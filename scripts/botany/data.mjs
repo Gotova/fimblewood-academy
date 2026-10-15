@@ -23,7 +23,7 @@ import { currentTimestamp, dayNumberForTimestamp, isCalendarAvailable, onDateCha
 import {
   MODULE_ID, PLANT_BY_ID, DEFAULT_SIZE, GARDEN_SIZES, slotCount, harvestIndexEntry
 } from "./plants.mjs";
-import { potionInfo, fertilizerFactor, cleanFactor, setFactor } from "./modifiers.mjs";
+import { potionInfo, fertilizerFactor, cleanFactor, setFactor, growthFactor } from "./modifiers.mjs";
 
 export const MEMBERS_SETTING = "botanyMembers";
 export const GARDENS_SETTING = "botanyGardens";
@@ -124,7 +124,7 @@ function grow(gardens, days) {
     for (const [key, slot] of Object.entries(garden.slots ?? {})) {
       const state = plantState(slot);
       if (!state || state.dead) continue;
-      const factor = garden.mods?.[key]?.growth ?? 1;
+      const factor = growthFactor(garden.mods?.[key]);
       slot.maturity = Math.min(100, round1(state.maturity + (days * 100 * factor) / growthDays(state.plant)));
     }
   }
@@ -237,10 +237,10 @@ async function applyOp(user, op = {}) {
     const item = actor.items.get(op.itemId);
     const factor = fertilizerFactor(item);
     if (!factor) return fail(i18n("Notice.NotUsable"));
-    setFactor(garden.mods, key, "growth", factor);
+    setFactor(garden.mods, key, "fertilizer", factor);
     await writeGardens(gardens);
     await consumeOne(item);
-    return done(i18n("Notice.Fertilized", { factor }));
+    return done(i18n("Notice.Fertilized", { factor: growthFactor(garden.mods[key]) }));
   }
 
   if (op.type === "usePotion") {
@@ -249,10 +249,10 @@ async function applyOp(user, op = {}) {
     const effect = info?.effect;
     if (!effect) return fail(i18n("Notice.NotUsable"));
     if (effect.kind === "growth") {
-      setFactor(garden.mods, key, "growth", info.factor);
+      setFactor(garden.mods, key, "potion", info.factor);
       await writeGardens(gardens);
       await consumeOne(item);
-      return done(i18n("Notice.Fertilized", { factor: info.factor }));
+      return done(i18n("Notice.Fertilized", { factor: growthFactor(garden.mods[key]) }));
     }
     const target = plantState(garden.slots[key]);
     if (!target) return fail(i18n("Notice.NeedsPlant"));
