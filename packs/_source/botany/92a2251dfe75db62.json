@@ -1,0 +1,42 @@
+{
+  "_id": "92a2251dfe75db62",
+  "name": "Trank der Verlangsamung",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-round-corked-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>Auf ein Beet in „Mein Garten“ geträufelt, wachsen die Pflanzen dort nur halb so schnell (Wachstum ×0,5), bis auf dem Beet geerntet wird.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "verlangsamung",
+      "role": "potion"
+    }
+  },
+  "_key": "!items!92a2251dfe75db62"
+}

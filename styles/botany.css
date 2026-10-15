@@ -294,3 +294,111 @@
   width: 70px;
   opacity: 0.7;
 }
+
+/* Side menu, target mode and the modifier label above a bed */
+.fw-garden-layout {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.fw-garden-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.fw-garden-side {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 64px;
+  flex: 0 0 64px;
+}
+.fw-garden-side-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  height: auto;
+  margin: 0;
+  padding: 6px 2px;
+  font-size: 10px;
+  line-height: 1.1;
+  text-align: center;
+  cursor: pointer;
+}
+.fw-garden-side-btn i {
+  font-size: 18px;
+}
+.fw-garden-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  background: rgba(255, 216, 107, 0.18);
+  border: 1px solid #c9a35a;
+}
+.fw-garden-banner button {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 1px 8px;
+}
+.fw-garden-slot.is-target {
+  border-style: solid;
+  border-color: #ffd86b;
+  animation: fw-garden-pulse 1.2s ease-in-out infinite;
+}
+@keyframes fw-garden-pulse {
+  50% { box-shadow: 0 0 10px rgba(255, 216, 107, 0.9); }
+}
+
+.fw-garden-mod {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  display: flex;
+  gap: 4px;
+  padding: 0 5px;
+  border-radius: 8px;
+  font-size: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: #fff;
+  background: rgba(20, 14, 8, 0.85);
+  pointer-events: none;
+  z-index: 3;
+}
+.fw-garden-mod .is-up {
+  color: #8be28b;
+}
+.fw-garden-mod .is-down {
+  color: #ff9a8a;
+}
+.fw-garden-card .fw-garden-mod {
+  position: static;
+  transform: none;
+  align-self: flex-start;
+}
+.fw-garden-modform {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.fw-garden-modform label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.fw-garden-modform input[type="number"] {
+  width: 110px;
+}
+.fw-garden-seed small {
+  opacity: 0.7;
+}

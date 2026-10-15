@@ -6,6 +6,7 @@
  *   botanyMembers  { [actorId]: { size } }                      which characters are in the club, and the garden size
  *   botanyGardens  { [actorId]: { slots: { [index]: plant }, lastDay } }
  *   plant          { plantId, maturity (0-100), hp, plantedDay }
+ *   mods           { [slotIndex]: { growth?, yield? } }          bed modifiers, see modifiers.mjs
  *   botanyGrowthDays  { [plantId]: days }                       the GM's growth times; plants not listed use their default
  *
  * Players never write settings themselves: they send a request (see
@@ -22,6 +23,7 @@ import { currentTimestamp, dayNumberForTimestamp, isCalendarAvailable, onDateCha
 import {
   MODULE_ID, PLANT_BY_ID, DEFAULT_SIZE, GARDEN_SIZES, slotCount, harvestIndexEntry
 } from "./plants.mjs";
+import { potionInfo, fertilizerFactor, cleanFactor, setFactor } from "./modifiers.mjs";
 
 export const MEMBERS_SETTING = "botanyMembers";
 export const GARDENS_SETTING = "botanyGardens";
@@ -63,7 +65,7 @@ export function getGardens() {
 /** A member's garden with a guaranteed `slots` object. */
 export function getGarden(actorId) {
   const garden = getGardens()[actorId] ?? {};
-  return { slots: garden.slots ?? {}, lastDay: garden.lastDay ?? null };
+  return { slots: garden.slots ?? {}, mods: garden.mods ?? {}, lastDay: garden.lastDay ?? null };
 }
 
 /** Days a plant needs to ripen: the GM's value if set, else the default for its rarity. */
@@ -119,10 +121,11 @@ async function writeGardens(gardens) {
 function grow(gardens, days) {
   if (!(days > 0)) return;
   for (const garden of Object.values(gardens)) {
-    for (const slot of Object.values(garden.slots ?? {})) {
+    for (const [key, slot] of Object.entries(garden.slots ?? {})) {
       const state = plantState(slot);
       if (!state || state.dead) continue;
-      slot.maturity = Math.min(100, round1(state.maturity + (days * 100) / growthDays(state.plant)));
+      const factor = garden.mods?.[key]?.growth ?? 1;
+      slot.maturity = Math.min(100, round1(state.maturity + (days * 100 * factor) / growthDays(state.plant)));
     }
   }
 }
@@ -144,6 +147,13 @@ async function grantHarvest(actor, ingredientId, quantity) {
   return true;
 }
 
+/** Uses up one of an item: a smaller stack, or gone if it was the last. */
+async function consumeOne(item) {
+  const qty = item.system.quantity ?? 1;
+  if (qty > 1) await item.update({ "system.quantity": qty - 1 });
+  else await item.delete();
+}
+
 async function rollYield(plant) {
   const [min, max] = plant.yield;
   if (min === max) return min;
@@ -154,11 +164,12 @@ async function rollYield(plant) {
 /**
  * Applies one operation on the active GM's client, on behalf of `user`.
  * Everyone (for characters they own): `plant {actorId, slot, itemId}`, `harvest {actorId, slot}`.
+ * Everyone also: `usePotion {actorId, slot, itemId}` and `useFertilizer {actorId, slot, itemId}`.
  * GM: additionally `gmPlant {actorId, slot, plantId}`, `gmSet {actorId, slot, maturity, hp}`,
- * `gmRemove {actorId, slot}` and `advance {days}`.
+ * `gmRemove {actorId, slot}`, `gmMod {actorId, slot, growth, yield, clear}` and `advance {days}`.
  */
 async function applyOp(user, op = {}) {
-  const gmOnly = ["gmPlant", "gmSet", "gmRemove", "advance"];
+  const gmOnly = ["gmPlant", "gmSet", "gmRemove", "gmMod", "advance"];
   if (gmOnly.includes(op.type) && !user.isGM) return fail(i18n("Notice.Refused"));
 
   if (op.type === "advance") {
@@ -181,6 +192,7 @@ async function applyOp(user, op = {}) {
   const gardens = foundry.utils.deepClone(getGardens());
   const garden = (gardens[actorId] ??= { slots: {}, lastDay: today() });
   garden.slots ??= {};
+  garden.mods ??= {};
   const key = String(slotIndex);
 
   if (op.type === "plant" || op.type === "gmPlant") {
@@ -203,6 +215,51 @@ async function applyOp(user, op = {}) {
       else await seed.delete();
     }
     return done(i18n("Notice.Planted", { plant: plant.name }));
+  }
+
+  // Modifiers work on a bed, planted or not.
+  if (op.type === "gmMod") {
+    if (op.clear) {
+      delete garden.mods[key];
+    } else {
+      for (const which of ["growth", "yield"]) {
+        if (op[which] == null) continue;
+        const factor = cleanFactor(op[which]);
+        if (factor == null) return fail(i18n("Notice.ModInvalid"));
+        setFactor(garden.mods, key, which, factor);
+      }
+    }
+    await writeGardens(gardens);
+    return done(i18n("Notice.ModSet"));
+  }
+
+  if (op.type === "useFertilizer") {
+    const item = actor.items.get(op.itemId);
+    const factor = fertilizerFactor(item);
+    if (!factor) return fail(i18n("Notice.NotUsable"));
+    setFactor(garden.mods, key, "growth", factor);
+    await writeGardens(gardens);
+    await consumeOne(item);
+    return done(i18n("Notice.Fertilized", { factor }));
+  }
+
+  if (op.type === "usePotion") {
+    const item = actor.items.get(op.itemId);
+    const effect = potionInfo(item)?.effect;
+    if (!effect) return fail(i18n("Notice.NotUsable"));
+    if (effect.kind === "growth") {
+      setFactor(garden.mods, key, "growth", effect.factor);
+      await writeGardens(gardens);
+      await consumeOne(item);
+      return done(i18n("Notice.Fertilized", { factor: effect.factor }));
+    }
+    const target = plantState(garden.slots[key]);
+    if (!target) return fail(i18n("Notice.NeedsPlant"));
+    if (target.dead) return fail(i18n("Notice.AlreadyDead"));
+    garden.slots[key].hp = 0;
+    await writeGardens(gardens);
+    await consumeOne(item);
+    return done(i18n("Notice.Withered", { plant: target.plant.name }));
   }
 
   const slot = garden.slots[key];
@@ -229,10 +286,13 @@ async function applyOp(user, op = {}) {
   }
 
   if (op.type === "harvest") {
+    // The bed's modifiers last until the next harvest: this one uses them up.
+    const mod = garden.mods[key];
     delete garden.slots[key];
+    delete garden.mods[key];
     await writeGardens(gardens);
     if (!state.ripe) return done(i18n(state.dead ? "Notice.RemovedDead" : "Notice.NothingGained", { plant: state.plant.name }));
-    const quantity = await rollYield(state.plant);
+    const quantity = Math.max(1, Math.round((await rollYield(state.plant)) * (mod?.yield ?? 1)));
     const granted = await grantHarvest(actor, state.plant.ingredientId, quantity);
     if (!granted) return fail(i18n("Notice.PackMissing"));
     await ChatMessage.create({

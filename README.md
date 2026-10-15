@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.36.0
+- **Current version:** 0.37.0
 
 ## Installation
 
@@ -138,6 +138,11 @@ A garden for the characters of the Botany Club. The GM picks the characters and 
 - The plants (herbs, mushrooms, food and flowers) and potion effects take their cue from Potion Craft. The players are meant to **find the recipes out themselves**, so the recipe journal *Botanikclub: Rezepte (nur SL)* is hidden from players and the items reveal nothing.
 - **Recipes**: every effect has up to three tiers. A higher tier needs one more, rarer ingredient per step (tier II: one, tier III: two), one more cup of each liquid it uses, and, for magical potions, powdered mana crystals: 1, 3 and 6 for tiers I to III. Water and oil are given in cups. Only poison, acid and explosion are non-magical. The shared catalogue (`scripts/alchemy/`) is groundwork for a later alchemy workshop.
 - **Growth times** are set per plant by the GM under **Configure Settings → Fimblewood Academy → Plant growth times**. The defaults are 5 days (common), 8 (uncommon), 12 (rare) and 30 (very rare).
+- **Bed modifiers**: a bed can have a growth factor and a yield factor. They belong to the bed and last until the next plant on it is harvested (any harvest or removal by the player ends them). A new growth factor replaces the old one. The factor is shown above the bed.
+  - The **menu on the left** of the garden window lets players use **potions** and **fertilizer** from their character's inventory: pick the item, then the bed. Potions list all potions of the character, but only those with a garden effect can be used. *Wildes Wachstum* is growth ×1.5, *Verlangsamung* ×0.5. Harmful potions (Gift, Säure, Explosion, Feuer, Frost, Nekromantie, Fluch) bring the plant's HP to 0.
+  - Three **fertilizers** (growth ×1.2, ×1.4, ×1.6) are in the compendium *Botanikclub: Samen & Zutaten*, with prices, ready for a shop.
+  - The GM sets any factor (growth and yield, 0.1 to 10) with the **Modifiers** tool on the left, then picks the bed.
+  - A potion's garden effect comes from its name, or from the field **Effect in the garden** on the potion's item sheet (GM). The fertilizer factor is a field on loot items.
 - Garden backgrounds go in `assets/garden/` — see the prompts in `assets/garden/PROMPTS.md`. Without them the garden shows a plain lawn.
 
 ### Content

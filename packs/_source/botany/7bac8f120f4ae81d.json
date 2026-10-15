@@ -1,0 +1,42 @@
+{
+  "_id": "7bac8f120f4ae81d",
+  "name": "Gifttrank",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-conical-corked-labeled-skull-poison-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ein schädlicher Trank. Auf einem Beet in „Mein Garten“ eingesetzt, vernichtet er die Pflanze dort sofort (HP auf 0).</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "gift",
+      "role": "potion"
+    }
+  },
+  "_key": "!items!7bac8f120f4ae81d"
+}

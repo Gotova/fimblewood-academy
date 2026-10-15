@@ -1,0 +1,42 @@
+{
+  "_id": "d452ddaf68ed98b7",
+  "name": "Einfacher Dünger",
+  "type": "loot",
+  "img": "icons/consumables/plants/sprout-glowing-roots-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Auf ein Beet in „Mein Garten“ gestreut, wachsen die Pflanzen dort schneller (Wachstum ×1,2), bis auf dem Beet geerntet wird. Ein neuer Dünger oder Trank ersetzt die Wirkung des alten.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "fertilizer": 1.2,
+      "role": "fertilizer"
+    }
+  },
+  "_key": "!items!d452ddaf68ed98b7"
+}

@@ -14,6 +14,7 @@
 
 import { INGREDIENT_BY_ID } from "../alchemy/ingredients.mjs";
 import { MODULE_ID, PLANTS, GARDEN_SIZES, slotCount } from "./plants.mjs";
+import { potionsOf, fertilizersOf, modBadge } from "./modifiers.mjs";
 import { getMembers, getGarden, plantState, seedsOf, requestGardenOp, today, memberActors } from "./data.mjs";
 
 /** Where the beds sit on each background picture, as % of the board width: the margin on every side, and the gap between beds. The beds are square. */
@@ -39,7 +40,7 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
     id: "fimblewood-garden",
     tag: "div",
     window: { title: "FIMBLEWOOD.Botany.WindowTitle", icon: "fas fa-seedling", resizable: false },
-    position: { width: 460, height: "auto" },
+    position: { width: 560, height: "auto" },
     classes: ["fimblewood-garden-app"]
   };
 
@@ -48,6 +49,9 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
 
   /** Index of the bed whose card is open. */
   selected = null;
+
+  /** An item or GM tool waiting for the player to pick a bed: {kind, itemId?, label, harm?, growth?, yield?, clear?}. */
+  applying = null;
 
   #viewedActor() {
     const ids = memberActors().map((a) => a.id);
@@ -68,19 +72,20 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
     if (this.selected != null && (this.selected >= total || !garden.slots[this.selected])) this.selected = null;
 
     let beds = "";
+    const target = this.applying ? "is-target" : "";
     for (let i = 0; i < total; i++) {
       const state = plantState(garden.slots[i]);
       if (!state) {
-        beds += `<button type="button" class="fw-garden-slot is-empty" data-action="fwSlot" data-slot="${i}" title="${esc(t("Plant"))}"><span class="fw-garden-plus">+</span></button>`;
+        beds += `<button type="button" class="fw-garden-slot is-empty ${target}" data-action="fwSlot" data-slot="${i}" title="${esc(t("Plant"))}"><span class="fw-garden-plus">+</span>${modBadge(garden.mods[i])}</button>`;
         continue;
       }
       const img = INGREDIENT_BY_ID.get(state.plant.ingredientId)?.img;
       const cls = state.dead ? "is-dead" : state.ripe ? "is-ripe" : "";
       beds += `
-        <button type="button" class="fw-garden-slot ${cls} ${this.selected === i ? "is-selected" : ""}" data-action="fwSlot" data-slot="${i}"
+        <button type="button" class="fw-garden-slot ${cls} ${target} ${this.selected === i ? "is-selected" : ""}" data-action="fwSlot" data-slot="${i}"
                 style="--m:${state.maturity / 100}" title="${esc(state.plant.name)}">
           <img src="${esc(img)}" alt="">
-          <span class="fw-garden-pct">${Math.floor(state.maturity)} %</span>
+          <span class="fw-garden-pct">${Math.floor(state.maturity)} %</span>${modBadge(garden.mods[i])}
         </button>`;
     }
 
@@ -91,7 +96,29 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
         ${this.#card(garden)}
       </div>`;
 
-    return `${this.#toolbar(actorId)}${board}`;
+    return `
+      <div class="fw-garden-layout">
+        ${this.#side()}
+        <div class="fw-garden-main">${this.#toolbar(actorId)}${this.#banner()}${board}</div>
+      </div>`;
+  }
+
+  /** The menu on the left: potions and fertilizer for the players, the modifier tool for the GM. */
+  #side() {
+    const button = (action, icon, label) =>
+      `<button type="button" class="fw-garden-side-btn" data-action="${action}" title="${esc(label)}"><i class="fas fa-${icon}"></i><span>${esc(label)}</span></button>`;
+    if (game.user.isGM) return `<nav class="fw-garden-side">${button("fwMod", "sliders", t("Side.Mod"))}</nav>`;
+    return `<nav class="fw-garden-side">${button("fwPotion", "flask", t("Side.Potion"))}${button("fwFertilizer", "leaf", t("Side.Fertilizer"))}</nav>`;
+  }
+
+  /** The hint shown while an item waits for a bed. */
+  #banner() {
+    if (!this.applying) return "";
+    return `
+      <div class="fw-garden-banner">
+        <span>${t("ApplyHint", { what: esc(this.applying.label) })}</span>
+        <button type="button" data-action="fwCancelApply">${t("Cancel")}</button>
+      </div>`;
   }
 
   #toolbar(actorId) {
@@ -129,6 +156,7 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
       <div class="fw-garden-card">
         <button type="button" class="fw-garden-close" data-action="fwCardClose" title="${esc(t("Close"))}">×</button>
         <h3>${esc(plant.name)}</h3>
+        ${modBadge(garden.mods[i])}
         <div class="fw-garden-status">${status}</div>
         <div class="fw-garden-stat"><span>${t("Maturity")}</span><span>${Math.floor(maturity)} %</span></div>
         <div class="fw-garden-bar is-maturity"><span style="width:${maturity}%"></span></div>
@@ -166,6 +194,10 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
     const slot = Number(el.dataset.slot);
     switch (action) {
       case "fwSlot": {
+        if (this.applying) {
+          this.#applyTo(slot);
+          break;
+        }
         const garden = getGarden(this.actorId);
         if (garden.slots[slot]) {
           this.selected = this.selected === slot ? null : slot;
@@ -190,7 +222,118 @@ export class GardenApp extends foundry.applications.api.ApplicationV2 {
       case "fwAdvance":
         requestGardenOp({ type: "advance", days: 1 });
         break;
+      case "fwPotion":
+        this.#pickPotion();
+        break;
+      case "fwFertilizer":
+        this.#pickFertilizer();
+        break;
+      case "fwMod":
+        this.#pickGmMod();
+        break;
+      case "fwCancelApply":
+        this.applying = null;
+        this.render();
+        break;
     }
+  }
+
+  /** A radio list of items in a dialog; resolves to the chosen item id, or null. */
+  async #chooseItem(title, icon, rows) {
+    const list = rows.map(({ item, usable, note }) => `
+      <label class="fw-garden-seed ${usable ? "" : "is-disabled"}">
+        <input type="radio" name="item" value="${item.id}" ${usable ? "" : "disabled"}>
+        <img src="${esc(item.img)}" alt="">
+        <span>${esc(item.name)} <em>×${item.system.quantity ?? 1}</em> <small>${esc(note)}</small></span>
+      </label>`).join("");
+    return foundry.applications.api.DialogV2.prompt({
+      window: { title, icon },
+      content: `<div class="fw-garden-seed-list">${list}</div>`,
+      ok: { label: t("Choose"), callback: (event, button) => button.form.elements.item?.value || null },
+      rejectClose: false,
+      position: { width: 380 }
+    });
+  }
+
+  async #pickPotion() {
+    const actor = game.actors.get(this.actorId);
+    const potions = potionsOf(actor);
+    if (!potions.length) return ui.notifications.info(t("NoPotions"));
+    const rows = potions.map(({ item, info }) => {
+      const effect = info.effect;
+      const note = !effect ? t("Note.None") : effect.kind === "growth" ? t("Note.Growth", { factor: effect.factor }) : t("Note.Harm");
+      return { item, usable: !!effect, note };
+    });
+    const itemId = await this.#chooseItem(t("PotionTitle"), "fas fa-flask", rows);
+    if (!itemId) return;
+    const picked = potions.find((p) => p.item.id === itemId);
+    this.applying = { kind: "potion", itemId, label: picked.item.name, harm: picked.info.effect.kind === "harm", effectId: picked.info.effectId };
+    this.render();
+  }
+
+  async #pickFertilizer() {
+    const actor = game.actors.get(this.actorId);
+    const fertilizers = fertilizersOf(actor);
+    if (!fertilizers.length) return ui.notifications.info(t("NoFertilizers"));
+    const rows = fertilizers.map(({ item, factor }) => ({ item, usable: true, note: t("Note.Growth", { factor }) }));
+    const itemId = await this.#chooseItem(t("FertilizerTitle"), "fas fa-leaf", rows);
+    if (!itemId) return;
+    const picked = fertilizers.find((f) => f.item.id === itemId);
+    this.applying = { kind: "fertilizer", itemId, label: picked.item.name };
+    this.render();
+  }
+
+  /** GM: sets growth/yield factors (or clears a bed), then waits for a bed to put them on. */
+  async #pickGmMod() {
+    const mod = await foundry.applications.api.DialogV2.prompt({
+      window: { title: t("ModTitle"), icon: "fas fa-sliders" },
+      content: `
+        <div class="fw-garden-modform">
+          <p class="fw-garden-hint">${t("ModHint")}</p>
+          <label>${t("ModGrowth")} <input type="number" name="growth" min="0.1" max="10" step="0.1" placeholder="${esc(t("ModUnchanged"))}"></label>
+          <label>${t("ModYield")} <input type="number" name="yield" min="0.1" max="10" step="0.1" placeholder="${esc(t("ModUnchanged"))}"></label>
+          <label class="checkbox"><input type="checkbox" name="clear"> ${t("ModClear")}</label>
+        </div>`,
+      ok: {
+        label: t("Choose"),
+        callback: (event, button) => {
+          const f = button.form.elements;
+          const num = (el) => (el.value === "" ? null : Number(el.value));
+          return { growth: num(f.growth), yield: num(f.yield), clear: f.clear.checked };
+        }
+      },
+      rejectClose: false,
+      position: { width: 380 }
+    });
+    if (!mod || (!mod.clear && mod.growth == null && mod.yield == null)) return;
+    const parts = [];
+    if (mod.clear) parts.push(t("ModClearShort"));
+    if (mod.growth != null) parts.push(`${t("ModGrowth")}${mod.growth}`);
+    if (mod.yield != null) parts.push(`${t("ModYield")}${mod.yield}`);
+    this.applying = { kind: "gmMod", label: parts.join(", "), ...mod };
+    this.render();
+  }
+
+  /** Puts the waiting item or GM tool on a bed. */
+  async #applyTo(slot) {
+    const a = this.applying;
+    if (!a) return;
+    const state = plantState(getGarden(this.actorId).slots[slot]);
+    if (a.kind === "potion" && a.harm) {
+      if (!state) return ui.notifications.warn(t("Notice.NeedsPlant"));
+      const ok = await foundry.applications.api.DialogV2.confirm({
+        window: { title: t("ConfirmHarmTitle") },
+        content: `<p>${t("ConfirmHarm", { potion: esc(a.label), plant: esc(state.plant.name) })}</p>`,
+        rejectClose: false
+      });
+      if (!ok) return;
+    }
+    const base = { actorId: this.actorId, slot };
+    if (a.kind === "potion") requestGardenOp({ ...base, type: "usePotion", itemId: a.itemId });
+    else if (a.kind === "fertilizer") requestGardenOp({ ...base, type: "useFertilizer", itemId: a.itemId });
+    else requestGardenOp({ ...base, type: "gmMod", growth: a.growth, yield: a.yield, clear: a.clear });
+    this.applying = null;
+    this.render();
   }
 
   async #plant(slot) {

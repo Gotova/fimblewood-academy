@@ -479,7 +479,14 @@
         "NothingGained": "{plant} war noch nicht reif. Du bekommst nichts.",
         "RemovedDead": "{plant} entfernt.",
         "Advanced": "{days} Tag(e) vergangen. Die Pflanzen sind gewachsen.",
-        "NeedsGM": "Es ist keine Spielleitung online, die das ausführen kann."
+        "NeedsGM": "Es ist keine Spielleitung online, die das ausführen kann.",
+        "NotUsable": "Das lässt sich im Garten nicht verwenden.",
+        "NeedsPlant": "Auf diesem Beet wächst nichts, das der Trank vernichten könnte.",
+        "AlreadyDead": "Diese Pflanze ist schon eingegangen.",
+        "Fertilized": "Wachstum auf diesem Beet jetzt ×{factor}.",
+        "Withered": "{plant} ist eingegangen.",
+        "ModSet": "Beet-Modifier gesetzt.",
+        "ModInvalid": "Der Faktor muss zwischen 0,1 und 10 liegen."
       },
       "Chat": {
         "Harvested": "{actor} erntet {qty}× {plant}."
@@ -500,6 +507,42 @@
         "uncommon": "ungewöhnlich",
         "rare": "selten",
         "veryRare": "sehr selten"
+      },
+      "Side": {
+        "Potion": "Tränke",
+        "Fertilizer": "Dünger",
+        "Mod": "Modifier"
+      },
+      "Cancel": "Abbrechen",
+      "Choose": "Auswählen",
+      "NoPotions": "Du hast keine Tränke im Inventar.",
+      "NoFertilizers": "Du hast keinen Dünger im Inventar.",
+      "PotionTitle": "Welchen Trank willst du einsetzen?",
+      "FertilizerTitle": "Welchen Dünger willst du verwenden?",
+      "ApplyHint": "{what}: Wähle jetzt ein Beet.",
+      "Note": {
+        "None": "wirkt nicht auf Pflanzen",
+        "Growth": "Wachstum ×{factor}",
+        "Harm": "vernichtet die Pflanze"
+      },
+      "ConfirmHarmTitle": "Trank einsetzen",
+      "ConfirmHarm": "<strong>{potion}</strong> auf <strong>{plant}</strong> einsetzen? Die Pflanze geht sofort ein.",
+      "ModTitle": "Beet-Modifier",
+      "ModHint": "Gelten für ein Beet, bis dort die nächste Pflanze geerntet wird. Ein neuer Wachstumsfaktor ersetzt den alten. Leer lassen = unverändert, 1 = Faktor entfernen.",
+      "ModGrowth": "Wachstum ×",
+      "ModYield": "Ertrag ×",
+      "ModUnchanged": "unverändert",
+      "ModClear": "Alle Modifier des Beets entfernen",
+      "ModClearShort": "Modifier entfernen",
+      "PotionField": {
+        "Legend": "Wirkung im Garten",
+        "Auto": "— automatisch nach dem Namen —",
+        "None": "— keine Wirkung —",
+        "Harm": "vernichtet die Pflanze"
+      },
+      "FertilizerField": {
+        "Legend": "Dünger",
+        "Label": "Wachstumsfaktor (leer = kein Dünger)"
       }
     }
   }

@@ -1,0 +1,42 @@
+{
+  "_id": "341bf654e6ed3d0b",
+  "name": "Starker Dünger",
+  "type": "loot",
+  "img": "icons/consumables/plants/leaf-veins-glowing-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Auf ein Beet in „Mein Garten“ gestreut, wachsen die Pflanzen dort schneller (Wachstum ×1,6), bis auf dem Beet geerntet wird. Ein neuer Dünger oder Trank ersetzt die Wirkung des alten.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 60,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "fertilizer": 1.6,
+      "role": "fertilizer"
+    }
+  },
+  "_key": "!items!341bf654e6ed3d0b"
+}

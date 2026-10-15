@@ -479,7 +479,14 @@
         "NothingGained": "{plant} was not ripe yet. You get nothing.",
         "RemovedDead": "Removed {plant}.",
         "Advanced": "{days} day(s) passed. The plants grew.",
-        "NeedsGM": "No GM is online to carry that out."
+        "NeedsGM": "No GM is online to carry that out.",
+        "NotUsable": "That cannot be used in the garden.",
+        "NeedsPlant": "Nothing grows on this bed for the potion to destroy.",
+        "AlreadyDead": "That plant has already withered.",
+        "Fertilized": "Growth on this bed is now ×{factor}.",
+        "Withered": "{plant} has withered.",
+        "ModSet": "Bed modifier set.",
+        "ModInvalid": "The factor must be between 0.1 and 10."
       },
       "Chat": {
         "Harvested": "{actor} harvests {qty}× {plant}."
@@ -500,6 +507,42 @@
         "uncommon": "uncommon",
         "rare": "rare",
         "veryRare": "very rare"
+      },
+      "Side": {
+        "Potion": "Potions",
+        "Fertilizer": "Fertilizer",
+        "Mod": "Modifiers"
+      },
+      "Cancel": "Cancel",
+      "Choose": "Choose",
+      "NoPotions": "You have no potions in your inventory.",
+      "NoFertilizers": "You have no fertilizer in your inventory.",
+      "PotionTitle": "Which potion do you want to use?",
+      "FertilizerTitle": "Which fertilizer do you want to use?",
+      "ApplyHint": "{what}: now pick a bed.",
+      "Note": {
+        "None": "no effect on plants",
+        "Growth": "growth ×{factor}",
+        "Harm": "destroys the plant"
+      },
+      "ConfirmHarmTitle": "Use potion",
+      "ConfirmHarm": "Use <strong>{potion}</strong> on <strong>{plant}</strong>? The plant withers at once.",
+      "ModTitle": "Bed modifiers",
+      "ModHint": "They belong to a bed until the next plant on it is harvested. A new growth factor replaces the old one. Leave blank = unchanged, 1 = remove the factor.",
+      "ModGrowth": "Growth ×",
+      "ModYield": "Yield ×",
+      "ModUnchanged": "unchanged",
+      "ModClear": "Remove all modifiers of the bed",
+      "ModClearShort": "remove modifiers",
+      "PotionField": {
+        "Legend": "Effect in the garden",
+        "Auto": "— automatic, by name —",
+        "None": "— no effect —",
+        "Harm": "destroys the plant"
+      },
+      "FertilizerField": {
+        "Legend": "Fertilizer",
+        "Label": "Growth factor (blank = not a fertilizer)"
       }
     }
   }

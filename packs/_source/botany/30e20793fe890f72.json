@@ -1,0 +1,42 @@
+{
+  "_id": "30e20793fe890f72",
+  "name": "Guter Dünger",
+  "type": "loot",
+  "img": "icons/consumables/plants/kelp-fern-glowing-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Auf ein Beet in „Mein Garten“ gestreut, wachsen die Pflanzen dort schneller (Wachstum ×1,4), bis auf dem Beet geerntet wird. Ein neuer Dünger oder Trank ersetzt die Wirkung des alten.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "fertilizer": 1.4,
+      "role": "fertilizer"
+    }
+  },
+  "_key": "!items!30e20793fe890f72"
+}

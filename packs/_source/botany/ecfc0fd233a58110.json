@@ -1,0 +1,42 @@
+{
+  "_id": "ecfc0fd233a58110",
+  "name": "Nekromantie-Trank",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-bulb-corked-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ein schädlicher Trank. Auf einem Beet in „Mein Garten“ eingesetzt, vernichtet er die Pflanze dort sofort (HP auf 0).</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 150,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "potionEffect": "nekromantie",
+      "role": "potion"
+    }
+  },
+  "_key": "!items!ecfc0fd233a58110"
+}

@@ -4,6 +4,16 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.37.0] - 2026-10-15
+
+### Added
+
+- **Bed modifiers** for the garden: a growth factor and a yield factor per bed, shown above the bed. They last until the next plant on the bed is harvested; a new growth factor replaces the old one.
+- A **menu on the left** of "Mein Garten": players use **potions** and **fertilizer** from their character's inventory by picking the item and then a bed. *Wildes Wachstum* grows plants ×1.5, *Verlangsamung* ×0.5, and the harmful potions (Gift, Säure, Explosion, Feuer, Frost, Nekromantie, Fluch) reduce the plant's HP to 0. Potions without a garden effect are listed but cannot be used.
+- Three **fertilizers** (×1.2, ×1.4, ×1.6) and the nine garden potions as items in the compendium *Botanikclub: Samen & Zutaten*.
+- The GM sets growth and yield factors on any bed with the **Modifiers** tool.
+- Item sheet fields for the GM: the garden effect of a potion, and the growth factor of a fertilizer.
+
 ## [0.36.0] - 2026-10-15
 
 ### Changed
