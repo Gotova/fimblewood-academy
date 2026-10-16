@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.40.0
+- **Current version:** 0.41.0
 
 ## Installation
 
@@ -25,6 +25,7 @@ This URL always resolves to the latest release, so it never needs to change betw
 - **Magic Circle Draw Pad** (`scripts/draw.mjs`, `styles/draw.css`) — merged in from the standalone [FoundryDraw](https://github.com/Gotova/FoundryDraw) module
 - **Hideout Jukebox** (`scripts/jukebox.mjs`, `styles/jukebox.css`) — a collectible-music system built around Foundry's native Ambient Sound and Playlist documents
 - **Dragonchess** (`scripts/dragonchess/`, `styles/dragonchess.css`) — the Dragonchess Club's chess variant, playable in Foundry with a rules engine, an optional bot opponent, and dice-driven captures streamed live to the whole table
+- **Silkball** (`scripts/silkball/`) — the Academy's sport as a dnd5e tool, rolled with spell attack + Silkball value
 
 ### Magic Circle Draw Pad
 
@@ -148,6 +149,14 @@ A garden for the characters of the Botany Club. The GM picks the characters and 
   - A potion's tier is a field next to its garden effect on the item sheet (GM).
   - **Prices**: the GM edits the price of every potion in one table, with the three tiers side by side, under **Configure Settings → Fimblewood Academy → Edit potion prices**. The compendium keeps its default prices (50 / 150 / 500 gp); a custom price applies when a potion is created from the compendium, and optionally to potions that already exist.
 - Garden backgrounds go in `assets/garden/` — see the prompts in `assets/garden/PROMPTS.md`. Without them the garden shows a plain lawn.
+
+### Silkball
+
+The Academy's sport is a **tool**, like a gaming set: **Silkball** shows in the Tools box of the character sheet, and the item sits in the compendium *Silkball*. A throw at a net or a player is `1d20 + spell attack + Silkball value`, and the tool check is set up to roll exactly that:
+
+- **Ability**: the character's spellcasting ability. **Proficient**.
+- **Bonus**: the Silkball value (+1 to +3, set by the GM). It counts only in Silkball.
+- Defence (AC + Silkball value) and the net AC (14 in training, 14–17 in league games, 17 in tournaments) are worked out by hand for now.
 
 ### Content
 

@@ -8,6 +8,7 @@ import { registerDragonchess, openBoardForCurrentUser, getGameRecord, selftest a
 import { registerAmbientSoundFade } from "./ambient-sound-fade.mjs";
 import { registerTimetable, openTimetableViewer, openTimetableEditor } from "./timetable/index.mjs";
 import { registerBotany, openGarden } from "./botany/index.mjs";
+import { registerSilkball } from "./silkball/index.mjs";
 import { registerSceneMusic } from "./scene-music.mjs";
 import { registerNpcSpawner, rerollScene, rerollRegion, addNpcs, removeNpcs, clearRegion } from "./npc-spawner.mjs";
 import { registerEladrinWildMagic, hasEladrinWildMagic, getState as getWildMagicState, setRingState, setContainment } from "./eladrin-wild-magic.mjs";
@@ -30,6 +31,7 @@ Hooks.once("init", () => {
   registerDragonchess();
   registerTimetable();
   registerBotany();
+  registerSilkball();
   registerNpcSpawner();
   registerEladrinWildMagic();
   registerSubclassDrop();

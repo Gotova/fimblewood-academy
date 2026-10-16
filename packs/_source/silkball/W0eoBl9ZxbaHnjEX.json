@@ -1,0 +1,58 @@
+{
+  "_id": "W0eoBl9ZxbaHnjEX",
+  "name": "Silkball",
+  "type": "tool",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": {
+      "value": "<p>Schläger mit Spinnenfäden für Silkball. Gilt als Zauberfokus und hält den Ball.</p><p><strong>Wurf</strong> (aufs Netz oder auf einen Spieler): W20 + Zauberangriff + Silkball-Wert. Im Bogen ist das der Tool-Wurf: Attribut = Zauberattribut, geübt, Silkball-Wert (+1 bis +3) im Bonus des Tools.</p><p><strong>Verteidigung:</strong> AC + Silkball-Wert. <strong>Netz mit Spieler davor:</strong> Netz-AC + Silkball-Wert des Spielers.</p><p><strong>Netz-AC:</strong> Training 14, Ligaspiele 14–17, Wettbewerbe 17.</p>",
+      "chat": ""
+    },
+    "identifier": "silkball",
+    "source": {
+      "book": "",
+      "revision": 1,
+      "rules": "2024"
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 0,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "attunement": "",
+    "attuned": false,
+    "equipped": false,
+    "ability": "cha",
+    "bonus": "",
+    "chatFlavor": "",
+    "proficient": null,
+    "properties": [],
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "recovery": []
+    },
+    "type": {
+      "value": "game",
+      "baseItem": "silkball"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "sort": 0,
+  "_key": "!items!W0eoBl9ZxbaHnjEX"
+}

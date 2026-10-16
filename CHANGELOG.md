@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.41.0] - 2026-10-16
+
+### Added
+
+- **Silkball as a tool**: Silkball now shows in the Tools box of the character sheet, like a gaming set. Its check rolls the Silkball throw: spellcasting ability, proficient, and the Silkball value as the tool's bonus. The tool item is in the new compendium *Silkball*.
+
 ## [0.40.0] - 2026-10-15
 
 ### Changed
