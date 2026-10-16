@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.41.0
+- **Current version:** 0.42.0
 
 ## Installation
 
@@ -157,6 +157,7 @@ The Academy's sport is a **tool**, like a gaming set: **Silkball** shows in the 
 - **Ability**: the character's spellcasting ability. **Proficient**.
 - **Bonus**: the Silkball value (+1 to +3, set by the GM). It counts only in Silkball.
 - Defence (AC + Silkball value) and the net AC (14 in training, 14–17 in league games, 17 in tournaments) are worked out by hand for now.
+- The compendium *Silkball: Ball & Netze* holds a **ball** token (put it next to whoever has the ball; one token per ball in play) and three **nets** with their net AC: training (AC 14, 3 squares wide), league (AC 15, adjust to 14–17, 2 squares) and tournament (AC 17, 1 square). The roll is not compared to the net's AC automatically; the nets show the AC to aim for.
 
 ### Content
 

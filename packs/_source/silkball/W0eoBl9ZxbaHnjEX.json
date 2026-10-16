@@ -2,7 +2,7 @@
   "_id": "W0eoBl9ZxbaHnjEX",
   "name": "Silkball",
   "type": "tool",
-  "img": "icons/svg/item-bag.svg",
+  "img": "modules/fimblewood-academy/assets/silkball/ball.svg",
   "system": {
     "description": {
       "value": "<p>Schläger mit Spinnenfäden für Silkball. Gilt als Zauberfokus und hält den Ball.</p><p><strong>Wurf</strong> (aufs Netz oder auf einen Spieler): W20 + Zauberangriff + Silkball-Wert. Im Bogen ist das der Tool-Wurf: Attribut = Zauberattribut, geübt, Silkball-Wert (+1 bis +3) im Bonus des Tools.</p><p><strong>Verteidigung:</strong> AC + Silkball-Wert. <strong>Netz mit Spieler davor:</strong> Netz-AC + Silkball-Wert des Spielers.</p><p><strong>Netz-AC:</strong> Training 14, Ligaspiele 14–17, Wettbewerbe 17.</p>",

@@ -1,0 +1,68 @@
+{
+  "_id": "J0F5MHaAry23SPux",
+  "name": "Silkball-Netz (Training)",
+  "type": "npc",
+  "img": "modules/fimblewood-academy/assets/silkball/net.svg",
+  "system": {
+    "attributes": {
+      "ac": {
+        "flat": 14,
+        "calc": "flat"
+      },
+      "hp": {
+        "value": 1,
+        "max": 1
+      },
+      "movement": {
+        "walk": 0,
+        "units": "ft"
+      }
+    },
+    "details": {
+      "cr": 0,
+      "type": {
+        "value": "construct",
+        "subtype": "Silkball"
+      },
+      "biography": {
+        "value": "<p>Netz für <strong>Freundschafts- und Trainingsspiele (größtes Netz)</strong>, Netz-AC <strong>14</strong>. Ein Torwurf (Tool-Wurf Silkball) trifft bei Ergebnis ≥ Netz-AC.</p><p><strong>Spieler vor dem Netz:</strong> Netz-AC + Silkball-Wert des Spielers. Würde der Ball das Netz treffen, ist stattdessen der Spieler getroffen und raus, kein Punkt. Sonst hat er den Ball gefangen.</p><p>Ein Ball, der trifft, bleibt am Netz kleben: Ball-Token aufs Netz schieben. Drei Bälle im Netz = Sieg für das andere Team.</p>",
+        "public": ""
+      }
+    },
+    "traits": {
+      "size": "huge"
+    }
+  },
+  "prototypeToken": {
+    "name": "Silkball-Netz (Training)",
+    "displayName": 50,
+    "actorLink": false,
+    "disposition": 0,
+    "width": 3,
+    "height": 1,
+    "texture": {
+      "src": "modules/fimblewood-academy/assets/silkball/net.svg",
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "lockRotation": true,
+    "sight": {
+      "enabled": false
+    },
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    }
+  },
+  "items": [],
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "sort": 0,
+  "_key": "!actors!J0F5MHaAry23SPux"
+}

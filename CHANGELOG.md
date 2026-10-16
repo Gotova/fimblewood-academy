@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.42.0] - 2026-10-16
+
+### Added
+
+- **Silkball: ball and nets**: the new compendium *Silkball: Ball & Netze* has a ball token to show who has the ball, and three nets for training (AC 14), league games (AC 15, adjustable 14–17) and tournaments (AC 17). The Silkball tool has its own icon now.
+
 ## [0.41.0] - 2026-10-16
 
 ### Added

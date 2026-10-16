@@ -1,0 +1,68 @@
+{
+  "_id": "2VZR9qY77eHIiVll",
+  "name": "Silkball (Ball)",
+  "type": "npc",
+  "img": "modules/fimblewood-academy/assets/silkball/ball.svg",
+  "system": {
+    "attributes": {
+      "ac": {
+        "flat": 10,
+        "calc": "flat"
+      },
+      "hp": {
+        "value": 1,
+        "max": 1
+      },
+      "movement": {
+        "walk": 0,
+        "units": "ft"
+      }
+    },
+    "details": {
+      "cr": 0,
+      "type": {
+        "value": "construct",
+        "subtype": "Silkball"
+      },
+      "biography": {
+        "value": "<p>Ein Silkball aus klebrigen Spinnenfäden. Was er trifft, daran bleibt er kleben.</p><p>Den Token neben den Spieler schieben, der den Ball hat. Sind mehrere Bälle im Spiel, für jeden einen Token aufstellen.</p>",
+        "public": ""
+      }
+    },
+    "traits": {
+      "size": "tiny"
+    }
+  },
+  "prototypeToken": {
+    "name": "Silkball (Ball)",
+    "displayName": 0,
+    "actorLink": false,
+    "disposition": 0,
+    "width": 0.5,
+    "height": 0.5,
+    "texture": {
+      "src": "modules/fimblewood-academy/assets/silkball/ball.svg",
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "lockRotation": true,
+    "sight": {
+      "enabled": false
+    },
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    }
+  },
+  "items": [],
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "sort": 0,
+  "_key": "!actors!2VZR9qY77eHIiVll"
+}
