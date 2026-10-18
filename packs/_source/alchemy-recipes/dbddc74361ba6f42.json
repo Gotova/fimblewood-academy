@@ -1,0 +1,42 @@
+{
+  "_id": "dbddc74361ba6f42",
+  "name": "Rezept: Unsichtbarkeit, Stufe III",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Unsichtbarkeit, Stufe III</strong></p><p>5× Windblüte (gemahlen) + 2× Wasserblüte (gemahlen) + 2× Hexenpilz + 1× Nebelschirmling + 1× Regenbogenkappe + 6× Manastaub; 4 Becher Wasser, 3 Becher Öl, 1 Becher Mondtau</p><p>Ausrüstung: Athanor, Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 250,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "unsichtbarkeit:3:0"
+    }
+  },
+  "_key": "!items!dbddc74361ba6f42"
+}

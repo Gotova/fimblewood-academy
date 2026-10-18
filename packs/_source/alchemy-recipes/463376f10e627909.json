@@ -1,0 +1,42 @@
+{
+  "_id": "463376f10e627909",
+  "name": "Rezept: Giftschutz, Stufe III",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Giftschutz, Stufe III</strong></p><p>5× Gutbeere + 2× Haarbanane + 1× Dryadensattel + 1× Heilerheide (gemahlen) + 1× Greifwurzel (gemahlen) + 6× Manastaub; 3 Becher Wasser, 4 Becher Öl</p><p>Ausrüstung: Athanor, Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 250,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "giftschutz:3:0"
+    }
+  },
+  "_key": "!items!463376f10e627909"
+}

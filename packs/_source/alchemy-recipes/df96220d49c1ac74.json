@@ -1,0 +1,42 @@
+{
+  "_id": "df96220d49c1ac74",
+  "name": "Rezept: Explosion, Stufe III, Variante 1",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Explosion, Stufe III, Variante 1</strong></p><p>4× Wahnpilz + 1× Schwefelporling + 1× Magmamorchel; 3 Becher Wasser, 4 Becher Öl</p><p>Ausrüstung: Athanor, Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 250,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "explosion:3:0"
+    }
+  },
+  "_key": "!items!df96220d49c1ac74"
+}

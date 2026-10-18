@@ -1,0 +1,42 @@
+{
+  "_id": "ab2deb3c6d5d767e",
+  "name": "Rezept: Giftschutz, Stufe I",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-rolled-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Giftschutz, Stufe I</strong></p><p>5× Gutbeere + 2× Haarbanane + 1× Dryadensattel + 1× Manastaub; 1 Becher Wasser, 2 Becher Öl</p><p>Ausrüstung: Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "giftschutz:1:0"
+    }
+  },
+  "_key": "!items!ab2deb3c6d5d767e"
+}

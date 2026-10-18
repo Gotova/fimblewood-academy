@@ -4,6 +4,16 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.44.0] - 2026-10-18
+
+### Added
+
+- **Recipe items**: a GM-only compendium *Alchemie: Rezepte (nur SL)* with one item per recipe, tier and variant (113). Give one to a character and the recipe goes straight into its recipe book; the item is used up and the owners get a whispered note.
+
+### Changed
+
+- **Alchemy**: the Kelle no longer shows in the tool menu. It is still needed to add liquids to the cauldron.
+
 ## [0.43.0] - 2026-10-18
 
 ### Added

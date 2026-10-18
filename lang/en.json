@@ -694,7 +694,9 @@
         "NoActor": "That character does not exist.",
         "Refused": "That is not allowed.",
         "NeedsGM": "No GM is online to carry that out.",
-        "Timeout": "The GM did not answer."
+        "Timeout": "The GM did not answer.",
+        "Learned": "{actor} learned \"{recipe}\". It is now in the recipe book.",
+        "AlreadyKnown": "{actor} already knew \"{recipe}\"."
       }
     }
   }

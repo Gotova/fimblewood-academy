@@ -694,7 +694,9 @@
         "NoActor": "Dieser Charakter existiert nicht.",
         "Refused": "Das ist nicht erlaubt.",
         "NeedsGM": "Es ist keine Spielleitung online, die das ausführen kann.",
-        "Timeout": "Die Spielleitung hat nicht geantwortet."
+        "Timeout": "Die Spielleitung hat nicht geantwortet.",
+        "Learned": "{actor} hat „{recipe}“ gelernt. Das Rezept steht jetzt im Rezeptbuch.",
+        "AlreadyKnown": "{actor} kannte „{recipe}“ schon."
       }
     }
   }

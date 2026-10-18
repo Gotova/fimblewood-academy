@@ -1,0 +1,42 @@
+{
+  "_id": "3b6a5cdca7803471",
+  "name": "Rezept: Heilung, Stufe III, Variante 1",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Heilung, Stufe III, Variante 1</strong></p><p>2× Erdwurz (gemahlen) + 1× Sumpfling + 1× Lebensblatt (gemahlen) + 1× Lebenskristall (gemahlen) + 6× Manastaub; 4 Becher Wasser, 1 Becher Mondtau</p><p>Ausrüstung: Athanor, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 250,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "heilung:3:0"
+    }
+  },
+  "_key": "!items!3b6a5cdca7803471"
+}

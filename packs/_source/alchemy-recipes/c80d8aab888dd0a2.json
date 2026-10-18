@@ -1,0 +1,42 @@
+{
+  "_id": "c80d8aab888dd0a2",
+  "name": "Rezept: Halluzination, Stufe III",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Halluzination, Stufe III</strong></p><p>5× Windblüte (gemahlen) + 5× Wasserblüte (gemahlen) + 1× Seltsampilz + 1× Regenbogenkappe + 6× Manastaub; 5 Becher Wasser</p><p>Ausrüstung: Athanor, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 250,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "halluzination:3:0"
+    }
+  },
+  "_key": "!items!c80d8aab888dd0a2"
+}

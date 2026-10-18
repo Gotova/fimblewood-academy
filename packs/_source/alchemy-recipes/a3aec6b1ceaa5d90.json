@@ -1,0 +1,42 @@
+{
+  "_id": "a3aec6b1ceaa5d90",
+  "name": "Rezept: Frost, Stufe I",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-rolled-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Frost, Stufe I</strong></p><p>3× Wasserblüte (gemahlen) + 1× Erdwurz (gemahlen) + 1× Manastaub; 2 Becher Wasser</p><p>Ausrüstung: Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "frost:1:0"
+    }
+  },
+  "_key": "!items!a3aec6b1ceaa5d90"
+}

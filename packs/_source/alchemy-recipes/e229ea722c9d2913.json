@@ -1,0 +1,42 @@
+{
+  "_id": "e229ea722c9d2913",
+  "name": "Rezept: Begierde, Stufe III",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Begierde, Stufe III</strong></p><p>6× Feuerglocke (gemahlen) + 2× Erdwurz (gemahlen) + 1× Lustpilz + 1× Blutrubin (gemahlen) + 6× Manastaub; 4 Becher Wasser</p><p>Ausrüstung: Athanor, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 250,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "begierde:3:0"
+    }
+  },
+  "_key": "!items!e229ea722c9d2913"
+}

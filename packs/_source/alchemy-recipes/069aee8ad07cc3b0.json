@@ -1,0 +1,42 @@
+{
+  "_id": "069aee8ad07cc3b0",
+  "name": "Rezept: Säureschutz, Stufe I",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-rolled-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Säureschutz, Stufe I</strong></p><p>2× Heilerheide (gemahlen) + 2× Erdwurz (gemahlen) + 1× Kälteblatt (gemahlen) + 1× Manastaub; 1 Becher Wasser, 2 Becher Öl</p><p>Ausrüstung: Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "saeureschutz:1:0"
+    }
+  },
+  "_key": "!items!069aee8ad07cc3b0"
+}

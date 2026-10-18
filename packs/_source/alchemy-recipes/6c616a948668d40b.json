@@ -1,0 +1,42 @@
+{
+  "_id": "6c616a948668d40b",
+  "name": "Rezept: Fluch",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-rolled-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Fluch</strong></p><p>1× Schlammpilz + 1× Stinkpilz + 1× Druidenrosmarin (gemahlen) + 1× Seltsampilz + 1× Manastaub; 2 Becher Wasser</p><p>Ausrüstung: Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 9100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "fluch:1:0"
+    }
+  },
+  "_key": "!items!6c616a948668d40b"
+}

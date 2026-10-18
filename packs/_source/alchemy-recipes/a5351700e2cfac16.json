@@ -1,0 +1,42 @@
+{
+  "_id": "a5351700e2cfac16",
+  "name": "Rezept: Feuerschutz, Stufe III",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Feuerschutz, Stufe III</strong></p><p>4× Dornstock (gemahlen) + 2× Frostsaphir (gemahlen) + 1× Eisfrucht + 1× Lebenskristall (gemahlen) + 6× Manastaub; 3 Becher Wasser, 4 Becher Öl</p><p>Ausrüstung: Athanor, Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 250,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "feuerschutz:3:0"
+    }
+  },
+  "_key": "!items!a5351700e2cfac16"
+}

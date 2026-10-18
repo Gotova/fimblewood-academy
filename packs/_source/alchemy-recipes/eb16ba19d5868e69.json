@@ -1,0 +1,42 @@
+{
+  "_id": "eb16ba19d5868e69",
+  "name": "Rezept: Halluzination, Stufe II",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-bound-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Halluzination, Stufe II</strong></p><p>5× Windblüte (gemahlen) + 5× Wasserblüte (gemahlen) + 1× Seltsampilz + 3× Manastaub; 4 Becher Wasser</p><p>Ausrüstung: Destillierapparat, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 75,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "halluzination:2:0"
+    }
+  },
+  "_key": "!items!eb16ba19d5868e69"
+}

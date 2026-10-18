@@ -1,0 +1,42 @@
+{
+  "_id": "0a5ef90ba3dcdb33",
+  "name": "Rezept: Licht, Stufe I, Variante 2",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-rolled-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Licht, Stufe I, Variante 2</strong></p><p>2× Feuerglocke (gemahlen) + 1× Feuercitrin (gemahlen) + 1× Manastaub; 2 Becher Wasser, 1 Becher Öl</p><p>Ausrüstung: Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "licht:1:1"
+    }
+  },
+  "_key": "!items!0a5ef90ba3dcdb33"
+}

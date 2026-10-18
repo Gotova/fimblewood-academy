@@ -1,0 +1,42 @@
+{
+  "_id": "fa002938dd8ba6d2",
+  "name": "Rezept: Mana, Stufe I, Variante 1",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-rolled-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Mana, Stufe I, Variante 1</strong></p><p>3× Schattenpfifferling + 1× Manastaub; 2 Becher Wasser</p><p>Ausrüstung: Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "mana:1:0"
+    }
+  },
+  "_key": "!items!fa002938dd8ba6d2"
+}

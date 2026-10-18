@@ -1,0 +1,42 @@
+{
+  "_id": "57e31f9f1c5cb30d",
+  "name": "Rezept: Nekromantie, Stufe II",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-bound-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Nekromantie, Stufe II</strong></p><p>2× Grabtrüffel + 2× Schattenpfifferling + 1× Seltsampilz + 3× Manastaub; 3 Becher Wasser</p><p>Ausrüstung: Destillierapparat, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 75,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "nekromantie:2:0"
+    }
+  },
+  "_key": "!items!57e31f9f1c5cb30d"
+}

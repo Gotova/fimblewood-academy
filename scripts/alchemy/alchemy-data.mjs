@@ -11,6 +11,9 @@
  *                                         "region:<sceneId>.<regionId>" (Braukessel)
  *   gmLearn  {actorId, key, known}        GM: tick a recipe in a character's book
  *
+ * Recipe items (compendium "Alchemie: Rezepte", flag `recipe`) teach their
+ * recipe as soon as they land in a character's inventory, and are used up.
+ *
  * Brewing is instant: ingredients are used up and the potion (or a failed
  * one) lands in the inventory right away. Successful recipes go into the
  * character's recipe book (actor flag `knownRecipes`).
@@ -168,6 +171,26 @@ async function gmLearn(actor, op) {
   return { ok: true, message: "" };
 }
 
+/** A recipe item reached an inventory: learn it, use the item up and tell the owners. */
+async function learnFromItem(actor, item) {
+  const key = String(item.getFlag(MODULE_ID, "recipe") ?? "");
+  const { effectId, tier } = parseRecipeKey(key);
+  const effect = EFFECT_BY_ID.get(effectId);
+  if (!effect || tier > effect.maxTier) return;
+  const known = knownRecipes(actor);
+  const isNew = !known.has(key);
+  known.add(key);
+  if (isNew) await actor.setFlag(MODULE_ID, KNOWN_FLAG, [...known]);
+  await item.delete();
+  const owners = game.users.filter((u) => actor.testUserPermission(u, "OWNER")).map((u) => u.id);
+  const esc = foundry.utils.escapeHTML;
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    whisper: owners,
+    content: `<p>${i18n(isNew ? "Notice.Learned" : "Notice.AlreadyKnown", { actor: esc(actor.name), recipe: esc(item.name) })}</p>`
+  });
+}
+
 async function applyAlchemyOp(user, op = {}) {
   const actor = game.actors.get(String(op.actorId ?? ""));
   if (!actor) return fail(i18n("Notice.NoActor"));
@@ -213,6 +236,13 @@ export function registerAlchemyData() {
     name: "FIMBLEWOOD.Alchemy.Settings.Hints.name",
     hint: "FIMBLEWOOD.Alchemy.Settings.Hints.hint",
     scope: "world", config: true, type: Boolean, default: true
+  });
+
+  // Only the active GM handles recipe items, so each is learned exactly once.
+  Hooks.on("createItem", (item) => {
+    if (!game.users.activeGM?.isSelf) return;
+    if (!(item.parent instanceof Actor) || item.getFlag(MODULE_ID, "role") !== "recipe") return;
+    learnFromItem(item.parent, item).catch((err) => console.error(`${MODULE_ID} | Alchemy: learning a recipe failed`, err));
   });
 
   Hooks.once("ready", () => {

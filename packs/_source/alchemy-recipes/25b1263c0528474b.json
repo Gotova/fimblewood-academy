@@ -1,0 +1,42 @@
+{
+  "_id": "25b1263c0528474b",
+  "name": "Rezept: Begierde, Stufe I",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-rolled-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Begierde, Stufe I</strong></p><p>6× Feuerglocke (gemahlen) + 2× Erdwurz (gemahlen) + 1× Manastaub; 2 Becher Wasser</p><p>Ausrüstung: Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "begierde:1:0"
+    }
+  },
+  "_key": "!items!25b1263c0528474b"
+}

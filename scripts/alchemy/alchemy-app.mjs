@@ -84,7 +84,8 @@ export class AlchemyApp extends foundry.applications.api.ApplicationV2 {
   /** The tool entries for the menu, in a fixed order. */
   #entries(tools) {
     const list = [];
-    for (const type of PORTABLE_TOOLS) if (tools.portable.has(type)) list.push({ key: type === "reisekessel" ? "kettle:portable" : type, type });
+    // The ladle only allows liquids in the cauldron; it has nothing to show of its own.
+    for (const type of PORTABLE_TOOLS) if (type !== "kelle" && tools.portable.has(type)) list.push({ key: type === "reisekessel" ? "kettle:portable" : type, type });
     const brauKessel = tools.stations.filter((s) => s.type === "braukessel");
     for (const s of brauKessel) list.push({ key: `kettle:region:${s.regionKey}`, type: "braukessel", label: brauKessel.length > 1 ? `${t("Tool.braukessel")} (${s.regionName})` : null, slots: s.slots });
     for (const type of ["destille", "athanor", "oelbad"]) if (tools.stations.some((s) => s.type === type)) list.push({ key: type, type });

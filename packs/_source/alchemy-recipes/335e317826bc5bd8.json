@@ -1,0 +1,42 @@
+{
+  "_id": "335e317826bc5bd8",
+  "name": "Rezept: Heilung, Stufe I, Variante 2",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-rolled-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rezept: Heilung, Stufe I, Variante 2</strong></p><p>1× Wasserblüte (gemahlen) + 1× Golddorn (gemahlen) + 1× Manastaub; 2 Becher Wasser</p><p>Ausrüstung: Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "treasure",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "recipe",
+      "recipe": "heilung:1:1"
+    }
+  },
+  "_key": "!items!335e317826bc5bd8"
+}
