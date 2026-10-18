@@ -1,0 +1,42 @@
+{
+  "_id": "5c6fabfc6eba27c4",
+  "name": "Erdpyrit (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-rough-cushion-orange.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Erdpyrit (gemahlen)</strong> — Erdpyrit, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 17100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "erdpyrit",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!5c6fabfc6eba27c4"
+}

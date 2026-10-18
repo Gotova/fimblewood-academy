@@ -1,0 +1,42 @@
+{
+  "_id": "a49ab5910a9d1709",
+  "name": "Rose (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/flowers/rosaecia-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Rose (gemahlen)</strong> — Rose, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "rose",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!a49ab5910a9d1709"
+}

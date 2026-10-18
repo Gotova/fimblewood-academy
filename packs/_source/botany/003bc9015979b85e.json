@@ -1,0 +1,42 @@
+{
+  "_id": "003bc9015979b85e",
+  "name": "Traumrübe (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/vegetable/root-beet-bulb-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Traumrübe (gemahlen)</strong> — Traumrübe, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 7,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "traumruebe",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!003bc9015979b85e"
+}

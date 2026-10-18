@@ -1,11 +1,11 @@
 {
-  "_id": "20a9b92d66001d01",
-  "name": "Pulverisierter Manakristall",
+  "_id": "c4dac4b72567801a",
+  "name": "Salat (gemahlen)",
   "type": "loot",
-  "img": "icons/commodities/gems/powder-raw-white.webp",
+  "img": "icons/consumables/vegetable/lettuce-romaine-green.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Pulverisierter Manakristall</strong> — Kristall, Ungewöhnlich.</p>",
+      "value": "<p><strong>Salat (gemahlen)</strong> — Salat, im Mörser gemahlen.</p>",
       "chat": ""
     },
     "quantity": 1,
@@ -14,10 +14,10 @@
       "units": "lb"
     },
     "price": {
-      "value": 10,
-      "denomination": "gp"
+      "value": 5,
+      "denomination": "cp"
     },
-    "rarity": "uncommon",
+    "rarity": "common",
     "type": {
       "value": "material",
       "subtype": ""
@@ -28,15 +28,15 @@
   },
   "effects": [],
   "folder": null,
-  "sort": 11600,
+  "sort": 15700,
   "ownership": {
     "default": 0
   },
   "flags": {
     "fimblewood-academy": {
-      "ingredientId": "manastaub",
-      "role": "harvest"
+      "ingredientId": "salat",
+      "role": "ground"
     }
   },
-  "_key": "!items!20a9b92d66001d01"
+  "_key": "!items!c4dac4b72567801a"
 }

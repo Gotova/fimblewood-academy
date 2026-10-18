@@ -1,0 +1,42 @@
+{
+  "_id": "b3518a98728bc5cf",
+  "name": "Lavendel (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/flowers/blooms-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Lavendel (gemahlen)</strong> — Lavendel, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "lavendel",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!b3518a98728bc5cf"
+}

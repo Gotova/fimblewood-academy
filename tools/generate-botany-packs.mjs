@@ -14,7 +14,7 @@ import { mkdirSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { INGREDIENTS, INGREDIENT_BY_ID, KIND_LABELS } from "../scripts/alchemy/ingredients.mjs";
-import { EFFECTS, tierRecipe, MANA_INGREDIENT } from "../scripts/alchemy/effects.mjs";
+import { EFFECTS, tierRecipe, MANA_INGREDIENT, MONDTAU_EFFECTS } from "../scripts/alchemy/effects.mjs";
 import { PLANTS } from "../scripts/botany/plants.mjs";
 
 const MODULE_ID = "fimblewood-academy";
@@ -126,6 +126,21 @@ for (const ing of INGREDIENTS.filter((i) => !i.growable)) {
   writeJson(ITEM_DIR, harvestItem(ing, (sort += 100)));
   count += 1;
 }
+// The ground form of every ingredient (made in the alchemy window's Mörser).
+for (const ing of INGREDIENTS) {
+  writeJson(ITEM_DIR, item({
+    id: stableId(`ground:${ing.id}`),
+    name: ing.groundName,
+    img: ing.groundImg,
+    description: `<p><strong>${esc(ing.groundName)}</strong> — ${esc(ing.name)}, im Mörser gemahlen.</p>`,
+    gp: ing.gp,
+    rarity: ing.rarity,
+    lootType: "material",
+    flags: { ingredientId: ing.id, role: "ground" },
+    sort: (sort += 100)
+  }));
+  count += 1;
+}
 /* Fertilizer. The potions have their own pack (tools/generate-potion-pack.mjs). */
 const FERTILIZERS = [
   ["einfach", "Einfacher Dünger", 1.2, 10, "common", "sprout-glowing-roots-green"],
@@ -178,6 +193,9 @@ const overview = `
 <ul>
 <li><strong>Reifezeit:</strong> Standard sind 5 Tage (gewöhnlich), 8 (ungewöhnlich), 12 (selten) und 30 (sehr selten). Du änderst sie pro Pflanze unter Moduleinstellungen → Fimblewood Academy → „Reifezeiten der Pflanzen“.</li>
 <li><strong>Rezepte:</strong> Die Stufe verändert das Rezept. Stufe II braucht eine zusätzliche, seltenere Zutat, Stufe III zwei. Dazu kommen Becher Wasser und Öl (je Stufe einer mehr) und bei magischen Tränken pulverisierte Manakristalle: 1, 3 und 6 für Stufe I bis III.</li>
+<li><strong>Zubereitung:</strong> Kräuter, Blüten und Kristalle kommen gemahlen in den Kessel (Mörser), Pilze, Gemüse, Gutbeere, Haarbanane und Eisfrucht roh. Falsch zubereitet misslingt der Trank.</li>
+<li><strong>Mondtau</strong> (1 Becher) brauchen die Stufe-III-Rezepte von ${[...MONDTAU_EFFECTS].map((id) => EFFECTS.find((e) => e.id === id)?.name).join(", ")}.</li>
+<li><strong>Ausrüstung:</strong> Stufe II braucht den Destillierapparat, Stufe III den Athanor, Öl das Ölbad, jede Flüssigkeit die Kelle. Ein Rezept muss genau stimmen, sonst misslingt es mit einem Hinweis.</li>
 <li><strong>Nicht magisch</strong> sind nur Gift, Säure und Explosion. Sie brauchen keinen Manastaub.</li>
 </ul>`;
 
@@ -187,7 +205,10 @@ for (const kind of ["herb", "mushroom", "food", "flower"]) {
   pages.push(page(`plants:${kind}`, KIND_LABELS[kind], plantTable(kind), (pageSort += 100)));
 }
 
-const ingName = (id) => esc(INGREDIENT_BY_ID.get(id)?.name ?? id);
+const ingName = (id, ground) => {
+  const ing = INGREDIENT_BY_ID.get(id);
+  return esc((ground ? ing?.groundName : ing?.name) ?? id);
+};
 const cups = (n, label) => (n > 0 ? `${n} Becher ${label}` : "");
 function recipeHtml(e) {
   const variants = e.variants.length > 1;
@@ -195,9 +216,9 @@ function recipeHtml(e) {
   for (let tier = 1; tier <= e.maxTier; tier++) {
     for (let v = 0; v < e.variants.length; v++) {
       const r = tierRecipe(e, tier, v);
-      const parts = r.ingredients.map((x) => `${x.qty}× ${ingName(x.ingredient)}`);
-      if (r.mana) parts.push(`${r.mana}× ${ingName(MANA_INGREDIENT)}`);
-      const liquids = [cups(r.water, "Wasser"), cups(r.oil, "Öl")].filter(Boolean).join(", ");
+      const parts = r.ingredients.map((x) => `${x.qty}× ${ingName(x.ingredient, INGREDIENT_BY_ID.get(x.ingredient)?.prep === "ground")}`);
+      if (r.mana) parts.push(`${r.mana}× ${ingName(MANA_INGREDIENT, true)}`);
+      const liquids = [cups(r.water, "Wasser"), cups(r.oil, "Öl"), cups(r.mondtau, "Mondtau")].filter(Boolean).join(", ");
       const label = `Stufe ${["I", "II", "III"][tier - 1]} (${RARITY_LABEL[e.rarities[tier - 1]]})${variants ? `, Variante ${v + 1}` : ""}`;
       items.push(`<li><strong>${label}:</strong> ${parts.join(" + ")}; ${liquids}</li>`);
     }

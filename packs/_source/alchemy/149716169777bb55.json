@@ -1,0 +1,41 @@
+{
+  "_id": "149716169777bb55",
+  "name": "Reisekessel",
+  "type": "loot",
+  "img": "icons/tools/cooking/pot-camping-iron-black.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ein kleiner Kessel für unterwegs. Damit lässt sich überall ein Trank nach dem anderen brauen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "alchemyTool": "reisekessel"
+    }
+  },
+  "_key": "!items!149716169777bb55"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "bc11812ed564cbaf",
+  "name": "Sumpfling (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/umbontae-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Sumpfling (gemahlen)</strong> — Sumpfling, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 6,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 14300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "sumpfling",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!bc11812ed564cbaf"
+}

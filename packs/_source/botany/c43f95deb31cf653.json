@@ -1,0 +1,42 @@
+{
+  "_id": "c43f95deb31cf653",
+  "name": "Mondblüte (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/flowers/lotus-white.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Mondblüte (gemahlen)</strong> — Mondblüte, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "mondbluete",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!c43f95deb31cf653"
+}

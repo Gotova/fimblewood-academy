@@ -1,0 +1,42 @@
+{
+  "_id": "436931892e258cc1",
+  "name": "Gurke (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/vegetable/cucumber-pickle-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Gurke (gemahlen)</strong> — Gurke, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "gurke",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!436931892e258cc1"
+}

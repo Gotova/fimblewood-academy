@@ -1,0 +1,42 @@
+{
+  "_id": "0a678e263d8510fb",
+  "name": "Nebelschirmling (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/campanulate-bell-shiny-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Nebelschirmling (gemahlen)</strong> — Nebelschirmling, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 8,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 14700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "nebelschirmling",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!0a678e263d8510fb"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "acd2bcd102c58015",
+  "name": "Heilerheide (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/sprout-leaf-herb-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Heilerheide (gemahlen)</strong> — Heilerheide, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "heilerheide",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!acd2bcd102c58015"
+}

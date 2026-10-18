@@ -1,0 +1,42 @@
+{
+  "_id": "245e88eb23314f1c",
+  "name": "Basilikum (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/basil-herb-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Basilikum (gemahlen)</strong> — Basilikum, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "basilikum",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!245e88eb23314f1c"
+}

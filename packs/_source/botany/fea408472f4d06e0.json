@@ -1,0 +1,42 @@
+{
+  "_id": "fea408472f4d06e0",
+  "name": "Druidenrosmarin (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/dill-herb-bundle-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Druidenrosmarin (gemahlen)</strong> — Druidenrosmarin, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 13300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "druidenrosmarin",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!fea408472f4d06e0"
+}

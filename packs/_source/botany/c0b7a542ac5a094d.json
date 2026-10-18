@@ -1,0 +1,42 @@
+{
+  "_id": "c0b7a542ac5a094d",
+  "name": "Wirrkraut (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/dried-stem-vine-root-bramble-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Wirrkraut (gemahlen)</strong> — Wirrkraut, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "wirrkraut",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!c0b7a542ac5a094d"
+}

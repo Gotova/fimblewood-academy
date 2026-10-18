@@ -1,0 +1,42 @@
+{
+  "_id": "f80f3973e41e22c5",
+  "name": "Wolkenkristall (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-rough-cushion-white.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Wolkenkristall (gemahlen)</strong> — Wolkenkristall, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 70,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 17400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "wolkenkristall",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!f80f3973e41e22c5"
+}

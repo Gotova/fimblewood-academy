@@ -1,0 +1,41 @@
+{
+  "_id": "5cb61066561e7ede",
+  "name": "Mondtau",
+  "type": "loot",
+  "img": "icons/consumables/potions/bottle-round-ring-teal.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ein Becher schimmernder Tau. Woher er stammt, weiß niemand so genau.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "liquid": "mondtau"
+    }
+  },
+  "_key": "!items!5cb61066561e7ede"
+}

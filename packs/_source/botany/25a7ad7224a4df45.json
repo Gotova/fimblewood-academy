@@ -1,0 +1,42 @@
+{
+  "_id": "25a7ad7224a4df45",
+  "name": "Zwiebel (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/vegetable/onion-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Zwiebel (gemahlen)</strong> — Zwiebel, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 15900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "zwiebel",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!25a7ad7224a4df45"
+}

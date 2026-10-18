@@ -1,0 +1,42 @@
+{
+  "_id": "adb4eeb6aea6d3ff",
+  "name": "Blutdorn (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/thorned-dried-stem-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Blutdorn (gemahlen)</strong> — Blutdorn, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 7,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "blutdorn",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!adb4eeb6aea6d3ff"
+}

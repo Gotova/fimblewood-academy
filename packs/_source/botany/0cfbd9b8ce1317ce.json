@@ -1,0 +1,42 @@
+{
+  "_id": "0cfbd9b8ce1317ce",
+  "name": "Grabtrüffel (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/cluster-red-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Grabtrüffel (gemahlen)</strong> — Grabtrüffel, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 30,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 14900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "grabtruffel",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!0cfbd9b8ce1317ce"
+}

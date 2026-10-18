@@ -1,0 +1,42 @@
+{
+  "_id": "301af785a1bfbad5",
+  "name": "Lustpilz (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/conical-shiny-magenta-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Lustpilz (gemahlen)</strong> — Lustpilz, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 8,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 14600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "lustpilz",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!301af785a1bfbad5"
+}

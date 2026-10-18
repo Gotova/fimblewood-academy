@@ -1,0 +1,42 @@
+{
+  "_id": "ca690de4283f3af3",
+  "name": "Regenbogenkappe (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/alien-spotted-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Regenbogenkappe (gemahlen)</strong> — Regenbogenkappe, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "veryRare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 15200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "regenbogenkappe",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!ca690de4283f3af3"
+}

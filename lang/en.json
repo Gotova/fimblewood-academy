@@ -572,6 +572,130 @@
         "Gm": "GM",
         "Yield": "Yield"
       }
+    },
+    "Alchemy": {
+      "ButtonTitle": "Alchemy",
+      "WindowTitle": "Alchemy",
+      "NoCharacter": "You do not own a character.",
+      "NoCharacters": "There are no player characters.",
+      "NoTools": "You have no tools right now. Find them in your inventory or in an alchemy room.",
+      "Tool": {
+        "reisekessel": "Travel cauldron",
+        "kelle": "Ladle",
+        "moerser": "Mortar",
+        "braukessel": "Brewing cauldron",
+        "destille": "Alembic",
+        "athanor": "Athanor",
+        "oelbad": "Oil bath"
+      },
+      "ToolInfo": {
+        "reisekessel": "A portable cauldron: brews one potion at a time.",
+        "kelle": "With the ladle you add water, oil and moon dew by the cup. Without it no liquid goes into the cauldron.",
+        "moerser": "Grinds raw ingredients. Herbs, flowers and crystals go in ground, mushrooms and fruit raw.",
+        "braukessel": "A large cauldron with several slots: each slot brews its own potion, all at once.",
+        "destille": "With the alembic close by, tier II potions succeed. You brew at the cauldron.",
+        "athanor": "The alchemical furnace makes tier III potions possible and allows moon dew in the cauldron. You brew at the cauldron.",
+        "oelbad": "The oil bath heats oil: no oil in the cauldron without it. You brew at the cauldron."
+      },
+      "Liquid": {
+        "water": "water",
+        "oil": "oil",
+        "mondtau": "moon dew"
+      },
+      "Element": {
+        "earth": "earthy",
+        "water": "watery",
+        "fire": "fiery",
+        "air": "airy",
+        "life": "lively",
+        "death": "rotten",
+        "mind": "mental"
+      },
+      "Cups": "{n} cups of {liquid}",
+      "TierN": "Tier {tier}",
+      "VariantN": "Variant {n}",
+      "SlotN": "Slot {n}",
+      "Ingredients": "Ingredients",
+      "Liquids": "Liquids",
+      "NoIngredients": "No ingredients in the inventory.",
+      "NoLadle": "No liquids without a ladle.",
+      "NothingToGrind": "No raw ingredients in the inventory.",
+      "Clear": "Empty",
+      "Brew": "Brew",
+      "BrewAll": "Brew all",
+      "Grind": "Grind",
+      "Result": {
+        "Fail": "Failed potion"
+      },
+      "Hint": {
+        "empty": "The cauldron was empty.",
+        "equipment": "The mixture bubbles promisingly, but you lack the right equipment.",
+        "prep": "Something in the cauldron should have been prepared differently.",
+        "manaMissing": "The mixture stays magically dead.",
+        "manaTooLittle": "The magic in the mixture is too weak.",
+        "manaTooMuch": "Too much magic: the mixture foams over.",
+        "liquidTooMuch": "Too much {liquid}.",
+        "liquidTooLittle": "Not enough {liquid}.",
+        "missing": "Something {element} is missing.",
+        "extra": "Too much of something {element}.",
+        "unknown": "The ingredients do not go together."
+      },
+      "Book": {
+        "Title": "Recipe book",
+        "Hint": "Your successful recipes. Click the hand to fill the cauldron if you have everything.",
+        "GmHint": "All recipes. The checkbox unlocks a recipe in this character's book.",
+        "Empty": "No recipes yet. Experiment!",
+        "Known": "In the recipe book",
+        "FillHint": "Put into the cauldron"
+      },
+      "Settings": {
+        "Hints": {
+          "name": "Alchemy: hints on failure",
+          "hint": "A failed potion tells roughly what went wrong."
+        }
+      },
+      "Station": {
+        "Label": "Alchemy station",
+        "FIELDS": {
+          "braukessel": {
+            "label": "Brewing cauldron",
+            "hint": "A large cauldron with several slots."
+          },
+          "braukesselSlots": {
+            "label": "Slots in the brewing cauldron",
+            "hint": "How many potions brew in one go."
+          },
+          "destille": {
+            "label": "Alembic",
+            "hint": "Allows tier II potions."
+          },
+          "athanor": {
+            "label": "Athanor",
+            "hint": "Allows tier III potions and moon dew."
+          },
+          "oelbad": {
+            "label": "Oil bath",
+            "hint": "Allows recipes with oil."
+          }
+        }
+      },
+      "Notice": {
+        "NeedMortar": "You need a mortar for that.",
+        "NotGrindable": "That cannot be ground.",
+        "PackMissing": "The item was not found in the compendium.",
+        "Ground": "Ground {qty}× {name}.",
+        "Empty": "The cauldron is empty.",
+        "NoKettle": "You have no cauldron to use.",
+        "TooManySlots": "This cauldron only has {slots} slots.",
+        "NotIngredient": "That is not an ingredient.",
+        "NeedTool": "You are missing: {tool}.",
+        "NotEnough": "Not enough {name}.",
+        "Missing": "You are missing: {list}.",
+        "NoActor": "That character does not exist.",
+        "Refused": "That is not allowed.",
+        "NeedsGM": "No GM is online to carry that out.",
+        "Timeout": "The GM did not answer."
+      }
     }
   }
 }

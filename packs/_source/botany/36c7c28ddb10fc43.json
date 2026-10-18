@@ -1,0 +1,42 @@
+{
+  "_id": "36c7c28ddb10fc43",
+  "name": "Feuercitrin (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-rough-cushion-orange-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Feuercitrin (gemahlen)</strong> — Feuercitrin, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 60,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 17300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "feuercitrin",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!36c7c28ddb10fc43"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "8d6cb12765006d5e",
+  "name": "Gutbeere (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/fruit/berry-stem-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Gutbeere (gemahlen)</strong> — Gutbeere, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 4,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "gutbeere",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!8d6cb12765006d5e"
+}

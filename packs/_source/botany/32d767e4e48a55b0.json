@@ -1,0 +1,42 @@
+{
+  "_id": "32d767e4e48a55b0",
+  "name": "Wahnpilz (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/mushroom-spotted-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Wahnpilz (gemahlen)</strong> — Wahnpilz, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 14100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "wahnpilz",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!32d767e4e48a55b0"
+}

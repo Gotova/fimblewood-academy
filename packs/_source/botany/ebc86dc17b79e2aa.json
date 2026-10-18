@@ -1,0 +1,42 @@
+{
+  "_id": "ebc86dc17b79e2aa",
+  "name": "Windblüte (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/flowers/dandelion-pod-white.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Windblüte (gemahlen)</strong> — Windblüte, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "windbluete",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!ebc86dc17b79e2aa"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "b1f763362f9873ef",
+  "name": "Kürbis (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/fruit/fruit-watermelon-whole-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Kürbis (gemahlen)</strong> — Kürbis, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 15600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "kuerbis",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!b1f763362f9873ef"
+}

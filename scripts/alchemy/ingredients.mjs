@@ -87,14 +87,30 @@ const CRYSTALS = [
   ["arkankristall", "Arkankristall", "Arcane Crystal", "veryRare", 100, `${G}gem-rough-cushion-purple.webp`, "mind"],
   ["blutrubin", "Blutrubin", "Blood Ruby", "veryRare", 100, `${G}gem-rough-cushion-red.webp`, "life"],
   ["lebenskristall", "Lebenskristall", "Life Crystal", "veryRare", 100, `${G}gem-rough-cushion-green.webp`, "life"],
-  ["manastaub", "Pulverisierter Manakristall", "", "uncommon", 10, `${G}powder-raw-white.webp`, "mind"]
+  ["manakristall", "Manakristall", "", "uncommon", 10, `${G}gem-faceted-hexagon-blue.webp`, "mind"]
 ];
 
 const REACH = { common: 1, uncommon: 2, rare: 3, veryRare: 3 };
 
+/**
+ * How an ingredient has to go into the cauldron: "ground" (through the mortar)
+ * or "raw". Herbs, flowers and crystals are ground; mushrooms, food and the
+ * fruit-like herbs go in raw. A ground mushroom spoils the brew.
+ */
+const PREP_BY_KIND = { herb: "ground", flower: "ground", crystal: "ground", mushroom: "raw", food: "raw" };
+const RAW_HERBS = new Set(["gutbeere", "haarbanane", "eisfrucht"]);
+
+/** Ground forms with their own name or picture (default: "<Name> (gemahlen)", same picture). */
+const GROUND_FORM = {
+  manakristall: { name: "Manastaub", img: `${G}powder-raw-white.webp` }
+};
+
 function build([id, name, pc, kind, rarity, gp, img, element], growable) {
   return {
     id, name, pc, kind, rarity, gp, img, growable,
+    prep: RAW_HERBS.has(id) ? "raw" : (PREP_BY_KIND[kind] ?? "raw"),
+    groundName: GROUND_FORM[id]?.name ?? `${name} (gemahlen)`,
+    groundImg: GROUND_FORM[id]?.img ?? img,
     alchemy: { element, reach: REACH[rarity] ?? 1, provisional: true }
   };
 }

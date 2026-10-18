@@ -1,0 +1,41 @@
+{
+  "_id": "85d1eba8e4537f31",
+  "name": "Kelle",
+  "type": "loot",
+  "img": "icons/tools/cooking/soup-ladle.webp",
+  "system": {
+    "description": {
+      "value": "<p>Zum Abmessen von Wasser, Öl und anderen Flüssigkeiten in Bechern. Ohne Kelle kommt keine Flüssigkeit in den Kessel.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "alchemyTool": "kelle"
+    }
+  },
+  "_key": "!items!85d1eba8e4537f31"
+}

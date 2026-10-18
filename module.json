@@ -2,7 +2,7 @@
   "id": "fimblewood-academy",
   "title": "Fimblewood Academy",
   "description": "Homebrew classes, subclasses, and content for the Fimblewood Academy campaign, built for the dnd5e system.",
-  "version": "0.42.0",
+  "version": "0.43.0",
   "compatibility": {
     "minimum": "13",
     "verified": "13.351",
@@ -32,7 +32,8 @@
   "documentTypes": {
     "RegionBehavior": {
       "npcSpawner": {},
-      "replaceMusic": {}
+      "replaceMusic": {},
+      "alchemyStation": {}
     }
   },
   "styles": [
@@ -43,7 +44,8 @@
     "styles/timetable.css",
     "styles/npc-spawner.css",
     "styles/eladrin-wild-magic.css",
-    "styles/botany.css"
+    "styles/botany.css",
+    "styles/alchemy.css"
   ],
   "languages": [
     {
@@ -144,6 +146,17 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       }
+    },
+    {
+      "name": "alchemy",
+      "label": "Alchemie: Werkzeuge & Flüssigkeiten",
+      "path": "packs/alchemy",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "packFolders": [
@@ -159,13 +172,14 @@
         "botany-journal",
         "potions",
         "silkball",
-        "silkball-actors"
+        "silkball-actors",
+        "alchemy"
       ]
     }
   ],
   "url": "https://github.com/Gotova/fimblewood-academy",
   "manifest": "https://github.com/Gotova/fimblewood-academy/releases/latest/download/module.json",
-  "download": "https://github.com/Gotova/fimblewood-academy/releases/download/v0.42.0/module.zip",
+  "download": "https://github.com/Gotova/fimblewood-academy/releases/download/v0.43.0/module.zip",
   "readme": "https://github.com/Gotova/fimblewood-academy/blob/main/README.md",
   "bugs": "https://github.com/Gotova/fimblewood-academy/issues",
   "changelog": "https://github.com/Gotova/fimblewood-academy/blob/main/CHANGELOG.md"

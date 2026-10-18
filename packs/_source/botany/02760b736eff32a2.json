@@ -1,0 +1,42 @@
+{
+  "_id": "02760b736eff32a2",
+  "name": "Federblüte (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/leaf-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Federblüte (gemahlen)</strong> — Federblüte, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 6,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 13200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "federbluete",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!02760b736eff32a2"
+}

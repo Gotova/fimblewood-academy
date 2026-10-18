@@ -1,0 +1,42 @@
+{
+  "_id": "bd5bc1af3f831477",
+  "name": "Wasserblüte (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/lily-pad-leaf-stem.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Wasserblüte (gemahlen)</strong> — Wasserblüte, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "wasserbluete",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!bd5bc1af3f831477"
+}

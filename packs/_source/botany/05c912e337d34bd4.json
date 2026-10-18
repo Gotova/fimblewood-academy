@@ -1,0 +1,42 @@
+{
+  "_id": "05c912e337d34bd4",
+  "name": "Magmamorchel (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/conical-bell-orange-white.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Magmamorchel (gemahlen)</strong> — Magmamorchel, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 35,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 15100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "magmamorchel",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!05c912e337d34bd4"
+}

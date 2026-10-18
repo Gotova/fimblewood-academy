@@ -1,0 +1,42 @@
+{
+  "_id": "0f73f2770fabf59c",
+  "name": "Arkankristall (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-rough-cushion-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Arkankristall (gemahlen)</strong> — Arkankristall, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "veryRare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 17500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "arkankristall",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!0f73f2770fabf59c"
+}

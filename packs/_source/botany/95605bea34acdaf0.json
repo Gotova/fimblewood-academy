@@ -1,0 +1,42 @@
+{
+  "_id": "95605bea34acdaf0",
+  "name": "Orchidee (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/flowers/lotus-violet.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Orchidee (gemahlen)</strong> — Orchidee, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 17000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "orchidee",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!95605bea34acdaf0"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "cb2cadc06d034a74",
+  "name": "Minze (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/mint-dried-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Minze (gemahlen)</strong> — Minze, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "minze",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!cb2cadc06d034a74"
+}

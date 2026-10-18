@@ -1,0 +1,42 @@
+{
+  "_id": "190e8b668eb814c3",
+  "name": "Dornstock (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/thorned-stem-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Dornstock (gemahlen)</strong> — Dornstock, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "dornstock",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!190e8b668eb814c3"
+}

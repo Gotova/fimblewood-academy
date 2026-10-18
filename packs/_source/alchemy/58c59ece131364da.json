@@ -1,0 +1,41 @@
+{
+  "_id": "58c59ece131364da",
+  "name": "Mörser",
+  "type": "loot",
+  "img": "icons/tools/laboratory/mortar-empty-grey.webp",
+  "system": {
+    "description": {
+      "value": "<p>Mörser und Stößel. Damit werden Zutaten gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 2,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "alchemyTool": "moerser"
+    }
+  },
+  "_key": "!items!58c59ece131364da"
+}

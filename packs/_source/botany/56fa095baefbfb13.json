@@ -1,0 +1,42 @@
+{
+  "_id": "56fa095baefbfb13",
+  "name": "Flauschblüte (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/leaf-hastate-white-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Flauschblüte (gemahlen)</strong> — Flauschblüte, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 30,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 13700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "flauschbluete",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!56fa095baefbfb13"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "c73185854b92ceec",
+  "name": "Dryadensattel (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/convex-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Dryadensattel (gemahlen)</strong> — Dryadensattel, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 14000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "dryadensattel",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!c73185854b92ceec"
+}

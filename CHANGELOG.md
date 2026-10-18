@@ -4,6 +4,22 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.43.0] - 2026-10-18
+
+### Added
+
+- **Alchemy**: a new tool **Alchemie** in the Fimblewood Controls. Its window shows only the tools the character can use right now and its recipe book.
+  - Portable tools as items: **Reisekessel** (one potion at a time), **Kelle** (liquids) and **Mörser** (grinding), in the new compendium *Alchemie: Werkzeuge & Flüssigkeiten* together with **Becher Öl**, **Mondtau** and the **Misslungener Trank**.
+  - Stationary tools through a new Region behavior **Alchemie-Station**: **Braukessel** (several slots brewed at once), **Destillierapparat** (tier II), **Athanor** (tier III, moon dew) and **Ölbad** (oil). They appear while the character's token is in the region.
+  - Instant brewing with exact recipes, a hint on failure (setting **Alchemy: hints on failure**), and a recipe book per character that fills itself and fills the cauldron on a click. The GM can unlock recipes by hand.
+- Every ingredient now also exists **ground**. Herbs, flowers and crystals have to go into the cauldron ground, mushrooms and fruit raw.
+- **Mondtau**: tier III of ten potions now needs one cup of it.
+
+### Changed
+
+- The ingredient *Pulverisierter Manakristall* is now the raw **Manakristall**; ground in the mortar it becomes **Manastaub**, which magical potions need.
+- The recipe journal shows preparation, moon dew and the equipment rules.
+
 ## [0.42.0] - 2026-10-16
 
 ### Added

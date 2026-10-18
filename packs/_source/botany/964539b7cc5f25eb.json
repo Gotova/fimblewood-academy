@@ -1,0 +1,42 @@
+{
+  "_id": "964539b7cc5f25eb",
+  "name": "Vergissmeinnicht (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/flowers/cornflower-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Vergissmeinnicht (gemahlen)</strong> — Vergissmeinnicht, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "vergissmeinnicht",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!964539b7cc5f25eb"
+}

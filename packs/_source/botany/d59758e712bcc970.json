@@ -1,0 +1,42 @@
+{
+  "_id": "d59758e712bcc970",
+  "name": "Greifwurzel (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/vegetable/root-alien-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Greifwurzel (gemahlen)</strong> — Greifwurzel, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 13600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "greifwurzel",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!d59758e712bcc970"
+}

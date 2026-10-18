@@ -20,7 +20,14 @@ export const TIER_RARITY = ["common", "uncommon", "rare"];
 
 /** Powdered mana crystals needed per tier (index 0 = tier I) by magical potions. */
 export const MANA_PER_TIER = [1, 3, 6];
-export const MANA_INGREDIENT = "manastaub";
+/** Mana crystals go into the cauldron ground, as "Manastaub". */
+export const MANA_INGREDIENT = "manakristall";
+
+/** Effects whose tier III recipe needs one cup of Mondtau (moon dew). */
+export const MONDTAU_EFFECTS = new Set([
+  "heilung", "mana", "unsichtbarkeit", "levitation", "magische-sicht",
+  "nekromantie", "antimagie", "vergroesserung", "furcht", "charme"
+]);
 
 const WATER_ONLY = [2, 0];
 const WATER_OIL = [1, 2];
@@ -77,7 +84,8 @@ export const EFFECT_BY_ID = new Map(EFFECTS.map((e) => [e.id, e]));
 /**
  * The complete recipe of an effect at `tier` (1-3) for one of its variants:
  * the variant's ingredients plus the tier's rarer ingredients, the cups of
- * water and oil, and the powdered mana crystals a magical potion needs.
+ * water, oil and Mondtau, and the powdered mana crystals a magical potion needs.
+ * How each ingredient is prepared comes from its `prep` (ingredients.mjs).
  */
 export function tierRecipe(effect, tier, variant = 0) {
   const t = Math.max(1, Math.min(effect.maxTier, tier));
@@ -90,6 +98,7 @@ export function tierRecipe(effect, tier, variant = 0) {
     ingredients,
     water: effect.water > 0 ? effect.water + (t - 1) : 0,
     oil: effect.oil > 0 ? effect.oil + (t - 1) : 0,
+    mondtau: t === 3 && MONDTAU_EFFECTS.has(effect.id) ? 1 : 0,
     mana: effect.magical ? MANA_PER_TIER[t - 1] : 0
   };
 }

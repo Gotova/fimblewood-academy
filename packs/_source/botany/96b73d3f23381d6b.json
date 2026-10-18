@@ -1,0 +1,42 @@
+{
+  "_id": "96b73d3f23381d6b",
+  "name": "Erdbeere (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/flowers/strawberry-trio-white.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Erdbeere (gemahlen)</strong> — Erdbeere, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 15800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "erdbeere",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!96b73d3f23381d6b"
+}

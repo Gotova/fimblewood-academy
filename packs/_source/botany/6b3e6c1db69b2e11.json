@@ -1,0 +1,42 @@
+{
+  "_id": "6b3e6c1db69b2e11",
+  "name": "Tulpe (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/flowers/blooms-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Tulpe (gemahlen)</strong> — Tulpe, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "tulpe",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!6b3e6c1db69b2e11"
+}

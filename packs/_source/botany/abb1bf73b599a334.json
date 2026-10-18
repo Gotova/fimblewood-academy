@@ -1,0 +1,42 @@
+{
+  "_id": "abb1bf73b599a334",
+  "name": "Zauberblüte (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/leaf-elm-glowing-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Zauberblüte (gemahlen)</strong> — Zauberblüte, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "veryRare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 13800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "zauberbluete",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!abb1bf73b599a334"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "c2587c0e422e56f7",
+  "name": "Haarbanane (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/fruit/banana-ripe-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Haarbanane (gemahlen)</strong> — Haarbanane, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 6,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "haarbanane",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!c2587c0e422e56f7"
+}

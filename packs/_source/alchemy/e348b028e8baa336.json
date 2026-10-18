@@ -1,0 +1,41 @@
+{
+  "_id": "e348b028e8baa336",
+  "name": "Misslungener Trank",
+  "type": "loot",
+  "img": "icons/tools/laboratory/bowl-liquid-black.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ein trüber, übel riechender Schlamm. Hier ist etwas schiefgegangen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 0,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "junk",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "role": "failedPotion"
+    }
+  },
+  "_key": "!items!e348b028e8baa336"
+}

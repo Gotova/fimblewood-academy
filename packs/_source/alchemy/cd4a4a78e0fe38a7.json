@@ -1,0 +1,41 @@
+{
+  "_id": "cd4a4a78e0fe38a7",
+  "name": "Becher Öl",
+  "type": "loot",
+  "img": "icons/containers/kitchenware/jug-clay-brown-sealed.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ein Becher Öl für die Alchemie. Erhitzen lässt es sich nur im Ölbad.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Alchemie"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "liquid": "oil"
+    }
+  },
+  "_key": "!items!cd4a4a78e0fe38a7"
+}

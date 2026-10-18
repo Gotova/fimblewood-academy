@@ -1,0 +1,42 @@
+{
+  "_id": "a51f226f51bbe3b1",
+  "name": "Eisfrucht (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/fruit/berry-shiny-leaf-blue-teal.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Eisfrucht (gemahlen)</strong> — Eisfrucht, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 13500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "eisfrucht",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!a51f226f51bbe3b1"
+}

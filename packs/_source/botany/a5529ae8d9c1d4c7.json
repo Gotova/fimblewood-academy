@@ -1,0 +1,42 @@
+{
+  "_id": "a5529ae8d9c1d4c7",
+  "name": "Hexenpilz (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/umbontae-bumpy-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Hexenpilz (gemahlen)</strong> — Hexenpilz, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 30,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 15000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "hexenpilz",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!a5529ae8d9c1d4c7"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "b9afea5c3736d8d7",
+  "name": "Lilie (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/flowers/lily-white.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Lilie (gemahlen)</strong> — Lilie, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "lilie",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!b9afea5c3736d8d7"
+}

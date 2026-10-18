@@ -1,0 +1,42 @@
+{
+  "_id": "6fc9c50d15402e3f",
+  "name": "Donnerdistel (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/milkweed-stem-serrated-leaves-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Donnerdistel (gemahlen)</strong> — Donnerdistel, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 6,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 13000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "donnerdistel",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!6fc9c50d15402e3f"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "69f0bb2511050cea",
+  "name": "Kartoffel (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/vegetable/root-brown-orange.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Kartoffel (gemahlen)</strong> — Kartoffel, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "cp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 15500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "kartoffel",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!69f0bb2511050cea"
+}

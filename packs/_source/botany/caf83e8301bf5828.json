@@ -1,0 +1,42 @@
+{
+  "_id": "caf83e8301bf5828",
+  "name": "Karotte (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/vegetable/root-carrot-orange.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Karotte (gemahlen)</strong> — Karotte, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 15300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "karotte",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!caf83e8301bf5828"
+}

@@ -21,8 +21,9 @@
 
 import { currentTimestamp, dayNumberForTimestamp, isCalendarAvailable, onDateChange } from "../timetable/calendar.mjs";
 import {
-  MODULE_ID, PLANT_BY_ID, DEFAULT_SIZE, GARDEN_SIZES, slotCount, harvestIndexEntry
+  MODULE_ID, PLANT_BY_ID, DEFAULT_SIZE, GARDEN_SIZES, slotCount
 } from "./plants.mjs";
+import { addToStack, consumeOne, packItemData } from "../shared/items.mjs";
 import { potionInfo, fertilizerFactor, cleanFactor, setFactor, growthFactor } from "./modifiers.mjs";
 
 export const MEMBERS_SETTING = "botanyMembers";
@@ -132,26 +133,10 @@ function grow(gardens, days) {
 
 /** Adds one harvested stack to the actor, merging with an existing stack of the same ingredient. */
 async function grantHarvest(actor, ingredientId, quantity) {
-  const entry = await harvestIndexEntry(ingredientId);
-  if (!entry) return false;
-  const existing = actor.items.find((i) => i.getFlag(MODULE_ID, "ingredientId") === ingredientId && i.getFlag(MODULE_ID, "role") === "harvest");
-  if (existing) {
-    await existing.update({ "system.quantity": (existing.system.quantity ?? 0) + quantity });
-    return true;
-  }
-  const doc = await game.packs.get(`${MODULE_ID}.botany`).getDocument(entry._id);
-  const data = doc.toObject();
-  delete data._id;
-  data.system.quantity = quantity;
-  await actor.createEmbeddedDocuments("Item", [data]);
+  const data = await packItemData("botany", (f) => f.ingredientId === ingredientId && f.role === "harvest");
+  if (!data) return false;
+  await addToStack(actor, (i) => i.getFlag(MODULE_ID, "ingredientId") === ingredientId && i.getFlag(MODULE_ID, "role") === "harvest", data, quantity);
   return true;
-}
-
-/** Uses up one of an item: a smaller stack, or gone if it was the last. */
-async function consumeOne(item) {
-  const qty = item.system.quantity ?? 1;
-  if (qty > 1) await item.update({ "system.quantity": qty - 1 });
-  else await item.delete();
 }
 
 async function rollYield(plant) {

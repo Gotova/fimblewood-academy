@@ -1,0 +1,42 @@
+{
+  "_id": "26dd00fa9dd277ad",
+  "name": "Golddorn (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/thorned-curled-vine-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Golddorn (gemahlen)</strong> — Golddorn, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 8,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "golddorn",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!26dd00fa9dd277ad"
+}

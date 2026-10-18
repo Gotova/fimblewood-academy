@@ -1,0 +1,42 @@
+{
+  "_id": "a9712c4949a6739a",
+  "name": "Schattenpfifferling (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/helm-purple-shiny.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Schattenpfifferling (gemahlen)</strong> — Schattenpfifferling, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "rare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 14800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "schattenpfifferling",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!a9712c4949a6739a"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "80702d657c1d60b5",
+  "name": "Feuerglocke (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/thorned-dried-stem-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Feuerglocke (gemahlen)</strong> — Feuerglocke, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "feuerglocke",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!80702d657c1d60b5"
+}

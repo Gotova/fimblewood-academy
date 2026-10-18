@@ -56,10 +56,10 @@ export function slotCount(size) {
   return c * r;
 }
 
-/** Index entry of a plant's harvest item in the botany compendium (looked up by flag, as the ids are generated). */
-export async function harvestIndexEntry(ingredientId) {
+/** Index entry of an ingredient's item in the botany compendium: `role` "harvest" (raw) or "ground". Looked up by flag, as the ids are generated. */
+export async function harvestIndexEntry(ingredientId, role = "harvest") {
   const pack = game.packs.get(`${MODULE_ID}.${BOTANY_PACK}`);
   if (!pack) return null;
   const index = await pack.getIndex({ fields: [`flags.${MODULE_ID}`] });
-  return index.find((e) => e.flags?.[MODULE_ID]?.ingredientId === ingredientId && e.flags?.[MODULE_ID]?.role === "harvest") ?? null;
+  return index.find((e) => e.flags?.[MODULE_ID]?.ingredientId === ingredientId && e.flags?.[MODULE_ID]?.role === role) ?? null;
 }

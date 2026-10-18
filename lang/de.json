@@ -572,6 +572,130 @@
         "Gm": "SL",
         "Yield": "Ertrag"
       }
+    },
+    "Alchemy": {
+      "ButtonTitle": "Alchemie",
+      "WindowTitle": "Alchemie",
+      "NoCharacter": "Dir gehört kein Charakter.",
+      "NoCharacters": "Es gibt keine Spielercharaktere.",
+      "NoTools": "Du hast gerade keine Werkzeuge. Werkzeuge findest du in deinem Inventar oder in einem Alchemieraum.",
+      "Tool": {
+        "reisekessel": "Reisekessel",
+        "kelle": "Kelle",
+        "moerser": "Mörser",
+        "braukessel": "Braukessel",
+        "destille": "Destillierapparat",
+        "athanor": "Athanor",
+        "oelbad": "Ölbad"
+      },
+      "ToolInfo": {
+        "reisekessel": "Ein tragbarer Kessel: braut einen Trank pro Durchgang.",
+        "kelle": "Mit der Kelle gibst du Wasser, Öl und Mondtau becherweise in den Kessel. Ohne Kelle kommt keine Flüssigkeit hinein.",
+        "moerser": "Mahlt rohe Zutaten. Kräuter, Blüten und Kristalle müssen gemahlen in den Kessel, Pilze und Früchte roh.",
+        "braukessel": "Ein großer Kessel mit mehreren Plätzen: Jeder Platz braut einen eigenen Trank, alle in einem Durchgang.",
+        "destille": "Mit dem Destillierapparat in der Nähe gelingen Tränke der Stufe II. Gebraut wird am Kessel.",
+        "athanor": "Der Alchemieofen macht Tränke der Stufe III möglich und erlaubt Mondtau im Kessel. Gebraut wird am Kessel.",
+        "oelbad": "Im Ölbad lässt sich Öl erhitzen: Ohne Ölbad kein Öl im Kessel. Gebraut wird am Kessel."
+      },
+      "Liquid": {
+        "water": "Wasser",
+        "oil": "Öl",
+        "mondtau": "Mondtau"
+      },
+      "Element": {
+        "earth": "Erdiges",
+        "water": "Wässriges",
+        "fire": "Feuriges",
+        "air": "Luftiges",
+        "life": "Lebendiges",
+        "death": "Fauliges",
+        "mind": "Geistiges"
+      },
+      "Cups": "{n} Becher {liquid}",
+      "TierN": "Stufe {tier}",
+      "VariantN": "Variante {n}",
+      "SlotN": "Platz {n}",
+      "Ingredients": "Zutaten",
+      "Liquids": "Flüssigkeiten",
+      "NoIngredients": "Keine Zutaten im Inventar.",
+      "NoLadle": "Ohne Kelle keine Flüssigkeiten.",
+      "NothingToGrind": "Keine rohen Zutaten im Inventar.",
+      "Clear": "Leeren",
+      "Brew": "Brauen",
+      "BrewAll": "Alle brauen",
+      "Grind": "Mahlen",
+      "Result": {
+        "Fail": "Misslungener Trank"
+      },
+      "Hint": {
+        "empty": "Der Kessel war leer.",
+        "equipment": "Die Mischung brodelt vielversprechend, aber dir fehlt die passende Ausrüstung.",
+        "prep": "Etwas im Kessel hätte anders zubereitet werden müssen.",
+        "manaMissing": "Die Mischung bleibt magisch leblos.",
+        "manaTooLittle": "Die Magie in der Mischung ist zu schwach.",
+        "manaTooMuch": "Zu viel Magie: Die Mischung schäumt über.",
+        "liquidTooMuch": "Zu viel {liquid}.",
+        "liquidTooLittle": "Es fehlt {liquid}.",
+        "missing": "Es fehlt etwas {element}.",
+        "extra": "Zu viel {element}.",
+        "unknown": "Die Zutaten passen nicht zusammen."
+      },
+      "Book": {
+        "Title": "Rezeptbuch",
+        "Hint": "Deine gelungenen Rezepte. Ein Klick auf die Hand füllt den Kessel, wenn du alles dabeihast.",
+        "GmHint": "Alle Rezepte. Das Häkchen schaltet ein Rezept im Buch dieses Charakters frei.",
+        "Empty": "Noch keine Rezepte. Experimentiere!",
+        "Known": "Im Rezeptbuch",
+        "FillHint": "In den Kessel geben"
+      },
+      "Settings": {
+        "Hints": {
+          "name": "Alchemie: Hinweise bei Fehlschlägen",
+          "hint": "Ein misslungener Trank verrät, was ungefähr falsch war."
+        }
+      },
+      "Station": {
+        "Label": "Alchemie-Station",
+        "FIELDS": {
+          "braukessel": {
+            "label": "Braukessel",
+            "hint": "Ein großer Kessel mit mehreren Plätzen."
+          },
+          "braukesselSlots": {
+            "label": "Plätze im Braukessel",
+            "hint": "So viele Tränke lassen sich in einem Durchgang brauen."
+          },
+          "destille": {
+            "label": "Destillierapparat",
+            "hint": "Ermöglicht Tränke der Stufe II."
+          },
+          "athanor": {
+            "label": "Athanor",
+            "hint": "Ermöglicht Tränke der Stufe III und Mondtau."
+          },
+          "oelbad": {
+            "label": "Ölbad",
+            "hint": "Ermöglicht Rezepte mit Öl."
+          }
+        }
+      },
+      "Notice": {
+        "NeedMortar": "Dafür brauchst du einen Mörser.",
+        "NotGrindable": "Das lässt sich nicht mahlen.",
+        "PackMissing": "Das Item wurde im Kompendium nicht gefunden.",
+        "Ground": "{qty}× {name} gemahlen.",
+        "Empty": "Der Kessel ist leer.",
+        "NoKettle": "Dir steht kein Kessel zur Verfügung.",
+        "TooManySlots": "Dieser Kessel hat nur {slots} Plätze.",
+        "NotIngredient": "Das ist keine Zutat.",
+        "NeedTool": "Dafür fehlt dir: {tool}.",
+        "NotEnough": "Nicht genug {name}.",
+        "Missing": "Dir fehlt: {list}.",
+        "NoActor": "Dieser Charakter existiert nicht.",
+        "Refused": "Das ist nicht erlaubt.",
+        "NeedsGM": "Es ist keine Spielleitung online, die das ausführen kann.",
+        "Timeout": "Die Spielleitung hat nicht geantwortet."
+      }
     }
   }
 }

@@ -1,0 +1,42 @@
+{
+  "_id": "3f92440b22c85de5",
+  "name": "Schlammpilz (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/crimini-button-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Schlammpilz (gemahlen)</strong> — Schlammpilz, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 8,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 14400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "schlammpilz",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!3f92440b22c85de5"
+}

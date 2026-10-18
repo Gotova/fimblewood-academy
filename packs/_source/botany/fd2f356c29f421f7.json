@@ -1,0 +1,42 @@
+{
+  "_id": "fd2f356c29f421f7",
+  "name": "Lebenskristall (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-rough-cushion-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Lebenskristall (gemahlen)</strong> — Lebenskristall, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "veryRare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 17700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "lebenskristall",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!fd2f356c29f421f7"
+}

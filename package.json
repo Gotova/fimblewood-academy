@@ -1,6 +1,6 @@
 {
   "name": "fimblewood-academy",
-  "version": "0.42.0",
+  "version": "0.43.0",
   "private": true,
   "type": "module",
   "description": "Homebrew Foundry VTT module for the Fimblewood Academy dnd5e campaign.",
@@ -9,7 +9,8 @@
     "build:packs": "node tools/build-packs.mjs compile",
     "extract:packs": "node tools/build-packs.mjs extract",
     "version:bump": "node tools/bump-version.mjs",
-    "generate:potions": "node tools/generate-potion-pack.mjs"
+    "generate:potions": "node tools/generate-potion-pack.mjs",
+    "generate:alchemy": "node tools/generate-alchemy-pack.mjs"
   },
   "devDependencies": {
     "@foundryvtt/foundryvtt-cli": "^3.0.4"

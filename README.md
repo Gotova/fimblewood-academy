@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.42.0
+- **Current version:** 0.43.0
 
 ## Installation
 
@@ -158,6 +158,16 @@ The Academy's sport is a **tool**, like a gaming set: **Silkball** shows in the 
 - **Bonus**: the Silkball value (+1 to +3, set by the GM). It counts only in Silkball.
 - Defence (AC + Silkball value) and the net AC (14 in training, 14–17 in league games, 17 in tournaments) are worked out by hand for now.
 - The compendium *Silkball: Ball & Netze* holds a **ball** token (put it next to whoever has the ball; one token per ball in play) and three **nets** with their net AC: training (AC 14, 3 squares wide), league (AC 15, adjust to 14–17, 2 squares) and tournament (AC 17, 1 square). The roll is not compared to the net's AC automatically; the nets show the AC to aim for.
+
+### Alchemy
+
+Brewing potions from the Botany Club's ingredients. **Alchemie** in the Fimblewood Controls opens a window that only shows the tools the character can use right now, plus its recipe book.
+
+- **Portable tools** are items (compendium *Alchemie: Werkzeuge & Flüssigkeiten*): the **Reisekessel** brews one potion at a time, the **Kelle** is needed for any liquid, the **Mörser** grinds ingredients.
+- **Stationary tools** stand in a room: draw a **Region**, add the behavior **Alchemie-Station** and tick what is there: **Braukessel** (several slots, each brewing its own potion in one go; the number of slots is set in the behavior), **Destillierapparat** (tier II), **Athanor** (tier III and moon dew) and **Ölbad** (recipes with oil). They show up in the window while the character's token stands in the region.
+- **Brewing** is instant: put ingredients and cups of water, oil (`Becher Öl`) or moon dew (`Mondtau`) into the cauldron and brew. Only an exact recipe succeeds: same ingredients, amounts, preparation and cups. Herbs, flowers and crystals go in **ground** (Mörser), mushrooms and fruit **raw**. Magical potions need ground mana crystals (**Manastaub**). Anything else gives a *Misslungener Trank* and one hint (can be turned off in the settings).
+- The **recipe book** of each character fills itself with every successful recipe; a click puts a recipe's ingredients into the cauldron. The GM can unlock recipes there by hand.
+- The GM-only compendium *Botanikclub: Rezepte (nur SL)* lists all recipes.
 
 ### Content
 

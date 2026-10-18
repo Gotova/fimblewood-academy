@@ -1,0 +1,42 @@
+{
+  "_id": "935cc72ab586487e",
+  "name": "Schwefelporling (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/mushrooms/conical-bell-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Schwefelporling (gemahlen)</strong> — Schwefelporling, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 14200,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "schwefelporling",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!935cc72ab586487e"
+}

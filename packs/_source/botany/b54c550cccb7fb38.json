@@ -1,0 +1,42 @@
+{
+  "_id": "b54c550cccb7fb38",
+  "name": "Manakristall",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-faceted-hexagon-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Manakristall</strong> — Kristall, Ungewöhnlich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "manakristall",
+      "role": "harvest"
+    }
+  },
+  "_key": "!items!b54c550cccb7fb38"
+}

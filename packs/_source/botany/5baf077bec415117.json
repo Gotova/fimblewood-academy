@@ -1,0 +1,42 @@
+{
+  "_id": "5baf077bec415117",
+  "name": "Sonnenblume (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/flowers/cornflower-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Sonnenblume (gemahlen)</strong> — Sonnenblume, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "common",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "sonnenblume",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!5baf077bec415117"
+}

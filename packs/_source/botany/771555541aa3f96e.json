@@ -1,0 +1,42 @@
+{
+  "_id": "771555541aa3f96e",
+  "name": "Flammenkraut (gemahlen)",
+  "type": "loot",
+  "img": "icons/consumables/plants/flax-leaves-spiked-bundle-orange.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Flammenkraut (gemahlen)</strong> — Flammenkraut, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 7,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 13400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "flammenkraut",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!771555541aa3f96e"
+}

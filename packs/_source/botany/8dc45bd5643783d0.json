@@ -1,0 +1,42 @@
+{
+  "_id": "8dc45bd5643783d0",
+  "name": "Blutrubin (gemahlen)",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-rough-cushion-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Blutrubin (gemahlen)</strong> — Blutrubin, im Mörser gemahlen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "veryRare",
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy Botanikclub"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 17600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "ingredientId": "blutrubin",
+      "role": "ground"
+    }
+  },
+  "_key": "!items!8dc45bd5643783d0"
+}
