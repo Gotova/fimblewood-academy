@@ -8,7 +8,7 @@
  * whispered chat card.
  */
 
-import { MODULE_ID, CHANNEL, SETTINGS, t, tf, esc, questData, canSee, players, getQuest } from "./data.mjs";
+import { MODULE_ID, CHANNEL, SETTINGS, t, tf, esc, questData, canSee, players, getQuest, visibleObjectives } from "./data.mjs";
 
 /** Events for one change: [{ kind, text, users }] */
 function diff(entry, before, after, actingUser) {
@@ -32,6 +32,12 @@ function diff(entry, before, after, actingUser) {
       if (o.secret || o.state !== "done") continue;
       const old = before.objectives.find((b) => b.id === o.id);
       if (old && old.state !== "done") events.push({ kind: "objective", text: tf("Notify.Objective", { text: o.text }), users: known });
+    }
+    // Objectives players see for the first time: unlocked, no longer secret, or newly added.
+    const player = { isGM: false };
+    const seenBefore = new Set(visibleObjectives(before, player).filter((o) => o.text.trim()).map((o) => o.id));
+    for (const o of visibleObjectives(after, player)) {
+      if (!seenBefore.has(o.id) && o.text.trim()) events.push({ kind: "objective", text: tf("Notify.NewObjective", { text: o.text }), users: known });
     }
   }
   return events.map((e) => ({ ...e, users: e.users.filter((u) => u.id !== actingUser?.id) }));

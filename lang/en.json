@@ -762,7 +762,11 @@
         "MarkOptional": "Optional",
         "MarkSecret": "Hide from players",
         "ObjectiveOptions": "Options",
-        "DragHint": "Drag to move"
+        "DragHint": "Drag to move",
+        "MarkAfterPrevious": "Show only after the previous objective",
+        "AfterPreviousHint": "Players see this once the objective above is done or failed",
+        "Sequential": "Reveal objectives one by one",
+        "SequentialHint": "Players see each objective only once the one above it is done or failed."
       },
       "Rewards": {
         "Text": "Reward (text)",
@@ -787,7 +791,8 @@
         "completed": "Quest completed",
         "failed": "Quest failed",
         "Objective": "Objective done: {text}",
-        "Loot": "Reward received ({count})"
+        "Loot": "Reward received ({count})",
+        "NewObjective": "New objective: {text}"
       },
       "Dock": {
         "Title": "Quests",

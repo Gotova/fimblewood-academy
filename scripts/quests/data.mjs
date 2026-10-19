@@ -79,6 +79,7 @@ export function questData(entry) {
     visibleTo: raw.visibleTo === "all" || !Array.isArray(raw.visibleTo) ? "all" : raw.visibleTo,
     perms: { checkObjectives: true, editNotes: true, editQuest: false, ...(raw.perms ?? {}) },
     objectives: (raw.objectives ?? []).map(cleanObjective),
+    sequential: !!raw.sequential,
     rewards: { qmFolderId: null, xp: 0, text: "", autoAward: false, awarded: false, awardedItems: [], ...(raw.rewards ?? {}) },
     importedFrom: raw.importedFrom ?? null,
     createdBy: raw.createdBy ?? null
@@ -92,6 +93,7 @@ export function cleanObjective(o = {}) {
     state: STATES.includes(o.state) ? o.state : "open",
     secret: !!o.secret,
     optional: !!o.optional,
+    afterPrevious: !!o.afterPrevious,
     depth: Math.max(0, Math.min(MAX_DEPTH, Number(o.depth) || 0))
   };
 }
@@ -126,8 +128,20 @@ export function can(entry, perm, user = game.user) {
   return !!perms[perm];
 }
 
+/** Whether an objective waits for the one above it (by itself or because the quest reveals them one by one). */
+export function isLocked(q, index) {
+  const o = q.objectives[index];
+  const prev = q.objectives[index - 1];
+  return !!prev && (o.afterPrevious || q.sequential) && prev.state === "open";
+}
+
+/**
+ * The objectives a user sees: the GM all of them, players neither secret ones
+ * nor ones still waiting for the objective above to be done or failed.
+ */
 export function visibleObjectives(q, user = game.user) {
-  return user.isGM ? q.objectives : q.objectives.filter((o) => !o.secret);
+  if (user.isGM) return q.objectives;
+  return q.objectives.filter((o, i) => !o.secret && !isLocked(q, i));
 }
 
 /** Done / total of the objectives that count: optional ones are left out. */
@@ -290,6 +304,7 @@ export async function applyQuestOp(user, op) {
       if (!user.isGM) {
         delete changes.visibleTo;
         delete changes.perms;
+        delete changes.sequential;
         if (changes.status === "draft") delete changes.status;
       }
       delete changes.rewards?.awarded;
@@ -298,16 +313,23 @@ export async function applyQuestOp(user, op) {
       if (Array.isArray(changes.visibleTo) || changes.visibleTo === "all") next.visibleTo = changes.visibleTo;
       if (changes.objectives) next.objectives = changes.objectives.map(cleanObjective);
       if (changes.objectives && !user.isGM) {
-        // Players never see secret objectives, so keep the ones they could not have sent.
-        const secret = quest.objectives.filter((o) => o.secret && !next.objectives.some((n) => n.id === o.id));
-        next.objectives.push(...secret);
+        // Players don't see secret or still-locked objectives, so put back the ones they could not have sent,
+        // each after the objective it followed before.
+        const sent = new Set(next.objectives.map((o) => o.id));
+        const shown = new Set(visibleObjectives(quest, user).map((o) => o.id));
+        quest.objectives.forEach((o, i) => {
+          if (sent.has(o.id) || shown.has(o.id)) return;
+          const prevId = quest.objectives[i - 1]?.id;
+          const at = prevId ? next.objectives.findIndex((n) => n.id === prevId) + 1 : 0;
+          next.objectives.splice(at > 0 ? at : (prevId ? next.objectives.length : 0), 0, cleanObjective(o));
+        });
       }
       const extra = typeof op.name === "string" && op.name.trim() ? { name: op.name.trim() } : {};
       return writeQuest(entry, next, extra, user);
     }
     case "setObjective": {
       const obj = quest.objectives.find((o) => o.id === op.objectiveId);
-      if (!obj || (obj.secret && !user.isGM)) return fail(t("Notice.Missing"));
+      if (!obj || !visibleObjectives(quest, user).includes(obj)) return fail(t("Notice.Missing"));
       if (!can(entry, "checkObjectives", user)) return fail(t("Notice.NoPermission"));
       if (!STATES.includes(op.state)) return fail(t("Notice.Missing"));
       obj.state = op.state;

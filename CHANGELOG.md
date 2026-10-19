@@ -4,6 +4,16 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.47.0] - 2026-10-20
+
+### Added
+
+- **Quests: reveal objectives one by one**: an objective can wait for the one above it (options ⋮ → *Show only after the previous objective*), or a whole quest can reveal its objectives one by one (Settings tab). Players see such an objective once the one above is done or failed; the GM sees a lock on it. Players get a "New objective" banner when one appears for them.
+
+### Fixed
+
+- **Quests**: the objective options no longer reach past the right edge of the window.
+
 ## [0.46.0] - 2026-10-20
 
 ### Added

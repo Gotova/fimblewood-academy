@@ -762,7 +762,11 @@
         "MarkOptional": "Optional",
         "MarkSecret": "Vor Spielern verstecken",
         "ObjectiveOptions": "Optionen",
-        "DragHint": "Ziehen zum Verschieben"
+        "DragHint": "Ziehen zum Verschieben",
+        "MarkAfterPrevious": "Erst nach dem vorherigen Ziel zeigen",
+        "AfterPreviousHint": "Wird Spielern erst gezeigt, wenn das Ziel darüber erledigt oder gescheitert ist",
+        "Sequential": "Ziele nacheinander freischalten",
+        "SequentialHint": "Spieler sehen jedes Ziel erst, wenn das darüber erledigt oder gescheitert ist."
       },
       "Rewards": {
         "Text": "Belohnung (Text)",
@@ -787,7 +791,8 @@
         "completed": "Quest abgeschlossen",
         "failed": "Quest gescheitert",
         "Objective": "Ziel erledigt: {text}",
-        "Loot": "Belohnung erhalten ({count})"
+        "Loot": "Belohnung erhalten ({count})",
+        "NewObjective": "Neues Ziel: {text}"
       },
       "Dock": {
         "Title": "Quests",

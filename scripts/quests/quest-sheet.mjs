@@ -14,7 +14,7 @@
 
 import {
   STATUSES, CATEGORIES, MAX_DEPTH, t, tf, esc,
-  getQuest, questData, pageOf, can, canSee, visibleObjectives, progress, players,
+  getQuest, questData, pageOf, can, canSee, visibleObjectives, isLocked, progress, players,
   requestQuestOp, cleanObjective, parseObjectives, stringifyObjectives
 } from "./data.mjs";
 import * as qm from "./quartermaster.mjs";
@@ -123,6 +123,8 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
             : `<span class="fw-quest-objective-text">${esc(o.text)}</span>`}
           ${o.optional ? `<span class="fw-quest-tag">${esc(t("Sheet.Optional"))}</span>` : ""}
           ${o.secret ? `<i class="fas fa-eye-slash fw-quest-secret-icon" data-tooltip="${esc(t("Sheet.Secret"))}"></i>` : ""}
+          ${game.user.isGM && (o.afterPrevious || q.sequential) && q.objectives.indexOf(o) > 0
+            ? `<i class="fas ${isLocked(q, q.objectives.indexOf(o)) ? "fa-lock" : "fa-lock-open"} fw-quest-secret-icon" data-tooltip="${esc(t("Sheet.AfterPreviousHint"))}"></i>` : ""}
           ${edit ? `<button type="button" class="fw-quest-icon-btn" data-action="objective-menu" data-tooltip="${esc(t("Sheet.ObjectiveOptions"))}"><i class="fas fa-ellipsis-vertical"></i></button>` : ""}
           ${edit && this._menuFor === o.id ? this.#objectiveMenu(o) : ""}
         </li>`).join("");
@@ -155,6 +157,7 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
         <div class="fw-quest-menu-group">
           ${toggle("toggle-optional", o.optional, "fa-circle-half-stroke", "Sheet.MarkOptional")}
           ${game.user.isGM ? toggle("toggle-secret", o.secret, "fa-eye-slash", "Sheet.MarkSecret") : ""}
+          ${game.user.isGM ? toggle("toggle-after", o.afterPrevious, "fa-lock", "Sheet.MarkAfterPrevious") : ""}
           <button type="button" data-action="remove-objective" class="is-danger"><i class="fas fa-trash"></i> ${esc(t("Sheet.RemoveObjective"))}</button>
         </div>
       </div>`;
@@ -224,6 +227,8 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
         <label class="fw-quest-check"><input type="checkbox" name="visibleAll" ${all ? "checked" : ""}> ${esc(t("Sheet.VisibleAll"))}</label>
         <div class="fw-quest-players">${playerBoxes || `<span class="fw-quest-hint">${esc(t("Sheet.NoPlayers"))}</span>`}</div>
         ${q.status === "draft" ? `<p class="fw-quest-hint">${esc(t("Sheet.DraftHint"))}</p>` : ""}
+        <label class="fw-quest-check"><input type="checkbox" name="sequential" ${q.sequential ? "checked" : ""}> ${esc(t("Sheet.Sequential"))}</label>
+        <p class="fw-quest-hint">${esc(t("Sheet.SequentialHint"))}</p>
         <h3 class="fw-quest-heading"><span><i class="fas fa-user-lock"></i> ${esc(t("Sheet.Permissions"))}</span></h3>
         ${perm("checkObjectives")}${perm("editNotes")}${perm("editQuest")}` : ""}
       <div class="fw-quest-actions is-danger">
@@ -490,6 +495,9 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
       case "toggle-optional":
         await this.#editObjectives((list, i) => { list[i].optional = !list[i].optional; }, button);
         break;
+      case "toggle-after":
+        await this.#editObjectives((list, i) => { list[i].afterPrevious = !list[i].afterPrevious; }, button);
+        break;
       case "toggle-secret":
         await this.#editObjectives((list, i) => { list[i].secret = !list[i].secret; }, button);
         break;
@@ -500,9 +508,8 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
       case "apply-text": {
         const text = this.element.querySelector(".fw-quest-textmode")?.value ?? "";
         // Secret objectives stay hidden from players in text mode, so keep them out of reach of the parser.
-        const visible = visibleObjectives(q);
-        const objectives = parseObjectives(text, visible);
-        if (!game.user.isGM) objectives.push(...q.objectives.filter((o) => o.secret));
+        // Objectives this user cannot see are kept by data.mjs.
+        const objectives = parseObjectives(text, visibleObjectives(q));
         this.textMode = false;
         await requestQuestOp({ type: "update", id: this.entryId, changes: { objectives } });
         this.render();
@@ -555,6 +562,8 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
         return update({ rewards: { qmFolderId: el.value || null } });
       case "autoAward":
         return update({ rewards: { autoAward: el.checked } });
+      case "sequential":
+        return update({ sequential: el.checked });
       case "visibleAll":
         return update({ visibleTo: el.checked ? "all" : players().map((u) => u.id) });
       case "visibleUser": {
@@ -617,8 +626,9 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
     const index = id ? list.findIndex((o) => o.id === id) : -1;
     if (id && index < 0) return;
     fn(list, index);
-    // Players never see secret objectives; data.mjs keeps them, so send only what this user sees.
-    const objectives = game.user.isGM ? list : list.filter((o) => !o.secret);
+    // Players don't see every objective; data.mjs keeps the others, so send only what this user sees.
+    const shown = new Set(visibleObjectives(q).map((o) => o.id));
+    const objectives = game.user.isGM ? list : list.filter((o) => shown.has(o.id) || !q.objectives.some((p) => p.id === o.id));
     await requestQuestOp({ type: "update", id: this.entryId, changes: { objectives } });
   }
 
