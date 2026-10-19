@@ -12,7 +12,8 @@
  *   gmLearn  {actorId, key, known}        GM: tick a recipe in a character's book
  *
  * Recipe items (compendium "Alchemie: Rezepte", flag `recipe`) teach their
- * recipe as soon as they land in a character's inventory, and are used up.
+ * recipe as soon as they land in a character's inventory. The item stays, so
+ * it can be passed on and teach the next character too.
  *
  * Brewing is instant: ingredients are used up and the potion (or a failed
  * one) lands in the inventory right away. Successful recipes go into the
@@ -171,23 +172,22 @@ async function gmLearn(actor, op) {
   return { ok: true, message: "" };
 }
 
-/** A recipe item reached an inventory: learn it, use the item up and tell the owners. */
+/** A recipe item reached an inventory: learn it and tell the owners (only when it is new to them). */
 async function learnFromItem(actor, item) {
   const key = String(item.getFlag(MODULE_ID, "recipe") ?? "");
   const { effectId, tier } = parseRecipeKey(key);
   const effect = EFFECT_BY_ID.get(effectId);
   if (!effect || tier > effect.maxTier) return;
   const known = knownRecipes(actor);
-  const isNew = !known.has(key);
+  if (known.has(key)) return;
   known.add(key);
-  if (isNew) await actor.setFlag(MODULE_ID, KNOWN_FLAG, [...known]);
-  await item.delete();
+  await actor.setFlag(MODULE_ID, KNOWN_FLAG, [...known]);
   const owners = game.users.filter((u) => actor.testUserPermission(u, "OWNER")).map((u) => u.id);
   const esc = foundry.utils.escapeHTML;
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
     whisper: owners,
-    content: `<p>${i18n(isNew ? "Notice.Learned" : "Notice.AlreadyKnown", { actor: esc(actor.name), recipe: esc(item.name) })}</p>`
+    content: `<p>${i18n("Notice.Learned", { actor: esc(actor.name), recipe: esc(item.name) })}</p>`
   });
 }
 

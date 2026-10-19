@@ -5,7 +5,7 @@
   "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Rezept: Levitation, Stufe III, Variante 2</strong></p><p>6× Nebelschirmling + 2× Wolkenkristall (gemahlen) + 1× Federblüte (gemahlen) + 6× Manastaub; 5 Becher Wasser, 1 Becher Mondtau</p><p>Ausrüstung: Athanor, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "value": "<p><strong>Rezept: Levitation, Stufe III, Variante 2</strong></p><p>6× Nebelschirmling + 2× Wolkenkristall (gemahlen) + 1× Federblüte (gemahlen) + 6× Manastaub; 5 Becher Wasser, 1 Becher Mondtau</p><p>Ausrüstung: Athanor, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters. Das Blatt bleibt erhalten und kann weitergegeben werden.</em></p>",
       "chat": ""
     },
     "quantity": 1,

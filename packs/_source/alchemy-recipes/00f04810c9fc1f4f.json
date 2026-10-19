@@ -5,7 +5,7 @@
   "img": "icons/sundries/scrolls/scroll-rolled-tan.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Rezept: Blitz, Stufe I, Variante 2</strong></p><p>3× Donnerdistel (gemahlen) + 1× Windblüte (gemahlen) + 1× Manastaub; 2 Becher Wasser, 1 Becher Öl</p><p>Ausrüstung: Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "value": "<p><strong>Rezept: Blitz, Stufe I, Variante 2</strong></p><p>3× Donnerdistel (gemahlen) + 1× Windblüte (gemahlen) + 1× Manastaub; 2 Becher Wasser, 1 Becher Öl</p><p>Ausrüstung: Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters. Das Blatt bleibt erhalten und kann weitergegeben werden.</em></p>",
       "chat": ""
     },
     "quantity": 1,

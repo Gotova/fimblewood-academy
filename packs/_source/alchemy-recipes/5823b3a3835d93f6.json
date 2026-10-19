@@ -5,7 +5,7 @@
   "img": "icons/sundries/scrolls/scroll-bound-green.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Rezept: Levitation, Stufe II, Variante 1</strong></p><p>1× Wahnpilz + 1× Windblüte (gemahlen) + 1× Hexenpilz + 1× Federblüte (gemahlen) + 3× Manastaub; 4 Becher Wasser</p><p>Ausrüstung: Destillierapparat, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "value": "<p><strong>Rezept: Levitation, Stufe II, Variante 1</strong></p><p>1× Wahnpilz + 1× Windblüte (gemahlen) + 1× Hexenpilz + 1× Federblüte (gemahlen) + 3× Manastaub; 4 Becher Wasser</p><p>Ausrüstung: Destillierapparat, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters. Das Blatt bleibt erhalten und kann weitergegeben werden.</em></p>",
       "chat": ""
     },
     "quantity": 1,

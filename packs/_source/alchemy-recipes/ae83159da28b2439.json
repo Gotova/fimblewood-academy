@@ -5,7 +5,7 @@
   "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Rezept: Mana, Stufe III, Variante 2</strong></p><p>3× Windblüte (gemahlen) + 2× Wasserblüte (gemahlen) + 1× Traumrübe (gemahlen) + 1× Arkankristall (gemahlen) + 6× Manastaub; 4 Becher Wasser, 1 Becher Mondtau</p><p>Ausrüstung: Athanor, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "value": "<p><strong>Rezept: Mana, Stufe III, Variante 2</strong></p><p>3× Windblüte (gemahlen) + 2× Wasserblüte (gemahlen) + 1× Traumrübe (gemahlen) + 1× Arkankristall (gemahlen) + 6× Manastaub; 4 Becher Wasser, 1 Becher Mondtau</p><p>Ausrüstung: Athanor, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters. Das Blatt bleibt erhalten und kann weitergegeben werden.</em></p>",
       "chat": ""
     },
     "quantity": 1,

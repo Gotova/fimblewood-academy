@@ -5,7 +5,7 @@
   "img": "icons/sundries/scrolls/scroll-rolled-tan.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Rezept: Giftschutz, Stufe I</strong></p><p>5× Gutbeere + 2× Haarbanane + 1× Dryadensattel + 1× Manastaub; 1 Becher Wasser, 2 Becher Öl</p><p>Ausrüstung: Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "value": "<p><strong>Rezept: Giftschutz, Stufe I</strong></p><p>5× Gutbeere + 2× Haarbanane + 1× Dryadensattel + 1× Manastaub; 1 Becher Wasser, 2 Becher Öl</p><p>Ausrüstung: Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters. Das Blatt bleibt erhalten und kann weitergegeben werden.</em></p>",
       "chat": ""
     },
     "quantity": 1,

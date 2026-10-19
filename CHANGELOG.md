@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.45.1] - 2026-10-20
+
+### Changed
+
+- **Recipe items** are no longer used up. Landing in an inventory still puts the recipe into the character's recipe book, but the item stays, so players can pass it on and share the recipe. A character who already knows it gets no message.
+
 ## [0.45.0] - 2026-10-19
 
 ### Added

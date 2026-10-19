@@ -5,7 +5,7 @@
   "img": "icons/sundries/scrolls/scroll-rolled-tan.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Rezept: Antimagie, Stufe I</strong></p><p>1× Traumrübe (gemahlen) + 1× Federblüte (gemahlen) + 1× Zauberblüte (gemahlen) + 1× Hexenpilz + 1× Manastaub; 1 Becher Wasser, 2 Becher Öl</p><p>Ausrüstung: Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "value": "<p><strong>Rezept: Antimagie, Stufe I</strong></p><p>1× Traumrübe (gemahlen) + 1× Federblüte (gemahlen) + 1× Zauberblüte (gemahlen) + 1× Hexenpilz + 1× Manastaub; 1 Becher Wasser, 2 Becher Öl</p><p>Ausrüstung: Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters. Das Blatt bleibt erhalten und kann weitergegeben werden.</em></p>",
       "chat": ""
     },
     "quantity": 1,

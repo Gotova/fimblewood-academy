@@ -5,7 +5,7 @@
   "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Rezept: Feuer, Stufe III</strong></p><p>3× Feuerglocke (gemahlen) + 1× Windblüte (gemahlen) + 1× Flammenkraut (gemahlen) + 1× Feuercitrin (gemahlen) + 6× Manastaub; 3 Becher Wasser, 3 Becher Öl</p><p>Ausrüstung: Athanor, Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "value": "<p><strong>Rezept: Feuer, Stufe III</strong></p><p>3× Feuerglocke (gemahlen) + 1× Windblüte (gemahlen) + 1× Flammenkraut (gemahlen) + 1× Feuercitrin (gemahlen) + 6× Manastaub; 3 Becher Wasser, 3 Becher Öl</p><p>Ausrüstung: Athanor, Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters. Das Blatt bleibt erhalten und kann weitergegeben werden.</em></p>",
       "chat": ""
     },
     "quantity": 1,

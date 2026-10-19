@@ -104,7 +104,7 @@ for (const r of ALL_RECIPES) {
     `<p><strong>Rezept: ${escHtml(title)}</strong></p>`,
     `<p>${escHtml(parts.join(" + "))}${cups.length ? `; ${escHtml(cups.join(", "))}` : ""}</p>`,
     gear.length ? `<p>Ausrüstung: ${escHtml(gear.join(", "))}.</p>` : "",
-    "<p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>"
+    "<p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters. Das Blatt bleibt erhalten und kann weitergegeben werden.</em></p>"
   ].join("");
   const t = r.tier - 1;
   const doc = {

@@ -5,7 +5,7 @@
   "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Rezept: Feuerschutz, Stufe III</strong></p><p>4× Dornstock (gemahlen) + 2× Frostsaphir (gemahlen) + 1× Eisfrucht + 1× Lebenskristall (gemahlen) + 6× Manastaub; 3 Becher Wasser, 4 Becher Öl</p><p>Ausrüstung: Athanor, Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "value": "<p><strong>Rezept: Feuerschutz, Stufe III</strong></p><p>4× Dornstock (gemahlen) + 2× Frostsaphir (gemahlen) + 1× Eisfrucht + 1× Lebenskristall (gemahlen) + 6× Manastaub; 3 Becher Wasser, 4 Becher Öl</p><p>Ausrüstung: Athanor, Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters. Das Blatt bleibt erhalten und kann weitergegeben werden.</em></p>",
       "chat": ""
     },
     "quantity": 1,

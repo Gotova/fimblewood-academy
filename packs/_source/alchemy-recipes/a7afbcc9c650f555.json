@@ -5,7 +5,7 @@
   "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Rezept: Explosion, Stufe III, Variante 2</strong></p><p>3× Windblüte (gemahlen) + 3× Feuerglocke (gemahlen) + 1× Schwefelporling + 1× Magmamorchel; 3 Becher Wasser, 4 Becher Öl</p><p>Ausrüstung: Athanor, Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "value": "<p><strong>Rezept: Explosion, Stufe III, Variante 2</strong></p><p>3× Windblüte (gemahlen) + 3× Feuerglocke (gemahlen) + 1× Schwefelporling + 1× Magmamorchel; 3 Becher Wasser, 4 Becher Öl</p><p>Ausrüstung: Athanor, Ölbad, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters. Das Blatt bleibt erhalten und kann weitergegeben werden.</em></p>",
       "chat": ""
     },
     "quantity": 1,

@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.45.0
+- **Current version:** 0.45.1
 
 ## Installation
 
@@ -167,7 +167,7 @@ Brewing potions from the Botany Club's ingredients. **Alchemie** in the Fimblewo
 - **Stationary tools** stand in a room: draw a **Region**, add the behavior **Alchemie-Station** and tick what is there: **Braukessel** (several slots, each brewing its own potion in one go; the number of slots is set in the behavior), **Destillierapparat** (tier II), **Athanor** (tier III and moon dew) and **Ölbad** (recipes with oil). They show up in the window while the character's token stands in the region.
 - **Brewing** is instant: put ingredients and cups of water, oil (`Becher Öl`) or moon dew (`Mondtau`) into the cauldron and brew. Only an exact recipe succeeds: same ingredients, amounts, preparation and cups. Herbs, flowers and crystals go in **ground** (Mörser), mushrooms and fruit **raw**. Magical potions need ground mana crystals (**Manastaub**). Anything else gives a *Misslungener Trank* and one hint (can be turned off in the settings).
 - The **recipe book** of each character fills itself with every successful recipe; a click puts a recipe's ingredients into the cauldron. The GM can unlock recipes there by hand.
-- **Recipe items** (GM-only compendium *Alchemie: Rezepte (nur SL)*, one per recipe, tier and variant): give one to a character and the recipe goes into its book at once; the item is used up and the players get a whispered note.
+- **Recipe items** (GM-only compendium *Alchemie: Rezepte (nur SL)*, one per recipe, tier and variant): give one to a character and the recipe goes into its book at once, with a whispered note to the players. The item stays, so it can be handed on and teach the next character too.
 - The GM-only compendium *Botanikclub: Rezepte (nur SL)* lists all recipes.
 
 ### Quests

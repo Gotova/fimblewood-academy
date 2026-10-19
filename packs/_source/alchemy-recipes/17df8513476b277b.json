@@ -5,7 +5,7 @@
   "img": "icons/sundries/scrolls/scroll-bound-gold.webp",
   "system": {
     "description": {
-      "value": "<p><strong>Rezept: Verlangsamung, Stufe III</strong></p><p>1× Lebensblatt (gemahlen) + 1× Schlammpilz + 1× Stinkpilz + 1× Druidenrosmarin (gemahlen) + 1× Seltsampilz + 1× Greifwurzel (gemahlen) + 6× Manastaub; 4 Becher Wasser</p><p>Ausrüstung: Athanor, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters, und das Blatt ist verbraucht.</em></p>",
+      "value": "<p><strong>Rezept: Verlangsamung, Stufe III</strong></p><p>1× Lebensblatt (gemahlen) + 1× Schlammpilz + 1× Stinkpilz + 1× Druidenrosmarin (gemahlen) + 1× Seltsampilz + 1× Greifwurzel (gemahlen) + 6× Manastaub; 4 Becher Wasser</p><p>Ausrüstung: Athanor, Kelle.</p><p><em>Kommt das Rezept in ein Inventar, steht es sofort im Rezeptbuch des Charakters. Das Blatt bleibt erhalten und kann weitergegeben werden.</em></p>",
       "chat": ""
     },
     "quantity": 1,
