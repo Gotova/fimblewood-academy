@@ -1,0 +1,656 @@
+/* Fimblewood Academy — Quests */
+
+/* -------------------------------------------- */
+/*  Dock                                         */
+/* -------------------------------------------- */
+
+#fw-quest-dock {
+  position: fixed;
+  top: 8px;
+  right: 320px;
+  z-index: 70;
+  width: 300px;
+  max-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  color: #f0e9da;
+  background: rgba(16, 12, 20, 0.72);
+  border: 1px solid rgba(201, 170, 113, 0.45);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  font-size: 13px;
+  pointer-events: auto;
+}
+#fw-quest-dock.is-collapsed {
+  width: auto;
+}
+#fw-quest-dock.is-dragging {
+  opacity: 0.85;
+  user-select: none;
+}
+
+.fw-quest-dock-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  cursor: grab;
+  border-bottom: 1px solid rgba(201, 170, 113, 0.3);
+  font-family: var(--font-h4, var(--font-primary));
+  font-size: 15px;
+  color: #e6c98a;
+}
+#fw-quest-dock.is-collapsed .fw-quest-dock-header {
+  border-bottom: none;
+}
+#fw-quest-dock.is-dragging .fw-quest-dock-header {
+  cursor: grabbing;
+}
+.fw-quest-dock-heading {
+  flex: 1;
+  white-space: nowrap;
+}
+#fw-quest-dock button {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+  padding: 0;
+  line-height: 1;
+  font-size: 12px;
+  color: inherit;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+#fw-quest-dock button:hover:not(:disabled) {
+  color: #fff;
+  text-shadow: 0 0 6px #e6c98a;
+}
+#fw-quest-dock button:disabled {
+  cursor: default;
+}
+
+.fw-quest-dock-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  overflow-y: auto;
+}
+.fw-quest-dock-quest + .fw-quest-dock-quest {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+.fw-quest-dock-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px 4px 4px;
+}
+.fw-quest-dock-thumb {
+  width: 26px;
+  height: 26px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid rgba(201, 170, 113, 0.5);
+}
+.fw-quest-dock-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+  cursor: pointer;
+}
+.fw-quest-dock-title:hover {
+  color: #fff;
+  text-shadow: 0 0 6px #e6c98a;
+}
+.fw-quest-dock-progress {
+  font-size: 11px;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+.fw-quest-dock-objectives {
+  list-style: none;
+  margin: 0;
+  padding: 0 8px 6px 18px;
+}
+.fw-quest-dock-objective {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  padding-left: calc(var(--depth, 0) * 14px);
+  line-height: 1.35;
+}
+.fw-quest-dock-objective button {
+  margin-top: -2px;
+}
+.fw-quest-dock-objective.is-done span {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+.fw-quest-dock-objective.is-failed span {
+  color: #e07a6b;
+  text-decoration: line-through;
+}
+.fw-quest-dock-objective.is-secret span {
+  color: #c5a3f0;
+  font-style: italic;
+}
+#fw-quest-dock .fw-quest-empty {
+  padding: 6px 10px;
+}
+
+/* -------------------------------------------- */
+/*  Shared                                       */
+/* -------------------------------------------- */
+
+.fw-quest-empty {
+  font-style: italic;
+  opacity: 0.7;
+  text-align: center;
+  list-style: none;
+}
+.fw-quest-hint {
+  font-size: 12px;
+  opacity: 0.75;
+}
+.fw-quest-warning {
+  color: var(--color-level-error, #c0392b);
+  font-size: 12px;
+}
+.fw-quest-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0 6px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--color-border, rgba(128, 128, 128, 0.4));
+  font-size: 15px;
+}
+.fw-quest-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.fw-quest-actions button {
+  flex: 0 0 auto;
+  width: auto;
+}
+.fw-quest-actions.is-danger {
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+.fw-quest-icon-btn {
+  flex: 0 0 auto;
+  width: 26px !important;
+  height: 26px;
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  opacity: 0.7;
+}
+.fw-quest-icon-btn:hover {
+  opacity: 1;
+}
+.fw-quest-icon-btn.is-off {
+  opacity: 0.35;
+}
+
+.fw-quest-tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid var(--color-border, rgba(128, 128, 128, 0.4));
+}
+.fw-quest-tab {
+  padding: 6px 10px;
+  border-bottom: 2px solid transparent;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+.fw-quest-tab:hover {
+  opacity: 1;
+}
+.fw-quest-tab.active {
+  opacity: 1;
+  border-bottom-color: #c9aa71;
+  font-weight: bold;
+}
+.fw-quest-count {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* -------------------------------------------- */
+/*  Quest window                                 */
+/* -------------------------------------------- */
+
+.fimblewood-quest-sheet .window-content {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.fw-quest-banner {
+  position: relative;
+  min-height: 110px;
+  display: flex;
+  align-items: flex-end;
+  padding: 12px 14px;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgba(10, 6, 14, 0.85)),
+    var(--fw-quest-img, linear-gradient(135deg, #3b2a52, #6b4a8a 55%, #2d2140));
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+.fw-quest-banner.has-image {
+  min-height: 190px;
+}
+.fw-quest-banner-tools {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 4px;
+}
+.fw-quest-banner-tools button {
+  width: 28px;
+  height: 28px;
+  min-height: 0;
+  padding: 0;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+}
+.fw-quest-banner-text {
+  flex: 1;
+  min-width: 0;
+}
+.fw-quest-title,
+.fw-quest-title-input {
+  margin: 4px 0 0;
+  font-family: var(--font-h1, var(--font-primary));
+  font-size: 26px;
+  line-height: 1.15;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  border: none;
+}
+.fw-quest-title-input {
+  width: 100%;
+  height: auto;
+  padding: 0 4px;
+  background: transparent;
+  border-radius: 4px;
+}
+.fw-quest-title-input:hover,
+.fw-quest-title-input:focus {
+  background: rgba(0, 0, 0, 0.35);
+  outline: none;
+  box-shadow: none;
+}
+.fw-quest-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.fw-quest-chip {
+  padding: 1px 8px;
+  font-size: 11px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.fw-quest-chip.is-active { border-color: #7fc47f; }
+.fw-quest-chip.is-completed { background: rgba(60, 120, 60, 0.75); }
+.fw-quest-chip.is-failed { background: rgba(150, 50, 40, 0.75); }
+.fw-quest-chip.is-onhold { border-color: #d6b35c; }
+.fw-quest-chip.is-draft { border-style: dashed; }
+
+.fimblewood-quest-sheet .fw-quest-tabs {
+  padding: 0 10px;
+}
+.fw-quest-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+}
+.fw-quest-panel {
+  display: none;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 10px 14px 14px;
+}
+.fw-quest-panel.active {
+  display: block;
+}
+.fw-quest-panel[data-panel="notes"].active {
+  display: flex;
+  flex-direction: column;
+}
+
+.fw-quest-description {
+  min-height: 2em;
+}
+prose-mirror.fw-quest-description {
+  display: block;
+}
+.fw-quest-placeholder {
+  font-style: italic;
+  opacity: 0.6;
+}
+
+.fw-quest-objectives {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fw-quest-objective {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 0 1px calc(var(--depth, 0) * 22px);
+}
+.fw-quest-state {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  min-height: 0;
+  padding: 0;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.fw-quest-state:disabled {
+  cursor: default;
+}
+.fw-quest-objective-text {
+  flex: 1;
+  min-width: 0;
+}
+input.fw-quest-objective-text {
+  height: 26px;
+  background: transparent;
+  border-color: transparent;
+}
+input.fw-quest-objective-text:hover,
+input.fw-quest-objective-text:focus {
+  border-color: var(--color-border, rgba(128, 128, 128, 0.5));
+}
+.fw-quest-objective.is-done .fw-quest-objective-text {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+.fw-quest-objective.is-done .fw-quest-state { color: #3f8f3f; }
+.fw-quest-objective.is-failed .fw-quest-objective-text {
+  text-decoration: line-through;
+  color: #c0392b;
+}
+.fw-quest-objective.is-failed .fw-quest-state { color: #c0392b; }
+.fw-quest-objective.is-secret .fw-quest-objective-text {
+  color: #8a5cc4;
+  font-style: italic;
+}
+.fw-quest-secret-icon {
+  color: #8a5cc4;
+}
+.fw-quest-objective .fw-quest-icon-btn {
+  visibility: hidden;
+}
+.fw-quest-objective:hover .fw-quest-icon-btn {
+  visibility: visible;
+}
+.fw-quest-textmode {
+  width: 100%;
+  font-family: var(--font-mono, monospace);
+  resize: vertical;
+}
+
+.fw-quest-editing {
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-style: italic;
+  opacity: 0.8;
+}
+prose-mirror.fw-quest-notes {
+  flex: 1;
+  min-height: 300px;
+}
+
+.fw-quest-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+.fw-quest-field > span {
+  font-weight: bold;
+  font-size: 12px;
+}
+.fw-quest-field.is-inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.fw-quest-field.is-inline input {
+  width: 90px;
+}
+.fw-quest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.fw-quest-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0;
+}
+.fw-quest-players {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 10px;
+  padding-left: 20px;
+}
+.fw-quest-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.fw-quest-loot {
+  list-style: none;
+  margin: 6px 0;
+  padding: 0;
+}
+.fw-quest-loot li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+}
+.fw-quest-loot img,
+.fw-quest-loot li > i {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: none;
+  text-align: center;
+  line-height: 28px;
+}
+.fw-quest-qty {
+  opacity: 0.7;
+}
+
+/* -------------------------------------------- */
+/*  Quest log                                    */
+/* -------------------------------------------- */
+
+.fimblewood-quest-log .window-content {
+  padding: 8px 10px;
+  gap: 6px;
+}
+.fw-quest-log-toolbar {
+  display: flex;
+  gap: 8px;
+}
+.fw-quest-log-toolbar input {
+  flex: 1;
+}
+.fw-quest-log-toolbar button {
+  flex: 0 0 auto;
+  width: auto;
+}
+.fw-quest-tabs.is-status {
+  flex-wrap: wrap;
+}
+.fw-quest-log-body {
+  flex: 1;
+  overflow-y: auto;
+}
+.fw-quest-log-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fw-quest-log-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  border-radius: 4px;
+}
+.fw-quest-log-row:hover {
+  background: rgba(128, 128, 128, 0.12);
+}
+.fw-quest-log-row[draggable="true"] {
+  cursor: grab;
+}
+.fw-quest-log-thumb {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid rgba(201, 170, 113, 0.5);
+}
+.fw-quest-log-thumb.is-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #3b2a52, #6b4a8a);
+  color: #e6c98a;
+}
+.fw-quest-log-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+}
+.fw-quest-import {
+  justify-content: center;
+  border-top: 1px solid var(--color-border, rgba(128, 128, 128, 0.4));
+  padding-top: 8px;
+}
+
+/* -------------------------------------------- */
+/*  Notifications                                */
+/* -------------------------------------------- */
+
+#fw-quest-toasts {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.fw-quest-toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 460px;
+  padding: 8px 18px 8px 8px;
+  color: #f5ecd9;
+  background: linear-gradient(135deg, rgba(30, 20, 40, 0.95), rgba(60, 40, 80, 0.95));
+  border: 1px solid #c9aa71;
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+  cursor: pointer;
+  animation: fw-quest-toast-in 0.4s ease-out;
+  transition: opacity 0.6s, transform 0.6s;
+}
+.fw-quest-toast.is-leaving {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+.fw-quest-toast img,
+.fw-quest-toast > i {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid rgba(201, 170, 113, 0.6);
+  text-align: center;
+  line-height: 52px;
+  font-size: 24px;
+  color: #e6c98a;
+}
+.fw-quest-toast > div {
+  display: flex;
+  flex-direction: column;
+}
+.fw-quest-toast-kind {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #e6c98a;
+}
+.fw-quest-toast strong {
+  font-family: var(--font-h3, var(--font-primary));
+  font-size: 18px;
+}
+.fw-quest-toast.is-completed { border-color: #7fc47f; }
+.fw-quest-toast.is-failed { border-color: #e07a6b; }
+@keyframes fw-quest-toast-in {
+  from { opacity: 0; transform: translateY(-14px); }
+  to { opacity: 1; transform: none; }
+}
+
+.fw-quest-chat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fw-quest-chat img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: none;
+}
+.fw-quest-chat-link {
+  cursor: pointer;
+}

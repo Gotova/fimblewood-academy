@@ -4,6 +4,18 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.45.0] - 2026-10-19
+
+### Added
+
+- **Quests**: a quest tracker of our own, replacing Simpler Quests. Open it with **Quests** in the Fimblewood Controls.
+  - A movable, foldable **dock** at the top right with the active quests and their objectives.
+  - A quest window with a **title picture**, a rich-text **description**, objectives (Enter / Tab to add and indent, secret objectives for the GM) and **shared notes that everyone co-edits live**.
+  - **Status** and **categories**, a quest log with search, **visibility per player** and **permissions per quest**.
+  - **Notifications** with the quest picture for new, completed and failed quests and finished objectives, optionally with sound and chat.
+  - **Quartermaster**: link a Loot Prep folder to a quest and award its loot to the party inventory, by hand or when the quest is completed.
+  - A one-time **import** of all Simpler Quests quests.
+
 ## [0.44.0] - 2026-10-18
 
 ### Added

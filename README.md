@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.44.0
+- **Current version:** 0.45.0
 
 ## Installation
 
@@ -169,6 +169,22 @@ Brewing potions from the Botany Club's ingredients. **Alchemie** in the Fimblewo
 - The **recipe book** of each character fills itself with every successful recipe; a click puts a recipe's ingredients into the cauldron. The GM can unlock recipes there by hand.
 - **Recipe items** (GM-only compendium *Alchemie: Rezepte (nur SL)*, one per recipe, tier and variant): give one to a character and the recipe goes into its book at once; the item is used up and the players get a whispered note.
 - The GM-only compendium *Botanikclub: Rezepte (nur SL)* lists all recipes.
+
+### Quests
+
+A quest tracker (`scripts/quests/`, `styles/quests.css`) that replaces Mythic's *Simpler Quests*. **Quests** in the Fimblewood Controls opens the quest log.
+
+- **Dock**: a small panel at the top right, next to the sidebar, lists the active quests. Each quest folds open to show its objectives, which can be ticked off right there. Drag it by its header (double-click puts it back), fold it down to its header, or turn it off per browser in the settings. Single quests can be hidden from the dock with the eye in the quest log.
+- **Quest window**: a banner with the quest's **picture** and title, then the tabs **Overview** (rich-text **description** and objectives), **Notes**, **Reward** and **Settings**.
+- **Objectives**: Enter adds the next objective, Tab / Shift+Tab indents (up to three levels), Backspace on an empty one removes it. Clicking the box cycles open → done → failed; the GM right-clicks it to make an objective **secret**. The text button switches to Simpler Quests' line syntax (`+` done, `-` failed, `/` secret, `*` sub-objective) for pasting whole lists.
+- **Notes** are shared and **co-edited live**: everyone allowed to write sees the others' typing as it happens (Foundry's collaborative editor), and a line above the editor says who else is typing.
+- **Status** (active, on hold, completed, failed, draft — drafts are GM-only) and **category** (main, side, personal, academy). The quest log groups quests by category per status and has a search box; the GM reorders quests by dragging.
+- **Visibility per player** and **permissions per quest** (tick off objectives, write notes, edit the quest), set by the GM in the quest's Settings tab. The defaults for new quests and whether players may create quests are world settings.
+- **Notifications**: new, revealed, completed and failed quests and finished objectives show a banner with the quest picture to the players who can see the quest, with an optional sound; new and finished quests can also be whispered in the chat.
+- **Quartermaster**: with the [Quartermaster](https://github.com/Lipton1010/quartermaster) module active, the GM links a quest to one of its *Loot Prep* folders. **Award loot** (or completing the quest, if ticked) reveals the folder's items and currency into Quartermaster's party inventory, and the players see what they got.
+- **Import**: the quest log offers the GM a one-time import of all Simpler Quests quests (objectives, states, secret objectives and nesting included; hidden quests become drafts). Importing again skips quests already imported. Afterwards Simpler Quests can be disabled.
+
+Each quest is a journal entry in the folder *Fimblewood Quests*, with a description page and a notes page; players only get ownership of the notes page, and every other change goes through the GM, so a GM has to be online for players to change quests. Foundry sends all journal data to every client, so hidden quests and secret objectives are hidden in the interface only, not from someone reading the browser console.
 
 ### Content
 

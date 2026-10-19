@@ -698,6 +698,149 @@
         "Learned": "{actor} learned \"{recipe}\". It is now in the recipe book.",
         "AlreadyKnown": "{actor} already knew \"{recipe}\"."
       }
+    },
+    "Quests": {
+      "ButtonTitle": "Quests",
+      "Title": "Quests",
+      "NewQuest": "New Quest",
+      "Tabs": {
+        "Overview": "Overview",
+        "Notes": "Notes",
+        "Rewards": "Reward",
+        "Settings": "Settings",
+        "Description": "Description"
+      },
+      "Status": {
+        "active": "Active",
+        "onhold": "On hold",
+        "completed": "Completed",
+        "failed": "Failed",
+        "draft": "Draft"
+      },
+      "Category": {
+        "main": "Main quest",
+        "side": "Side quest",
+        "personal": "Personal",
+        "academy": "Academy"
+      },
+      "State": {
+        "open": "Open",
+        "done": "Done",
+        "failed": "Failed"
+      },
+      "Perms": {
+        "checkObjectives": "Players may tick off objectives",
+        "editNotes": "Players may write in the notes",
+        "editQuest": "Players may edit the quest (title, picture, description, objectives)"
+      },
+      "Sheet": {
+        "PickImage": "Choose picture",
+        "ClearImage": "Remove picture",
+        "TitlePlaceholder": "Quest title",
+        "DescriptionPlaceholder": "Click the pen to write a description …",
+        "Objectives": "Objectives",
+        "NoObjectives": "No objectives yet.",
+        "AddObjective": "Add objective",
+        "ObjectivePlaceholder": "New objective …",
+        "RemoveObjective": "Remove objective",
+        "KeyHint": "Enter: new objective · Tab: indent · Shift+Tab: outdent",
+        "SecretHint": "Right-click: secret",
+        "Secret": "Secret – only the GM sees this",
+        "TextMode": "Edit as text",
+        "TextModeHint": "One objective per line. + done, - failed, / secret, * sub-objective (** deeper).",
+        "ApplyText": "Apply",
+        "NoNotes": "No notes yet.",
+        "Editing": "Also typing: {names}",
+        "Status": "Status",
+        "Category": "Category",
+        "Visibility": "Visibility",
+        "VisibleAll": "Visible to all players",
+        "NoPlayers": "No players in this world.",
+        "DraftHint": "Only the GM sees drafts. Set the status to Active to reveal the quest.",
+        "Permissions": "Permissions for this quest",
+        "Delete": "Delete quest",
+        "DeleteConfirm": "Really delete “{name}”? This cannot be undone."
+      },
+      "Rewards": {
+        "Text": "Reward (text)",
+        "Xp": "Experience points",
+        "Loot": "Loot from Quartermaster",
+        "Folder": "Loot prep folder",
+        "NoFolder": "— no folder —",
+        "FolderMissing": "The linked Quartermaster folder no longer exists.",
+        "EmptyFolder": "The folder is empty.",
+        "AutoAward": "Award automatically when the quest is completed",
+        "Award": "Award loot",
+        "OpenQm": "Open Loot Prep",
+        "Awarded": "The loot has already been awarded.",
+        "AwardedNotice": "The loot of “{name}” is now in the party inventory.",
+        "Hidden": "A reward awaits …",
+        "None": "No reward entered.",
+        "QmMissing": "Quartermaster is not active.",
+        "PartialFail": "Not everything could be awarded: {items}"
+      },
+      "Notify": {
+        "New": "New quest",
+        "completed": "Quest completed",
+        "failed": "Quest failed",
+        "Objective": "Objective done: {text}",
+        "Loot": "Reward received ({count})"
+      },
+      "Dock": {
+        "Title": "Quests",
+        "Empty": "No active quests.",
+        "Collapse": "Collapse",
+        "Expand": "Expand",
+        "DragHint": "Drag to move · Double-click: back to the sidebar"
+      },
+      "Log": {
+        "Title": "Quest Log",
+        "New": "New quest",
+        "Search": "Search …",
+        "Empty": "No quests here.",
+        "Restricted": "Only visible to selected players",
+        "HideFromDock": "Hide in the dock",
+        "ShowInDock": "Show in the dock",
+        "Import": "Import {count} quests from Simpler Quests",
+        "Imported": "Imported {count} quests from Simpler Quests."
+      },
+      "Notice": {
+        "NoPermission": "You don't have permission for that.",
+        "Missing": "This quest no longer exists.",
+        "Unknown": "Unknown action.",
+        "NeedsGM": "A GM must be online for that.",
+        "Timeout": "The GM did not respond."
+      },
+      "Settings": {
+        "PlayersCreate": {
+          "name": "Quests: players may create quests",
+          "hint": "Players can create their own quests and edit them."
+        },
+        "DefaultCheck": {
+          "name": "Quests: tick off objectives (default)",
+          "hint": "Whether players may tick off objectives in new quests. Can be changed per quest."
+        },
+        "DefaultNotes": {
+          "name": "Quests: write notes (default)",
+          "hint": "Whether players may write in the shared notes of new quests. Can be changed per quest."
+        },
+        "DefaultEdit": {
+          "name": "Quests: edit quest (default)",
+          "hint": "Whether players may edit new quests (title, picture, description, objectives). Can be changed per quest."
+        },
+        "Chat": {
+          "name": "Quests: chat messages",
+          "hint": "Also announce new, completed and failed quests as a whisper in the chat."
+        },
+        "Sound": {
+          "name": "Quests: notification sound",
+          "hint": "Played with quest notifications. Leave empty for no sound."
+        },
+        "DockEnabled": {
+          "name": "Quests: show dock",
+          "hint": "Show the quest dock at the top right next to the sidebar (this browser only)."
+        }
+      }
     }
   }
 }

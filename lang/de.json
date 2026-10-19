@@ -698,6 +698,149 @@
         "Learned": "{actor} hat „{recipe}“ gelernt. Das Rezept steht jetzt im Rezeptbuch.",
         "AlreadyKnown": "{actor} kannte „{recipe}“ schon."
       }
+    },
+    "Quests": {
+      "ButtonTitle": "Quests",
+      "Title": "Quests",
+      "NewQuest": "Neue Quest",
+      "Tabs": {
+        "Overview": "Übersicht",
+        "Notes": "Notizen",
+        "Rewards": "Belohnung",
+        "Settings": "Einstellungen",
+        "Description": "Beschreibung"
+      },
+      "Status": {
+        "active": "Aktiv",
+        "onhold": "Pausiert",
+        "completed": "Abgeschlossen",
+        "failed": "Gescheitert",
+        "draft": "Entwurf"
+      },
+      "Category": {
+        "main": "Hauptquest",
+        "side": "Nebenquest",
+        "personal": "Persönlich",
+        "academy": "Akademie"
+      },
+      "State": {
+        "open": "Offen",
+        "done": "Erledigt",
+        "failed": "Gescheitert"
+      },
+      "Perms": {
+        "checkObjectives": "Spieler dürfen Ziele abhaken",
+        "editNotes": "Spieler dürfen in die Notizen schreiben",
+        "editQuest": "Spieler dürfen die Quest bearbeiten (Titel, Bild, Beschreibung, Ziele)"
+      },
+      "Sheet": {
+        "PickImage": "Titelbild wählen",
+        "ClearImage": "Titelbild entfernen",
+        "TitlePlaceholder": "Titel der Quest",
+        "DescriptionPlaceholder": "Klicke auf den Stift, um eine Beschreibung zu schreiben …",
+        "Objectives": "Ziele",
+        "NoObjectives": "Noch keine Ziele.",
+        "AddObjective": "Ziel hinzufügen",
+        "ObjectivePlaceholder": "Neues Ziel …",
+        "RemoveObjective": "Ziel entfernen",
+        "KeyHint": "Enter: neues Ziel · Tab: einrücken · Shift+Tab: ausrücken",
+        "SecretHint": "Rechtsklick: geheim",
+        "Secret": "Geheim – nur für die Spielleitung sichtbar",
+        "TextMode": "Als Text bearbeiten",
+        "TextModeHint": "Ein Ziel pro Zeile. + erledigt, - gescheitert, / geheim, * Unterziel (** tiefer).",
+        "ApplyText": "Übernehmen",
+        "NoNotes": "Noch keine Notizen.",
+        "Editing": "Schreibt gerade mit: {names}",
+        "Status": "Status",
+        "Category": "Kategorie",
+        "Visibility": "Sichtbarkeit",
+        "VisibleAll": "Für alle Spieler sichtbar",
+        "NoPlayers": "Keine Spieler in dieser Welt.",
+        "DraftHint": "Entwürfe sieht nur die Spielleitung. Stelle den Status auf „Aktiv“, um die Quest freizuschalten.",
+        "Permissions": "Rechte für diese Quest",
+        "Delete": "Quest löschen",
+        "DeleteConfirm": "„{name}“ wirklich löschen? Das kann nicht rückgängig gemacht werden."
+      },
+      "Rewards": {
+        "Text": "Belohnung (Text)",
+        "Xp": "Erfahrungspunkte",
+        "Loot": "Loot aus Quartermaster",
+        "Folder": "Loot-Prep-Ordner",
+        "NoFolder": "— kein Ordner —",
+        "FolderMissing": "Der verknüpfte Quartermaster-Ordner existiert nicht mehr.",
+        "EmptyFolder": "Der Ordner ist leer.",
+        "AutoAward": "Automatisch vergeben, wenn die Quest abgeschlossen wird",
+        "Award": "Loot vergeben",
+        "OpenQm": "Loot-Prep öffnen",
+        "Awarded": "Der Loot wurde bereits vergeben.",
+        "AwardedNotice": "Loot von „{name}“ ist jetzt im Party-Inventar.",
+        "Hidden": "Es wartet eine Belohnung …",
+        "None": "Keine Belohnung eingetragen.",
+        "QmMissing": "Quartermaster ist nicht aktiv.",
+        "PartialFail": "Nicht alles konnte vergeben werden: {items}"
+      },
+      "Notify": {
+        "New": "Neue Quest",
+        "completed": "Quest abgeschlossen",
+        "failed": "Quest gescheitert",
+        "Objective": "Ziel erledigt: {text}",
+        "Loot": "Belohnung erhalten ({count})"
+      },
+      "Dock": {
+        "Title": "Quests",
+        "Empty": "Keine aktiven Quests.",
+        "Collapse": "Einklappen",
+        "Expand": "Ausklappen",
+        "DragHint": "Ziehen zum Verschieben · Doppelklick: zurück an die Seitenleiste"
+      },
+      "Log": {
+        "Title": "Questlog",
+        "New": "Neue Quest",
+        "Search": "Suchen …",
+        "Empty": "Hier gibt es keine Quests.",
+        "Restricted": "Nur für ausgewählte Spieler sichtbar",
+        "HideFromDock": "Im Dock ausblenden",
+        "ShowInDock": "Im Dock anzeigen",
+        "Import": "{count} Quests aus Simpler Quests importieren",
+        "Imported": "{count} Quests aus Simpler Quests importiert."
+      },
+      "Notice": {
+        "NoPermission": "Dafür fehlt dir die Berechtigung.",
+        "Missing": "Diese Quest gibt es nicht mehr.",
+        "Unknown": "Unbekannte Aktion.",
+        "NeedsGM": "Dafür muss eine Spielleitung online sein.",
+        "Timeout": "Die Spielleitung hat nicht geantwortet."
+      },
+      "Settings": {
+        "PlayersCreate": {
+          "name": "Quests: Spieler dürfen Quests anlegen",
+          "hint": "Spieler können eigene Quests anlegen und diese auch bearbeiten."
+        },
+        "DefaultCheck": {
+          "name": "Quests: Ziele abhaken (Standard)",
+          "hint": "Ob Spieler in neuen Quests Ziele abhaken dürfen. Lässt sich pro Quest ändern."
+        },
+        "DefaultNotes": {
+          "name": "Quests: Notizen schreiben (Standard)",
+          "hint": "Ob Spieler in neuen Quests in die gemeinsamen Notizen schreiben dürfen. Lässt sich pro Quest ändern."
+        },
+        "DefaultEdit": {
+          "name": "Quests: Quest bearbeiten (Standard)",
+          "hint": "Ob Spieler neue Quests bearbeiten dürfen (Titel, Bild, Beschreibung, Ziele). Lässt sich pro Quest ändern."
+        },
+        "Chat": {
+          "name": "Quests: Chat-Nachrichten",
+          "hint": "Neue, abgeschlossene und gescheiterte Quests zusätzlich als Flüsternachricht im Chat melden."
+        },
+        "Sound": {
+          "name": "Quests: Benachrichtigungston",
+          "hint": "Wird bei Quest-Benachrichtigungen abgespielt. Leer lassen für keinen Ton."
+        },
+        "DockEnabled": {
+          "name": "Quests: Dock anzeigen",
+          "hint": "Das Quest-Dock oben rechts neben der Seitenleiste anzeigen (nur in diesem Browser)."
+        }
+      }
     }
   }
 }
