@@ -10,7 +10,7 @@
  */
 
 import {
-  MODULE_ID, SETTINGS, t, esc, getQuests, questData, canSee, can, canCreate,
+  MODULE_ID, SETTINGS, CATEGORIES, t, esc, getQuests, questData, canSee, can, canCreate,
   visibleObjectives, progress, requestQuestOp
 } from "./data.mjs";
 
@@ -39,7 +39,9 @@ export function renderDock() {
   const hidden = new Set(get(SETTINGS.dockHidden));
   const expanded = new Set(get(SETTINGS.dockExpanded));
   const collapsed = get(SETTINGS.dockCollapsed);
-  const quests = getQuests().filter((e) => canSee(e) && questData(e).status === "active" && !hidden.has(e.id));
+  // Main quests first, then the other categories in their usual order; within one, the quest log's order.
+  const quests = getQuests().filter((e) => canSee(e) && questData(e).status === "active" && !hidden.has(e.id))
+    .sort((a, b) => CATEGORIES.indexOf(questData(a).category) - CATEGORIES.indexOf(questData(b).category));
 
   const rows = quests.map((entry) => {
     const q = questData(entry);

@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.47.1] - 2026-10-20
+
+### Changed
+
+- **Quests**: the dock lists main quests first, then side, personal and academy quests.
+
 ## [0.47.0] - 2026-10-20
 
 ### Added
