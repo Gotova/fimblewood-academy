@@ -136,6 +136,9 @@
   color: #e07a6b;
   text-decoration: line-through;
 }
+.fw-quest-dock-optional {
+  opacity: 0.6;
+}
 .fw-quest-dock-objective.is-secret span {
   color: #c5a3f0;
   font-style: italic;
@@ -245,15 +248,14 @@
   display: flex;
   align-items: flex-end;
   padding: 12px 14px;
-  background:
-    linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgba(10, 6, 14, 0.85)),
-    var(--fw-quest-img, linear-gradient(135deg, #3b2a52, #6b4a8a 55%, #2d2140));
+  /* The quest picture replaces this gradient through an inline style. */
+  background-image: linear-gradient(135deg, #3b2a52, #6b4a8a 55%, #2d2140);
   background-size: cover;
   background-position: center;
   color: #fff;
 }
 .fw-quest-banner.has-image {
-  min-height: 190px;
+  min-height: 220px;
 }
 .fw-quest-banner-tools {
   position: absolute;
@@ -344,8 +346,18 @@
 .fw-quest-description {
   min-height: 2em;
 }
-prose-mirror.fw-quest-description {
-  display: block;
+/* Closed, the description is as tall as its text; open, the editor gets room to write below its toolbar. */
+prose-mirror.fw-quest-description.inactive .editor-container {
+  overflow: visible;
+}
+prose-mirror.fw-quest-description.inactive .editor-content {
+  position: static;
+  min-height: 2.5em;
+}
+prose-mirror.fw-quest-description.active {
+  height: 340px;
+  resize: vertical;
+  overflow: hidden;
 }
 .fw-quest-placeholder {
   font-style: italic;
@@ -407,11 +419,79 @@ input.fw-quest-objective-text:focus {
 .fw-quest-secret-icon {
   color: #8a5cc4;
 }
+.fw-quest-objective {
+  flex-wrap: wrap;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+.fw-quest-objective.drop-before {
+  border-top-color: #c9aa71;
+}
+.fw-quest-objective.drop-after {
+  border-bottom-color: #c9aa71;
+}
+.fw-quest-objective.is-dragging {
+  opacity: 0.4;
+}
+.fw-quest-grip {
+  flex: 0 0 auto;
+  width: 14px;
+  text-align: center;
+  cursor: grab;
+  opacity: 0.35;
+}
+.fw-quest-objective:hover .fw-quest-grip {
+  opacity: 0.8;
+}
 .fw-quest-objective .fw-quest-icon-btn {
-  visibility: hidden;
+  opacity: 0.25;
 }
 .fw-quest-objective:hover .fw-quest-icon-btn {
-  visibility: visible;
+  opacity: 0.8;
+}
+.fw-quest-objective.is-optional .fw-quest-objective-text {
+  font-style: italic;
+}
+.fw-quest-tag {
+  flex: 0 0 auto;
+  padding: 0 6px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 8px;
+  border: 1px solid var(--color-border, rgba(128, 128, 128, 0.5));
+  opacity: 0.8;
+}
+.fw-quest-objective-menu {
+  flex: 1 0 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 2px 0 6px 40px;
+  padding: 6px;
+  border-radius: 6px;
+  background: rgba(128, 128, 128, 0.12);
+}
+.fw-quest-menu-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.fw-quest-menu-group button {
+  flex: 0 0 auto;
+  width: auto;
+  height: 26px;
+  min-height: 0;
+  padding: 0 8px;
+  font-size: 12px;
+}
+.fw-quest-menu-group button.is-on {
+  border-color: #c9aa71;
+  box-shadow: 0 0 0 1px #c9aa71 inset;
+}
+.fw-quest-menu-group button.is-danger {
+  margin-left: auto;
+  color: #c0392b;
 }
 .fw-quest-textmode {
   width: 100%;

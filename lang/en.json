@@ -743,10 +743,9 @@
         "ObjectivePlaceholder": "New objective …",
         "RemoveObjective": "Remove objective",
         "KeyHint": "Enter: new objective · Tab: indent · Shift+Tab: outdent",
-        "SecretHint": "Right-click: secret",
         "Secret": "Secret – only the GM sees this",
         "TextMode": "Edit as text",
-        "TextModeHint": "One objective per line. + done, - failed, / secret, * sub-objective (** deeper).",
+        "TextModeHint": "One objective per line. + done, - failed, / secret, ? optional, * sub-objective (** deeper).",
         "ApplyText": "Apply",
         "NoNotes": "No notes yet.",
         "Editing": "Also typing: {names}",
@@ -758,7 +757,12 @@
         "DraftHint": "Only the GM sees drafts. Set the status to Active to reveal the quest.",
         "Permissions": "Permissions for this quest",
         "Delete": "Delete quest",
-        "DeleteConfirm": "Really delete “{name}”? This cannot be undone."
+        "DeleteConfirm": "Really delete “{name}”? This cannot be undone.",
+        "Optional": "optional",
+        "MarkOptional": "Optional",
+        "MarkSecret": "Hide from players",
+        "ObjectiveOptions": "Options",
+        "DragHint": "Drag to move"
       },
       "Rewards": {
         "Text": "Reward (text)",

@@ -91,6 +91,7 @@ export function cleanObjective(o = {}) {
     text: String(o.text ?? ""),
     state: STATES.includes(o.state) ? o.state : "open",
     secret: !!o.secret,
+    optional: !!o.optional,
     depth: Math.max(0, Math.min(MAX_DEPTH, Number(o.depth) || 0))
   };
 }
@@ -129,8 +130,9 @@ export function visibleObjectives(q, user = game.user) {
   return user.isGM ? q.objectives : q.objectives.filter((o) => !o.secret);
 }
 
+/** Done / total of the objectives that count: optional ones are left out. */
 export function progress(q, user = game.user) {
-  const list = visibleObjectives(q, user);
+  const list = visibleObjectives(q, user).filter((o) => !o.optional);
   return { done: list.filter((o) => o.state === "done").length, total: list.length };
 }
 
@@ -146,18 +148,19 @@ export function players() {
 /*  Objective text mode (Simpler Quests syntax)  */
 /* -------------------------------------------- */
 
-/** "+" done, "-" failed, "/" secret, "*" one level deeper — one objective per line. */
+/** "+" done, "-" failed, "/" secret, "?" optional, "*" one level deeper — one objective per line. */
 export function parseObjectives(text, previous = []) {
   const byText = new Map(previous.map((o) => [o.text, o]));
   const result = [];
   for (let line of String(text).split("\n")) {
     line = line.trim();
-    const o = { state: "open", secret: false, depth: 0 };
-    while (/^[-+/*]/.test(line)) {
+    const o = { state: "open", secret: false, optional: false, depth: 0 };
+    while (/^[-+/*?]/.test(line)) {
       const c = line[0];
       if (c === "-") o.state = "failed";
       else if (c === "+") o.state = "done";
       else if (c === "/") o.secret = true;
+      else if (c === "?") o.optional = true;
       else o.depth++;
       line = line.slice(1).trim();
     }
@@ -172,7 +175,7 @@ export function parseObjectives(text, previous = []) {
 
 export function stringifyObjectives(objectives) {
   return objectives.map((o) =>
-    `${"*".repeat(o.depth)}${o.secret ? "/" : ""}${o.state === "done" ? "+" : o.state === "failed" ? "-" : ""}${o.depth || o.secret || o.state !== "open" ? " " : ""}${o.text}`
+    `${"*".repeat(o.depth)}${o.secret ? "/" : ""}${o.optional ? "?" : ""}${o.state === "done" ? "+" : o.state === "failed" ? "-" : ""}${o.depth || o.secret || o.optional || o.state !== "open" ? " " : ""}${o.text}`
   ).join("\n");
 }
 

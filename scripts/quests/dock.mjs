@@ -47,9 +47,9 @@ export function renderDock() {
     const prog = progress(q);
     const check = can(entry, "checkObjectives");
     const objectives = open ? visibleObjectives(q).map((o) => `
-      <li class="fw-quest-dock-objective is-${o.state} ${o.secret ? "is-secret" : ""}" style="--depth: ${o.depth}" data-objective-id="${o.id}">
+      <li class="fw-quest-dock-objective is-${o.state} ${o.secret ? "is-secret" : ""} ${o.optional ? "is-optional" : ""}" style="--depth: ${o.depth}" data-objective-id="${o.id}">
         <button type="button" data-action="cycle" ${check ? "" : "disabled"}><i class="${STATE_ICON[o.state]}"></i></button>
-        <span>${esc(o.text)}</span>
+        <span>${esc(o.text)}${o.optional ? ` <em class="fw-quest-dock-optional">(${esc(t("Sheet.Optional"))})</em>` : ""}</span>
       </li>`).join("") : "";
     return `
       <li class="fw-quest-dock-quest ${open ? "is-open" : ""}" data-quest-id="${entry.id}">

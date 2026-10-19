@@ -4,6 +4,18 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.46.0] - 2026-10-20
+
+### Added
+
+- **Quests: objective options**: every objective has an options button (⋮) to set its state, mark it **optional** (shown in italics with a tag, not counted in the progress) or, for the GM, **hide it from players**. In text mode `?` marks an objective optional.
+- **Quests: reorder objectives** by dragging them by their grip. Sub-objectives move along with their objective.
+
+### Fixed
+
+- **Quests**: the title picture now shows in the quest window's banner, not only in the quest log.
+- **Quests**: the description editor is taller when open, so its toolbar no longer leaves no room to write, and it stays open while others tick off objectives.
+
 ## [0.45.1] - 2026-10-20
 
 ### Changed

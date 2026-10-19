@@ -743,10 +743,9 @@
         "ObjectivePlaceholder": "Neues Ziel …",
         "RemoveObjective": "Ziel entfernen",
         "KeyHint": "Enter: neues Ziel · Tab: einrücken · Shift+Tab: ausrücken",
-        "SecretHint": "Rechtsklick: geheim",
         "Secret": "Geheim – nur für die Spielleitung sichtbar",
         "TextMode": "Als Text bearbeiten",
-        "TextModeHint": "Ein Ziel pro Zeile. + erledigt, - gescheitert, / geheim, * Unterziel (** tiefer).",
+        "TextModeHint": "Ein Ziel pro Zeile. + erledigt, - gescheitert, / geheim, ? optional, * Unterziel (** tiefer).",
         "ApplyText": "Übernehmen",
         "NoNotes": "Noch keine Notizen.",
         "Editing": "Schreibt gerade mit: {names}",
@@ -758,7 +757,12 @@
         "DraftHint": "Entwürfe sieht nur die Spielleitung. Stelle den Status auf „Aktiv“, um die Quest freizuschalten.",
         "Permissions": "Rechte für diese Quest",
         "Delete": "Quest löschen",
-        "DeleteConfirm": "„{name}“ wirklich löschen? Das kann nicht rückgängig gemacht werden."
+        "DeleteConfirm": "„{name}“ wirklich löschen? Das kann nicht rückgängig gemacht werden.",
+        "Optional": "optional",
+        "MarkOptional": "Optional",
+        "MarkSecret": "Vor Spielern verstecken",
+        "ObjectiveOptions": "Optionen",
+        "DragHint": "Ziehen zum Verschieben"
       },
       "Rewards": {
         "Text": "Belohnung (Text)",

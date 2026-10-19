@@ -57,7 +57,7 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
     return {
       banner: this.#banner(entry, q, edit),
       tabs: this.#tabs(edit),
-      overview: await this.#overview(entry, q, edit),
+      ...(await this.#overview(entry, q, edit)),
       rewards: await this.#rewards(entry, q),
       settings: edit ? this.#settings(entry, q) : "",
       notesAllowed: can(entry, "editNotes")
@@ -66,7 +66,8 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
 
   #banner(entry, q, edit) {
     const prog = progress(q);
-    const bg = q.image ? `style="--fw-quest-img: url('${esc(q.image)}')"` : "";
+    // Set inline: a url() inside a CSS variable would resolve relative to the stylesheet, not the page.
+    const bg = q.image ? `style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgba(10, 6, 14, 0.85)), url('${esc(q.image)}')"` : "";
     return `
       <div class="fw-quest-banner ${q.image ? "has-image" : ""}" ${bg}>
         ${edit ? `<div class="fw-quest-banner-tools">
@@ -113,14 +114,17 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
         <div class="fw-quest-actions"><button type="button" data-action="apply-text"><i class="fas fa-check"></i> ${esc(t("Sheet.ApplyText"))}</button></div>`;
     } else {
       const rows = objectives.map((o) => `
-        <li class="fw-quest-objective is-${o.state} ${o.secret ? "is-secret" : ""}" data-objective-id="${o.id}" style="--depth: ${o.depth}">
+        <li class="fw-quest-objective is-${o.state} ${o.secret ? "is-secret" : ""} ${o.optional ? "is-optional" : ""}" data-objective-id="${o.id}" style="--depth: ${o.depth}">
+          ${edit ? `<span class="fw-quest-grip" draggable="true" data-tooltip="${esc(t("Sheet.DragHint"))}"><i class="fas fa-grip-vertical"></i></span>` : ""}
           <button type="button" class="fw-quest-state" data-action="cycle-state" ${check ? "" : "disabled"}
-            data-tooltip="${esc(t(`State.${o.state}`))}${game.user.isGM ? ` · ${esc(t("Sheet.SecretHint"))}` : ""}"><i class="${STATE_ICON[o.state]}"></i></button>
+            data-tooltip="${esc(t(`State.${o.state}`))}"><i class="${STATE_ICON[o.state]}"></i></button>
           ${edit
             ? `<input type="text" class="fw-quest-objective-text" value="${esc(o.text)}" placeholder="${esc(t("Sheet.ObjectivePlaceholder"))}">`
             : `<span class="fw-quest-objective-text">${esc(o.text)}</span>`}
+          ${o.optional ? `<span class="fw-quest-tag">${esc(t("Sheet.Optional"))}</span>` : ""}
           ${o.secret ? `<i class="fas fa-eye-slash fw-quest-secret-icon" data-tooltip="${esc(t("Sheet.Secret"))}"></i>` : ""}
-          ${edit ? `<button type="button" class="fw-quest-icon-btn" data-action="remove-objective" data-tooltip="${esc(t("Sheet.RemoveObjective"))}"><i class="fas fa-trash"></i></button>` : ""}
+          ${edit ? `<button type="button" class="fw-quest-icon-btn" data-action="objective-menu" data-tooltip="${esc(t("Sheet.ObjectiveOptions"))}"><i class="fas fa-ellipsis-vertical"></i></button>` : ""}
+          ${edit && this._menuFor === o.id ? this.#objectiveMenu(o) : ""}
         </li>`).join("");
       list = `
         <ul class="fw-quest-objectives">${rows || `<li class="fw-quest-empty">${esc(t("Sheet.NoObjectives"))}</li>`}</ul>
@@ -130,14 +134,30 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
         </div>` : ""}`;
     }
 
-    return `
-      ${descriptionHTML}
+    return { description: descriptionHTML, descriptionKey: `${edit}|${description}`, objectives: `
       <h3 class="fw-quest-heading">
         <span>${esc(t("Sheet.Objectives"))}</span>
         ${edit ? `<button type="button" class="fw-quest-icon-btn" data-action="toggle-text" data-tooltip="${esc(t("Sheet.TextMode"))}">
           <i class="fas ${this.textMode ? "fa-list-check" : "fa-align-left"}"></i></button>` : ""}
       </h3>
-      ${list}`;
+      ${list}` };
+  }
+
+  /** The options of one objective, folded out under its row. */
+  #objectiveMenu(o) {
+    const toggle = (action, on, icon, label) => `
+      <button type="button" data-action="${action}" class="${on ? "is-on" : ""}"><i class="fas ${icon}"></i> ${esc(t(label))}</button>`;
+    const states = ["open", "done", "failed"].map((s) => `
+      <button type="button" data-action="set-state" data-state="${s}" class="${o.state === s ? "is-on" : ""}"><i class="${STATE_ICON[s]}"></i> ${esc(t(`State.${s}`))}</button>`).join("");
+    return `
+      <div class="fw-quest-objective-menu">
+        <div class="fw-quest-menu-group">${states}</div>
+        <div class="fw-quest-menu-group">
+          ${toggle("toggle-optional", o.optional, "fa-circle-half-stroke", "Sheet.MarkOptional")}
+          ${game.user.isGM ? toggle("toggle-secret", o.secret, "fa-eye-slash", "Sheet.MarkSecret") : ""}
+          <button type="button" data-action="remove-objective" class="is-danger"><i class="fas fa-trash"></i> ${esc(t("Sheet.RemoveObjective"))}</button>
+        </div>
+      </div>`;
   }
 
   async #rewards(entry, q) {
@@ -223,7 +243,10 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
         <div class="fw-quest-banner-slot"></div>
         <nav class="fw-quest-tabs"></nav>
         <div class="fw-quest-body">
-          <section class="fw-quest-panel" data-panel="overview"></section>
+          <section class="fw-quest-panel" data-panel="overview">
+            <div class="fw-quest-description-box"></div>
+            <div class="fw-quest-objectives-box"></div>
+          </section>
           <section class="fw-quest-panel" data-panel="notes"></section>
           <section class="fw-quest-panel" data-panel="rewards"></section>
           <section class="fw-quest-panel" data-panel="settings"></section>
@@ -234,10 +257,16 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
     const focus = this.#captureFocus(content);
     content.querySelector(".fw-quest-banner-slot").innerHTML = result.banner;
     content.querySelector(".fw-quest-tabs").innerHTML = result.tabs;
-    content.querySelector('[data-panel="overview"]').innerHTML = result.overview;
+    // The description is only rebuilt when it changed, and never while someone is writing in it.
+    const descriptionBox = content.querySelector(".fw-quest-description-box");
+    if (this._descriptionKey !== result.descriptionKey && !descriptionBox.querySelector("prose-mirror.active")) {
+      this._descriptionKey = result.descriptionKey;
+      descriptionBox.innerHTML = result.description;
+      this.#mountDescription(content);
+    }
+    content.querySelector(".fw-quest-objectives-box").innerHTML = result.objectives;
     content.querySelector('[data-panel="rewards"]').innerHTML = result.rewards;
     content.querySelector('[data-panel="settings"]').innerHTML = result.settings;
-    this.#mountDescription(content);
     if (this._notesFor !== result.notesAllowed) this.#mountNotes(content, result.notesAllowed);
     else this.#refreshReadonlyNotes(content);
     if (!result.settings && this.tab === "settings") this.tab = "overview";
@@ -373,11 +402,59 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
       this.#editObjectives((list, i) => { list[i].secret = !list[i].secret; }, button);
     });
     content.addEventListener("change", (event) => this.#onChange(event));
+    this.#wireObjectiveDrag(content);
     content.addEventListener("keydown", (event) => this.#onKeyDown(event));
     content.addEventListener("focusout", (event) => {
       const input = event.target.closest(".fw-quest-objective-text");
       if (input?.tagName === "INPUT") this.#commitObjectiveText(input);
       if (event.target.classList.contains("fw-quest-title-input")) this.#commitTitle(event.target);
+    });
+  }
+
+  /**
+   * Objectives are dragged by their grip. An objective moves together with its
+   * sub-objectives; dropped onto the upper half of a row it goes before it, onto
+   * the lower half after it, and takes the depth of the row it lands next to.
+   */
+  #wireObjectiveDrag(content) {
+    let dragId = null;
+    const clear = () => content.querySelectorAll(".fw-quest-objective.drop-before, .fw-quest-objective.drop-after")
+      .forEach((el) => el.classList.remove("drop-before", "drop-after"));
+
+    content.addEventListener("dragstart", (event) => {
+      const grip = event.target.closest?.(".fw-quest-grip");
+      if (!grip) return;
+      const row = grip.closest("[data-objective-id]");
+      dragId = row.dataset.objectiveId;
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", "");
+      event.dataTransfer.setDragImage(row, 10, row.offsetHeight / 2);
+      row.classList.add("is-dragging");
+    });
+    content.addEventListener("dragover", (event) => {
+      const row = dragId && event.target.closest(".fw-quest-objective[data-objective-id]");
+      if (!row) return;
+      event.preventDefault();
+      clear();
+      if (row.dataset.objectiveId === dragId) return;
+      const after = event.clientY > row.getBoundingClientRect().top + row.offsetHeight / 2;
+      row.classList.add(after ? "drop-after" : "drop-before");
+    });
+    content.addEventListener("dragend", () => {
+      clear();
+      content.querySelector(".fw-quest-objective.is-dragging")?.classList.remove("is-dragging");
+      dragId = null;
+    });
+    content.addEventListener("drop", (event) => {
+      const row = dragId && event.target.closest(".fw-quest-objective[data-objective-id]");
+      if (!row) return;
+      event.preventDefault();
+      const after = row.classList.contains("drop-after");
+      const targetId = row.dataset.objectiveId;
+      const movedId = dragId;
+      clear();
+      if (targetId === movedId) return;
+      this.#editObjectives((list) => moveObjective(list, movedId, targetId, after));
     });
   }
 
@@ -396,7 +473,25 @@ export class QuestSheet extends foundry.applications.api.ApplicationV2 {
         await this.#insertObjective(q.objectives.length - 1, q.objectives.at(-1)?.depth ?? 0);
         break;
       case "remove-objective":
+        this._menuFor = null;
         await this.#editObjectives((list, i) => list.splice(i, 1), button);
+        break;
+      case "objective-menu": {
+        const id = button.closest("[data-objective-id]").dataset.objectiveId;
+        this._menuFor = this._menuFor === id ? null : id;
+        this.render();
+        break;
+      }
+      case "set-state": {
+        const id = button.closest("[data-objective-id]").dataset.objectiveId;
+        await requestQuestOp({ type: "setObjective", id: this.entryId, objectiveId: id, state: button.dataset.state });
+        break;
+      }
+      case "toggle-optional":
+        await this.#editObjectives((list, i) => { list[i].optional = !list[i].optional; }, button);
+        break;
+      case "toggle-secret":
+        await this.#editObjectives((list, i) => { list[i].secret = !list[i].secret; }, button);
         break;
       case "toggle-text":
         this.textMode = !this.textMode;
@@ -546,4 +641,30 @@ function lootList(items = []) {
   return `<ul class="fw-quest-loot">${items.map((i) => `
     <li>${i.img ? `<img src="${esc(i.img)}" alt="">` : `<i class="fas fa-coins"></i>`}
       <span>${esc(i.name)}</span>${i.qty > 1 ? `<span class="fw-quest-qty">×${i.qty}</span>` : ""}</li>`).join("")}</ul>`;
+}
+
+/** Moves an objective (with its sub-objectives) before or after another one, in place. */
+function moveObjective(list, movedId, targetId, after) {
+  const from = list.findIndex((o) => o.id === movedId);
+  if (from < 0) return;
+  let end = from + 1;
+  while (end < list.length && list[end].depth > list[from].depth) end++;
+  const block = list.slice(from, end);
+  if (block.some((o) => o.id === targetId)) return;
+  list.splice(from, end - from);
+
+  let at = list.findIndex((o) => o.id === targetId);
+  if (at < 0) return list.splice(from, 0, ...block);
+  const targetDepth = list[at].depth;
+  if (after) {
+    // After a row means after its sub-objectives too.
+    at++;
+    while (at < list.length && list[at].depth > targetDepth) at++;
+  }
+  const shift = targetDepth - block[0].depth;
+  for (const o of block) o.depth = Math.max(0, Math.min(MAX_DEPTH, o.depth + shift));
+  list.splice(at, 0, ...block);
+
+  // No objective may sit more than one level below the one before it.
+  for (let i = 0; i < list.length; i++) list[i].depth = Math.min(list[i].depth, i ? list[i - 1].depth + 1 : 0);
 }
