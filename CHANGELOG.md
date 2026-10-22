@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.48.0] - 2026-10-22
+
+### Added
+
+- **Amans Freundebuch**: a new item (compendium *Fimblewood Academy: Gegenstände*). Using it opens a window with two tabs: **Animal forms** (the actors in the folder *Aman Formen*, Wild Shape preset) and **People** (only Aman's portrait, token image and token name change). **Change back** undoes either. The GM adds people with the new **book** button in the token HUD and opens the book from anywhere with **Amans Freundebuch** in the Fimblewood Controls; the GM and Aman can strike people out. For a player, enable the dnd5e setting *Allow Polymorphing* and the permission *Create New Actors*, and give him *Observer* on the animal form actors.
+
 ## [0.47.1] - 2026-10-20
 
 ### Changed

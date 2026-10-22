@@ -1,0 +1,121 @@
+/* Fimblewood Academy — Amans Freundebuch */
+
+.fimblewood-freundebuch-app .window-content {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.fw-fb-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 32px 16px;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.fw-fb-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.fw-fb-portrait {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--color-border, #7a7971);
+}
+.fw-fb-status {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.fw-fb-status span {
+  font-size: 12px;
+  font-style: italic;
+  opacity: 0.85;
+}
+.fw-fb-header button {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.fw-fb-tabs {
+  display: flex;
+  gap: 4px;
+}
+.fw-fb-tab {
+  flex: 1;
+}
+.fw-fb-tab.is-active {
+  border-color: #3f7d5c;
+  box-shadow: inset 0 -2px 0 #3f7d5c;
+  font-weight: bold;
+}
+
+.fw-fb-grid {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  align-content: start;
+  gap: 8px;
+}
+.fw-fb-grid.is-busy {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.fw-fb-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border: 1px solid var(--color-border, #7a7971);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.fw-fb-card:hover {
+  background: rgba(63, 125, 92, 0.15);
+  border-color: #3f7d5c;
+}
+.fw-fb-card.is-active {
+  border: 2px solid #3f7d5c;
+  background: rgba(63, 125, 92, 0.25);
+}
+.fw-fb-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border: none;
+}
+.fw-fb-name {
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.fw-fb-remove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+  padding: 0;
+  line-height: 1;
+  font-size: 11px;
+  display: none;
+}
+.fw-fb-card:hover .fw-fb-remove {
+  display: block;
+}

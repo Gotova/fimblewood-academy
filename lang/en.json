@@ -849,6 +849,29 @@
           "hint": "Show the quest dock at the top right next to the sidebar (this browser only)."
         }
       }
+    },
+    "Freundebuch": {
+      "ButtonTitle": "Aman’s Friendship Book",
+      "WindowTitle": "Aman’s Friendship Book",
+      "HudAdd": "Add to Aman’s Friendship Book",
+      "NoBook": "Nobody carries Aman’s Friendship Book.",
+      "NotAman": "Aman cannot add himself to his book.",
+      "AlreadyIn": "{name} is already in Aman’s Friendship Book.",
+      "Added": "{name} signed Aman’s Friendship Book.",
+      "CurrentlyAs": "Currently as {name}",
+      "OwnShape": "In his own shape",
+      "Revert": "Change back",
+      "Remove": "Strike from the book",
+      "NoForms": "No animal forms found. Create them in the actor folder “{folder}” (and give Aman’s player at least Observer permission).",
+      "NoFriends": "Nobody has signed the book yet.",
+      "NoFriendsGm": "Nobody has signed the book yet. Right-click a token → book icon adds the character.",
+      "NeedPolymorphSetting": "Players may not transform. The GM must enable “Allow Polymorphing” in the dnd5e settings.",
+      "NeedCreateActor": "An animal form needs the “Create New Actors” permission for players (Settings → Permissions).",
+      "Failed": "The transformation failed (see the console for details).",
+      "Tab": {
+        "animals": "Animal forms",
+        "people": "People"
+      }
     }
   }
 }

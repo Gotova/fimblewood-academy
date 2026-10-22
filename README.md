@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.47.1
+- **Current version:** 0.48.0
 
 ## Installation
 
@@ -185,6 +185,15 @@ A quest tracker (`scripts/quests/`, `styles/quests.css`) that replaces Mythic's 
 - **Import**: the quest log offers the GM a one-time import of all Simpler Quests quests (objectives, states, secret objectives and nesting included; hidden quests become drafts). Importing again skips quests already imported. Afterwards Simpler Quests can be disabled.
 
 Each quest is a journal entry in the folder *Fimblewood Quests*, with a description page and a notes page; players only get ownership of the notes page, and every other change goes through the GM, so a GM has to be online for players to change quests. Foundry sends all journal data to every client, so hidden quests and secret objectives are hidden in the interface only, not from someone reading the browser console.
+
+### Amans Freundebuch
+
+Shapechanging for Aman (`scripts/freundebuch/`, `styles/freundebuch.css`). The item **Amans Freundebuch** (compendium *Fimblewood Academy: Gegenstände*) opens a window when used; **Amans Freundebuch** in the Fimblewood Controls opens it from anywhere, for the GM and for Aman's player (also while he is in an animal form).
+
+- **Animal forms**: every actor in the actor folder **Aman Formen**. A click transforms Aman with dnd5e's Wild Shape preset (Chaotic Wild Shape); no Wild Shape use is spent automatically.
+- **People**: the GM right-clicks a token and clicks the **book** button to add that character. A click on a person only changes Aman's look: portrait, token image and token name.
+- **Change back** undoes either. The GM and Aman can strike people from the book.
+- Needs, for a player: the dnd5e setting **Allow Polymorphing**, the core permission **Create New Actors** for players, and at least *Observer* on the actors in *Aman Formen*. A player's change back leaves the temporary Wild Shape actor behind; the active GM's client deletes it.
 
 ### Content
 

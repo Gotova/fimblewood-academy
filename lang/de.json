@@ -849,6 +849,29 @@
           "hint": "Das Quest-Dock oben rechts neben der Seitenleiste anzeigen (nur in diesem Browser)."
         }
       }
+    },
+    "Freundebuch": {
+      "ButtonTitle": "Amans Freundebuch",
+      "WindowTitle": "Amans Freundebuch",
+      "HudAdd": "Zu Amans Freundebuch hinzufügen",
+      "NoBook": "Niemand trägt Amans Freundebuch bei sich.",
+      "NotAman": "Aman kann sich nicht in sich selbst eintragen.",
+      "AlreadyIn": "{name} steht schon in Amans Freundebuch.",
+      "Added": "{name} hat sich in Amans Freundebuch eingetragen.",
+      "CurrentlyAs": "Gerade als {name}",
+      "OwnShape": "In eigener Gestalt",
+      "Revert": "Zurückverwandeln",
+      "Remove": "Aus dem Buch streichen",
+      "NoForms": "Keine Tierformen gefunden. Lege sie im Actor-Ordner „{folder}“ an (und gib Amans Spieler mindestens Beobachter-Rechte).",
+      "NoFriends": "Noch hat sich niemand eingetragen.",
+      "NoFriendsGm": "Noch hat sich niemand eingetragen. Rechtsklick auf ein Token → Buch-Symbol trägt den Charakter ein.",
+      "NeedPolymorphSetting": "Verwandeln ist für Spieler gesperrt. Der DM muss in den dnd5e-Einstellungen „Allow Polymorphing“ aktivieren.",
+      "NeedCreateActor": "Für eine Tierform braucht dein Spieler das Recht „Neue Actors erstellen“ (Einstellungen → Berechtigungen).",
+      "Failed": "Die Verwandlung ist fehlgeschlagen (Details in der Konsole).",
+      "Tab": {
+        "animals": "Tierformen",
+        "people": "Personen"
+      }
     }
   }
 }

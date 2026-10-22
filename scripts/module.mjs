@@ -17,6 +17,8 @@ import { registerSubclassDrop } from "./subclass-drop.mjs";
 import { registerOwnerPrompts } from "./owner-prompt.mjs";
 import { registerSimplerQuestsCompat } from "./simpler-quests-compat.mjs";
 import { registerQuests, openQuest, openQuestLog, createQuest } from "./quests/index.mjs";
+import { registerFreundebuch, openFreundebuch } from "./freundebuch/index.mjs";
+import { addFriend as addFreundebuchFriend } from "./freundebuch/data.mjs";
 
 const MODULE_ID = "fimblewood-academy";
 
@@ -40,6 +42,7 @@ Hooks.once("init", () => {
   registerSubclassDrop();
   registerSimplerQuestsCompat();
   registerQuests();
+  registerFreundebuch();
 
   game.modules.get(MODULE_ID).api = {
     id: MODULE_ID,
@@ -53,7 +56,8 @@ Hooks.once("init", () => {
     timetable: { openViewer: openTimetableViewer, openEditor: openTimetableEditor },
     eladrinWildMagic: { hasEladrinWildMagic, getState: getWildMagicState, setRingState, setContainment },
     npcSpawner: { rerollScene, rerollRegion, addNpcs, removeNpcs, clearRegion },
-    quests: { open: openQuest, openLog: openQuestLog, create: createQuest }
+    quests: { open: openQuest, openLog: openQuestLog, create: createQuest },
+    freundebuch: { open: openFreundebuch, addFriend: addFreundebuchFriend }
   };
 });
 

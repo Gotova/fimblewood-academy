@@ -1,0 +1,76 @@
+{
+  "_id": "1ae6fc5d18eee4cc",
+  "name": "Amans Freundebuch",
+  "type": "equipment",
+  "img": "icons/sundries/books/book-turquoise-moon.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ein kleines, abgegriffenes Freundebuch. Wer sich darin einträgt, dessen Gestalt kann Aman annehmen.</p><p><em>Benutzen</em> öffnet das Freundebuch: Tierformen und eingetragene Personen, mit einem Klick verwandeln und wieder zurück.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "price": {
+      "value": 0,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "type": {
+      "value": "trinket",
+      "baseItem": ""
+    },
+    "activities": {
+      "75d6acd491082f3d": {
+        "_id": "75d6acd491082f3d",
+        "type": "utility",
+        "name": "Freundebuch öffnen",
+        "activation": {
+          "type": "",
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false,
+          "targets": []
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "affects": {
+            "type": "self"
+          },
+          "template": {
+            "units": "ft"
+          },
+          "prompt": false
+        },
+        "sort": 0
+      }
+    },
+    "identified": true,
+    "source": {
+      "custom": "Fimblewood Academy"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "fimblewood-academy": {
+      "isFreundebuch": true
+    }
+  },
+  "_key": "!items!1ae6fc5d18eee4cc"
+}
