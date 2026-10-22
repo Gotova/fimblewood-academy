@@ -112,7 +112,12 @@ export async function removeFriend(id) {
 
 /** The temporary Wild Shape actor Aman is in right now, if any. */
 function polymorphOf(aman) {
-  return game.actors.find((a) => a.isPolymorphed && a.getFlag("dnd5e", "originalActor") === aman.id) ?? null;
+  return polymorphsOf(aman)[0] ?? null;
+}
+
+/** All of them: normally one, but a failed change back can leave more. */
+function polymorphsOf(aman) {
+  return game.actors.filter((a) => a.isPolymorphed && a.getFlag("dnd5e", "originalActor") === aman.id);
 }
 
 /** @returns {{kind: "animal", id: string, name: string} | {kind: "person", id: string, name: string} | null} */
@@ -160,7 +165,7 @@ async function disguiseAs(aman, entry) {
   const saved = aman.getFlag(MODULE_ID, DISGUISE);
   const original = saved?.original ?? {
     img: aman.img,
-    prototype: lookOf(aman.prototypeToken),
+    proto: lookOf(aman.prototypeToken),
     tokens: Object.fromEntries(amanTokens(aman).map((tk) => [tokenKey(tk), lookOf(tk)]))
   };
   const look = { name: entry.name, ...entry.token };
@@ -178,17 +183,31 @@ async function disguiseAs(aman, entry) {
 async function dropDisguise(aman) {
   const saved = aman.getFlag(MODULE_ID, DISGUISE);
   if (!saved) return;
-  const { original } = saved;
+  const original = saved.original ?? {};
+  const tokens = original.tokens ?? {};
+  // 0.48.0 saved the prototype under "prototype", which Foundry drops from flags; fall back to a saved token.
+  const proto = original.proto ?? firstLook(tokens) ?? { name: aman.name, src: aman.prototypeToken.texture.src, scaleX: 1, scaleY: 1 };
   await aman.update({
-    img: original.img,
-    "prototypeToken.name": original.prototype.name,
-    "prototypeToken.texture.src": original.prototype.src,
-    "prototypeToken.texture.scaleX": original.prototype.scaleX,
-    "prototypeToken.texture.scaleY": original.prototype.scaleY,
+    img: original.img ?? aman.img,
+    "prototypeToken.name": proto.name,
+    "prototypeToken.texture.src": proto.src,
+    "prototypeToken.texture.scaleX": proto.scaleX ?? 1,
+    "prototypeToken.texture.scaleY": proto.scaleY ?? 1,
     [`flags.${MODULE_ID}.-=${DISGUISE}`]: null
   });
   // Tokens placed while disguised get the original look of the prototype.
-  await applyTokenLooks(aman, (tk) => original.tokens[tokenKey(tk)] ?? original.prototype);
+  await applyTokenLooks(aman, (tk) => tokens[tokenKey(tk)] ?? proto);
+}
+
+/** The first saved token look anywhere in an object (0.48.0 keyed them by UUID, which nests). */
+function firstLook(obj) {
+  if (!obj || typeof obj !== "object") return null;
+  if (typeof obj.src === "string") return obj;
+  for (const value of Object.values(obj)) {
+    const look = firstLook(value);
+    if (look) return look;
+  }
+  return null;
 }
 
 /* -------------------------------------------- */
@@ -216,13 +235,43 @@ function canTransform() {
   return true;
 }
 
+/**
+ * Gives every token of Aman or of his Wild Shape copies, in every scene, Aman's own
+ * token back. dnd5e's revert only touches the scene on the clicking client's canvas
+ * and restores the look the token had before the *first* transformation it
+ * remembers, which can be an earlier animal form.
+ */
+async function restoreAmanTokens(aman, polyIds) {
+  const base = (await aman.getTokenDocument()).toObject();
+  const own = {
+    name: base.name, width: base.width, height: base.height, alpha: base.alpha,
+    lockRotation: base.lockRotation, texture: base.texture, ring: base.ring,
+    sight: base.sight, detectionModes: base.detectionModes
+  };
+  const ids = new Set([aman.id, ...polyIds]);
+  for (const scene of game.scenes) {
+    const updates = scene.tokens
+      .filter((tk) => ids.has(tk.actorId) && (tk.actorLink || tk.actorId !== aman.id))
+      .map((tk) => ({
+        _id: tk.id, actorId: aman.id, actorLink: true, ...foundry.utils.deepClone(own),
+        "flags.dnd5e.-=previousTokenData": null, "flags.dnd5e.-=isPolymorphed": null, "flags.dnd5e.-=originalActor": null
+      }));
+    if (updates.length) await scene.updateEmbeddedDocuments("Token", updates);
+  }
+}
+
 async function dropAnimalForm(aman) {
-  const poly = polymorphOf(aman);
-  if (!poly) return;
-  await poly.revertOriginalForm({ renderSheet: false });
-  // A player's revert only strips the flags; the GM deletes the leftover actor.
-  if (!game.user.isGM && game.actors.get(poly.id)) {
-    game.socket.emit(CHANNEL, { type: "freundebuchCleanup", actorId: poly.id });
+  const polys = polymorphsOf(aman);
+  if (!polys.length) return;
+  await restoreAmanTokens(aman, polys.map((p) => p.id));
+  for (const poly of polys) {
+    // A GM's revert also deletes the forms chained before it.
+    if (!game.actors.get(poly.id)?.isPolymorphed) continue;
+    await poly.revertOriginalForm({ renderSheet: false });
+    // A player's revert only strips the flags; the GM deletes the leftover actor.
+    if (!game.user.isGM && game.actors.get(poly.id)) {
+      game.socket.emit(CHANNEL, { type: "freundebuchCleanup", actorId: poly.id });
+    }
   }
 }
 
@@ -277,8 +326,11 @@ export function revert() {
   return guarded(async () => {
     const aman = bookOwner();
     if (!aman) return;
+    const disguised = !!aman.getFlag(MODULE_ID, DISGUISE);
     await dropAnimalForm(aman);
     await dropDisguise(aman);
+    // Also mends tokens left in an old form (e.g. after a change back in 0.48.0).
+    if (!disguised) await restoreAmanTokens(aman, []);
   });
 }
 

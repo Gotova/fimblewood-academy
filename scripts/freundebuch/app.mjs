@@ -82,7 +82,7 @@ export class FreundebuchApp extends foundry.applications.api.ApplicationV2 {
       <div class="fw-fb-header">
         <img class="fw-fb-portrait" src="${esc(aman.img)}" alt="">
         <div class="fw-fb-status"><strong>${esc(aman.name)}</strong><span>${status}</span></div>
-        <button type="button" data-action="fwRevert" ${form ? "" : "disabled"}><i class="fas fa-rotate-left"></i> ${t("Revert")}</button>
+        <button type="button" data-action="fwRevert"><i class="fas fa-rotate-left"></i> ${t("Revert")}</button>
       </div>
       <nav class="fw-fb-tabs">${tabBtn("animals", "fa-paw")}${tabBtn("people", "fa-user-group")}</nav>
       <div class="fw-fb-grid ${this.busy ? "is-busy" : ""}">${body}</div>`;

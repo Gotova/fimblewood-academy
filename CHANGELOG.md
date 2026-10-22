@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.48.1] - 2026-10-22
+
+### Fixed
+
+- **Amans Freundebuch**: *Change back* after a person failed with an error, and after an animal form could leave Aman's token looking like an earlier form. It now always gives every one of Aman's tokens, in every scene, his own token back. The button is always available, so it also mends a token stuck in an old form.
+
 ## [0.48.0] - 2026-10-22
 
 ### Added
