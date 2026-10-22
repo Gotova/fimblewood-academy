@@ -1,0 +1,52 @@
+{
+  "_id": "2935e9c6060cf35d",
+  "name": "Papier (1 Blatt)",
+  "type": "loot",
+  "img": "icons/sundries/documents/paper-plain-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>One sheet of Paper can hold about 250 handwritten words.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "rarity": "",
+    "properties": [],
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "identifier": "paper"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagPaper000000"
+    }
+  },
+  "folder": "9325440b59ca485c",
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!2935e9c6060cf35d"
+}

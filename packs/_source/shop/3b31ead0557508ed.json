@@ -1,0 +1,48 @@
+{
+  "_id": "3b31ead0557508ed",
+  "name": "Kater-Kur",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-round-label-cork-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p>Beseitigt die Folgen einer durchzechten Nacht.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "48a594e9acf5d746",
+  "sort": 600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!3b31ead0557508ed"
+}

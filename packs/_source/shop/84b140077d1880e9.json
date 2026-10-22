@@ -1,0 +1,52 @@
+{
+  "_id": "84b140077d1880e9",
+  "name": "Decke",
+  "type": "loot",
+  "img": "icons/sundries/survival/bedroll-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p>While wrapped in a blanket, you have Advantage on saving throws against extreme cold (see @UUID[Compendium.dnd5e.content24.JournalEntry.dmgDmsToolbox000.JournalEntryPage.xgLA30rErlkjIPAK]{Gameplay Toolbox}).</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 3,
+      "units": "lb"
+    },
+    "rarity": "",
+    "properties": [],
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "identifier": "blanket"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagBlanket0000"
+    }
+  },
+  "folder": "e07115f43682781a",
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!84b140077d1880e9"
+}

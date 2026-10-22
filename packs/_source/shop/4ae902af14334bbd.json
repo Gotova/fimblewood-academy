@@ -1,0 +1,42 @@
+{
+  "_id": "4ae902af14334bbd",
+  "name": "Fährticket zum Festland",
+  "type": "loot",
+  "img": "icons/environment/settlement/ship.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "0bcce6360c035044",
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!4ae902af14334bbd"
+}

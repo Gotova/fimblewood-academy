@@ -1,0 +1,48 @@
+{
+  "_id": "d288436b319ad34a",
+  "name": "Mondblütenlikör",
+  "type": "consumable",
+  "img": "icons/consumables/drinks/clay-jar-glowing-orange-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>Leuchtet schwach im Dunkeln.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "food",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "2a9f3d57392b24d0",
+  "sort": 1800,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!d288436b319ad34a"
+}

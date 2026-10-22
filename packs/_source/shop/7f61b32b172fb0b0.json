@@ -1,0 +1,212 @@
+{
+  "_id": "7f61b32b172fb0b0",
+  "name": "Würfelset aus Knochen",
+  "type": "tool",
+  "img": "icons/sundries/gaming/dice-runed-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p><strong>Ability:</strong> Wisdom</p><p class=\"phb-meta\"><strong>Utilize:</strong> Discern whether someone is cheating (DC 10), or win the game (DC 20)</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "rarity": "",
+    "attunement": "",
+    "attuned": false,
+    "equipped": false,
+    "uses": {
+      "max": "",
+      "spent": 0,
+      "recovery": []
+    },
+    "type": {
+      "value": "game",
+      "baseItem": "dice"
+    },
+    "ability": "wis",
+    "chatFlavor": "",
+    "proficient": null,
+    "properties": [],
+    "bonus": "",
+    "activities": {
+      "snf3qwCBELlFasdZ": {
+        "type": "check",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "inst",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "self",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": false,
+          "override": false
+        },
+        "check": {
+          "ability": "wis",
+          "dc": {
+            "calculation": "",
+            "formula": "10"
+          },
+          "associated": []
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "sort": 0,
+        "_id": "snf3qwCBELlFasdZ",
+        "name": "Catch Cheating",
+        "img": "",
+        "appliedEffects": []
+      },
+      "Xa5CnT6vqjbhgSpN": {
+        "type": "check",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "inst",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "self",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": false,
+          "override": false
+        },
+        "check": {
+          "ability": "wis",
+          "dc": {
+            "calculation": "",
+            "formula": "20"
+          },
+          "associated": []
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "sort": 0,
+        "name": "Play to Win",
+        "_id": "Xa5CnT6vqjbhgSpN",
+        "img": "",
+        "appliedEffects": []
+      }
+    },
+    "identifier": "dice"
+  },
+  "effects": [],
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    },
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbgstDice000000"
+    }
+  },
+  "folder": "d0ea5437ffd082a6",
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!7f61b32b172fb0b0"
+}

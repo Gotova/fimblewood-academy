@@ -1,0 +1,62 @@
+{
+  "_id": "b03e17b5f5aeb099",
+  "name": "Rucksack",
+  "type": "container",
+  "img": "icons/containers/bags/pack-simple-leather.webp",
+  "system": {
+    "description": {
+      "value": "<p>A Backpack holds up to 30 pounds within 1 cubic foot. It can also serve as a saddlebag.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "quantity": 1,
+    "source": {
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": "",
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "weight": {
+      "value": 5,
+      "units": "lb"
+    },
+    "rarity": "",
+    "attunement": "",
+    "attuned": false,
+    "equipped": false,
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "properties": [],
+    "capacity": {
+      "type": "weight",
+      "value": 30
+    },
+    "identifier": "backpack"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagBackpack000"
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!b03e17b5f5aeb099"
+}

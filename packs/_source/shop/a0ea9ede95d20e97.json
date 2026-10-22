@@ -1,0 +1,52 @@
+{
+  "_id": "a0ea9ede95d20e97",
+  "name": "Lehrbuch",
+  "type": "loot",
+  "img": "icons/sundries/books/book-worn-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p>Je nach Fach 10 bis 25 GM.</p><hr><p>A Book contains fiction or nonfiction. If you consult an accurate nonfiction Book about its topic, you gain a +5 bonus to Intelligence (Arcana, History, Nature, or Religion) checks you make about that topic.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 15,
+      "denomination": "gp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 5,
+      "units": "lb"
+    },
+    "rarity": "",
+    "properties": [],
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "identifier": "book"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagBook0000000"
+    }
+  },
+  "folder": "9325440b59ca485c",
+  "sort": 1700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!a0ea9ede95d20e97"
+}

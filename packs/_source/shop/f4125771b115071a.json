@@ -1,0 +1,42 @@
+{
+  "_id": "f4125771b115071a",
+  "name": "Pfeife & Tabak",
+  "type": "loot",
+  "img": "icons/commodities/wood/kindling-stick-brown.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "d0ea5437ffd082a6",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!f4125771b115071a"
+}

@@ -1,0 +1,48 @@
+{
+  "_id": "85ab5a6b7202981e",
+  "name": "Rauchbombe",
+  "type": "consumable",
+  "img": "icons/commodities/tech/smoke-bomb-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>Erzeugt beim Zerplatzen eine Rauchwolke mit 3 m Radius, die 1 Minute lang Sicht blockiert.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "24237c3103b07002",
+  "sort": 600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!85ab5a6b7202981e"
+}

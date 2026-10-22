@@ -1,0 +1,42 @@
+{
+  "_id": "cff922400542736f",
+  "name": "Barde für einen Abend",
+  "type": "loot",
+  "img": "icons/tools/instruments/lute-gold-brown.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "cd94eda9612ede6a",
+  "sort": 1400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!cff922400542736f"
+}

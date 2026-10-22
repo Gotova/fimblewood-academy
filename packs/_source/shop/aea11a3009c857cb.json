@@ -1,0 +1,51 @@
+{
+  "_id": "aea11a3009c857cb",
+  "name": "Feenstaub",
+  "type": "consumable",
+  "img": "icons/commodities/materials/bowl-powder-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p>Eine Prise golden glitzernder Staub. Über eine Kreatur gestreut, wirkt er einmal den Zauber <em>Federfall</em> auf sie.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 250,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "07503fe33b2501a1",
+  "sort": 900,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!aea11a3009c857cb"
+}

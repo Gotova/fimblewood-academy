@@ -1,0 +1,42 @@
+{
+  "_id": "9f66447949643146",
+  "name": "Fernglas „Möwenblick“",
+  "type": "loot",
+  "img": "icons/tools/navigation/spyglass-telescope-brass-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ein kleineres, günstigeres Fernrohr aus Inselfertigung.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 200,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 2500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!9f66447949643146"
+}

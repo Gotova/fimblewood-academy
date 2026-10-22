@@ -1,0 +1,42 @@
+{
+  "_id": "1eff1d8b7460c652",
+  "name": "Mini-Gewächshaus",
+  "type": "loot",
+  "img": "icons/commodities/materials/glass-cube.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 1400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!1eff1d8b7460c652"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "e28f014f3e47fb29",
+  "name": "Kreide",
+  "type": "loot",
+  "img": "icons/commodities/stone/rock-chunk-pumice-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 3100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!e28f014f3e47fb29"
+}

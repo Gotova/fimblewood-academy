@@ -1,0 +1,48 @@
+{
+  "_id": "f77193350a17f73f",
+  "name": "Wachhaltetropfen",
+  "type": "consumable",
+  "img": "icons/consumables/potions/vial-cork-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Keine Müdigkeit für 8 Stunden. Danach eine Stufe Erschöpfung.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "48a594e9acf5d746",
+  "sort": 500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!f77193350a17f73f"
+}

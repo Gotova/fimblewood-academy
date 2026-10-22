@@ -1,0 +1,52 @@
+{
+  "_id": "020f9480d441828b",
+  "name": "Vorhängeschloss",
+  "type": "loot",
+  "img": "icons/sundries/misc/lock-bronze-reinforced.webp",
+  "system": {
+    "description": {
+      "value": "<p>A Lock comes with a key. Without the key, a creature can use @UUID[Compendium.dnd5e.equipment24.Item.phbtulThievesToo]{Thieves' Tools} to pick this Lock with a successful [[/tool thief dex 15]] check.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
+    "rarity": "",
+    "properties": [],
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "identifier": "lock"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagLock0000000"
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 2000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!020f9480d441828b"
+}

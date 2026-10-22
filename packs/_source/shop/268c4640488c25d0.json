@@ -1,0 +1,42 @@
+{
+  "_id": "268c4640488c25d0",
+  "name": "Geisterkerzenwachs",
+  "type": "loot",
+  "img": "icons/sundries/lights/candle-unlit-grey.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 15,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f15bbccdac37d1d8",
+  "sort": 2100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!268c4640488c25d0"
+}

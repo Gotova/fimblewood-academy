@@ -1,0 +1,42 @@
+{
+  "_id": "2341790502986a66",
+  "name": "Tavernenkrug mit Gravur",
+  "type": "loot",
+  "img": "icons/containers/kitchenware/stein-empty.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "d0ea5437ffd082a6",
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!2341790502986a66"
+}

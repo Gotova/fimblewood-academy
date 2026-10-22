@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.49.0] - 2026-10-22
+
+### Added
+
+- **Stratos shops**: new GM-only compendium *Stratos: Shop-Angebote* with 366 items for taverns, magic shops, alchemists, botany shops and general stores, sorted into folders. Standard D&D items keep their dnd5e rules; Stratos items have German descriptions.
+
 ## [0.48.1] - 2026-10-22
 
 ### Fixed

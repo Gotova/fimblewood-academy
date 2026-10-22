@@ -1,0 +1,42 @@
+{
+  "_id": "770c3827cfb8cd8f",
+  "name": "Moorerde für Pilze",
+  "type": "loot",
+  "img": "icons/consumables/grains/sack-rice-flour-brown.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 3,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "38fdb1a796b8e3ca",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!770c3827cfb8cd8f"
+}

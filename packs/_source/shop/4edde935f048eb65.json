@@ -1,0 +1,48 @@
+{
+  "_id": "4edde935f048eb65",
+  "name": "Drachenatem",
+  "type": "consumable",
+  "img": "icons/consumables/drinks/clay-jar-glowing-orange-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>Wer ihn trinkt, erleidet 1 Feuerschaden und hat 1 Stunde lang Vorteil auf Würfe für Einschüchtern.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "food",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "2a9f3d57392b24d0",
+  "sort": 1900,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!4edde935f048eb65"
+}

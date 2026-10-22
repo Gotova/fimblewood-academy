@@ -1,0 +1,42 @@
+{
+  "_id": "f635b4d7a6df034d",
+  "name": "Schiefertafel & Kreide",
+  "type": "loot",
+  "img": "icons/commodities/stone/paver-tile-grey.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9325440b59ca485c",
+  "sort": 900,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!f635b4d7a6df034d"
+}

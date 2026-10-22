@@ -1,0 +1,42 @@
+{
+  "_id": "c4efc8af04062101",
+  "name": "Kaltlichtfackel",
+  "type": "loot",
+  "img": "icons/sundries/lights/torch-black.webp",
+  "system": {
+    "description": {
+      "value": "<p>Leuchtet wie eine Fackel, aber ohne Flamme und Hitze.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "24237c3103b07002",
+  "sort": 1200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!c4efc8af04062101"
+}

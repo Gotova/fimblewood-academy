@@ -1,0 +1,42 @@
+{
+  "_id": "74872f22003d84d0",
+  "name": "Wetterblume",
+  "type": "loot",
+  "img": "icons/commodities/flowers/cornflower-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>Schließt sich eine Stunde, bevor es regnet.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "81a8e101a1d553e3",
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!74872f22003d84d0"
+}

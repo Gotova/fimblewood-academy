@@ -1,0 +1,48 @@
+{
+  "_id": "75e4551e4196e111",
+  "name": "Festmahl für vier",
+  "type": "consumable",
+  "img": "icons/consumables/food/cooked-drumstick-chicken-turkey-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ein reich gedeckter Tisch für vier Personen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 4,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "food",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "636470d6bc79d906",
+  "sort": 800,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!75e4551e4196e111"
+}

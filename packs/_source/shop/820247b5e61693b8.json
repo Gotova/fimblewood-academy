@@ -1,0 +1,42 @@
+{
+  "_id": "820247b5e61693b8",
+  "name": "Kerzen-Set fürs Nachtlernen",
+  "type": "loot",
+  "img": "icons/sundries/lights/candle-unlit-tan.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9325440b59ca485c",
+  "sort": 1300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!820247b5e61693b8"
+}

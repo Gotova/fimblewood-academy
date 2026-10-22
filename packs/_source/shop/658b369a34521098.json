@@ -1,0 +1,42 @@
+{
+  "_id": "658b369a34521098",
+  "name": "Becher",
+  "type": "loot",
+  "img": "icons/containers/kitchenware/goblet-worn-clay-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "e07115f43682781a",
+  "sort": 700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!658b369a34521098"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "c8e5b1c6da3a2805",
+  "name": "Federmäppchen",
+  "type": "loot",
+  "img": "icons/containers/bags/case-leather-tan.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9325440b59ca485c",
+  "sort": 700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!c8e5b1c6da3a2805"
+}

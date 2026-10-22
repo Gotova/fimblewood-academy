@@ -1,0 +1,48 @@
+{
+  "_id": "25f9b9a1424f1a5d",
+  "name": "Wein (Glas)",
+  "type": "consumable",
+  "img": "icons/containers/kitchenware/goblet-jeweled-gold-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "food",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "2a9f3d57392b24d0",
+  "sort": 1200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!25f9b9a1424f1a5d"
+}

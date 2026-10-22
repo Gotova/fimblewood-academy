@@ -1,0 +1,42 @@
+{
+  "_id": "baa43a4425b9cbb9",
+  "name": "Bootsmiete (1 Tag)",
+  "type": "loot",
+  "img": "icons/tools/nautical/anchor-blue.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "0bcce6360c035044",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!baa43a4425b9cbb9"
+}

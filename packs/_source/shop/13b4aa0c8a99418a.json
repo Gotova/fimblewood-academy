@@ -1,0 +1,52 @@
+{
+  "_id": "13b4aa0c8a99418a",
+  "name": "Pergament (1 Blatt)",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-plain-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p>One sheet of Parchment can hold about 250 handwritten words.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "rarity": "",
+    "properties": [],
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "identifier": "parchment"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagParchment00"
+    }
+  },
+  "folder": "9325440b59ca485c",
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!13b4aa0c8a99418a"
+}

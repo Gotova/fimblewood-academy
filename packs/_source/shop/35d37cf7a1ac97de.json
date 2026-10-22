@@ -1,0 +1,62 @@
+{
+  "_id": "35d37cf7a1ac97de",
+  "name": "Feldflasche",
+  "type": "container",
+  "img": "icons/sundries/survival/waterskin-leather-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p>A Waterskin holds up to 4 pints. If you don't drink sufficient water, you risk &amp;Reference[dehydration].</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "quantity": 1,
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
+    "rarity": "",
+    "attunement": "",
+    "attuned": false,
+    "equipped": false,
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "properties": [],
+    "capacity": {
+      "type": "weight",
+      "value": 4
+    },
+    "identifier": "waterskin"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagWaterskin00"
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 1300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!35d37cf7a1ac97de"
+}

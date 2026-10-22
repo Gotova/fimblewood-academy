@@ -1,0 +1,42 @@
+{
+  "_id": "45d8ec88a27b635e",
+  "name": "Vulkanerde",
+  "type": "loot",
+  "img": "icons/commodities/stone/ore-pile-red.webp",
+  "system": {
+    "description": {
+      "value": "<p>Besonders gut für Feuerpflanzen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "38fdb1a796b8e3ca",
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!45d8ec88a27b635e"
+}

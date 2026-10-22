@@ -1,0 +1,86 @@
+{
+  "_id": "d2367f6981dd2e45",
+  "name": "Zauberschriftrolle (Grad 2)",
+  "type": "consumable",
+  "img": "icons/sundries/scrolls/scroll-bound-blue-tan.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true,
+      "max": "1"
+    },
+    "description": {
+      "value": "<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSpellScroll00 inline]</p>",
+      "chat": ""
+    },
+    "identifier": "spell-scroll",
+    "source": {
+      "revision": 1,
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": "",
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "attunement": "",
+    "attuned": false,
+    "equipped": false,
+    "type": {
+      "value": "scroll",
+      "subtype": ""
+    },
+    "damage": {
+      "base": {
+        "number": null,
+        "denomination": null,
+        "types": [],
+        "custom": {
+          "enabled": false
+        },
+        "scaling": {
+          "number": 1
+        }
+      },
+      "replace": false
+    },
+    "magicalBonus": null,
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    },
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n"
+    }
+  },
+  "folder": "07503fe33b2501a1",
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!d2367f6981dd2e45"
+}

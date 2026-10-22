@@ -1,0 +1,42 @@
+{
+  "_id": "03822c79292daede",
+  "name": "Hängeampel",
+  "type": "loot",
+  "img": "icons/containers/misc/basket-handle-woven-yellow.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 1100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!03822c79292daede"
+}

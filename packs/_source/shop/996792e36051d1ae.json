@@ -1,0 +1,42 @@
+{
+  "_id": "996792e36051d1ae",
+  "name": "Destillierkolben",
+  "type": "loot",
+  "img": "icons/tools/laboratory/alembic-glass-ball-blue.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 20,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f9c471321644727b",
+  "sort": 600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!996792e36051d1ae"
+}

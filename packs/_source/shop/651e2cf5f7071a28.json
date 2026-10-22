@@ -1,0 +1,48 @@
+{
+  "_id": "651e2cf5f7071a28",
+  "name": "Kräutertee",
+  "type": "consumable",
+  "img": "icons/consumables/drinks/tea-jug-gourd-brown.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "food",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "2a9f3d57392b24d0",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!651e2cf5f7071a28"
+}

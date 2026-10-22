@@ -1,0 +1,48 @@
+{
+  "_id": "6b11aa47dba45fce",
+  "name": "Glitzerelixier",
+  "type": "consumable",
+  "img": "icons/consumables/potions/potion-bottle-corked-fancy-orange.webp",
+  "system": {
+    "description": {
+      "value": "<p>Deine Haut glitzert 1 Stunde lang.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "48a594e9acf5d746",
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!6b11aa47dba45fce"
+}

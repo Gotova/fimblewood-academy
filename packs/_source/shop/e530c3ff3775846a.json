@@ -1,0 +1,42 @@
+{
+  "_id": "e530c3ff3775846a",
+  "name": "Hut",
+  "type": "equipment",
+  "img": "icons/equipment/head/hat-belted-simple.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "clothing",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "92cb86a660e2795d",
+  "sort": 700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!e530c3ff3775846a"
+}

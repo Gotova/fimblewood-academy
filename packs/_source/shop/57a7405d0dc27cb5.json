@@ -1,0 +1,48 @@
+{
+  "_id": "57a7405d0dc27cb5",
+  "name": "Stinkbombe",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-conical-fumes-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Verpestet einen Raum. Wer drin bleibt, ist vergiftet, solange der Gestank anhält (1 Minute).</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "24237c3103b07002",
+  "sort": 1600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!57a7405d0dc27cb5"
+}

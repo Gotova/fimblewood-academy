@@ -1,0 +1,51 @@
+{
+  "_id": "b00152911590ceed",
+  "name": "Trank des Vergessens",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-round-label-cork-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>Wer ihn trinkt, vergisst die letzte Stunde. Gegenstück zum Vergissmeinnicht.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 150,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "identified": true,
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "d05051249d62524c",
+  "sort": 1000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!b00152911590ceed"
+}

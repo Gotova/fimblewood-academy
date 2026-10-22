@@ -1,0 +1,62 @@
+{
+  "_id": "b122242bd395e32d",
+  "name": "Erntekorb",
+  "type": "container",
+  "img": "icons/containers/misc/basket-handle-woven-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p>A Basket holds up to 40 pounds within 2 cubic feet.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 4,
+      "denomination": "sp"
+    },
+    "quantity": 1,
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "weight": {
+      "value": 2,
+      "units": "lb"
+    },
+    "rarity": "",
+    "attunement": "",
+    "attuned": false,
+    "equipped": false,
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "properties": [],
+    "capacity": {
+      "type": "weight",
+      "value": 40
+    },
+    "identifier": "basket"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagBasket00000"
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 1500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!b122242bd395e32d"
+}

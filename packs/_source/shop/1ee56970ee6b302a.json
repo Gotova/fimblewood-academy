@@ -1,0 +1,42 @@
+{
+  "_id": "1ee56970ee6b302a",
+  "name": "Fledermausguano",
+  "type": "loot",
+  "img": "icons/commodities/stone/rock-chunk-brown.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f15bbccdac37d1d8",
+  "sort": 1500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!1ee56970ee6b302a"
+}

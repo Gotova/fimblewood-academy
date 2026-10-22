@@ -1,0 +1,42 @@
+{
+  "_id": "9c1a9ed7ab850f2b",
+  "name": "Spinnenseide",
+  "type": "loot",
+  "img": "icons/commodities/cloth/thread-spindle-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f15bbccdac37d1d8",
+  "sort": 1400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!9c1a9ed7ab850f2b"
+}

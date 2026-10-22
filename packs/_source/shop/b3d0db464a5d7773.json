@@ -1,0 +1,79 @@
+{
+  "_id": "b3d0db464a5d7773",
+  "name": "Ring der Wärme",
+  "type": "equipment",
+  "img": "icons/equipment/finger/ring-cabochon-gold-orange.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "recovery": [],
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>Ring, Uncommon (Requires Attunement)</em></p><p>If you take Cold damage while wearing this ring, the ring reduces the damage you take by [[/r 2d8]].</p><p>In addition, while wearing this ring, you and everything you wear and carry are unharmed by temperatures of 0 degrees Fahrenheit or lower.</p>",
+      "chat": ""
+    },
+    "identifier": "ring-of-warmth",
+    "source": {
+      "revision": 1,
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": "",
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 400,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "attunement": "required",
+    "attuned": false,
+    "equipped": false,
+    "armor": {
+      "value": null,
+      "magicalBonus": null,
+      "dex": null
+    },
+    "cover": null,
+    "crewed": false,
+    "hp": {
+      "value": null,
+      "max": null,
+      "dt": null,
+      "conditions": ""
+    },
+    "type": {
+      "value": "ring",
+      "baseItem": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "strength": null,
+    "proficient": null
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.dmgRingOfWarmth0"
+    }
+  },
+  "folder": "9c64212ad6687f68",
+  "sort": 900,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!b3d0db464a5d7773"
+}

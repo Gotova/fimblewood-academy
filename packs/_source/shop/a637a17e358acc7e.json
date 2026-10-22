@@ -1,0 +1,45 @@
+{
+  "_id": "a637a17e358acc7e",
+  "name": "Heimkompass",
+  "type": "equipment",
+  "img": "icons/tools/navigation/compass-chain-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>Zeigt immer zum Ort, an dem du zuletzt eine lange Rast gemacht hast.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 1500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!a637a17e358acc7e"
+}

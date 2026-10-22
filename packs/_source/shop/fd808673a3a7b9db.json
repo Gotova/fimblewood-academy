@@ -1,0 +1,48 @@
+{
+  "_id": "fd808673a3a7b9db",
+  "name": "Knistertonikum",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-conical-corked-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p>Die Haare stehen 1 Stunde lang knisternd unter Strom.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "48a594e9acf5d746",
+  "sort": 1100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!fd808673a3a7b9db"
+}

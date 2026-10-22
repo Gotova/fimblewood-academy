@@ -1,0 +1,48 @@
+{
+  "_id": "1dd4a65a644e0659",
+  "name": "Eisfrucht-Sorbet",
+  "type": "consumable",
+  "img": "icons/consumables/fruit/berry-shiny-leaf-blue-teal.webp",
+  "system": {
+    "description": {
+      "value": "<p>Eiskalt und fruchtig. Für 1 Stunde Vorteil auf Rettungswürfe gegen extreme Hitze.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "food",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "636470d6bc79d906",
+  "sort": 1300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!1dd4a65a644e0659"
+}

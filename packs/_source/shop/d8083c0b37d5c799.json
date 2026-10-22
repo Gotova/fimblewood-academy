@@ -1,0 +1,42 @@
+{
+  "_id": "d8083c0b37d5c799",
+  "name": "Kutschfahrt über die Insel",
+  "type": "loot",
+  "img": "icons/tools/smithing/horsehoe-worn-steel-grey.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "0bcce6360c035044",
+  "sort": 600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!d8083c0b37d5c799"
+}

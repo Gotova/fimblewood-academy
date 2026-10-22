@@ -1,0 +1,45 @@
+{
+  "_id": "12034606fe739413",
+  "name": "Wolkenkissen",
+  "type": "equipment",
+  "img": "icons/commodities/materials/material-cotton-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>Schwebt 30 cm über dem Boden und trägt bis zu 5 kg.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 60,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 1000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!12034606fe739413"
+}

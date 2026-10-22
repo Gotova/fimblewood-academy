@@ -1,0 +1,42 @@
+{
+  "_id": "fc078e12e68c6ea7",
+  "name": "Perlenpulver",
+  "type": "loot",
+  "img": "icons/commodities/gems/pearl-rough-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f15bbccdac37d1d8",
+  "sort": 900,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!fc078e12e68c6ea7"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "a21f02bbcb723652",
+  "name": "Ansteckblume für Bälle",
+  "type": "loot",
+  "img": "icons/commodities/flowers/lotus-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "81a8e101a1d553e3",
+  "sort": 2000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!a21f02bbcb723652"
+}

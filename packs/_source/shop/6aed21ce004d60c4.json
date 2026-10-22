@@ -1,0 +1,42 @@
+{
+  "_id": "6aed21ce004d60c4",
+  "name": "Bonsai-Wolkenkiefer",
+  "type": "loot",
+  "img": "icons/environment/wilderness/tree-oak.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 40,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "81a8e101a1d553e3",
+  "sort": 700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!6aed21ce004d60c4"
+}

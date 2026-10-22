@@ -1,0 +1,48 @@
+{
+  "_id": "90c29b2a27af1e09",
+  "name": "Zwergenschnaps",
+  "type": "consumable",
+  "img": "icons/consumables/drinks/alcohol-jar-spirits-gray.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "food",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "2a9f3d57392b24d0",
+  "sort": 1500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!90c29b2a27af1e09"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "e3d0ae4222ece56c",
+  "name": "Wurmkiste mit Kompostwürmern",
+  "type": "loot",
+  "img": "icons/containers/boxes/crate-heavy-yellow.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 3,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "38fdb1a796b8e3ca",
+  "sort": 1200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!e3d0ae4222ece56c"
+}

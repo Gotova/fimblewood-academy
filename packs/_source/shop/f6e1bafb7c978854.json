@@ -1,0 +1,42 @@
+{
+  "_id": "f6e1bafb7c978854",
+  "name": "Handschaufel",
+  "type": "loot",
+  "img": "icons/tools/hand/shovel-spade-steel-grey.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!f6e1bafb7c978854"
+}

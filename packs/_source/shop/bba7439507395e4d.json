@@ -1,0 +1,48 @@
+{
+  "_id": "bba7439507395e4d",
+  "name": "Feuerglocken-Chili",
+  "type": "consumable",
+  "img": "icons/consumables/fruit/chili-fresno-pepper-red.webp",
+  "system": {
+    "description": {
+      "value": "<p>Höllisch scharf. Wer es isst, macht einen Rettungswurf auf Konstitution (SG 10) oder hustet eine Runde lang.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 4,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "food",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "636470d6bc79d906",
+  "sort": 1200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!bba7439507395e4d"
+}

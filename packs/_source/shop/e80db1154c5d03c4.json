@@ -1,0 +1,42 @@
+{
+  "_id": "e80db1154c5d03c4",
+  "name": "Gewitterwasser",
+  "type": "loot",
+  "img": "icons/commodities/tech/tube-chamber-lightning.webp",
+  "system": {
+    "description": {
+      "value": "<p>In einem Sturm aufgefangen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f15bbccdac37d1d8",
+  "sort": 1900,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!e80db1154c5d03c4"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "7e53743b07b72f5a",
+  "name": "Ölbrenner",
+  "type": "loot",
+  "img": "icons/tools/laboratory/burner-steel-grey.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f9c471321644727b",
+  "sort": 700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!7e53743b07b72f5a"
+}

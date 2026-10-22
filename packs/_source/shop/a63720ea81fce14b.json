@@ -1,0 +1,48 @@
+{
+  "_id": "a63720ea81fce14b",
+  "name": "Klebebombe",
+  "type": "consumable",
+  "img": "icons/commodities/materials/slime-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>Das Ziel ist festgesetzt, bis es eine Aktion aufwendet, um sich zu befreien.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "24237c3103b07002",
+  "sort": 800,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!a63720ea81fce14b"
+}

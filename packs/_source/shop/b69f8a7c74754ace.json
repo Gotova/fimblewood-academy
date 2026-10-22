@@ -1,0 +1,51 @@
+{
+  "_id": "b69f8a7c74754ace",
+  "name": "Blitzfeder",
+  "type": "consumable",
+  "img": "icons/commodities/materials/feather-blue-glowing.webp",
+  "system": {
+    "description": {
+      "value": "<p>Als Reaktion beim Fallen: Die Feder zerfällt und wirkt <em>Federfall</em> auf dich.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "07503fe33b2501a1",
+  "sort": 1400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!b69f8a7c74754ace"
+}

@@ -1,0 +1,83 @@
+{
+  "_id": "a10f8620e6a0a973",
+  "name": "Tinte",
+  "type": "consumable",
+  "img": "icons/tools/scribal/ink-quill-red.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ink comes in a 1-ounce bottle, which provides enough ink to write about 500 pages.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "rarity": "",
+    "attunement": "",
+    "attuned": false,
+    "equipped": false,
+    "uses": {
+      "max": "1",
+      "autoDestroy": false,
+      "spent": 0,
+      "recovery": []
+    },
+    "damage": {
+      "base": {
+        "number": null,
+        "denomination": null,
+        "types": [],
+        "custom": {
+          "enabled": false
+        },
+        "scaling": {
+          "number": 1
+        }
+      },
+      "replace": false
+    },
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "magicalBonus": null,
+    "properties": [],
+    "activities": {},
+    "identifier": "ink"
+  },
+  "effects": [],
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    },
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagInk00000000"
+    }
+  },
+  "folder": "9325440b59ca485c",
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!a10f8620e6a0a973"
+}

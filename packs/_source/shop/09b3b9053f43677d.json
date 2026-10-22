@@ -1,0 +1,51 @@
+{
+  "_id": "09b3b9053f43677d",
+  "name": "Keoghtoms Salbe",
+  "type": "consumable",
+  "img": "icons/containers/kitchenware/jug-bottle-clay-brown-gold-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>Eine Dose mit 1W4+1 Portionen. Eine Portion heilt 2W8+2 Trefferpunkte und beendet Vergiftung und Krankheit.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 200,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "identified": true,
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "07503fe33b2501a1",
+  "sort": 1100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!09b3b9053f43677d"
+}

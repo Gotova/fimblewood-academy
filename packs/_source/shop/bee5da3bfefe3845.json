@@ -1,0 +1,42 @@
+{
+  "_id": "bee5da3bfefe3845",
+  "name": "Meersalz",
+  "type": "loot",
+  "img": "icons/commodities/gems/powder-raw-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f15bbccdac37d1d8",
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!bee5da3bfefe3845"
+}

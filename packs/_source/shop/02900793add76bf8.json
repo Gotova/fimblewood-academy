@@ -1,0 +1,42 @@
+{
+  "_id": "02900793add76bf8",
+  "name": "Schlafplatz im Gemeinschaftsraum (bis zur nächsten Stadt)",
+  "type": "loot",
+  "img": "icons/sundries/survival/bedroll-grey.webp",
+  "system": {
+    "description": {
+      "value": "<p>Pauschale bis zur nächsten Stadt (etwa 25 bis 30 Tage), mit Frühstück. Wer früher auszieht, bekommt nichts zurück.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "cd94eda9612ede6a",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!02900793add76bf8"
+}

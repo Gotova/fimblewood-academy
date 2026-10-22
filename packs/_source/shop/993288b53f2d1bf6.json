@@ -1,0 +1,42 @@
+{
+  "_id": "993288b53f2d1bf6",
+  "name": "Akademie-Schal in Hausfarben",
+  "type": "equipment",
+  "img": "icons/equipment/waist/sash-cloth-gold-purple.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "clothing",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9325440b59ca485c",
+  "sort": 1400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!993288b53f2d1bf6"
+}

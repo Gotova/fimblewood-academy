@@ -1,0 +1,48 @@
+{
+  "_id": "5e9c15950851a9ca",
+  "name": "Lippenbalsam der Sternfarbe",
+  "type": "consumable",
+  "img": "icons/commodities/gems/pearl-purple-smooth.webp",
+  "system": {
+    "description": {
+      "value": "<p>Färbt die Lippen in schimmernden Sternfarben.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "48a594e9acf5d746",
+  "sort": 900,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!5e9c15950851a9ca"
+}

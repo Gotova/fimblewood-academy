@@ -1,0 +1,48 @@
+{
+  "_id": "4f79ef8796b59333",
+  "name": "Donnerstein",
+  "type": "consumable",
+  "img": "icons/commodities/stone/geode-raw-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p>Zerschellt mit lautem Knall: 1W4 Schallschaden im Umkreis von 1,5 m.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 30,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "24237c3103b07002",
+  "sort": 900,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!4f79ef8796b59333"
+}

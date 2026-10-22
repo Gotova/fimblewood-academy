@@ -1,0 +1,62 @@
+{
+  "_id": "52be7ae210fd0dbc",
+  "name": "Eimer",
+  "type": "container",
+  "img": "icons/containers/misc/bucket-steel.webp",
+  "system": {
+    "description": {
+      "value": "<p>A Bucket holds up to half a cubic foot of contents.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "quantity": 1,
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "weight": {
+      "value": 2,
+      "units": "lb"
+    },
+    "rarity": "",
+    "attunement": "",
+    "attuned": false,
+    "equipped": false,
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "properties": [],
+    "capacity": {
+      "type": "weight",
+      "value": null
+    },
+    "identifier": "bucket"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagBucket00000"
+    }
+  },
+  "folder": "e07115f43682781a",
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!52be7ae210fd0dbc"
+}

@@ -1,0 +1,52 @@
+{
+  "_id": "47504e01752d2e48",
+  "name": "Seekarte",
+  "type": "loot",
+  "img": "icons/tools/navigation/map-chart-tan.webp",
+  "system": {
+    "description": {
+      "value": "<p>If you consult an accurate Map, you gain a +5 bonus to Wisdom (Survival) checks you make to find your way in the place represented on it.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 20,
+      "denomination": "gp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "rarity": "",
+    "properties": [],
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "identifier": "map"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagMap00000000"
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 2700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!47504e01752d2e48"
+}

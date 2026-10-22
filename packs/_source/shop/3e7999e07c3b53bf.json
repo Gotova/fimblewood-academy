@@ -1,0 +1,45 @@
+{
+  "_id": "3e7999e07c3b53bf",
+  "name": "Diktier-Notizbuch",
+  "type": "equipment",
+  "img": "icons/sundries/books/book-open-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p>Schreibt mit, was in seiner Nähe gesagt wird.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 75,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!3e7999e07c3b53bf"
+}

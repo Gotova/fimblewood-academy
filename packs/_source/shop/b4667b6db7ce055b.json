@@ -1,0 +1,42 @@
+{
+  "_id": "b4667b6db7ce055b",
+  "name": "Schleimtropfen",
+  "type": "loot",
+  "img": "icons/commodities/materials/slime-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f15bbccdac37d1d8",
+  "sort": 1300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!b4667b6db7ce055b"
+}

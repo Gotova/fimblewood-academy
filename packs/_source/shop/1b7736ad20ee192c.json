@@ -1,0 +1,42 @@
+{
+  "_id": "1b7736ad20ee192c",
+  "name": "Teekessel",
+  "type": "loot",
+  "img": "icons/tools/cooking/pot-camping-iron-black.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "e07115f43682781a",
+  "sort": 500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!1b7736ad20ee192c"
+}

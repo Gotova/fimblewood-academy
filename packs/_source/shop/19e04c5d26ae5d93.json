@@ -1,0 +1,42 @@
+{
+  "_id": "19e04c5d26ae5d93",
+  "name": "Anzuchtkasten",
+  "type": "loot",
+  "img": "icons/containers/boxes/crate-heavy-yellow.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 1300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!19e04c5d26ae5d93"
+}

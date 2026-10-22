@@ -1,0 +1,45 @@
+{
+  "_id": "ae37683225bd57cc",
+  "name": "Schattenlaterne",
+  "type": "equipment",
+  "img": "icons/sundries/lights/lantern-iron-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ihr Licht kann nur sehen, wer sie trägt.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 80,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 1300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!ae37683225bd57cc"
+}

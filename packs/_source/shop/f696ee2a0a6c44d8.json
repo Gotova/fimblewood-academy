@@ -1,0 +1,48 @@
+{
+  "_id": "f696ee2a0a6c44d8",
+  "name": "Studentenmenü",
+  "type": "consumable",
+  "img": "icons/consumables/food/soup-broth-bowl-wooden-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p>Suppe, Brot und Saft. Nur gegen Vorlage des Akademieausweises.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 4,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "food",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "636470d6bc79d906",
+  "sort": 1500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!f696ee2a0a6c44d8"
+}

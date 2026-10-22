@@ -1,0 +1,42 @@
+{
+  "_id": "59e6c530ff6a53de",
+  "name": "Goldstaub",
+  "type": "loot",
+  "img": "icons/commodities/materials/bowl-powder-gold.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f15bbccdac37d1d8",
+  "sort": 800,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!59e6c530ff6a53de"
+}

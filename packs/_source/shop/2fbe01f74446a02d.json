@@ -1,0 +1,42 @@
+{
+  "_id": "2fbe01f74446a02d",
+  "name": "Leine",
+  "type": "loot",
+  "img": "icons/sundries/misc/pet-collar-red.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "e07115f43682781a",
+  "sort": 1900,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!2fbe01f74446a02d"
+}

@@ -1,0 +1,51 @@
+{
+  "_id": "983146fa13c88668",
+  "name": "Zauberkreide",
+  "type": "consumable",
+  "img": "icons/commodities/stone/rock-chunk-pumice-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ein damit gezeichnetes Zeichen wirkt einmal den Zauber <em>Alarm</em>.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 40,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "07503fe33b2501a1",
+  "sort": 1600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!983146fa13c88668"
+}

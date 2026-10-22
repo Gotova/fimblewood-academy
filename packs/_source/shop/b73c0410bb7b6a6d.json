@@ -1,0 +1,48 @@
+{
+  "_id": "b73c0410bb7b6a6d",
+  "name": "Seemannsgrog",
+  "type": "consumable",
+  "img": "icons/containers/kitchenware/stein-empty.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 6,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "food",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "2a9f3d57392b24d0",
+  "sort": 2000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!b73c0410bb7b6a6d"
+}

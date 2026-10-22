@@ -1,0 +1,52 @@
+{
+  "_id": "0d01c118f7c5baa4",
+  "name": "Zelt",
+  "type": "loot",
+  "img": "icons/environment/settlement/tent.webp",
+  "system": {
+    "description": {
+      "value": "<p>A Tent sleeps up to two Small or Medium creatures.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 20,
+      "units": "lb"
+    },
+    "rarity": "",
+    "properties": [],
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "identifier": "tent"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagTent0000000"
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!0d01c118f7c5baa4"
+}

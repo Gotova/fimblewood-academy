@@ -1,0 +1,48 @@
+{
+  "_id": "e36ee6b6e77c6b28",
+  "name": "Donnerdistel-Brand",
+  "type": "consumable",
+  "img": "icons/consumables/drinks/alcohol-jar-spirits-gray.webp",
+  "system": {
+    "description": {
+      "value": "<p>Kleine Funken knistern auf der Zunge.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 8,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "food",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "2a9f3d57392b24d0",
+  "sort": 1600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!e36ee6b6e77c6b28"
+}

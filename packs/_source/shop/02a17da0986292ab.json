@@ -1,0 +1,42 @@
+{
+  "_id": "02a17da0986292ab",
+  "name": "Ruderboot",
+  "type": "loot",
+  "img": "icons/tools/nautical/anchor-blue-orange.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "0bcce6360c035044",
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!02a17da0986292ab"
+}

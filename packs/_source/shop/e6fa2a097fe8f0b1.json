@@ -1,0 +1,42 @@
+{
+  "_id": "e6fa2a097fe8f0b1",
+  "name": "Teemischung Rosenblüte",
+  "type": "loot",
+  "img": "icons/commodities/flowers/rosaecia-red.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "81a8e101a1d553e3",
+  "sort": 1700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!e6fa2a097fe8f0b1"
+}

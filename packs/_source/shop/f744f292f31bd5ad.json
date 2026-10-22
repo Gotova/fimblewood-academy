@@ -1,0 +1,42 @@
+{
+  "_id": "f744f292f31bd5ad",
+  "name": "Wachhund-Efeu",
+  "type": "loot",
+  "img": "icons/consumables/plants/thorned-stem-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p>Raschelt laut, wenn Fremde den Raum betreten.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 30,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "81a8e101a1d553e3",
+  "sort": 500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!f744f292f31bd5ad"
+}

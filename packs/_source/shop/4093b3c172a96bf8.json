@@ -1,0 +1,48 @@
+{
+  "_id": "4093b3c172a96bf8",
+  "name": "Mutmacher-Bonbon",
+  "type": "consumable",
+  "img": "icons/commodities/gems/gem-rough-cushion-red.webp",
+  "system": {
+    "description": {
+      "value": "<p>Für 1 Runde Vorteil auf Rettungswürfe gegen den Zustand Verängstigt.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 20,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "48a594e9acf5d746",
+  "sort": 1000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!4093b3c172a96bf8"
+}

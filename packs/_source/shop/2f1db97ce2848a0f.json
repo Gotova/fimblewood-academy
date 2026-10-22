@@ -1,0 +1,42 @@
+{
+  "_id": "2f1db97ce2848a0f",
+  "name": "Blumenerde (Sack)",
+  "type": "loot",
+  "img": "icons/consumables/grains/sack-rice-flour-brown.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "38fdb1a796b8e3ca",
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!2f1db97ce2848a0f"
+}

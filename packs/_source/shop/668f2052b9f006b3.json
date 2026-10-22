@@ -1,0 +1,45 @@
+{
+  "_id": "668f2052b9f006b3",
+  "name": "Ewige Fackel",
+  "type": "equipment",
+  "img": "icons/sundries/lights/torch-brown-lit.webp",
+  "system": {
+    "description": {
+      "value": "<p>Brennt ohne Hitze und ohne je auszugehen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!668f2052b9f006b3"
+}

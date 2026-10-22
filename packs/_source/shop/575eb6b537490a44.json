@@ -1,0 +1,45 @@
+{
+  "_id": "575eb6b537490a44",
+  "name": "Topf des Erwachens",
+  "type": "equipment",
+  "img": "icons/containers/kitchenware/vase-clay-painted-brown-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>Wird darin 30 Tage lang ein Strauch gezogen, erwacht er zu einem kleinen, freundlichen Begleiter.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 1700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!575eb6b537490a44"
+}

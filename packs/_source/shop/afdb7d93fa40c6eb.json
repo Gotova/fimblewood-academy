@@ -1,0 +1,45 @@
+{
+  "_id": "afdb7d93fa40c6eb",
+  "name": "Selbstrührende Tasse",
+  "type": "equipment",
+  "img": "icons/containers/kitchenware/goblet-worn-clay-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>Rührt Tee und Kaffee von selbst um.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 30,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!afdb7d93fa40c6eb"
+}

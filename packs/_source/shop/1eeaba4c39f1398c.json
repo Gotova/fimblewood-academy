@@ -1,0 +1,42 @@
+{
+  "_id": "1eeaba4c39f1398c",
+  "name": "Nachtglimm-Farn",
+  "type": "loot",
+  "img": "icons/consumables/plants/kelp-fern-glowing-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Spendet dämmriges Licht in 1,5 m Umkreis.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 15,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "81a8e101a1d553e3",
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!1eeaba4c39f1398c"
+}

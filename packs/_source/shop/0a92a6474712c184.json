@@ -1,0 +1,42 @@
+{
+  "_id": "0a92a6474712c184",
+  "name": "Pflanzenetiketten (10 Stück)",
+  "type": "loot",
+  "img": "icons/sundries/documents/paper-plain-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 2200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!0a92a6474712c184"
+}

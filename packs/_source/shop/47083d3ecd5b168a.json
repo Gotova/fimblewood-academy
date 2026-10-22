@@ -1,0 +1,42 @@
+{
+  "_id": "47083d3ecd5b168a",
+  "name": "Rotharz (Drachenblut-Ersatz)",
+  "type": "loot",
+  "img": "icons/commodities/materials/liquid-orange.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 20,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f15bbccdac37d1d8",
+  "sort": 1100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!47083d3ecd5b168a"
+}

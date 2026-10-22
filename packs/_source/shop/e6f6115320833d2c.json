@@ -1,0 +1,42 @@
+{
+  "_id": "e6f6115320833d2c",
+  "name": "Sonnentau",
+  "type": "loot",
+  "img": "icons/consumables/plants/leaf-pink.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 3,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "81a8e101a1d553e3",
+  "sort": 800,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!e6f6115320833d2c"
+}

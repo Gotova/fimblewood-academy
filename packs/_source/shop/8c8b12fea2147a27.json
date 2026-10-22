@@ -1,0 +1,42 @@
+{
+  "_id": "8c8b12fea2147a27",
+  "name": "Flugbesen-Reparaturset",
+  "type": "loot",
+  "img": "icons/tools/hand/broom-straw-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p>Borsten, Bindedraht und Runenwachs, um einen magischen Besen zu reparieren.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 150,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9c64212ad6687f68",
+  "sort": 2600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!8c8b12fea2147a27"
+}

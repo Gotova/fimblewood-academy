@@ -1,0 +1,48 @@
+{
+  "_id": "f4fc57fbee0034ea",
+  "name": "Leuchtstab",
+  "type": "consumable",
+  "img": "icons/sundries/lights/torch-black.webp",
+  "system": {
+    "description": {
+      "value": "<p>Leuchtet nach dem Knicken 1 Stunde lang hell in 6 m Umkreis.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "24237c3103b07002",
+  "sort": 1000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!f4fc57fbee0034ea"
+}

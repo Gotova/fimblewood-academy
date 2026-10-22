@@ -1,0 +1,45 @@
+{
+  "_id": "efc710ef49592b24",
+  "name": "Immerwarme Decke",
+  "type": "equipment",
+  "img": "icons/sundries/survival/bedroll-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p>Bleibt immer angenehm warm.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 40,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!efc710ef49592b24"
+}

@@ -1,0 +1,45 @@
+{
+  "_id": "a1a832b3adc0622a",
+  "name": "Windsegel-Gleitflügel",
+  "type": "equipment",
+  "img": "icons/commodities/treasure/trinket-wing-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>Beim Fallen gleitest du für jede 30 cm Fall 2 m weit in eine Richtung deiner Wahl.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 450,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9c64212ad6687f68",
+  "sort": 2500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!a1a832b3adc0622a"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "52b2ca9e9cc6b83b",
+  "name": "Pflanzschalen-Set",
+  "type": "loot",
+  "img": "icons/tools/laboratory/bowl-mixing.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 1200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!52b2ca9e9cc6b83b"
+}

@@ -1,0 +1,52 @@
+{
+  "_id": "1eef0754d745fca8",
+  "name": "Fernrohr",
+  "type": "loot",
+  "img": "icons/tools/navigation/spyglass-telescope-brass.webp",
+  "system": {
+    "description": {
+      "value": "<p>Objects viewed through a Spyglass are magnified to twice their size.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 1000,
+      "denomination": "gp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
+    "rarity": "",
+    "properties": [],
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "identifier": "spyglass"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagSpyglass100"
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 2400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!1eef0754d745fca8"
+}

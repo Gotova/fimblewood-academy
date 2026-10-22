@@ -1,0 +1,42 @@
+{
+  "_id": "e346ebac0bf55ef1",
+  "name": "Reittier leihen (1 Tag)",
+  "type": "loot",
+  "img": "icons/tools/smithing/horseshoe-steel-blue.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "0bcce6360c035044",
+  "sort": 500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!e346ebac0bf55ef1"
+}

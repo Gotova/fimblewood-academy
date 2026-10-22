@@ -1,0 +1,42 @@
+{
+  "_id": "06f41aa88db5ca1b",
+  "name": "Postkarte von Stratos",
+  "type": "loot",
+  "img": "icons/sundries/documents/document-letter-blue.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "d0ea5437ffd082a6",
+  "sort": 500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!06f41aa88db5ca1b"
+}

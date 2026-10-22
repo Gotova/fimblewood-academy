@@ -1,0 +1,51 @@
+{
+  "_id": "186c299401a3fa67",
+  "name": "Sturmglas-Kugel",
+  "type": "consumable",
+  "img": "icons/commodities/materials/glass-orb-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>Zerbricht man die Kugel, wirkt sie einmal den Zauber <em>Windstoß</em>.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 150,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "07503fe33b2501a1",
+  "sort": 1300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!186c299401a3fa67"
+}

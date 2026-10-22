@@ -1,0 +1,42 @@
+{
+  "_id": "969e4ca6c47896de",
+  "name": "Windgleiter-Rundflug",
+  "type": "loot",
+  "img": "icons/commodities/treasure/trinket-wing-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ein Mietflug einmal rund um die Insel.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "0bcce6360c035044",
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!969e4ca6c47896de"
+}

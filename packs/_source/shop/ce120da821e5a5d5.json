@@ -1,0 +1,45 @@
+{
+  "_id": "ce120da821e5a5d5",
+  "name": "Kleiner Hut der Verkleidung",
+  "type": "equipment",
+  "img": "icons/equipment/head/hat-belted-simple.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ändert auf Befehl Farbe und Schnitt deiner Kleidung, aber nicht dein Aussehen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!ce120da821e5a5d5"
+}

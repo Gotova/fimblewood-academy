@@ -1,0 +1,42 @@
+{
+  "_id": "9e82ce90d25642cd",
+  "name": "Kompass",
+  "type": "loot",
+  "img": "icons/tools/navigation/compass-brass-blue-red.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 2800,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!9e82ce90d25642cd"
+}

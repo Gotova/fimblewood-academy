@@ -1,0 +1,42 @@
+{
+  "_id": "d11a0ed83ce16dd0",
+  "name": "Stallplatz (1 Nacht)",
+  "type": "loot",
+  "img": "icons/tools/smithing/horsehoe-worn-steel-grey.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "cd94eda9612ede6a",
+  "sort": 1100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!d11a0ed83ce16dd0"
+}

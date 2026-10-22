@@ -1,0 +1,45 @@
+{
+  "_id": "799d8de659cda8b4",
+  "name": "Kühlbox mit Frostrune",
+  "type": "equipment",
+  "img": "icons/containers/chest/chest-reinforced-steel-walnut-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p>Hält ihren Inhalt kühl wie in einem Eiskeller.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 40,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f9c471321644727b",
+  "sort": 1500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!799d8de659cda8b4"
+}

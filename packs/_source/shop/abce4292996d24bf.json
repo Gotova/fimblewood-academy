@@ -1,0 +1,42 @@
+{
+  "_id": "abce4292996d24bf",
+  "name": "Salbei (Topf)",
+  "type": "loot",
+  "img": "icons/consumables/plants/leaf-herb-green.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "81a8e101a1d553e3",
+  "sort": 1200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!abce4292996d24bf"
+}

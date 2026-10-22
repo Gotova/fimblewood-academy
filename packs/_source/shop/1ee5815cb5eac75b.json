@@ -1,0 +1,42 @@
+{
+  "_id": "1ee5815cb5eac75b",
+  "name": "Kissen",
+  "type": "loot",
+  "img": "icons/commodities/materials/material-cotton-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 3,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "e07115f43682781a",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!1ee5815cb5eac75b"
+}

@@ -1,0 +1,45 @@
+{
+  "_id": "a425f17ae44b8944",
+  "name": "Windfester Regenschirm",
+  "type": "equipment",
+  "img": "icons/commodities/wood/wood-pole.webp",
+  "system": {
+    "description": {
+      "value": "<p>Lässt sich vom Wind nicht verbiegen oder entreißen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 40,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 1200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!a425f17ae44b8944"
+}

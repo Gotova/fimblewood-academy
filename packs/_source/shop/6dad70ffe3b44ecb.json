@@ -1,0 +1,42 @@
+{
+  "_id": "6dad70ffe3b44ecb",
+  "name": "Glastopf",
+  "type": "loot",
+  "img": "icons/containers/kitchenware/vase-bottle-brown.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 1000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!6dad70ffe3b44ecb"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "1f799494a2ac500a",
+  "name": "Schneckenschreck",
+  "type": "loot",
+  "img": "icons/commodities/gems/powder-raw-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "38fdb1a796b8e3ca",
+  "sort": 600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!1f799494a2ac500a"
+}

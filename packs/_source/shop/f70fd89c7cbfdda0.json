@@ -1,0 +1,42 @@
+{
+  "_id": "f70fd89c7cbfdda0",
+  "name": "Seifenblasenstab",
+  "type": "loot",
+  "img": "icons/sundries/survival/soap.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "e07115f43682781a",
+  "sort": 2100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!f70fd89c7cbfdda0"
+}

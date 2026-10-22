@@ -1,0 +1,42 @@
+{
+  "_id": "844a0b4f0510d8fa",
+  "name": "Mondstein-Mörser",
+  "type": "loot",
+  "img": "icons/tools/laboratory/mortar-liquid-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ein edler Mörser aus Mondstein.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f9c471321644727b",
+  "sort": 1700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!844a0b4f0510d8fa"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "019509af779ddeaa",
+  "name": "Tierfutter (1 Tag)",
+  "type": "loot",
+  "img": "icons/consumables/grains/sack-oats-glowing-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "e07115f43682781a",
+  "sort": 2000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!019509af779ddeaa"
+}

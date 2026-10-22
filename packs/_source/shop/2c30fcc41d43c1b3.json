@@ -1,0 +1,42 @@
+{
+  "_id": "2c30fcc41d43c1b3",
+  "name": "Tontopf",
+  "type": "loot",
+  "img": "icons/containers/kitchenware/jug-terracotta-orange.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 800,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!2c30fcc41d43c1b3"
+}

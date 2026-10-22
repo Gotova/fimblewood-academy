@@ -1,0 +1,42 @@
+{
+  "_id": "a256efe3f8638ecc",
+  "name": "Gartenschere",
+  "type": "loot",
+  "img": "icons/tools/hand/sickle-steel-grey.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!a256efe3f8638ecc"
+}

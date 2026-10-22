@@ -1,0 +1,42 @@
+{
+  "_id": "e798b869dc5c6458",
+  "name": "Kräutersichel",
+  "type": "loot",
+  "img": "icons/tools/hand/sickle-steel-grey.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!e798b869dc5c6458"
+}

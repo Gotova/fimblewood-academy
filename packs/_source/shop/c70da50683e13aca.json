@@ -1,0 +1,42 @@
+{
+  "_id": "c70da50683e13aca",
+  "name": "Rasiermesser",
+  "type": "loot",
+  "img": "icons/tools/hand/chisel-steel-brown.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "92cb86a660e2795d",
+  "sort": 1100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!c70da50683e13aca"
+}

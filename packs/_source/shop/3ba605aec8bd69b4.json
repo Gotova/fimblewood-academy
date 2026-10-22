@@ -1,0 +1,51 @@
+{
+  "_id": "3ba605aec8bd69b4",
+  "name": "Leuchtsteine (3 Stück)",
+  "type": "consumable",
+  "img": "icons/commodities/gems/pearl-natural.webp",
+  "system": {
+    "description": {
+      "value": "<p>Jeder Stein leuchtet nach einem Reiben 1 Stunde lang wie der Zaubertrick <em>Licht</em>.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 15,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "07503fe33b2501a1",
+  "sort": 1500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!3ba605aec8bd69b4"
+}

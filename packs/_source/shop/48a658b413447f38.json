@@ -1,0 +1,42 @@
+{
+  "_id": "48a658b413447f38",
+  "name": "Getrockneter Blumenstrauß",
+  "type": "loot",
+  "img": "icons/commodities/flowers/cornflower-gold.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "81a8e101a1d553e3",
+  "sort": 1800,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!48a658b413447f38"
+}

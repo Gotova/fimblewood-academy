@@ -1,0 +1,42 @@
+{
+  "_id": "5ae8748f87c22edc",
+  "name": "Sprechende Topfblume",
+  "type": "loot",
+  "img": "icons/commodities/flowers/blooms-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p>Kennt genau drei Sätze.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "81a8e101a1d553e3",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!5ae8748f87c22edc"
+}

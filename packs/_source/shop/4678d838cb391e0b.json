@@ -1,0 +1,42 @@
+{
+  "_id": "4678d838cb391e0b",
+  "name": "Schwefel",
+  "type": "loot",
+  "img": "icons/commodities/stone/ore-pile-white.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f15bbccdac37d1d8",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!4678d838cb391e0b"
+}

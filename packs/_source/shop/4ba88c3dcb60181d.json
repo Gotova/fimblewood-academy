@@ -1,0 +1,42 @@
+{
+  "_id": "4ba88c3dcb60181d",
+  "name": "Gepäckaufbewahrung (1 Tag)",
+  "type": "loot",
+  "img": "icons/containers/chest/chest-simple-box-brown.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "cd94eda9612ede6a",
+  "sort": 1200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!4ba88c3dcb60181d"
+}

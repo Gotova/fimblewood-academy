@@ -1,0 +1,42 @@
+{
+  "_id": "ff216646274b4fbb",
+  "name": "Waffe mit Zaubertrick verzaubern",
+  "type": "loot",
+  "img": "icons/sundries/documents/blueprint-magical.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "66dfdbb7e66f8d38",
+  "sort": 300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!ff216646274b4fbb"
+}

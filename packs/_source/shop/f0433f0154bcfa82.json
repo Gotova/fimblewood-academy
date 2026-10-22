@@ -1,0 +1,42 @@
+{
+  "_id": "f0433f0154bcfa82",
+  "name": "Bambusstäbe & Bindfaden",
+  "type": "loot",
+  "img": "icons/commodities/wood/wood-pole.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 2300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!f0433f0154bcfa82"
+}

@@ -1,0 +1,51 @@
+{
+  "_id": "8658a1684a40f6a1",
+  "name": "Wolkenwachskerze",
+  "type": "consumable",
+  "img": "icons/sundries/lights/candle-lit-angelic.webp",
+  "system": {
+    "description": {
+      "value": "<p>Brennt 8 Stunden und geht auch bei starkem Wind nicht aus.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "07503fe33b2501a1",
+  "sort": 1200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!8658a1684a40f6a1"
+}

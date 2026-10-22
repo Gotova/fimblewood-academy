@@ -1,0 +1,42 @@
+{
+  "_id": "8973c8f125d069d8",
+  "name": "Gießkanne",
+  "type": "loot",
+  "img": "icons/containers/misc/bucket-steel.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!8973c8f125d069d8"
+}

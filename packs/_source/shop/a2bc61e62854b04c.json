@@ -1,0 +1,45 @@
+{
+  "_id": "a2bc61e62854b04c",
+  "name": "Plaudernde Drachenschach-Figur",
+  "type": "equipment",
+  "img": "icons/sundries/gaming/chess-knight-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>Kommentiert jeden Zug, ob man will oder nicht.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 40,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 1800,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!a2bc61e62854b04c"
+}

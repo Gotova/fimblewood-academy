@@ -1,0 +1,42 @@
+{
+  "_id": "f49ad4a0e6dd6e4e",
+  "name": "Suite (bis zur nächsten Stadt)",
+  "type": "loot",
+  "img": "icons/sundries/misc/key-ring-long-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p>Pauschale bis zur nächsten Stadt (etwa 25 bis 30 Tage), mit Frühstück. Wer früher auszieht, bekommt nichts zurück.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 45,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "cd94eda9612ede6a",
+  "sort": 800,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!f49ad4a0e6dd6e4e"
+}

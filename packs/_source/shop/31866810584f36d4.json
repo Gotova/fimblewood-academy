@@ -1,0 +1,42 @@
+{
+  "_id": "31866810584f36d4",
+  "name": "Magischen Gegenstand aufladen",
+  "type": "loot",
+  "img": "icons/commodities/gems/gem-faceted-radiant-teal.webp",
+  "system": {
+    "description": {
+      "value": "<p>Preis pro Ladung.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "66dfdbb7e66f8d38",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!31866810584f36d4"
+}

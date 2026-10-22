@@ -1,0 +1,45 @@
+{
+  "_id": "1ed177983cf7b055",
+  "name": "Geheimtinte",
+  "type": "equipment",
+  "img": "icons/tools/scribal/ink-quill-red.webp",
+  "system": {
+    "description": {
+      "value": "<p>Was damit geschrieben wird, kann nur die Person lesen, die es geschrieben hat.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 35,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!1ed177983cf7b055"
+}

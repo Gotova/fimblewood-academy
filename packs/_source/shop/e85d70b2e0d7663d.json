@@ -1,0 +1,86 @@
+{
+  "_id": "e85d70b2e0d7663d",
+  "name": "Schreibfeder",
+  "type": "equipment",
+  "img": "icons/tools/scribal/pen-steel-grey-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p>Using Ink, an Ink Pen is used to write or draw.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 2,
+      "denomination": "cp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "rarity": "",
+    "attunement": "",
+    "attuned": false,
+    "equipped": false,
+    "cover": null,
+    "crewed": false,
+    "uses": {
+      "max": "",
+      "spent": 0,
+      "recovery": []
+    },
+    "armor": {
+      "value": null,
+      "magicalBonus": null,
+      "dex": null
+    },
+    "hp": {
+      "value": null,
+      "max": null,
+      "dt": null,
+      "conditions": ""
+    },
+    "type": {
+      "value": "trinket",
+      "baseItem": ""
+    },
+    "properties": [],
+    "speed": {
+      "value": null,
+      "conditions": ""
+    },
+    "strength": null,
+    "proficient": null,
+    "activities": {},
+    "identifier": "ink-pen"
+  },
+  "effects": [],
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    },
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagInkPen00000"
+    }
+  },
+  "folder": "9325440b59ca485c",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!e85d70b2e0d7663d"
+}

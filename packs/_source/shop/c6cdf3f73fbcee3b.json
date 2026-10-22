@@ -1,0 +1,42 @@
+{
+  "_id": "c6cdf3f73fbcee3b",
+  "name": "Wolkenmoos-Substrat",
+  "type": "loot",
+  "img": "icons/commodities/materials/material-cotton-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>Besonders gut für Wind- und Wolkenpflanzen.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 3,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "38fdb1a796b8e3ca",
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!c6cdf3f73fbcee3b"
+}

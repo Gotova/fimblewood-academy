@@ -1,0 +1,42 @@
+{
+  "_id": "d3b5c6b989164a89",
+  "name": "Bestimmungsbuch „Flora von Stratos“",
+  "type": "loot",
+  "img": "icons/sundries/books/book-turquoise-moon.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 25,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "6da3f48fe2a99ca6",
+  "sort": 2000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!d3b5c6b989164a89"
+}

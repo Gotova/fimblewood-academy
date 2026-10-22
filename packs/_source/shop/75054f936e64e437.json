@@ -1,0 +1,52 @@
+{
+  "_id": "75054f936e64e437",
+  "name": "Kletterhaken (Eisen)",
+  "type": "loot",
+  "img": "icons/tools/fasteners/nails-steel-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p>Iron Spikes come in bundles of ten. As a Utilize action, you can use a blunt object, such as a Light Hammer, to hammer a spike into wood, earth, or a similar material. You can do so to jam a door shut or to then tie a Rope or Chain to the Spike.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 10,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
+    "rarity": "",
+    "properties": [],
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "identifier": "spikes-iron"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagSpikesIron0"
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!75054f936e64e437"
+}

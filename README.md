@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.48.1
+- **Current version:** 0.49.0
 
 ## Installation
 
@@ -169,6 +169,16 @@ Brewing potions from the Botany Club's ingredients. **Alchemie** in the Fimblewo
 - The **recipe book** of each character fills itself with every successful recipe; a click puts a recipe's ingredients into the cauldron. The GM can unlock recipes there by hand.
 - **Recipe items** (GM-only compendium *Alchemie: Rezepte (nur SL)*, one per recipe, tier and variant): give one to a character and the recipe goes into its book at once, with a whispered note to the players. The item stays, so it can be handed on and teach the next character too.
 - The GM-only compendium *Botanikclub: Rezepte (nur SL)* lists all recipes.
+
+### Stratos shops
+
+The GM-only compendium *Stratos: Shop-Angebote* holds everything the shops on Stratos sell (366 items), ready to drag into a shop. One folder per shop type: **Taverne**, **Magieladen**, **Alchemieladen**, **Botanikladen** and **Allgemeiner Laden**, each split into subfolders (food, drinks, rooms, scrolls, lab supplies, plants, tool sets and so on). Every item has a German name and the Stratos price; rooms come per night and as a flat rate until the next town.
+
+- Standard D&D items (scrolls, Bag of Holding, Alchemist's Fire, tool sets, …) copy their rules from the dnd5e *Equipment* compendium, so their activities and uses work. Their rules text stays in English.
+- Items made up for Stratos (food and drinks, cosmetics, bombs, Academy gear, house plants, services) carry a German description and no automation.
+- The Botany Club's plants, potions and recipes are not repeated here; they stay in their own compendia.
+
+The pack is generated: `npm run generate:shop`, then `npm run build:packs`. The list lives in `tools/generate-shop-pack.mjs`; the SRD data it copies is in `tools/data/shop-srd-base.json` (refresh it with `--snapshot`, see the script header).
 
 ### Quests
 

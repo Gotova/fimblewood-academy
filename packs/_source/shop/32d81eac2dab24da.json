@@ -1,0 +1,42 @@
+{
+  "_id": "32d81eac2dab24da",
+  "name": "Mondwasser",
+  "type": "loot",
+  "img": "icons/consumables/potions/bottle-round-ring-teal.webp",
+  "system": {
+    "description": {
+      "value": "<p>Bei Vollmond gesammelt.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 4,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "38fdb1a796b8e3ca",
+  "sort": 900,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!32d81eac2dab24da"
+}

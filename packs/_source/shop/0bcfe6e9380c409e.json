@@ -1,0 +1,42 @@
+{
+  "_id": "0bcfe6e9380c409e",
+  "name": "Briefumschlag",
+  "type": "loot",
+  "img": "icons/sundries/documents/envelope-sealed-red-tan.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9325440b59ca485c",
+  "sort": 1200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!0bcfe6e9380c409e"
+}

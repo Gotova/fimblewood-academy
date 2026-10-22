@@ -1,0 +1,42 @@
+{
+  "_id": "6be9750bc872e3d5",
+  "name": "Hammer",
+  "type": "loot",
+  "img": "icons/tools/hand/hammer-and-nail.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 1700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!6be9750bc872e3d5"
+}

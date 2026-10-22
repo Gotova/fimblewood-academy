@@ -1,0 +1,42 @@
+{
+  "_id": "10b21b5b9aac20ba",
+  "name": "Bücherriemen",
+  "type": "loot",
+  "img": "icons/sundries/survival/leather-strap-brown.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9325440b59ca485c",
+  "sort": 1000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!10b21b5b9aac20ba"
+}

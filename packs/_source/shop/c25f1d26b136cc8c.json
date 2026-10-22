@@ -1,0 +1,52 @@
+{
+  "_id": "c25f1d26b136cc8c",
+  "name": "Schlafsack",
+  "type": "loot",
+  "img": "icons/sundries/survival/bedroll-grey.webp",
+  "system": {
+    "description": {
+      "value": "<p>A Bedroll sleeps one Small or Medium creature. While in a Bedroll, you automatically succeed on saving throws against extreme cold (see @UUID[Compendium.dnd5e.content24.JournalEntry.dmgDmsToolbox000]{Gameplay Toolbox}).</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 7,
+      "units": "lb"
+    },
+    "rarity": "",
+    "properties": [],
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "identifier": "bedroll"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagBedroll0000"
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 200,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!c25f1d26b136cc8c"
+}

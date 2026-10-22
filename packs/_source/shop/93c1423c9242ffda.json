@@ -1,0 +1,42 @@
+{
+  "_id": "93c1423c9242ffda",
+  "name": "Kaktus „Prüfungsfreund“",
+  "type": "loot",
+  "img": "icons/consumables/plants/thorned-dried-stem-red.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "81a8e101a1d553e3",
+  "sort": 900,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!93c1423c9242ffda"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "c0848e3acfdbfd20",
+  "name": "Schlafplatz im Gemeinschaftsraum (1 Nacht)",
+  "type": "loot",
+  "img": "icons/sundries/survival/bedroll-grey.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "cd94eda9612ede6a",
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!c0848e3acfdbfd20"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "1411c42091ddfa05",
+  "name": "Lederschürze",
+  "type": "loot",
+  "img": "icons/equipment/chest/vest-cloth-tattered-tan.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f9c471321644727b",
+  "sort": 1000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!1411c42091ddfa05"
+}

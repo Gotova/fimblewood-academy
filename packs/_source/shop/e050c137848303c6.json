@@ -1,0 +1,52 @@
+{
+  "_id": "e050c137848303c6",
+  "name": "Brecheisen",
+  "type": "loot",
+  "img": "icons/tools/hand/pickaxe-steel-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>Using a Crowbar gives you Advantage on Strength checks where the Crowbar's leverage can be applied.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 5,
+      "units": "lb"
+    },
+    "rarity": "",
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "properties": [],
+    "identifier": "crowbar"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagCrowbar0000"
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 1600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!e050c137848303c6"
+}

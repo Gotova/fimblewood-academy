@@ -1,0 +1,42 @@
+{
+  "_id": "bea296f933b1513c",
+  "name": "Kreisel",
+  "type": "loot",
+  "img": "icons/commodities/treasure/token-brass-round.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "e07115f43682781a",
+  "sort": 1500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!bea296f933b1513c"
+}

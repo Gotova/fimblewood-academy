@@ -1,0 +1,48 @@
+{
+  "_id": "3caa9b3dd667242e",
+  "name": "Blendpulver",
+  "type": "consumable",
+  "img": "icons/commodities/materials/bowl-powder-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p>Ins Gesicht geworfen: Rettungswurf auf Konstitution (SG 12) oder 1 Runde blind.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 20,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "24237c3103b07002",
+  "sort": 700,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!3caa9b3dd667242e"
+}

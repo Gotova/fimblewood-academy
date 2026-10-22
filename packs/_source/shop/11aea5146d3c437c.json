@@ -1,0 +1,42 @@
+{
+  "_id": "11aea5146d3c437c",
+  "name": "Akademie-Uniform (Ersatz)",
+  "type": "equipment",
+  "img": "icons/equipment/chest/robe-layered-blue.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "clothing",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9325440b59ca485c",
+  "sort": 1500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!11aea5146d3c437c"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "9c2a38846ac2d109",
+  "name": "Puppe",
+  "type": "loot",
+  "img": "icons/commodities/treasure/figurine-idol.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 5,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "e07115f43682781a",
+  "sort": 1600,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!9c2a38846ac2d109"
+}

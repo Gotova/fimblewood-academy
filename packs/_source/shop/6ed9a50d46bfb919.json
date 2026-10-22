@@ -1,0 +1,42 @@
+{
+  "_id": "6ed9a50d46bfb919",
+  "name": "Feuerfeste Handschuhe",
+  "type": "loot",
+  "img": "icons/equipment/hand/glove-simple-leather-green.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 8,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f9c471321644727b",
+  "sort": 1100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!6ed9a50d46bfb919"
+}

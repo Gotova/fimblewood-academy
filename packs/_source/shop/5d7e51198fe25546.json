@@ -1,0 +1,42 @@
+{
+  "_id": "5d7e51198fe25546",
+  "name": "Wäsche waschen",
+  "type": "loot",
+  "img": "icons/commodities/cloth/cloth-roll-worn-blue.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "cd94eda9612ede6a",
+  "sort": 1000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!5d7e51198fe25546"
+}

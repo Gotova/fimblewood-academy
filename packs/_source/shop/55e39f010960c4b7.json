@@ -1,0 +1,42 @@
+{
+  "_id": "55e39f010960c4b7",
+  "name": "Thymian (Topf)",
+  "type": "loot",
+  "img": "icons/consumables/plants/herb-marjoram-basil-oregano-leaf-bunch-green.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "cp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "81a8e101a1d553e3",
+  "sort": 1100,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!55e39f010960c4b7"
+}

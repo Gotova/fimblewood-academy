@@ -1,0 +1,42 @@
+{
+  "_id": "31669fb284a95bf2",
+  "name": "Besen",
+  "type": "loot",
+  "img": "icons/tools/hand/broom-straw-brown.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "e07115f43682781a",
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!31669fb284a95bf2"
+}

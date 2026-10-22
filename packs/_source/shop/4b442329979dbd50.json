@@ -1,0 +1,45 @@
+{
+  "_id": "4b442329979dbd50",
+  "name": "Wingwing-Umhang",
+  "type": "equipment",
+  "img": "icons/equipment/back/cloak-collared-feathers-green.webp",
+  "system": {
+    "description": {
+      "value": "<p>Solange du ihn trägst, fällst du sanft wie unter dem Zauber <em>Federfall</em>.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 500,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "9c64212ad6687f68",
+  "sort": 2400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!4b442329979dbd50"
+}

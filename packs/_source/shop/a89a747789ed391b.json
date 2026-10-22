@@ -1,0 +1,42 @@
+{
+  "_id": "a89a747789ed391b",
+  "name": "Regenwasser (Fass)",
+  "type": "loot",
+  "img": "icons/containers/barrels/barrel-oak-banded-tan.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 2,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "material",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "38fdb1a796b8e3ca",
+  "sort": 1000,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!a89a747789ed391b"
+}

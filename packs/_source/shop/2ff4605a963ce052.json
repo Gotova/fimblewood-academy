@@ -1,0 +1,42 @@
+{
+  "_id": "2ff4605a963ce052",
+  "name": "Gepolsterte Trankkiste (12 Plätze)",
+  "type": "loot",
+  "img": "icons/containers/chest/chest-reinforced-box-brown.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 15,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f9c471321644727b",
+  "sort": 500,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!2ff4605a963ce052"
+}

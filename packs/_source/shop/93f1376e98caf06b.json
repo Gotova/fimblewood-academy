@@ -1,0 +1,45 @@
+{
+  "_id": "93f1376e98caf06b",
+  "name": "Ohrstecker der Übersetzung",
+  "type": "equipment",
+  "img": "icons/equipment/neck/pendant-faceted-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>Einmal am Tag verstehst du für 1 Stunde eine festgelegte Sprache, wenn du sie hörst.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "rarity": "common",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f4a42b9c253d6894",
+  "sort": 900,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!93f1376e98caf06b"
+}

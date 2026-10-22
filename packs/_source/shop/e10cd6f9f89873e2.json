@@ -1,0 +1,48 @@
+{
+  "_id": "e10cd6f9f89873e2",
+  "name": "Riechsalz",
+  "type": "consumable",
+  "img": "icons/commodities/gems/powder-raw-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>Stabilisiert eine bewusstlose Kreatur mit 0 Trefferpunkten und weckt eine schlafende.</p>",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 15,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "24237c3103b07002",
+  "sort": 1300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!e10cd6f9f89873e2"
+}

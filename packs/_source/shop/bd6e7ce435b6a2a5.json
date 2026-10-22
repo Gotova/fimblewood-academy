@@ -1,0 +1,42 @@
+{
+  "_id": "bd6e7ce435b6a2a5",
+  "name": "Fluch entfernen lassen",
+  "type": "loot",
+  "img": "icons/sundries/scrolls/scroll-bound-sealed-black-red.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 250,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "66dfdbb7e66f8d38",
+  "sort": 400,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!bd6e7ce435b6a2a5"
+}

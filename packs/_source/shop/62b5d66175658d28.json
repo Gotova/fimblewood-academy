@@ -1,0 +1,48 @@
+{
+  "_id": "62b5d66175658d28",
+  "name": "Sonnenschutzcreme",
+  "type": "consumable",
+  "img": "icons/containers/kitchenware/jug-clay-brown-sealed.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 3,
+      "denomination": "gp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [],
+      "autoDestroy": true
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "48a594e9acf5d746",
+  "sort": 800,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!62b5d66175658d28"
+}

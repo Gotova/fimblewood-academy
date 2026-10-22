@@ -1,0 +1,130 @@
+{
+  "_id": "b47887e84d4c1008",
+  "name": "Handschuhe der Diebeskunst",
+  "type": "equipment",
+  "img": "icons/equipment/hand/glove-tooled-leather-red-purple.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "recovery": [],
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>Wondrous Item, Uncommon</em></p><p>These gloves are imperceptible while worn. While wearing them, you gain a +5 bonus to Dexterity (Sleight of Hand) checks.</p><section id=\"secret-MTbVEJqcHy1oERli\" class=\"secret\"><p><strong>Foundry Note</strong></p><p>The <strong>Gloves On</strong> Active Effect automates the +5 to your Sleight of Hand checks.</p></section>",
+      "chat": ""
+    },
+    "identifier": "gloves-of-thievery",
+    "source": {
+      "revision": 1,
+      "rules": "2024",
+      "book": "",
+      "license": "CC-BY-4.0",
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 500,
+      "denomination": "gp"
+    },
+    "rarity": "uncommon",
+    "attunement": "",
+    "attuned": false,
+    "equipped": false,
+    "armor": {
+      "value": null,
+      "magicalBonus": null,
+      "dex": null
+    },
+    "cover": null,
+    "crewed": false,
+    "hp": {
+      "value": null,
+      "max": null,
+      "dt": null,
+      "conditions": ""
+    },
+    "type": {
+      "value": "wondrous",
+      "baseItem": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "strength": null,
+    "proficient": null
+  },
+  "effects": [
+    {
+      "name": "Gloves On",
+      "img": "icons/equipment/hand/glove-tooled-leather-red-purple.webp",
+      "_id": "6f8ARzOvPmhNZ0NV",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.skills.slt.bonuses.check",
+          "mode": 2,
+          "value": "5",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "dnd5e": {
+          "riders": {
+            "statuses": []
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.344",
+        "systemId": "dnd5e",
+        "systemVersion": "4.4.0",
+        "createdTime": 1730728665344,
+        "modifiedTime": 1745611806102,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "exportSource": null
+      },
+      "_key": "!items.effects!b47887e84d4c1008.6f8ARzOvPmhNZ0NV"
+    }
+  ],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.dmgGlovesOfThiev"
+    }
+  },
+  "folder": "9c64212ad6687f68",
+  "sort": 1300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!b47887e84d4c1008"
+}

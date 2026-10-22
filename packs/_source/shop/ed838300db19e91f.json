@@ -1,0 +1,52 @@
+{
+  "_id": "ed838300db19e91f",
+  "name": "Schaufel",
+  "type": "loot",
+  "img": "icons/tools/hand/shovel-spade-steel-grey.webp",
+  "system": {
+    "description": {
+      "value": "<p>Working for 1 hour, you can use a Shovel to dig a hole that is 5 feet on each side in soil or similar material.</p>",
+      "chat": ""
+    },
+    "price": {
+      "value": 2,
+      "denomination": "gp"
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops",
+      "rules": "2024",
+      "license": "CC-BY-4.0",
+      "book": ""
+    },
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 5,
+      "units": "lb"
+    },
+    "rarity": "",
+    "properties": [],
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "identifier": "shovel"
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true,
+      "srd": "Compendium.dnd5e.equipment24.Item.phbagShovel00000"
+    }
+  },
+  "folder": "9b796f78ca1f04ca",
+  "sort": 1800,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!ed838300db19e91f"
+}

@@ -1,0 +1,42 @@
+{
+  "_id": "5d5521d0bb4a5c93",
+  "name": "Filtertücher (10 Stück)",
+  "type": "loot",
+  "img": "icons/commodities/cloth/cloth-bolt-gold-orange.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
+    "rarity": "",
+    "identified": true,
+    "type": {
+      "value": "gear",
+      "subtype": ""
+    },
+    "source": {
+      "custom": "Fimblewood Academy: Stratos-Shops"
+    }
+  },
+  "effects": [],
+  "flags": {
+    "fimblewood-academy": {
+      "shop": true
+    }
+  },
+  "folder": "f9c471321644727b",
+  "sort": 1300,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!5d5521d0bb4a5c93"
+}
