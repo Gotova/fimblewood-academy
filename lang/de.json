@@ -162,7 +162,8 @@
         "HearingRangeHint": "Spieler hoeren die Musikbox in voller Lautstaerke, solange einer ihrer Tokens in dieser Reichweite steht, unabhaengig von Waenden. 0 = die ganze Szene."
       },
       "Notify": {
-        "Broadcast": "Schallplatte \"{name}\" gesammelt!"
+        "Broadcast": "Schallplatte \"{name}\" gesammelt!",
+        "Banner": "Neue Schallplatte für die Musikbox"
       },
       "Settings": {
         "CollectionEnabledName": "Musikbox-Sammeln aktiviert",

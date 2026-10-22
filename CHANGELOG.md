@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.50.0] - 2026-10-22
+
+### Added
+
+- **Jukebox**: collecting a new record now shows the same banner as a finished quest, with the record's cover art, for everyone at the table. Clicking it opens the jukebox.
+
 ## [0.49.0] - 2026-10-22
 
 ### Added

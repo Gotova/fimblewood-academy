@@ -197,8 +197,27 @@ async function setAllTracksCollectedForParty(collected) {
 /*  Party-wide collection announcement           */
 /* -------------------------------------------- */
 
-function showCollectionBanner(name) {
-  ui.notifications.info(game.i18n.format("FIMBLEWOOD.Jukebox.Notify.Broadcast", { name }));
+/** The same banner the quests use (styles/quests.css), showing the record's cover art. */
+function showCollectionBanner(name, img) {
+  let stack = document.getElementById("fw-quest-toasts");
+  if (!stack) {
+    stack = document.createElement("div");
+    stack.id = "fw-quest-toasts";
+    document.body.append(stack);
+  }
+  const toast = document.createElement("div");
+  toast.className = "fw-quest-toast is-record";
+  toast.innerHTML = `
+    ${img ? `<img src="${esc(img)}" alt="">` : `<i class="fas fa-compact-disc"></i>`}
+    <div><span class="fw-quest-toast-kind">${esc(game.i18n.localize("FIMBLEWOOD.Jukebox.Notify.Banner"))}</span><strong>${esc(name)}</strong></div>`;
+  toast.addEventListener("click", () => {
+    openJukeboxWindow();
+    toast.remove();
+  });
+  stack.append(toast);
+  setTimeout(() => toast.classList.add("is-leaving"), 5500);
+  setTimeout(() => toast.remove(), 6200);
+
   const sfx = game.settings.get(MODULE_ID, REWARD_SOUND_SETTING);
   if (sfx) {
     foundry.audio.AudioHelper.play({ src: sfx, volume: 0.8, autoplay: true, loop: false });
@@ -206,9 +225,11 @@ function showCollectionBanner(name) {
 }
 
 function announceTrackCollected(trackId) {
-  const name = getRegistry()[trackId]?.name ?? trackId;
-  showCollectionBanner(name);
-  game.socket.emit(`module.${MODULE_ID}`, { type: "trackCollected", name });
+  const track = getRegistry()[trackId];
+  const name = track?.name ?? trackId;
+  const img = track?.img ?? "";
+  showCollectionBanner(name, img);
+  game.socket.emit(`module.${MODULE_ID}`, { type: "trackCollected", name, img });
 }
 
 /* -------------------------------------------- */
@@ -1377,7 +1398,7 @@ export function registerJukebox() {
     const adopter = game.users.activeGM ? game.user === game.users.activeGM : playlist?.isOwner;
     if (playlist && adopter) await adoptPlaylistPlayback(playlist);
     game.socket.on(`module.${MODULE_ID}`, (data) => {
-      if (data.type === "trackCollected") showCollectionBanner(data.name);
+      if (data.type === "trackCollected") showCollectionBanner(data.name, data.img);
     });
   });
 
