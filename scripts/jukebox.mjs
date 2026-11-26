@@ -479,13 +479,81 @@ export async function stopTrack(trackId) {
  */
 const _collecting = new Set();
 
+/* -------------------------------------------- */
+/*  Storage Bracelet + sound cylinders           */
+/* -------------------------------------------- */
+
+/**
+ * Items can be tagged (item sheet, GM only) as a Storage Bracelet or as a sound
+ * cylinder. Hearing music only collects it while a character of this player
+ * wears a Storage Bracelet holding an empty cylinder; that cylinder is then
+ * recorded with the track. How many cylinders fit is simply the bracelet's own
+ * container capacity, so repairing it means raising that capacity.
+ */
+const STORAGE_ROLE_FLAG = "storageRole";
+const ROLE_BRACELET = "bracelet";
+const ROLE_CYLINDER = "cylinder";
+
+function isEmptyCylinder(item) {
+  return item.getFlag(MODULE_ID, STORAGE_ROLE_FLAG) === ROLE_CYLINDER
+    && !item.getFlag(MODULE_ID, "recordTrackId")
+    && (item.system?.quantity ?? 1) > 0;
+}
+
+/** Worn = equipped, for item types that can be equipped at all. */
+function isWorn(item) {
+  return typeof item.system?.equipped !== "boolean" || item.system.equipped;
+}
+
+/** This player's own characters, their assigned character first. */
+function getOwnCharacters() {
+  const own = game.actors.filter(a => a.type === "character" && a.isOwner);
+  const main = game.user.character;
+  return main && own.includes(main) ? [main, ...own.filter(a => a !== main)] : own;
+}
+
+/** The first empty cylinder inside a worn Storage Bracelet of this player's characters. */
+function findEmptyStoredCylinder() {
+  for (const actor of getOwnCharacters()) {
+    for (const bracelet of actor.items) {
+      if (bracelet.getFlag(MODULE_ID, STORAGE_ROLE_FLAG) !== ROLE_BRACELET || !isWorn(bracelet)) continue;
+      const cylinder = actor.items.find(i => i.system?.container === bracelet.id && isEmptyCylinder(i));
+      if (cylinder) return cylinder;
+    }
+  }
+  return null;
+}
+
+/**
+ * Records a track onto a cylinder: it then carries the track like any item that
+ * grants one, renamed after it. A stack only gives up one of its cylinders.
+ */
+async function recordOntoCylinder(cylinder, trackId) {
+  const track = getRegistry()[trackId] ?? {};
+  const changes = {
+    name: `${cylinder.name}: ${track.name ?? trackId}`,
+    [`flags.${MODULE_ID}.recordTrackId`]: trackId
+  };
+  if (track.img) changes.img = track.img;
+  const quantity = cylinder.system?.quantity ?? 1;
+  if (quantity <= 1) return cylinder.update(changes);
+  await cylinder.update({ "system.quantity": quantity - 1 });
+  const data = foundry.utils.mergeObject(cylinder.toObject(), changes);
+  delete data._id;
+  data.system.quantity = 1;
+  // Flagged so onCreateItem doesn't treat it as a GM grant and announce it twice.
+  return cylinder.actor.createEmbeddedDocuments("Item", [data], { [`${MODULE_ID}.recordedCylinder`]: true });
+}
+
 /**
  * Hearing a track as scene or region music collects it for the party, if no one
- * has it yet. GM clients never collect.
+ * has it yet and this player carries an empty cylinder in a worn Storage
+ * Bracelet. GM clients never collect.
  */
 async function collectHeardTrack(trackId) {
   if (game.user.isGM || !isCollectionEnabled() || _collecting.has(trackId)) return;
   if (getPartyCollectedTrackIds().has(trackId)) return;
+  if (!findEmptyStoredCylinder()) return;
   _collecting.add(trackId);
   try {
     // Every player loads an activated scene at the same moment. A short random
@@ -493,6 +561,9 @@ async function collectHeardTrack(trackId) {
     // once instead of once per player.
     await new Promise(resolve => setTimeout(resolve, Math.random() * 2000));
     if (getPartyCollectedTrackIds().has(trackId)) return;
+    const cylinder = findEmptyStoredCylinder();
+    if (!cylinder) return;
+    await recordOntoCylinder(cylinder, trackId);
     if (await addCollectedTrack(trackId)) announceTrackCollected(trackId);
   } finally {
     _collecting.delete(trackId);
@@ -523,7 +594,8 @@ export function diagnoseJukebox() {
     listenerPoints: canvas.ready ? getListenerPoints() : "canvas not ready",
     hearing: desired ? { source: desired.source, track: registry[desired.trackId]?.name ?? desired.trackId } : null,
     playingLocally: !!_local?.sound?.playing,
-    myCollectedTracks: getCollectedTracks().map(id => registry[id]?.name ?? `${id} (not in registry)`)
+    myCollectedTracks: getCollectedTracks().map(id => registry[id]?.name ?? `${id} (not in registry)`),
+    emptyCylinderInWornBracelet: game.user.isGM ? null : (findEmptyStoredCylinder()?.name ?? false)
   };
   console.log(`${MODULE_ID} | Jukebox diagnostics`, report);
   return report;
@@ -712,12 +784,32 @@ function injectItemTrackPicker(app, html) {
   const wrap = document.createElement("fieldset");
   wrap.className = "fimblewood-jukebox-source-field";
   wrap.innerHTML = `
-    <legend>${i18n("SourceConfig.ItemGrantsTrack")}</legend>
+    <legend>${i18n("SourceConfig.ItemLegend")}</legend>
     <label><input type="checkbox" class="fw-jukebox-item-toggle" ${currentTrackId ? "checked" : ""}> ${i18n("SourceConfig.ItemGrantsTrack")}</label>
     <div class="fw-jukebox-item-picker" style="display:${currentTrackId ? "block" : "none"}">
       ${buildTrackPickerHtml(currentTrackId, { includeNone: false })}
     </div>`;
   root.querySelector("form")?.appendChild(wrap) ?? root.appendChild(wrap);
+
+  // Song storage role: Storage Bracelet (holds cylinders) or sound cylinder.
+  const role = item?.getFlag(MODULE_ID, STORAGE_ROLE_FLAG) ?? "";
+  const roleWrap = document.createElement("div");
+  roleWrap.className = "fw-jukebox-storage-role";
+  roleWrap.innerHTML = `
+    <label>${i18n("SourceConfig.StorageRole")}
+      <select class="fw-jukebox-storage-role-select">
+        <option value="" ${role ? "" : "selected"}>${i18n("SourceConfig.TrackNone")}</option>
+        <option value="${ROLE_BRACELET}" ${role === ROLE_BRACELET ? "selected" : ""}>${i18n("SourceConfig.StorageBracelet")}</option>
+        <option value="${ROLE_CYLINDER}" ${role === ROLE_CYLINDER ? "selected" : ""}>${i18n("SourceConfig.StorageCylinder")}</option>
+      </select>
+    </label>
+    <p class="hint">${i18n("SourceConfig.StorageRoleHint")}</p>`;
+  wrap.appendChild(roleWrap);
+  roleWrap.querySelector("select").addEventListener("change", async (event) => {
+    const value = event.currentTarget.value;
+    if (value) await item.setFlag(MODULE_ID, STORAGE_ROLE_FLAG, value);
+    else await item.unsetFlag(MODULE_ID, STORAGE_ROLE_FLAG);
+  });
 
   const pickerWrap = wrap.querySelector(".fw-jukebox-item-picker");
   wrap.querySelector(".fw-jukebox-item-toggle").addEventListener("change", async (event) => {
@@ -797,8 +889,9 @@ function injectTokenTrackPicker(app, html) {
 /*  Item-based grant                             */
 /* -------------------------------------------- */
 
-async function onCreateItem(item) {
+async function onCreateItem(item, options) {
   if (!game.user.isGM || !isCollectionEnabled()) return;
+  if (options?.[`${MODULE_ID}.recordedCylinder`]) return;
   const trackId = item.getFlag(MODULE_ID, "recordTrackId");
   if (!trackId || !item.actor?.hasPlayerOwner) return;
   let anyNew = false;
@@ -1433,6 +1526,13 @@ export function registerJukebox() {
     if (setting.key === `${MODULE_ID}.${REGISTRY_SETTING}`) refreshLocalJukeboxThrottled();
   });
   Hooks.on("createItem", onCreateItem);
+  // Equipping a Storage Bracelet or putting a cylinder in collects the music
+  // already playing, without having to leave and come back.
+  for (const hook of ["createItem", "updateItem"]) {
+    Hooks.on(hook, (item) => {
+      if (!game.user.isGM && item.actor?.isOwner && item.getFlag(MODULE_ID, STORAGE_ROLE_FLAG)) refreshLocalJukeboxThrottled();
+    });
+  }
 
   // Slots the GM track manager into the Fimblewood control category created by
   // registerDrawPad — which runs first at init, so the category already exists

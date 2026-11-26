@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.51.0] - 2026-11-26
+
+### Changed
+
+- **Jukebox**: scene and region music is now only collected while a character wears a **Storage Bracelet** holding an empty **sound cylinder** (Klangwalze). The cylinder is recorded with the song, renamed after it and gets its cover art. The bracelet's container capacity limits how many cylinders it holds. Tag both on the item sheet under "Song storage".
+
 ## [0.50.0] - 2026-10-22
 
 ### Added
