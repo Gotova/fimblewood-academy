@@ -17,7 +17,8 @@
       "Actions": {
         "Undo": "Rueckgaengig (Ctrl+Z)",
         "Redo": "Wiederholen (Ctrl+Y)",
-        "InsertCircle": "Zentrierten Kreis einfuegen (Zaubergrad waehlen)",
+        "InsertCircle": "Zaubergrad-Kreis einfuegen (Zaubergrad waehlen)",
+        "InsertFreeCircle": "Freien zentrierten Kreis einfuegen (Radius anklicken)",
         "Clear": "Alles loeschen",
         "CopyClipboard": "In Zwischenablage kopieren",
         "CopiedClipboard": "Bild in Zwischenablage kopiert!",
@@ -32,7 +33,7 @@
       },
       "Status": {
         "InkTooltip": "Verbrauchte Tinte — Summe der Strichlaengen aller gezeichneten Elemente (1 Tinte = 1000 Welteinheiten Linie). Mit gewaehltem Zaubergrad steht dahinter das Tinten-Limit dieses Grades.",
-        "SpellLevelTooltip": "Zaubergrad, geschaetzt aus der verbrauchten Tinte (noch kein Grad ueber 'Zentrierten Kreis einfuegen' gewaehlt)",
+        "SpellLevelTooltip": "Zaubergrad, geschaetzt aus der verbrauchten Tinte (noch kein Grad ueber den Zaubergrad-Kreis gewaehlt)",
         "Cantrip": "Zaubertrick",
         "SpellLevel": "Zauber {level}. Grades",
         "BeyondNinth": "Jenseits des 9. Grades",

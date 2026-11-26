@@ -17,7 +17,8 @@
       "Actions": {
         "Undo": "Undo (Ctrl+Z)",
         "Redo": "Redo (Ctrl+Y)",
-        "InsertCircle": "Insert centred circle (choose spell level)",
+        "InsertCircle": "Insert spell-level circle (choose spell level)",
+        "InsertFreeCircle": "Insert free centred circle (click to set radius)",
         "Clear": "Clear All",
         "CopyClipboard": "Copy to Clipboard",
         "CopiedClipboard": "Image copied to clipboard!",
@@ -32,7 +33,7 @@
       },
       "Status": {
         "InkTooltip": "Total ink used — sum of stroke lengths for every drawn element (1 ink = 1000 world-units of line). With a spell level chosen, that level's ink limit is shown after it.",
-        "SpellLevelTooltip": "Spell level estimated from ink used (no level chosen via 'Insert centred circle' yet)",
+        "SpellLevelTooltip": "Spell level estimated from ink used (no level chosen via the spell-level circle yet)",
         "Cantrip": "Cantrip",
         "SpellLevel": "Level {level} Spell",
         "BeyondNinth": "Beyond 9th Level",

@@ -126,6 +126,8 @@ class DrawPadApp extends Application {
 
     // Insert-circle mode: true while the spell-level menu is open
     this._insertCircleMode = false;
+    // Free-circle mode: true while waiting for a click that sets the radius
+    this._freeCircleMode   = false;
     this._levelMenuEl      = null;
     this._levelMenuOutside = null;
 
@@ -183,8 +185,11 @@ class DrawPadApp extends Application {
   <button class="fw-draw-tool-btn active" data-tool="brush"  data-tooltip="${i18n("Tools.Brush")}">
     <i class="fas fa-paint-brush"></i>
   </button>
-  <button class="fw-draw-tool-btn" id="fw-draw-insert-circle" data-tooltip="${i18n("Actions.InsertCircle")}">
+  <button class="fw-draw-tool-btn" id="fw-draw-insert-free-circle" data-tooltip="${i18n("Actions.InsertFreeCircle")}">
     <i class="fas fa-circle-plus"></i>
+  </button>
+  <button class="fw-draw-tool-btn" id="fw-draw-insert-circle" data-tooltip="${i18n("Actions.InsertCircle")}">
+    <i class="fas fa-wand-magic-sparkles"></i>
   </button>
   <button class="fw-draw-tool-btn" data-tool="eraser"        data-tooltip="${i18n("Tools.Eraser")}">
     <i class="fas fa-eraser"></i>
@@ -322,7 +327,7 @@ class DrawPadApp extends Application {
         focused.isContentEditable
       )) return;
       if (e.key === "Escape") {
-        if (this._insertCircleMode)    this._exitCircleMode();
+        if (this._insertCircleMode || this._freeCircleMode) this._exitCircleMode();
         if (this._selectedEls.length)  this._doDeselect();
         return;
       }
@@ -680,6 +685,10 @@ class DrawPadApp extends Application {
       if (this._insertCircleMode) this._exitCircleMode();
       else this._enterCircleMode();
     });
+    html.find("#fw-draw-insert-free-circle").on("click", () => {
+      if (this._freeCircleMode) this._exitCircleMode();
+      else this._enterFreeCircleMode();
+    });
 
     html.find("#fw-draw-center-view").on("click", () => {
       this._zoom = 1.0;
@@ -735,6 +744,7 @@ class DrawPadApp extends Application {
     });
     el.addEventListener("mousemove",     (e) => {
       this._updateCoords(e);
+      if (this._freeCircleMode) this._updateFreeCirclePreview(e);
     });
     el.addEventListener("wheel",         (e) => this._onWheel(e), { passive: false });
   }
@@ -780,6 +790,16 @@ class DrawPadApp extends Application {
 
     // A click on the canvas closes the spell-level menu (without drawing).
     if (this._insertCircleMode) { this._exitCircleMode(); return; }
+
+    // Free centred circle: left-click places it at the hovered radius; anything else cancels.
+    if (this._freeCircleMode) {
+      if (e.button === 0) {
+        const r = this._radiusFromCentre(e);
+        if (r >= 1) this._placeCentredCircle(r, null);
+      }
+      this._exitCircleMode();
+      return;
+    }
 
     if (e.button === 2) {
       // Right-click → pan
@@ -1702,14 +1722,50 @@ class DrawPadApp extends Application {
     }
     this._levelMenuEl?.remove();
     this._levelMenuEl = null;
-    if (!this._insertCircleMode) return;
-    this._insertCircleMode = false;
+    if (this._insertCircleMode || this._freeCircleMode) {
+      if (this._previewGroup) this._previewGroup.innerHTML = "";
+    }
+    if (this._insertCircleMode) {
+      this._insertCircleMode = false;
+      document.getElementById("fw-draw-insert-circle")?.classList.remove("active");
+    }
+    if (this._freeCircleMode) {
+      this._freeCircleMode = false;
+      this._wrap?.classList.remove("fw-draw-insert-circle-mode");
+      document.getElementById("fw-draw-insert-free-circle")?.classList.remove("active");
+    }
+  }
+
+  /* ── Free centred circle: click anywhere to set the radius (no spell level) ── */
+
+  _enterFreeCircleMode() {
+    this._exitCircleMode();
+    this._freeCircleMode = true;
     if (this._previewGroup) this._previewGroup.innerHTML = "";
-    document.getElementById("fw-draw-insert-circle")?.classList.remove("active");
+    this._wrap.classList.add("fw-draw-insert-circle-mode");
+    document.getElementById("fw-draw-insert-free-circle")?.classList.add("active");
+  }
+
+  /** Distance of the pointer from the world centre, in world units. */
+  _radiusFromCentre(e) {
+    const sp = this._canvasPoint(e);
+    const wp = this._screenToWorld(sp.x, sp.y);
+    return Math.hypot(wp.x - WORLD_SIZE / 2, wp.y - WORLD_SIZE / 2);
+  }
+
+  _updateFreeCirclePreview(e) {
+    const r = this._radiusFromCentre(e);
+    this._previewGroup.innerHTML = "";
+    if (r < 1) return;
+    this._previewGroup.appendChild(this._svgEl("circle", this._centredCircleAttrs(r)));
   }
 
   _spellCircleAttrs(lvl) {
     const r = getSpellLevelConfig()[lvl]?.radius ?? DEFAULT_SPELL_LEVELS[lvl].radius;
+    return this._centredCircleAttrs(r);
+  }
+
+  _centredCircleAttrs(r) {
     return {
       cx:               (WORLD_SIZE / 2).toFixed(2),
       cy:               (WORLD_SIZE / 2).toFixed(2),
@@ -1731,10 +1787,19 @@ class DrawPadApp extends Application {
 
   /** Place the centred circle for a spell level and make that level the selected one. */
   _insertSpellCircle(lvl) {
+    const r = getSpellLevelConfig()[lvl]?.radius ?? DEFAULT_SPELL_LEVELS[lvl].radius;
+    this._placeCentredCircle(r, lvl);
+  }
+
+  /**
+   * Commit a circle around the world centre. With a spell level it is tagged
+   * data-spell-level (which the badge reads); a free circle (lvl null) is not.
+   */
+  _placeCentredCircle(r, lvl) {
     if (!this._contentGroup) return;
     this._redoStack = [];
-    const circleEl = this._svgEl("circle", this._spellCircleAttrs(lvl));
-    circleEl.setAttribute("data-spell-level", String(lvl));
+    const circleEl = this._svgEl("circle", this._centredCircleAttrs(r));
+    if (lvl !== null) circleEl.setAttribute("data-spell-level", String(lvl));
     this._contentGroup.appendChild(circleEl);
     // White unmask so the circle is visible even over erased areas.
     if (this._erasePaths) {

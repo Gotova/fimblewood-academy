@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.53.0] - 2026-11-26
+
+### Added
+
+- **Magic Circle Draw Pad**: the free centred circle is back as its own button (circle-plus icon). Click anywhere on the canvas to set its radius. Spell-level circles now have their own button (magic-wand icon) with the spell-level dropdown. Free circles do not change the chosen spell level.
+
 ## [0.52.0] - 2026-11-26
 
 ### Changed

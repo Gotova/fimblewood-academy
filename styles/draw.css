@@ -217,6 +217,7 @@ body.game .fimblewood-draw-app.window-app .window-content > .fimblewood-draw-can
 /* Cursor overrides per tool / mode */
 .fimblewood-draw-canvas-wrap.tool-eraser           #fimblewood-draw-svg { cursor: none; }
 .fimblewood-draw-canvas-wrap.tool-text             #fimblewood-draw-svg { cursor: text; }
+.fimblewood-draw-canvas-wrap.fw-draw-insert-circle-mode #fimblewood-draw-svg { cursor: crosshair; }
 .fimblewood-draw-canvas-wrap.tool-select           #fimblewood-draw-svg { cursor: default; }
 .fimblewood-draw-canvas-wrap.tool-select.fw-draw-sel-moving   #fimblewood-draw-svg { cursor: move; }
 .fimblewood-draw-canvas-wrap.tool-select.fw-draw-sel-rotating #fimblewood-draw-svg { cursor: crosshair; }
