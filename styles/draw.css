@@ -217,7 +217,6 @@ body.game .fimblewood-draw-app.window-app .window-content > .fimblewood-draw-can
 /* Cursor overrides per tool / mode */
 .fimblewood-draw-canvas-wrap.tool-eraser           #fimblewood-draw-svg { cursor: none; }
 .fimblewood-draw-canvas-wrap.tool-text             #fimblewood-draw-svg { cursor: text; }
-.fimblewood-draw-canvas-wrap.fw-draw-insert-circle-mode #fimblewood-draw-svg { cursor: crosshair; }
 .fimblewood-draw-canvas-wrap.tool-select           #fimblewood-draw-svg { cursor: default; }
 .fimblewood-draw-canvas-wrap.tool-select.fw-draw-sel-moving   #fimblewood-draw-svg { cursor: move; }
 .fimblewood-draw-canvas-wrap.tool-select.fw-draw-sel-rotating #fimblewood-draw-svg { cursor: crosshair; }
@@ -277,6 +276,62 @@ body.game .fimblewood-draw-app.window-app .window-content > .fimblewood-draw-can
   color: #ff7060;
   border-color: #a04030;
 }
+
+#fw-draw-spell-level { text-align: center; }
+#fw-draw-spell-level.fw-draw-level-is-unstable { border-color: #c0392b; }
+#fw-draw-spell-level .fw-draw-level-unstable {
+  color: #ff4a3a;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 1px;
+}
+.fimblewood-draw-status #fw-draw-ink-info.fw-draw-ink-over { color: #ff4a3a; }
+
+/* ───── Spell-level dropdown (opened by "Insert centred circle") ───── */
+.fw-draw-level-menu {
+  position: absolute;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  min-width: 170px;
+  padding: 4px;
+  background: #1e1810;
+  border: 1px solid #8a6d2f;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+  font-family: "Signika", sans-serif;
+}
+.fw-draw-level-menu-title {
+  padding: 3px 8px 5px;
+  color: #a08850;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid #5c4a1e;
+  margin-bottom: 3px;
+}
+.fw-draw-level-menu .fw-draw-level-menu-item {
+  all: unset;
+  box-sizing: border-box;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #e0b860;
+  font-size: 13px;
+  cursor: pointer;
+}
+.fw-draw-level-menu .fw-draw-level-menu-item:hover { background: #3a2e18; }
+.fw-draw-level-menu .fw-draw-level-menu-item.current { font-weight: bold; }
+.fw-draw-level-menu .fw-draw-level-menu-item.current::before { content: "• "; }
+
+/* ───── Spell-level settings dialog ───── */
+.fimblewood-draw-level-config .window-content { gap: 8px; }
+.fw-draw-level-config-hint { margin: 0; font-size: 12px; opacity: 0.85; }
+.fw-draw-level-config-table { width: 100%; margin: 0; }
+.fw-draw-level-config-table th[scope="row"] { text-align: left; font-weight: normal; }
+.fw-draw-level-config-table input { width: 100%; }
+.fw-draw-level-config-actions { display: flex; gap: 6px; }
+.fw-draw-level-config-actions button { flex: 1; }
 
 /* ───── Symmetry centre marker ───── */
 /* top/left are set dynamically by JS (_updateCenterMarker) to follow pan/zoom */

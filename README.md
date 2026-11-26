@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.51.0
+- **Current version:** 0.52.0
 
 ## Installation
 
@@ -35,7 +35,8 @@ An SVG-based drawing canvas for painting magic circles, available to every playe
 - **Select tool:** click a shape to select it (Shift-click to add/remove, drag a marquee to multi-select), drag to move, drag the handle above it to rotate, click the red ✕ or press Delete to remove. Hold Ctrl while moving/rotating to snap to 45°; hold Alt to snap to the grid.
 - **Symmetry:** none, or 2/4/6/8/12-fold rotational symmetry around a fixed centre point — ideal for magic circles. Start with a dark background, 6- or 8-fold symmetry, and draw outward from the centre.
 - **Canvas:** a 2000×2000 virtual drawing surface with independent pan (right-drag) and zoom (scroll wheel); the symmetry centre never drifts regardless of window size or viewport. A procedural paper-grain texture is baked into the parchment background.
-- **Ink counter & spell-level badge:** a running total of "ink used" (stroke length) is shown in the status bar; a badge in the canvas corner estimates what spell level the circle can hold, from Cantrip up to 9th (and beyond).
+- **Spell-level circles:** *Insert centred circle* opens a dropdown of spell levels (Cantrip to 9th). Picking one places a circle around the centre with that level's radius, and the badge in the canvas corner shows the chosen level.
+- **Ink counter & unstable warning:** a running total of "ink used" (stroke length) is shown in the status bar, next to the chosen level's ink limit. Using more ink than the limit shows a red **Unstable** under the spell level. Without a chosen level, the badge estimates the level from the ink used, as before. The GM sets each level's radius and ink limit under *Game Settings → Fimblewood Academy → Magic Circle: Spell Levels*.
 - **Undo/redo:** `Ctrl+Z` / `Ctrl+Y` (or `Ctrl+Shift+Z`), up to 20 steps.
 - **Export:** save as SVG, copy to clipboard, send to chat, or save to a **Gallery** — gallery entries can be organized into folders (drag-and-drop to reorder or move between folders), renamed, reloaded into the draw pad, or deleted. The gallery is stored per-user (a flag on your user document), so it follows you to any machine you log into.
 - **GM tools:** push the current drawing, or any gallery entry, out to all connected players as a one-off image popout; or toggle **Go Live** to broadcast the drawing to all players in real time as you draw (updates every stroke, ~200ms throttled) — a live viewer window opens automatically on player clients and closes when you stop broadcasting.

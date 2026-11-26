@@ -25,6 +25,48 @@ const SVG_NS      = "http://www.w3.org/2000/svg";
 const PARCHMENT   = "#e8d5a3";   // background fill colour (also used by eraser)
 
 /* ──────────────────────────────────────────────
+   Spell levels (centred circle radius + ink limit per level)
+   Index 0 = cantrip … 9 = ninth level. Editable by the GM in the module
+   settings ("Magiekreis: Zaubergrade"); stored as a world setting.
+   ────────────────────────────────────────────── */
+
+const SPELL_LEVEL_SETTING = "drawSpellLevels";
+const SPELL_LEVEL_COUNT   = 10;
+const DEFAULT_SPELL_LEVELS = Object.freeze([
+  { radius:  60, maxInk:  3 },
+  { radius:  85, maxInk:  8 },
+  { radius: 110, maxInk: 12 },
+  { radius: 135, maxInk: 15 },
+  { radius: 160, maxInk: 17 },
+  { radius: 185, maxInk: 19 },
+  { radius: 210, maxInk: 20 },
+  { radius: 235, maxInk: 21 },
+  { radius: 260, maxInk: 22 },
+  { radius: 285, maxInk: 23 },
+]);
+
+/** Effective per-level config: the GM's overrides merged over the defaults. */
+function getSpellLevelConfig() {
+  let saved = [];
+  try { saved = game.settings.get(MODULE_ID, SPELL_LEVEL_SETTING) ?? []; } catch (_) { /* not registered yet */ }
+  return DEFAULT_SPELL_LEVELS.map((def, i) => {
+    const s = saved[i] ?? {};
+    const radius = Number(s.radius);
+    const maxInk = Number(s.maxInk);
+    return {
+      radius: Number.isFinite(radius) && radius > 0  ? radius : def.radius,
+      maxInk: Number.isFinite(maxInk) && maxInk >= 0 ? maxInk : def.maxInk,
+    };
+  });
+}
+
+function spellLevelLabel(lvl) {
+  return lvl === 0
+    ? game.i18n.localize("FIMBLEWOOD.Draw.Status.Cantrip")
+    : game.i18n.format("FIMBLEWOOD.Draw.Status.SpellLevel", { level: lvl });
+}
+
+/* ──────────────────────────────────────────────
    Gallery storage (server-side, per user)
 
    Drawings are stored as flags on the user document, which lives in the
@@ -82,8 +124,10 @@ class DrawPadApp extends Application {
     this._viewX = 0;   // world-x at the top-left of the viewport
     this._viewY = 0;   // world-y at the top-left of the viewport
 
-    // Insert-circle mode: true while waiting for the user to click a radius
+    // Insert-circle mode: true while the spell-level menu is open
     this._insertCircleMode = false;
+    this._levelMenuEl      = null;
+    this._levelMenuOutside = null;
 
     // Live-stroke state: one <path> per symmetry axis while the pointer is down
     this._activePaths  = [];
@@ -305,6 +349,7 @@ class DrawPadApp extends Application {
   async close(options = {}) {
     if (this._resizeObserver) this._resizeObserver.disconnect();
     if (this._keyHandler) document.removeEventListener("keydown", this._keyHandler, true);
+    this._exitCircleMode();
     return super.close(options);
   }
 
@@ -690,7 +735,6 @@ class DrawPadApp extends Application {
     });
     el.addEventListener("mousemove",     (e) => {
       this._updateCoords(e);
-      if (this._insertCircleMode) this._updateCirclePreview(e);
     });
     el.addEventListener("wheel",         (e) => this._onWheel(e), { passive: false });
   }
@@ -734,43 +778,8 @@ class DrawPadApp extends Application {
   _onPointerDown(e) {
     e.preventDefault();
 
-    // ── Insert-circle mode ──────────────────────────────────────────────────
-    // Left-click places the circle at the hovered radius; anything else cancels.
-    if (this._insertCircleMode) {
-      if (e.button === 0) {
-        const sp = this._canvasPoint(e);
-        const wp = this._screenToWorld(sp.x, sp.y);
-        const cx = WORLD_SIZE / 2;
-        const cy = WORLD_SIZE / 2;
-        const r  = Math.hypot(wp.x - cx, wp.y - cy);
-        if (r >= 1) {
-          this._redoStack = [];
-          const circleEl = this._svgEl("circle", {
-            cx:               cx.toFixed(2),
-            cy:               cy.toFixed(2),
-            r:                r.toFixed(2),
-            stroke:           this._color,
-            "stroke-width":   this._brushSize,
-            "stroke-linecap": "round",
-            fill:             "none",
-            opacity:          this._opacity,
-          });
-          this._contentGroup.appendChild(circleEl);
-          // White unmask so the circle is visible even over erased areas.
-          if (this._erasePaths) {
-            const um = circleEl.cloneNode(false);
-            um.setAttribute("stroke", "white");
-            um.removeAttribute("opacity");
-            this._erasePaths.appendChild(um);
-          }
-          this._saveHistory();
-          this._updateHistoryInfo();
-    this._updateInkInfo();
-        }
-      }
-      this._exitCircleMode();
-      return;
-    }
+    // A click on the canvas closes the spell-level menu (without drawing).
+    if (this._insertCircleMode) { this._exitCircleMode(); return; }
 
     if (e.button === 2) {
       // Right-click → pan
@@ -1630,46 +1639,126 @@ class DrawPadApp extends Application {
 
   /* ──────────────────────────────────────────────
      Insert-circle mode
-     Press the button → cursor becomes a radius picker; hover shows a live
-     preview circle centred on the world centre; click to place it.
+     Press the button → a dropdown of spell levels opens. Hovering an entry
+     previews its circle; choosing one places a circle centred on the world
+     centre with that level's radius (GM-configurable). The circle carries
+     data-spell-level, which is what the spell-level badge reads.
      ────────────────────────────────────────────── */
 
   _enterCircleMode() {
+    this._exitCircleMode();
+    const btn  = document.getElementById("fw-draw-insert-circle");
+    const root = this.element?.[0];
+    if (!btn || !root) return;
+
     this._insertCircleMode = true;
     this._previewGroup.innerHTML = "";
-    this._wrap.classList.add("fw-draw-insert-circle-mode");
-    document.getElementById("fw-draw-insert-circle")?.classList.add("active");
+    btn.classList.add("active");
+
+    const config  = getSpellLevelConfig();
+    const current = this._getSelectedSpellLevel();
+    const menu    = document.createElement("div");
+    menu.className = "fw-draw-level-menu";
+    menu.innerHTML =
+      `<div class="fw-draw-level-menu-title">${game.i18n.localize("FIMBLEWOOD.Draw.LevelMenu.Title")}</div>` +
+      config.map((_, lvl) =>
+        `<button type="button" class="fw-draw-level-menu-item${lvl === current ? " current" : ""}" data-level="${lvl}">${spellLevelLabel(lvl)}</button>`
+      ).join("");
+
+    const br = btn.getBoundingClientRect();
+    const rr = root.getBoundingClientRect();
+    menu.style.left = `${br.left - rr.left}px`;
+    menu.style.top  = `${br.bottom - rr.top + 4}px`;
+    root.appendChild(menu);
+    this._levelMenuEl = menu;
+
+    menu.addEventListener("pointerover", (e) => {
+      const item = e.target.closest("[data-level]");
+      if (item) this._previewSpellCircle(Number(item.dataset.level));
+    });
+    menu.addEventListener("pointerleave", () => { this._previewGroup.innerHTML = ""; });
+    menu.addEventListener("click", (e) => {
+      const item = e.target.closest("[data-level]");
+      if (!item) return;
+      const lvl = Number(item.dataset.level);
+      this._exitCircleMode();
+      this._insertSpellCircle(lvl);
+    });
+
+    // Any press outside the menu (and outside its own button) closes it.
+    this._levelMenuOutside = (e) => {
+      if (menu.contains(e.target) || btn.contains(e.target)) return;
+      // A press on the canvas only dismisses the menu; it must not also draw.
+      if (this._svg?.contains(e.target)) { e.preventDefault(); e.stopPropagation(); }
+      this._exitCircleMode();
+    };
+    document.addEventListener("pointerdown", this._levelMenuOutside, true);
   }
 
   _exitCircleMode() {
+    if (this._levelMenuOutside) {
+      document.removeEventListener("pointerdown", this._levelMenuOutside, true);
+      this._levelMenuOutside = null;
+    }
+    this._levelMenuEl?.remove();
+    this._levelMenuEl = null;
     if (!this._insertCircleMode) return;
     this._insertCircleMode = false;
-    this._previewGroup.innerHTML = "";
-    this._wrap.classList.remove("fw-draw-insert-circle-mode");
+    if (this._previewGroup) this._previewGroup.innerHTML = "";
     document.getElementById("fw-draw-insert-circle")?.classList.remove("active");
   }
 
-  /** Redraw the preview circle in `_previewGroup` based on cursor distance from world centre. */
-  _updateCirclePreview(e) {
-    const sp = this._canvasPoint(e);
-    const wp = this._screenToWorld(sp.x, sp.y);
-    const cx = WORLD_SIZE / 2;
-    const cy = WORLD_SIZE / 2;
-    const r  = Math.hypot(wp.x - cx, wp.y - cy);
-
-    this._previewGroup.innerHTML = "";
-    if (r < 1) return;
-
-    this._previewGroup.appendChild(this._svgEl("circle", {
-      cx:               cx.toFixed(2),
-      cy:               cy.toFixed(2),
-      r:                r.toFixed(2),
+  _spellCircleAttrs(lvl) {
+    const r = getSpellLevelConfig()[lvl]?.radius ?? DEFAULT_SPELL_LEVELS[lvl].radius;
+    return {
+      cx:               (WORLD_SIZE / 2).toFixed(2),
+      cy:               (WORLD_SIZE / 2).toFixed(2),
+      r:                Number(r).toFixed(2),
       stroke:           this._color,
       "stroke-width":   this._brushSize,
       "stroke-linecap": "round",
       fill:             "none",
       opacity:          this._opacity,
-    }));
+    };
+  }
+
+  /** Show the circle a spell level would place, without committing it. */
+  _previewSpellCircle(lvl) {
+    if (!this._previewGroup) return;
+    this._previewGroup.innerHTML = "";
+    this._previewGroup.appendChild(this._svgEl("circle", this._spellCircleAttrs(lvl)));
+  }
+
+  /** Place the centred circle for a spell level and make that level the selected one. */
+  _insertSpellCircle(lvl) {
+    if (!this._contentGroup) return;
+    this._redoStack = [];
+    const circleEl = this._svgEl("circle", this._spellCircleAttrs(lvl));
+    circleEl.setAttribute("data-spell-level", String(lvl));
+    this._contentGroup.appendChild(circleEl);
+    // White unmask so the circle is visible even over erased areas.
+    if (this._erasePaths) {
+      const um = circleEl.cloneNode(false);
+      um.removeAttribute("data-spell-level");
+      um.setAttribute("stroke", "white");
+      um.removeAttribute("opacity");
+      this._erasePaths.appendChild(um);
+    }
+    this._saveHistory();
+    this._updateHistoryInfo();
+    this._updateInkInfo();
+  }
+
+  /**
+   * The spell level chosen for this drawing: the most recently placed
+   * level circle still on the canvas (so undo, redo, deleting the circle and
+   * reloading from the gallery all keep it right). null when there is none.
+   */
+  _getSelectedSpellLevel() {
+    const circles = this._contentGroup?.querySelectorAll("[data-spell-level]");
+    if (!circles?.length) return null;
+    const lvl = Number(circles[circles.length - 1].getAttribute("data-spell-level"));
+    return Number.isInteger(lvl) && lvl >= 0 && lvl < SPELL_LEVEL_COUNT ? lvl : null;
   }
 
   /* ──────────────────────────────────────────────
@@ -1770,13 +1859,14 @@ class DrawPadApp extends Application {
   }
 
   /**
-   * Map an ink amount to a spell level (0 = cantrip … 9 = ninth level).
-   * Returns 10 for anything at or above the ninth-level cap (overspent).
+   * Fallback when no spell level has been chosen: estimate the level from the
+   * ink used, using the per-level ink limits (0 = cantrip … 9 = ninth level).
+   * Returns 10 for anything above the ninth-level limit (overspent).
    */
   _spellLevelForInk(ink) {
-    const caps = [3, 8, 12, 15, 17, 19, 20, 21, 22, 23]; // upper bound (exclusive) per level 0-9
-    for (let lvl = 0; lvl < caps.length; lvl++) {
-      if (ink < caps[lvl]) return lvl;
+    const config = getSpellLevelConfig();
+    for (let lvl = 0; lvl < config.length; lvl++) {
+      if (ink <= config[lvl].maxInk) return lvl;
     }
     return 10;
   }
@@ -1784,22 +1874,51 @@ class DrawPadApp extends Application {
   _updateInkInfo() {
     const inkEl   = document.getElementById("fw-draw-ink-info");
     const levelEl = document.getElementById("fw-draw-spell-level");
-    const ink = this._calcInkUsed();
+    const ink      = this._calcInkUsed();
+    const selected = this._getSelectedSpellLevel();
+    const limit    = selected === null ? null : getSpellLevelConfig()[selected].maxInk;
+    const unstable = limit !== null && ink > limit;
 
-    if (inkEl) inkEl.textContent = `\u{1F58B} ${ink.toFixed(1)}`;
-
-    if (levelEl) {
-      if (ink <= 0) {
-        levelEl.style.display = "none";
-      } else {
-        levelEl.style.display = "";
-        const lvl = this._spellLevelForInk(ink);
-        levelEl.textContent = lvl === 0  ? game.i18n.localize("FIMBLEWOOD.Draw.Status.Cantrip")
-                            : lvl === 10 ? game.i18n.localize("FIMBLEWOOD.Draw.Status.BeyondNinth")
-                            : game.i18n.format("FIMBLEWOOD.Draw.Status.SpellLevel", { level: lvl });
-        levelEl.classList.toggle("fw-draw-level-max", lvl === 10);
-      }
+    if (inkEl) {
+      inkEl.textContent = limit === null
+        ? `\u{1F58B} ${ink.toFixed(1)}`
+        : `\u{1F58B} ${ink.toFixed(1)} / ${limit}`;
+      inkEl.classList.toggle("fw-draw-ink-over", unstable);
     }
+
+    if (!levelEl) return;
+    if (selected === null && ink <= 0) {
+      levelEl.style.display = "none";
+      return;
+    }
+    levelEl.style.display = "";
+
+    let label, beyond = false;
+    if (selected !== null) {
+      label = spellLevelLabel(selected);
+      levelEl.title = game.i18n.format("FIMBLEWOOD.Draw.Status.SpellLevelChosenTooltip", {
+        ink: ink.toFixed(1), limit,
+      });
+    } else {
+      const lvl = this._spellLevelForInk(ink);
+      beyond = lvl === 10;
+      label  = beyond ? game.i18n.localize("FIMBLEWOOD.Draw.Status.BeyondNinth") : spellLevelLabel(lvl);
+      levelEl.title = game.i18n.localize("FIMBLEWOOD.Draw.Status.SpellLevelTooltip");
+    }
+
+    levelEl.innerHTML = "";
+    const main = document.createElement("div");
+    main.textContent = label;
+    levelEl.appendChild(main);
+    if (unstable) {
+      const warn = document.createElement("div");
+      warn.className   = "fw-draw-level-unstable";
+      warn.textContent = game.i18n.localize("FIMBLEWOOD.Draw.Status.Unstable");
+      levelEl.appendChild(warn);
+    }
+    levelEl.classList.toggle("fw-draw-level-max", beyond);
+    levelEl.classList.toggle("fw-draw-level-is-unstable", unstable);
+    levelEl.classList.toggle("fw-draw-level-chosen", selected !== null);
   }
 
   /* ──────────────────────────────────────────────
@@ -2756,10 +2875,100 @@ export function openGallery() {
 }
 
 /* ──────────────────────────────────────────────
+   Spell-level settings (GM): circle radius + ink limit per level
+   ────────────────────────────────────────────── */
+
+class SpellLevelConfigApp extends foundry.applications.api.ApplicationV2 {
+  static DEFAULT_OPTIONS = {
+    id:       "fimblewood-draw-spell-levels",
+    tag:      "div",
+    window:   { title: "FIMBLEWOOD.Draw.LevelConfig.Title", icon: "fas fa-circle-plus", resizable: true },
+    position: { width: 460, height: "auto" },
+    classes:  ["fimblewood-draw-level-config"],
+  };
+
+  async _renderHTML() {
+    const t = (k, d) => d ? game.i18n.format(`FIMBLEWOOD.Draw.LevelConfig.${k}`, d)
+                          : game.i18n.localize(`FIMBLEWOOD.Draw.LevelConfig.${k}`);
+    const config = getSpellLevelConfig();
+    const rows = config.map((c, lvl) => `
+      <tr>
+        <th scope="row">${spellLevelLabel(lvl)}</th>
+        <td><input type="number" min="1" max="${WORLD_SIZE / 2}" step="1" data-level="${lvl}" data-field="radius"
+                   value="${c.radius}" placeholder="${DEFAULT_SPELL_LEVELS[lvl].radius}"></td>
+        <td><input type="number" min="0" step="0.5" data-level="${lvl}" data-field="maxInk"
+                   value="${c.maxInk}" placeholder="${DEFAULT_SPELL_LEVELS[lvl].maxInk}"></td>
+      </tr>`).join("");
+    return `
+      <p class="fw-draw-level-config-hint">${t("Hint")}</p>
+      <table class="fw-draw-level-config-table">
+        <thead><tr><th>${t("Level")}</th><th>${t("Radius")}</th><th>${t("MaxInk")}</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div class="fw-draw-level-config-actions">
+        <button type="button" data-fw-action="save"><i class="fas fa-save"></i> ${t("Save")}</button>
+        <button type="button" data-fw-action="reset"><i class="fas fa-undo"></i> ${t("Reset")}</button>
+        <button type="button" data-fw-action="cancel">${t("Cancel")}</button>
+      </div>`;
+  }
+
+  async _replaceHTML(result, content) {
+    content.innerHTML = result;
+    if (!content.dataset.fwWired) {
+      content.dataset.fwWired = "1";
+      content.addEventListener("click", (event) => {
+        const action = event.target.closest("[data-fw-action]")?.dataset.fwAction;
+        if (action === "save")        this.#save();
+        else if (action === "reset")  this.#reset();
+        else if (action === "cancel") this.close();
+      });
+    }
+    return content;
+  }
+
+  /** Puts the defaults into the fields (saving is still up to the GM). */
+  #reset() {
+    for (const input of this.element.querySelectorAll("input[data-level]")) {
+      input.value = DEFAULT_SPELL_LEVELS[Number(input.dataset.level)][input.dataset.field];
+    }
+  }
+
+  async #save() {
+    const levels = DEFAULT_SPELL_LEVELS.map(d => ({ ...d }));
+    for (const input of this.element.querySelectorAll("input[data-level]")) {
+      const v = Number(input.value);
+      if (input.value === "" || !Number.isFinite(v) || v < 0) continue;
+      if (input.dataset.field === "radius" && v <= 0) continue;
+      levels[Number(input.dataset.level)][input.dataset.field] = v;
+    }
+    await game.settings.set(MODULE_ID, SPELL_LEVEL_SETTING, levels);
+    ui.notifications.info(game.i18n.localize("FIMBLEWOOD.Draw.LevelConfig.Saved"));
+    this.close();
+  }
+}
+
+/* ──────────────────────────────────────────────
    Registration
    ────────────────────────────────────────────── */
 
 export function registerDrawPad() {
+  game.settings.register(MODULE_ID, SPELL_LEVEL_SETTING, {
+    scope:   "world",
+    config:  false,
+    type:    Array,
+    default: DEFAULT_SPELL_LEVELS.map(d => ({ ...d })),
+    // Open draw pads pick up new radii / ink limits right away.
+    onChange: () => { if (_appInstance?.rendered) _appInstance._updateInkInfo(); },
+  });
+  game.settings.registerMenu(MODULE_ID, "drawSpellLevelsMenu", {
+    name:       "FIMBLEWOOD.Draw.LevelConfig.MenuName",
+    label:      "FIMBLEWOOD.Draw.LevelConfig.MenuLabel",
+    hint:       "FIMBLEWOOD.Draw.LevelConfig.MenuHint",
+    icon:       "fas fa-circle-plus",
+    type:       SpellLevelConfigApp,
+    restricted: true,
+  });
+
   // Socket – show a static image, or relay live-draw broadcast frames, to all players.
   Hooks.once("ready", () => {
     game.socket.on(`module.${MODULE_ID}`, (data) => {

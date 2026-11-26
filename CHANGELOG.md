@@ -4,6 +4,16 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.52.0] - 2026-11-26
+
+### Changed
+
+- **Magic Circle Draw Pad**: *Insert centred circle* now opens a dropdown of spell levels instead of asking for a click on the canvas. The chosen level sets the circle's radius and is what the spell-level badge shows. If the drawing uses more ink than that level allows, a red **Unstable** appears under the level, and the ink counter shows the limit.
+
+### Added
+
+- **Magic Circle Draw Pad**: new GM setting *Magic Circle: Spell Levels* (Game Settings → Fimblewood Academy) to set each level's circle radius and ink limit.
+
 ## [0.51.0] - 2026-11-26
 
 ### Changed

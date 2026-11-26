@@ -17,7 +17,7 @@
       "Actions": {
         "Undo": "Undo (Ctrl+Z)",
         "Redo": "Redo (Ctrl+Y)",
-        "InsertCircle": "Insert centred circle",
+        "InsertCircle": "Insert centred circle (choose spell level)",
         "Clear": "Clear All",
         "CopyClipboard": "Copy to Clipboard",
         "CopiedClipboard": "Image copied to clipboard!",
@@ -31,11 +31,13 @@
         "CenterView": "Reset view (center + 100%)"
       },
       "Status": {
-        "InkTooltip": "Total ink used — sum of stroke lengths for every drawn element (1 ink = 1000 world-units of line). The spell level badge in the canvas corner is derived from this number.",
-        "SpellLevelTooltip": "Spell level this circle can hold, based on ink used",
+        "InkTooltip": "Total ink used — sum of stroke lengths for every drawn element (1 ink = 1000 world-units of line). With a spell level chosen, that level's ink limit is shown after it.",
+        "SpellLevelTooltip": "Spell level estimated from ink used (no level chosen via 'Insert centred circle' yet)",
         "Cantrip": "Cantrip",
         "SpellLevel": "Level {level} Spell",
-        "BeyondNinth": "Beyond 9th Level"
+        "BeyondNinth": "Beyond 9th Level",
+        "SpellLevelChosenTooltip": "Chosen spell level. Ink: {ink} of at most {limit} — above that the circle becomes unstable.",
+        "Unstable": "Unstable"
       },
       "GalleryTitle": "Magic Circle Gallery",
       "LiveViewerTitle": "Live Drawing",
@@ -74,6 +76,23 @@
         "Symmetry8": "8-fold",
         "Symmetry12": "12-fold",
         "SymmetryCenter": "Symmetry center point"
+      },
+      "LevelMenu": {
+        "Title": "Choose spell level"
+      },
+      "LevelConfig": {
+        "Title": "Magic Circle: Spell Levels",
+        "MenuName": "Magic Circle: Spell Levels",
+        "MenuLabel": "Edit spell levels",
+        "MenuHint": "Set, per spell level, the radius of the centred circle and the maximum ink before the circle counts as unstable.",
+        "Hint": "Radius in world units (the canvas is 2000 wide; at 100% zoom roughly ±300 around the centre is visible). Max ink: using more ink than this shows a red 'Unstable' under the spell level. The centred circle itself counts (2πr / 1000).",
+        "Level": "Spell level",
+        "Radius": "Radius",
+        "MaxInk": "Max ink",
+        "Save": "Save",
+        "Reset": "Reset all to default",
+        "Cancel": "Cancel",
+        "Saved": "Spell levels saved."
       }
     },
     "Jukebox": {

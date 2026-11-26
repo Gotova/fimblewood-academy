@@ -17,7 +17,7 @@
       "Actions": {
         "Undo": "Rueckgaengig (Ctrl+Z)",
         "Redo": "Wiederholen (Ctrl+Y)",
-        "InsertCircle": "Zentrierten Kreis einfuegen",
+        "InsertCircle": "Zentrierten Kreis einfuegen (Zaubergrad waehlen)",
         "Clear": "Alles loeschen",
         "CopyClipboard": "In Zwischenablage kopieren",
         "CopiedClipboard": "Bild in Zwischenablage kopiert!",
@@ -31,11 +31,13 @@
         "CenterView": "Ansicht zuruecksetzen (Mitte + 100%)"
       },
       "Status": {
-        "InkTooltip": "Verbrauchte Tinte — Summe der Strichlaengen aller gezeichneten Elemente (1 Tinte = 1000 Welteinheiten Linie). Der Zaubergrad-Anzeiger in der Ecke der Leinwand basiert auf diesem Wert.",
-        "SpellLevelTooltip": "Zaubergrad, den dieser Kreis fassen kann, basierend auf der verbrauchten Tinte",
+        "InkTooltip": "Verbrauchte Tinte — Summe der Strichlaengen aller gezeichneten Elemente (1 Tinte = 1000 Welteinheiten Linie). Mit gewaehltem Zaubergrad steht dahinter das Tinten-Limit dieses Grades.",
+        "SpellLevelTooltip": "Zaubergrad, geschaetzt aus der verbrauchten Tinte (noch kein Grad ueber 'Zentrierten Kreis einfuegen' gewaehlt)",
         "Cantrip": "Zaubertrick",
         "SpellLevel": "Zauber {level}. Grades",
-        "BeyondNinth": "Jenseits des 9. Grades"
+        "BeyondNinth": "Jenseits des 9. Grades",
+        "SpellLevelChosenTooltip": "Gewaehlter Zaubergrad. Tinte: {ink} von maximal {limit} — darueber wird der Kreis instabil.",
+        "Unstable": "Instabil"
       },
       "GalleryTitle": "Magiekreis-Galerie",
       "LiveViewerTitle": "Live-Zeichnung",
@@ -74,6 +76,23 @@
         "Symmetry8": "8-fach",
         "Symmetry12": "12-fach",
         "SymmetryCenter": "Symmetrie-Mittelpunkt"
+      },
+      "LevelMenu": {
+        "Title": "Zaubergrad waehlen"
+      },
+      "LevelConfig": {
+        "Title": "Magiekreis: Zaubergrade",
+        "MenuName": "Magiekreis: Zaubergrade",
+        "MenuLabel": "Zaubergrade bearbeiten",
+        "MenuHint": "Lege pro Zaubergrad den Radius des zentrierten Kreises und die maximale Tinte fest, ab der der Kreis als instabil gilt.",
+        "Hint": "Radius in Welteinheiten (die Leinwand ist 2000 breit, bei 100% Zoom sind etwa ±300 um die Mitte sichtbar). Max. Tinte: Wird mehr Tinte verbraucht als hier angegeben, steht unter dem Zaubergrad rot 'Instabil'. Der zentrierte Kreis selbst zaehlt mit (2πr / 1000).",
+        "Level": "Zaubergrad",
+        "Radius": "Radius",
+        "MaxInk": "Max. Tinte",
+        "Save": "Speichern",
+        "Reset": "Alle auf Standard",
+        "Cancel": "Abbrechen",
+        "Saved": "Zaubergrade gespeichert."
       }
     },
     "Jukebox": {
