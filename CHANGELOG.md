@@ -4,6 +4,12 @@ All notable changes to this module are documented here.
 
 ## [Unreleased]
 
+## [0.53.1] - 2026-11-26
+
+### Fixed
+
+- **Jukebox**: a recorded sound cylinder now replaces the placeholder in its name instead of appending to it — *Klangwalze: Vorlage* becomes *Klangwalze: <song>*, not *Klangwalze: Vorlage: <song>*.
+
 ## [0.53.0] - 2026-11-26
 
 ### Added

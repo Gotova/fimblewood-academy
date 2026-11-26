@@ -4,7 +4,7 @@ A homebrew Foundry VTT module for the **Fimblewood Academy** campaign — custom
 
 - **Foundry VTT:** v13 (build 351) — verified; compatible up to v14
 - **Game system:** `dnd5e` v5.3.1+
-- **Current version:** 0.53.0
+- **Current version:** 0.53.1
 
 ## Installation
 
@@ -51,7 +51,7 @@ A party can **collect** music tracks by hearing them as scene or region music (s
 **Setting it up (GM):**
 
 - **Use a track as scene or region music** (see Scene Music below). Every track picker has a "+ Create new track…" option: a small dialog asks for a name and the audio file (cover art optional) — no separate setup screen needed.
-- **Storage Bracelet + sound cylinders**: scene and region music is only collected while a player's character wears (equips) an item tagged as **Storage Bracelet** that holds at least one empty item tagged as **Sound cylinder** (Klangwalze). Set both under "Song storage" on the item sheet; the bracelet should be a container. Each collected song is recorded onto one empty cylinder, which is renamed after the song and takes its cover art. How many cylinders fit is the bracelet's container capacity — raise it when the party repairs the bracelet. Map pickups and item grants don't need a bracelet.
+- **Storage Bracelet + sound cylinders**: scene and region music is only collected while a player's character wears (equips) an item tagged as **Storage Bracelet** that holds at least one empty item tagged as **Sound cylinder** (Klangwalze). Set both under "Song storage" on the item sheet; the bracelet should be a container. Each collected song is recorded onto one empty cylinder, which is renamed after the song (anything after a colon in the empty cylinder's name is a placeholder: *Klangwalze: Vorlage* becomes *Klangwalze: <song>*) and takes its cover art. Players can't collect from a GM client, and the bracelet must actually be equipped (shield toggle on the inventory row). How many cylinders fit is the bracelet's container capacity — raise it when the party repairs the bracelet. Map pickups and item grants don't need a bracelet.
 - **Grant a track via an item**: open any item's sheet, tick "Grants a Jukebox track," and pick/create a track the same way. Dropping that item onto a player's character immediately unlocks the track for the whole party — the item stays in their inventory as a keepsake, it's never consumed.
 - **Place a collectible on the map**: drop any token, open its Token Configuration, and choose "Map pickup — grants track" (with a track picker) or "This is the Jukebox prop" (for the interactive record player itself). Either way, the token's ownership is automatically opened up so any player can click it — you never need to configure permissions by hand.
 

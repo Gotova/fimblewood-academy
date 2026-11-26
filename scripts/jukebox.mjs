@@ -526,12 +526,15 @@ function findEmptyStoredCylinder() {
 
 /**
  * Records a track onto a cylinder: it then carries the track like any item that
- * grants one, renamed after it. A stack only gives up one of its cylinders.
+ * grants one, renamed after it. Whatever follows a colon in the empty
+ * cylinder's name is a placeholder ("Klangwalze: Vorlage") and gives way to the
+ * track's name. A stack only gives up one of its cylinders.
  */
 async function recordOntoCylinder(cylinder, trackId) {
   const track = getRegistry()[trackId] ?? {};
+  const baseName = cylinder.name.split(":")[0].trim() || cylinder.name;
   const changes = {
-    name: `${cylinder.name}: ${track.name ?? trackId}`,
+    name: `${baseName}: ${track.name ?? trackId}`,
     [`flags.${MODULE_ID}.recordTrackId`]: trackId
   };
   if (track.img) changes.img = track.img;
